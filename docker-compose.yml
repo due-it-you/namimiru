@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    command: rails server -b 0.0.0.0
+    volumes:
+      - .:/namimiru
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      DATABASE_HOST: db
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: password
+    depends_on:
+      - db
+
+volumes:
+  postgres-data:
