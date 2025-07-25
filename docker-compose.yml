@@ -12,7 +12,9 @@ services:
       - "5432:5432"
 
   web:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
     command: rails server -b 0.0.0.0
     volumes:
       - .:/namimiru
