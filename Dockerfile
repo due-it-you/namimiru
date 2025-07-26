@@ -38,9 +38,6 @@ RUN bundle install && \
 
 # Copy application code
 COPY . .
-COPY entrypoint.sh /usr/bin/
-
-RUN chmod +x /usr/bin/entrypoint.sh
 
 # Final stage for app image
 FROM base
@@ -56,7 +53,7 @@ RUN groupadd --system --gid 1000 rails && \
 USER 1000:1000
 
 # Entrypoint prepares the database.
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
+ENTRYPOINT ["bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
