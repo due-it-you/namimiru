@@ -39,6 +39,9 @@ RUN bundle install && \
 # Copy application code
 COPY . .
 
+# Build static assets (Tailwind CSS, JS etc.)
+RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+
 # Final stage for app image
 FROM base
 
