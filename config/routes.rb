@@ -12,5 +12,5 @@ Rails.application.routes.draw do
 
   get "privacy_policy" => "static_pages#privacy_policy"
   # Defines the root path route ("/")
-  root "pages#index"
+  root "static_pages#privacy_policy"
 end
