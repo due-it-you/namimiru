@@ -13,4 +13,8 @@ export default class extends Controller {
         console.error("LIFF init failed", err);
       })
   }
+
+  get isDevelopmentEnvironment() {
+    return document.head.querySelector("meta[name=rails_env]").content === "development"
+  }
 }
