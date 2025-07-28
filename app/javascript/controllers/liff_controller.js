@@ -3,13 +3,15 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="liff"
 export default class extends Controller {
   connect() {
+    // ? 開発用 : 本番用 LIFF ID
+    const liffId = this.isDevelopmentEnvironment ? "2007822088-DyWMzRPP" : "2007822090-JdbBVDrp";;
     liff.init({
-      liffId: ENV["LIFF_ID"],
+      liffId: liffId,
     })
-    .then(() => {
+      .then(() => {
         console.log("LIFF initialized");
       })
-    .catch(() => {
+      .catch(() => {
         console.error("LIFF init failed", err);
       })
   }
