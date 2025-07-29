@@ -7,4 +7,8 @@ export default class extends Controller {
   connect() {
     this.outputTarget.textContent = this.scoreTarget.value;
   }
+
+  updateSliderValue() {
+    this.outputTarget.textContent = this.scoreTarget.value;
+  }
 }
