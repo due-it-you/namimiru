@@ -2,5 +2,14 @@
   <div>
     <h2>気分の波の記録</h2>
   </div>
-  <input type="range" name="mood_score" min="-10" max="10"/>
+  <div data-controller="logs-slider">
+    <span data-logs-slider-target="output"></span>
+    <input
+      data-logs-slider-target="score"
+      type="range"
+      name="mood_score"
+      min="-10"
+      max="10"
+    />
+  </div>
 </div>
