@@ -1,0 +1,28 @@
+<div class="mx-auto w-2/3 border border-gray-400 rounded-xl">
+  <div class="flex items-center justify-center p-12">
+    <div>
+      <div>
+        <div>
+          <h2 class="font-bold">気分の波の記録</h2>
+        </div>
+        <div data-controller="logs-slider">
+          <div class="border border-gray-400">
+            <div class="flex justify-center">
+              <span data-logs-slider-target="output"></span>
+            </div>
+          </div>
+          <div>
+            <input
+              data-action="logs-slider#updateSliderValue"
+              data-logs-slider-target="score"
+              type="range"
+              name="mood_score"
+              min="-10"
+              max="10"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
