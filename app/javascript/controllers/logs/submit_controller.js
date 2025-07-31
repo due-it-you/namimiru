@@ -2,11 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="logs--submit"
 export default class extends Controller {
-  target = ["mood_score"]
+  static targets = ["mood_score"]
 
   connect() {
   }
 
   submitMoodScore() {
+    const moodScore = this.mood_scoreTarget.value
   }
 } 
