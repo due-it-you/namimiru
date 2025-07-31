@@ -63,8 +63,8 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.compile = true
-  config.assets.debug = false
-  config.assets.digest = false
+  config.assets.debug = true
+  config.assets.digest = true
   config.assets.quiet = true
 
   # Raises error for missing translations.
