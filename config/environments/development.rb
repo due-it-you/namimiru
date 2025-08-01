@@ -67,6 +67,8 @@ Rails.application.configure do
   config.assets.digest = true
   config.assets.quiet = true
 
+  # ngrokで生成されたURLを許可
+  config.hosts << /[a-z0-9\-]+\.ngrok\-free\.app/
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
