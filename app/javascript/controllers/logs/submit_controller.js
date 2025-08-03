@@ -12,7 +12,7 @@ export default class extends Controller {
     // ? 開発用 : 本番用 LIFF ID
     const liffId = this.isDevelopmentEnvironment ? "2007859619-29wykPby" : "2007822090-JdbBVDrp";
     liff.init({ liffId }).then(() => {
-      console.log("✅ LIFF initialized");
+      console.log("LIFF initialized");
       const idToken = liff.getIDToken();
     }).catch((err) => {
       console.error("LIFF init failed", err);
