@@ -13,7 +13,7 @@ export default class extends Controller {
       .then(() => {
         console.log("LIFF initialized");
         const csrfToken = document.querySelector("[name='csrf-token']").content;
-        fetch(uid_sessions_path, {
+        fetch("/uid_sessions", {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
