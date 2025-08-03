@@ -16,6 +16,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     tty: true
+    stdin_open: true
     command: bin/dev
     volumes:
       - .:/namimiru
