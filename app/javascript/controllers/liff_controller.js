@@ -4,7 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   initialize() {
     // ? 開発用 : 本番用 LIFF ID
-    const idToken = "";
     const testChannelDevLiffId = "2007822088-DyWMzRPP";
     const namimiruChannelProdLiffId = "2007822090-JdbBVDrp";
     const liffId = this.isDevelopmentEnvironment ? testChannelDevLiffId : namimiruChannelProdLiffId;
@@ -13,7 +12,6 @@ export default class extends Controller {
     })
       .then(() => {
         console.log("LIFF initialized");
-        idToken = liff.getIDToken();
         const csrfToken = document.querySelector("[name='csrf-token']").content;
         fetch(uid_sessions_path, {
           method: 'POST',
@@ -21,7 +19,7 @@ export default class extends Controller {
             'Content-Type': 'application/json',
             'X-CSRF-Token': csrfToken
           },
-          body: JSON.stringify({ id_token: idToken })
+          body: JSON.stringify({ id_token: liff.getIDToken() })
         })
           .then(response => {
             // もしUIDがDBにない場合に役割作成画面へTurbo.visitで遷移する処理
