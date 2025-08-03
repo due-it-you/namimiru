@@ -15,7 +15,7 @@ export default class extends Controller {
         console.log("LIFF initialized");
         idToken = liff.getIDToken();
         const csrfToken = document.querySelector("[name='csrf-token']").content;
-        fetch("UIDの存在を確かめるアクションへのパス", {
+        fetch(uid_sessions_path, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
