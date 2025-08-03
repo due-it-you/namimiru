@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="liff"
 export default class extends Controller {
-  connect() {
+  initialize() {
     // ? 開発用 : 本番用 LIFF ID
     const testChannelDevLiffId = "2007822088-DyWMzRPP";
     const namimiruChannelProdLiffId = "2007822090-JdbBVDrp";
@@ -12,6 +12,7 @@ export default class extends Controller {
     })
       .then(() => {
         console.log("LIFF initialized");
+        liff.getIDToken();
       })
       .catch(() => {
         console.error("LIFF init failed", err);
