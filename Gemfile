@@ -50,6 +50,7 @@ group :development do
   gem "web-console"
   gem "pry-rails"
   gem "pry-byebug"
+  gem "pry-remote"
 end
 
 gem "tailwindcss-ruby", "~> 4.1"

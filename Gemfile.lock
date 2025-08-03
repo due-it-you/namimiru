@@ -170,6 +170,9 @@ GEM
       pry (>= 0.13, < 0.16)
     pry-rails (0.3.11)
       pry (>= 0.13.0)
+    pry-remote (0.1.8)
+      pry (~> 0.9)
+      slop (~> 3.0)
     psych (5.2.6)
       date
       stringio
@@ -251,6 +254,7 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    slop (3.6.0)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -315,6 +319,7 @@ DEPENDENCIES
   pg (~> 1.1)
   pry-byebug
   pry-rails
+  pry-remote
   puma (>= 5.0)
   rails (~> 7.2.2, >= 7.2.2.1)
   rubocop-rails-omakase
