@@ -4,6 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   initialize() {
     // ? 開発用 : 本番用 LIFF ID
+    const idToken = "";
     const testChannelDevLiffId = "2007822088-DyWMzRPP";
     const namimiruChannelProdLiffId = "2007822090-JdbBVDrp";
     const liffId = this.isDevelopmentEnvironment ? testChannelDevLiffId : namimiruChannelProdLiffId;
@@ -12,7 +13,23 @@ export default class extends Controller {
     })
       .then(() => {
         console.log("LIFF initialized");
-        liff.getIDToken();
+        idToken = liff.getIDToken();
+        const csrfToken = document.querySelector("[name='csrf-token']").content;
+        fetch("UIDの存在を確かめるアクションへのパス", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken
+          },
+          body: JSON.stringify({ id_token: idToken })
+        })
+          .then(response => {
+            // もしUIDがDBにない場合に役割作成画面へTurbo.visitで遷移する処理
+            // もしUIDがDBにある場合、処理を何もしない
+          })
+          .catch(error => {
+            // エラー処理
+          })
       })
       .catch(() => {
         console.error("LIFF init failed", err);
