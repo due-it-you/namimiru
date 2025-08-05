@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   initialize() {
     // ? 開発用 : 本番用 LIFF ID
-    const testChannelDevLiffId = "2007822088-DyWMzRPP";
+    const testChannelDevLiffId = "2007859619-29wykPby";
     const namimiruChannelProdLiffId = "2007822090-JdbBVDrp";
     const liffId = this.isDevelopmentEnvironment ? testChannelDevLiffId : namimiruChannelProdLiffId;
     liff.init({
