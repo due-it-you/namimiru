@@ -30,7 +30,7 @@ export default class extends Controller {
             if (data.status === "ok") {
 
             } else {
-              Turbo.visit('/');
+              Turbo.visit('/users/new');
             }
           })
           .catch(error => {
