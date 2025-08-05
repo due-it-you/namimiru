@@ -1,1 +1,1 @@
-css: bin/rails tailwindcss:watch
+css: bin/rails tailwindcss:watch[always]
