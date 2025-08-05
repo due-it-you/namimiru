@@ -62,8 +62,13 @@ Rails.application.configure do
   config.active_job.verbose_enqueue_logs = true
 
   # Suppress logger output for asset requests.
+  config.assets.compile = true
+  config.assets.debug = true
+  config.assets.digest = true
   config.assets.quiet = true
 
+  # ngrokで生成されたURLを許可
+  config.hosts << /[a-z0-9\-]+\.ngrok\-free\.app/
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 

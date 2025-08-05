@@ -48,6 +48,9 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "pry-rails"
+  gem "pry-byebug"
+  gem "pry-remote"
 end
 
 gem "tailwindcss-ruby", "~> 4.1"

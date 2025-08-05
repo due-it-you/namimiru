@@ -1,25 +1,36 @@
-<div class="mx-auto w-2/3 border border-gray-400 rounded-xl">
+<div
+  data-controller="liff"
+  class="mx-auto w-2/3 border border-gray-400 rounded-xl"
+>
   <div class="flex items-center justify-center p-12">
     <div>
       <div>
         <div>
           <h2 class="font-bold">気分の波の記録</h2>
         </div>
-        <div data-controller="logs-slider">
+        <div data-controller="logs--slider logs--submit">
           <div class="border border-gray-400">
             <div class="flex justify-center">
-              <span data-logs-slider-target="output"></span>
+              <span data-logs--slider-target="output"></span>
             </div>
           </div>
           <div>
             <input
-              data-action="logs-slider#updateSliderValue"
-              data-logs-slider-target="score"
+              data-action="logs--slider#updateSliderValue"
+              data-logs--submit-target="mood_score"
+              data-logs--slider-target="score"
               type="range"
               name="mood_score"
               min="-10"
               max="10"
             />
+          </div>
+          <div>
+            <button
+              data-action="logs--submit#submitMoodScore"
+              type="button"
+              class="px-4 py-2 rounded-xl bg-green-300"
+            >記録を保存</button>
           </div>
         </div>
       </div>
