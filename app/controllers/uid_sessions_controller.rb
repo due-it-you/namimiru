@@ -10,7 +10,13 @@ class UidSessionsController < ApplicationController
     req["Content-Type"] = "application/x-www-form-urlencoded"
     req.set_form_data({ "id_token" => id_token, "client_id" => ENV["LINE_LIFF_CHANNEL_ID"] })
     res = Net::HTTP.new(uri.hostname, uri.port).start { |http| http.request(req) }
-    res_json = JSON.parse(res.body)
+    result = JSON.parse(res.body)
+    uid = result["sub"]
+    if User.find_by(line_user_id: uid)
+      render json: { status: "ok" }
+    else
+      render json: { status: "error" }
+    end
   end
 
   private

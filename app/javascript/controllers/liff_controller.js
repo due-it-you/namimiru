@@ -22,14 +22,22 @@ export default class extends Controller {
           body: JSON.stringify({ id_token: liff.getIDToken() })
         })
           .then(response => {
+            return response.json();
             // もしUIDがDBにない場合に役割作成画面へTurbo.visitで遷移する処理
             // もしUIDがDBにある場合、処理を何もしない
+          })
+          .then(data => {
+            if (data.status === "ok") {
+
+            } else {
+              Turbo.visit('/');
+            }
           })
           .catch(error => {
             // エラー処理
           })
       })
-      .catch(() => {
+      .catch((err) => {
         console.error("LIFF init failed", err);
       })
   }
