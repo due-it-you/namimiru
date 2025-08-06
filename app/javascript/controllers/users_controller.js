@@ -23,7 +23,7 @@ export default class extends Controller {
             'Content-Type': 'application/json',
             'X-CSRF-Token': csrfToken
           },
-          body: JSON.stringify({ id_token: liff.getIDToken(), role: role })
+          body: JSON.stringify({ user: { id_token: liff.getIDToken(), role: role } })
         })
           .then(response => {
             return response.json();
@@ -32,7 +32,6 @@ export default class extends Controller {
           })
           .then(data => {
             if (data.status === "ok") {
-
             } else {
               Turbo.visit('/users/new');
             }
