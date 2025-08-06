@@ -14,6 +14,12 @@ class UidSessionsController < ApplicationController
     res = http.start { |http| http.request(req) }
     result = JSON.parse(res.body)
     uid = result["sub"]
+
+    if User.find_by(line_user_id: uid)
+      render json: { status: "ok" }
+    else
+      render json: { status: "error" }
+    end
   end
 
   private
