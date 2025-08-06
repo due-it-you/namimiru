@@ -6,9 +6,9 @@
     <h2>あなたに当てはまるものを選んでください。</h2>
   </div>
   <div>
-    <%= button_to "当事者の方" %>
+    <%= button_to "当事者の方", users_path, params: { role: "person_with_bipolar" } %>
   </div>
   <div>
-    <%= button_to "周囲の家族や支援者の方" %>
+    <%= button_to "周囲の家族や支援者の方", users_path, params: { role: "supporter" } %>
   </div>
 </div>
