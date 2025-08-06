@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def create
     # IDトークンの検証 / UIDの取得
     id_token = params[:id_token]
+    role = params[:role]
 
     uri = URI.parse("https://api.line.me/oauth2/v2.1/verify")
     req = Net::HTTP::Post.new(uri)
@@ -15,6 +16,14 @@ class UsersController < ApplicationController
     res = http.start { |http| http.request(req) }
     result = JSON.parse(res.body)
     uid = result["sub"]
+
+    user = User.new({ line_user_id: uid, role: role })
+    binding.pry
+    if user.save
+      render json: { status: "ok" }
+    else
+      render json: { status: "error" }
+    end
   end
 
   private
