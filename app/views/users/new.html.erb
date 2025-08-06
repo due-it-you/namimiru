@@ -7,11 +7,9 @@
   </div>
   <div data-controller="users">
     <div>
-      <%= button_to "当事者の方", users_path, params: { role: "person_with_bipolar" } %>
       <button data-action="click->users#createUser" type="button">当事者の方</button>
     </div>
     <div>
-      <%= button_to "周囲の家族や支援者の方", users_path, params: { role: "supporter" } %>
       <button data-action="click->users#createUser" type="button">周囲の家族や支援者の方</button>
     </div>
   </div>
