@@ -4,4 +4,8 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   connect() {
   }
+
+  createUser() {
+    console.log('try to create the user.')
+  }
 }
