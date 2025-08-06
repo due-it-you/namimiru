@@ -3,7 +3,7 @@ require "uri"
 
 class UidSessionsController < ApplicationController
   def create
-    id_token = params[:id_token]
+    id_token = idtoken_params[:id_token]
 
     uri = URI.parse("https://api.line.me/oauth2/v2.1/verify")
     req = Net::HTTP::Post.new(uri)
