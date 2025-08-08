@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     if user.save
       render json: { status: "ok" }
     else
-      render json: { status: "error" }
+      render json: { status: "error", message: "保存処理に失敗しました。" }
     end
   end
 
