@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
     user = User.new({ line_user_id: uid, role: role })
     if user.save
-      render json: { status: "ok" }
+      render json: { status: "success", message: "ユーザー登録に成功しました！" }
     else
       render json: { status: "error", message: "保存処理に失敗しました。" }
     end

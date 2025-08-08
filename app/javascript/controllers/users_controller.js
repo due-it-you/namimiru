@@ -31,7 +31,9 @@ export default class extends Controller {
             // もしUIDがDBにある場合、処理を何もしない
           })
           .then(data => {
-            if (data.status === "error") {
+            if (data.status === "success") {
+              document.getElementById('success').textContent = data.message;
+            } else {
               document.getElementById("error").textContent = data.message;
             }
           })
