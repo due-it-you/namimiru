@@ -39,6 +39,7 @@ export default class extends Controller {
           })
           .catch(error => {
             // エラー処理
+            document.getElementById('error').textContent = "エラーが発生しました。";
           })
       })
       .catch((err) => {
