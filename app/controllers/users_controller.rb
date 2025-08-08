@@ -1,3 +1,6 @@
+require "net/http"
+require "uri"
+
 class UsersController < ApplicationController
   def new
   end
@@ -6,16 +9,8 @@ class UsersController < ApplicationController
     # IDトークンの検証 / UIDの取得
     id_token = user_params[:id_token]
     role = user_params[:role]
-
-    uri = URI.parse("https://api.line.me/oauth2/v2.1/verify")
-    req = Net::HTTP::Post.new(uri)
-    req["Content-Type"] = "application/x-www-form-urlencoded"
-    req.set_form_data({ "id_token" => id_token, "client_id" => ENV["LINE_LIFF_CHANNEL_ID"] })
-    http = Net::HTTP.new(uri.hostname, uri.port)
-    http.use_ssl = true
-    res = http.start { |http| http.request(req) }
-    result = JSON.parse(res.body)
-    uid = result["sub"]
+    channel_id = ENV["LINE_LIFF_CHANNEL_ID"]
+    res = Net::HTTP.post_form(URI.parse("https://api.line.me/oauth2/v2.1/verify"), { "id_token" => id_token, "client_id" => channel_id })
 
     user = User.new({ line_user_id: uid, role: role })
     if user.save
