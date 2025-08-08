@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     result = JSON.parse(res.body)
     uid = result["sub"]
 
+    if User.find_by(line_user_id: uid)
+      return render json: { status: "error", message: "このLINEアカウントはすでに登録されています。" }
+    end
+
     user = User.new({ line_user_id: uid, role: role })
     if user.save
       render json: { status: "ok" }

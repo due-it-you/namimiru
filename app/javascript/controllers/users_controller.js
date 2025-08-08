@@ -31,9 +31,8 @@ export default class extends Controller {
             // もしUIDがDBにある場合、処理を何もしない
           })
           .then(data => {
-            if (data.status === "ok") {
-            } else {
-              Turbo.visit('/users/new');
+            if (data.status === "error") {
+              document.getElementById("error").textContent = data.message;
             }
           })
           .catch(error => {
