@@ -31,7 +31,7 @@ export default class extends Controller {
           document.getElementById("response-message").textContent = data.message;
         })
         .catch(error => {
-          // エラー処理
+          document.getElementById("response-message").textContent = "記録の保存に失敗しました。";
         })
     })
       .catch((err) => {
