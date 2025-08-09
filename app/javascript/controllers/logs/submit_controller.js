@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="logs--submit"
 export default class extends Controller {
-  static targets = ["mood_score"]
+  static targets = ["mood_score", "success"]
 
   connect() {
   }
@@ -13,10 +13,30 @@ export default class extends Controller {
     const liffId = this.isDevelopmentEnvironment ? "2007859619-29wykPby" : "2007822090-JdbBVDrp";
     liff.init({ liffId }).then(() => {
       console.log("LIFF initialized");
-      const idToken = liff.getIDToken();
-    }).catch((err) => {
-      console.error("LIFF init failed", err);
-    });
+      const csrfToken = document.querySelector("[name='csrf-token']").content;
+      fetch("/logs", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken
+        },
+        body: JSON.stringify({ log: { id_token: liff.getIDToken(), mood_score: moodScore } })
+      })
+        .then(response => {
+          return response.json();
+          // もしUIDがDBにない場合に役割作成画面へTurbo.visitで遷移する処理
+          // もしUIDがDBにある場合、処理を何もしない
+        })
+        .then(data => {
+          document.getElementById("response-message").textContent = data.message;
+        })
+        .catch(error => {
+          document.getElementById("response-message").textContent = "記録の保存に失敗しました。";
+        })
+    })
+      .catch((err) => {
+        console.error("LIFF init failed", err);
+      })
   }
 
   get isDevelopmentEnvironment() {
