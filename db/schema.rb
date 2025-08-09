@@ -10,21 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_09_072002) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_30_222848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "user_role", ["unclear", "person_with_bipolar", "supporter"]
-
-  create_table "logs", force: :cascade do |t|
-    t.integer "mood_score", null: false
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_logs_on_user_id"
-  end
 
   create_table "users", force: :cascade do |t|
     t.string "line_user_id", null: false
@@ -33,6 +25,4 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_09_072002) do
     t.datetime "updated_at", null: false
     t.index ["line_user_id"], name: "index_users_on_line_user_id", unique: true
   end
-
-  add_foreign_key "logs", "users"
 end
