@@ -28,10 +28,7 @@ export default class extends Controller {
           // もしUIDがDBにある場合、処理を何もしない
         })
         .then(data => {
-          if (data.status === "success") {
-            document.getElementById("success").textContent = data.message;
-          } else {
-          }
+          document.getElementById("response-message").textContent = data.message;
         })
         .catch(error => {
           // エラー処理

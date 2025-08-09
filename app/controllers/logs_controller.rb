@@ -22,7 +22,7 @@ class LogsController < ApplicationController
     if log.save
       render json: { status: "success", message: "記録の保存に成功しました！" }
     else
-      render json: { status: "error" }
+      render json: { status: "error", message: "記録の保存に失敗しました。" }
     end
   end
 
