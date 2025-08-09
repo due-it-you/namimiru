@@ -20,7 +20,7 @@ class LogsController < ApplicationController
     current_user = User.find_by(line_user_id: uid)
     log = current_user.logs.new(mood_score: mood_score)
     if log.save
-      render json: { status: "ok" }
+      render json: { status: "success", message: "記録の保存に成功しました！" }
     else
       render json: { status: "error" }
     end

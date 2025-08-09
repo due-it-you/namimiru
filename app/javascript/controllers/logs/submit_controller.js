@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="logs--submit"
 export default class extends Controller {
-  static targets = ["mood_score"]
+  static targets = ["mood_score", "success"]
 
   connect() {
   }
@@ -28,8 +28,8 @@ export default class extends Controller {
           // もしUIDがDBにある場合、処理を何もしない
         })
         .then(data => {
-          if (data.status === "ok") {
-
+          if (data.status === "success") {
+            document.getElementById("success").textContent = data.message;
           } else {
           }
         })
