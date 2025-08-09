@@ -13,9 +13,6 @@ class LogsController < ApplicationController
     res = Net::HTTP.post_form(URI.parse("https://api.line.me/oauth2/v2.1/verify"), { "id_token" => id_token, "client_id" => channel_id })
     result = JSON.parse(res.body)
     uid = result["sub"]
-    logger.info "LINE UID: #{uid.inspect}"
-    logger.info "ID Token: #{id_token.inspect}"
-    logger.info "Channel ID: #{channel_id.inspect}"
 
     current_user = User.find_by(line_user_id: uid)
     log = current_user.logs.new(mood_score: mood_score)
