@@ -4,7 +4,7 @@ class LogsController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(:id_token, :role)
+  def log_params
+    params.require(:log).permit(:id_token, :mood_score)
   end
 end
