@@ -51,7 +51,6 @@ group :development do
   gem "pry-rails"
   gem "pry-byebug"
   gem "pry-remote"
-  gem "dotenv-rails"
 end
 
 gem "tailwindcss-ruby", "~> 4.1"
