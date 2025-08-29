@@ -91,7 +91,7 @@ Figma： https://www.figma.com/design/P8wlRzMppgU8NsghayaNfQ/%E3%83%8A%E3%83%9F%
 
 ### READMEに記載した機能
 #### 認証機能
-- [x] Emailでの新規登録機能
+- [x] Emailでの新規登録機能(ユーザーネームもその時に登録)
 - [x] ソーシャルログインでのログイン機能
 - [x] パスワードの再登録機能
 - [x] ゲストログイン機能 
