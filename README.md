@@ -78,11 +78,16 @@ LINE公式アカウントのリッチメニューから以下の機能が使え�
 - グラフの表示機能
 
 ## ■ 機能の実装方針予定
-- ログイン機能 => gem 'devise'
-- 招待機能 => gem 'devise_invitable'
-- グラフの表示 => Chart.jsライブラリ
-- プッシュ通知の定期的実行とその間隔と時刻の動的変更 => sidekiq/redisによる非同期なバックグランドジョブ処理
 
+| 項目  | |
+| ------------- | ------------- |
+| ログイン機能  | gem 'devise' |
+| 招待機能  | gem 'devise_invitable' |
+| プッシュ通知の定期的実行とその間隔と時刻の動的変更  | sidekiq/redisによる非同期なバックグランドジョブ処理 |
+| パスワードリセット機能  | devise/recoverable |
+| メールアドレス認証機能  | devise/confirmable |
+
+## 技術スタック
 | 項目  | |
 | ------------- | ------------- |
 | フロントエンド  | Hotwire, Javascript, TailwindCSS v4.1 |
