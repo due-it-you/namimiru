@@ -155,8 +155,7 @@ Figma： https://www.figma.com/design/P8wlRzMppgU8NsghayaNfQ/%E3%83%8A%E3%83%9F%
 - [x] 作り込みはある程度完了している（Figmaを見て画面の作成ができる状態にある）
 
 ### ER図
-<img width="888" height="523" alt="スクリーンショット 2025-09-01 15 04 26" src="https://github.com/user-attachments/assets/d44843ef-a391-403d-a5a4-6e1cd1e6cca4" />
-https://gyazo.com/aeb9f5e7bdb515002c962e6391b6a13c
+https://gyazo.com/d58a656c228af37042eff1820b8f59fc
 
 ### 本サービスの概要（700文字以内）
 ナミミルは、双極性障害を持つ方が毎日の気分を記録し、それを周囲の支援者とその情報を共有できるサービスです。
