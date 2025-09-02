@@ -91,8 +91,11 @@ LINE公式アカウントのリッチメニューから以下の機能が使え�
 | ログイン機能  | gem 'devise' |
 | 招待機能  | gem 'devise_invitable' |
 | プッシュ通知の定期的実行とその間隔と時刻の動的変更  | sidekiq/redisによる非同期なバックグランドジョブ処理 |
-| パスワードリセット機能  | devise/recoverable |
-| メールアドレス認証機能  | devise/confirmable |
+| パスワードリセット機能  | devise/Recoverable |
+| メールアドレス認証機能  | devise/Confirmable |
+| SNS認証機能  | devise/Omniauthable |
+| アカウントロック機能  | devise/Lockable |
+| アカウントセッション自動破棄機能  | devise/Timeoutable |
 
 ## ■ 技術スタック
 | 項目  | |
