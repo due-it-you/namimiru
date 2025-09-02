@@ -106,7 +106,11 @@ LINE公式アカウントのリッチメニューから以下の機能が使え�
 
 ### ER図
 <img width="637" height="557" alt="スクリーンショット 2025-09-02 16 45 47" src="https://github.com/user-attachments/assets/c955834e-9cc4-4e4f-a717-07916f962351" />
+
 [Gyazoスクリーンショット](https://gyazo.com/a03adfb99006518d0997c132ba0c8376)
 
 ## 画面遷移図
-Figma： https://www.figma.com/design/P8wlRzMppgU8NsghayaNfQ/%E3%83%8A%E3%83%9F%E3%83%9F%E3%83%AB-%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&p=f&t=zZ5NbV9yDZlaifJu-0
+<img width="391" height="613" alt="スクリーンショット 2025-09-02 16 48 09" src="https://github.com/user-attachments/assets/39bb31f0-f11b-4736-8549-3f9d35f91e79" />
+
+
+[Figma URL](https://www.figma.com/design/P8wlRzMppgU8NsghayaNfQ/%E3%83%8A%E3%83%9F%E3%83%9F%E3%83%AB-%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&p=f&t=zZ5NbV9yDZlaifJu-0)
