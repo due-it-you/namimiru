@@ -115,7 +115,7 @@ LINE公式アカウントのリッチメニューから以下の機能が使え�
 | バックエンド  | Ruby 3.3.7 / Rails 7.2.2 |
 | データベース  | PostgreSQL 17.4 |
 | 開発環境  | Docker |
-| インフラ  | Render |
+| インフラ  | Render（Web Service）｜Neon（PostgreSQL）｜Upstash（Redis） |
 | API  | LINELoginAPI |
 
 ## ■ ER図
