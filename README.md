@@ -136,8 +136,8 @@ https://github.com/users/due-it-you/projects/8
 
 ## ■MVPリリースまで
 - [x] 環境構築
+- [x] トップページの作成
 - [x] デプロイ
-- [x] 独自ドメイン
 - [x] Emailでの新規登録機能
 - [x] ソーシャルログイン（Google）でのログイン機能
 - [x] ゲストログイン機能
@@ -161,6 +161,7 @@ https://github.com/users/due-it-you/projects/8
 - [x] お問い合わせ
 - [x] パスワードリセット機能
 - [x] パスワード更新
+- [x] 独自ドメイン
 - [x] ファビコン
 - [x] OGP（静的）
 - [x] ソーシャルログイン（LINE）でのログイン機能(Google, LINEでの複数のSNS認証機能)
