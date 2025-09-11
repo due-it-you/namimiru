@@ -123,3 +123,12 @@ LINE公式アカウントのリッチメニューから以下の機能が使え�
 
 
 [実際のFigmaのプロジェクトはこちら](https://www.figma.com/design/P8wlRzMppgU8NsghayaNfQ/%E3%83%8A%E3%83%9F%E3%83%9F%E3%83%AB-%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&p=f&t=zZ5NbV9yDZlaifJu-0)
+
+## ■ RSpec/Capybaraを用いた開発のフロー
+
+1. 要件を基にissueを立てる
+2. issueの中の記載した`Doneの定義（期待する動作）`を基にRSpec/Capybaraで先にテストを実装
+3. テストが全て失敗している状態を確認
+4. テストが成功するようにプログラムを書いていく
+5. テストが全て成功になっていることを確認
+6. (1.)に戻る
