@@ -82,4 +82,8 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # Neon connection string
   url: <%= ENV['DATABASE_URL'] %>
