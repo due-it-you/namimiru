@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable
 
   validates :name, presence: true, length: { maximum: 12, message: 'は12文字以内にしてください。' }
-  validates :email, presence: true, format: { with: /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/}
+  validates :email, presence: true, format: { with: /\A[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/}
   validates :password, presence: true, confirmation: true, length: { in: 8..72 }, 
     format: {
       # 少なくとも1つ 英字小文字, 大文字, 数字 が含まれる / 合計で8文字以上
