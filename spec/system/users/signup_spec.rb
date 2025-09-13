@@ -25,7 +25,6 @@ RSpec.describe "Signup", type: :system do
         fill_in 'email', with: 'polarbear1001@gmail.com'
         fill_in 'password', with: 'G473888g!'
         fill_in 'password_confirmation', with: 'G473888g!'
-        click_on '送信'
       end
 
       # ユーザーネーム
