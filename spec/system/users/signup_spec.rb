@@ -48,6 +48,15 @@ RSpec.describe "Signup", type: :system do
       end
 
       # メールアドレス
+      context 'メールアドレスのフィールドに何も入力されていない場合' do
+        it '新規登録に失敗し、エラーメッセージが表示される' do
+          fill_in 'email', with: ''
+          click_on '送信'
+          expect(page).to have_current_path(new_user_registration_path)
+          expect(page).to have_content('メールアドレスを入力してください。')
+        end
+      end
+
       context 'メールアドレスに「@」が入力されていない場合' do
         it '新規登録に失敗し、エラーメッセージが表示される' do
           fill_in 'email', with: 'polarbeat1001gmail.com'
