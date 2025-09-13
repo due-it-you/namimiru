@@ -12,7 +12,7 @@ RSpec.describe "Signup", type: :system do
         fill_in 'パスワード', with: 'G473888g!'
         fill_in 'パスワード（確認用）', with: 'G473888g!'
         click_on '送信'
-        expect(page).to have_content('新規登録が完了しました。')
+        expect(page).to have_content('アカウント登録が完了しました。')
         expect(page).to have_current_path('/logs/new')
       end
     end
