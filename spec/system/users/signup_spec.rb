@@ -86,6 +86,16 @@ RSpec.describe "Signup", type: :system do
           expect(page).to have_content('パスワードは8文字以上にしてください。')
         end
       end
+
+      context '英字小文字・英字大文字・数字がそれぞれ1つ以上含まれていない場合' do
+        it '新規登録に失敗し、エラーメッセージが表示される' do
+          fill_in 'password', with: 'h89977442xg'
+          fill_in 'password_confirmation', with: 'h89977442xg'
+          click_on '送信'
+          expect(page).to have_current_path(new_user_registration_path)
+          expect(page).to have_content('パスワードは、英字小文字・英字大文字・数字がそれぞれ1つ以上含まれるようにしてください。')
+        end
+      end
     end
   end
 end
