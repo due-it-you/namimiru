@@ -65,6 +65,17 @@ RSpec.describe "Signup", type: :system do
           expect(page).to have_content('メールアドレスの形式を満たしてください。')
         end
       end
+
+      # パスワード
+      context 'パスワードが入力されていない場合' do
+        it '新規登録に失敗し、エラーメッセージが表示される' do
+          fill_in 'password', with: ''
+          fill_in 'password_confirmation', with: ''
+          click_on '送信'
+          expect(page).to have_current_path(new_user_registration_path)
+          expect(page).to have_content('パスワードを入力してください。')
+        end
+      end
     end
   end
 end
