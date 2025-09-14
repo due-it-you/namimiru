@@ -14,6 +14,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      ktg-net:
   web:
     build:
       context: .
@@ -27,11 +29,20 @@ services:
       - node_modules:/myapp/node_modules
     environment:
       TZ: Asia/Tokyo
+      SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
     ports:
       - "3000:3000"
     depends_on:
-      db:
-        condition: service_healthy
+     - db
+     - selenium_chrome
+    networks:
+      ktg-net:
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    networks:
+      ktg-net:
+networks:
+  ktg-net:
 volumes:
   bundle_data:
   postgresql_data:
