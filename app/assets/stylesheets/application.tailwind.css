@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@theme {
+  --color-string-base: #484848;
+  --color-border-base: #B6B6B6;
+  --color-logo-color: #67BDB7;
+}
