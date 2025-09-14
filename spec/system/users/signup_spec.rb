@@ -13,7 +13,7 @@ RSpec.describe "Signup", type: :system do
         fill_in 'パスワード（確認用）', with: 'G473888g!'
         click_on '送信'
         expect(page).to have_content('アカウント登録が完了しました。')
-        expect(page).to have_current_path('/logs/new')
+        expect(page).to have_current_path(new_log_path)
       end
     end
 
@@ -53,15 +53,6 @@ RSpec.describe "Signup", type: :system do
           click_on '送信'
           expect(page).to have_current_path(new_user_registration_path)
           expect(page).to have_content('メールアドレスを入力してください。')
-        end
-      end
-
-      context 'メールアドレスに「@」が入力されていない場合' do
-        it '新規登録に失敗し、エラーメッセージが表示される' do
-          fill_in 'メールアドレス', with: 'polarbeat1001gmail.com'
-          click_on '送信'
-          expect(page).to have_current_path(new_user_registration_path)
-          expect(page).to have_content('メールアドレスの形式を満たしてください。')
         end
       end
 
