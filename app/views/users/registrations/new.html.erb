@@ -5,7 +5,7 @@
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "users/shared/error_messages", resource: resource %>
 
-    <div class="space-y-4 mt-12">
+    <div class="space-y-4 mt-8">
       <div class="field">
         <%= f.label :name, "ユーザーネーム", class: "text-string-base font-semibold" %><br>
         <%= f.text_field :name, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autofocus: true %>
