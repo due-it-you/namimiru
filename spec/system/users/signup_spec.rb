@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Signup", type: :system do
-
   describe 'ユーザー新規登録' do
     # 正常系
     context 'フォームの入力値が正常' do
