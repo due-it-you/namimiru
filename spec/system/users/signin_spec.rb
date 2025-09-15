@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Signin", type: :system do
-
   describe 'ログイン機能' do
     context 'フォームの入力値が正常' do
       let(:user) { create(:user) }
