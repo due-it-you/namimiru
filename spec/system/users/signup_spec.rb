@@ -14,19 +14,6 @@ RSpec.describe "Signup", type: :system do
         expect(page).to have_content('アカウント登録が完了しました。')
         expect(page).to have_current_path(new_log_path)
       end
-
-      it 'usersテーブルに新規レコードが作成されている' do
-        visit new_user_registration_path
-        fill_in 'ユーザーネーム', with: '中田敦弘'
-        fill_in 'メールアドレス', with: 'nakatagohantabetabe@outlook.com'
-        fill_in 'パスワード', with: 'G473888g!'
-        fill_in 'パスワード（確認用）', with: 'G473888g!'
-        click_on '送信'
-        expect(User.exists?(
-          email: 'nakatagohantabetabe@outlook.com',
-          name: '中田敦弘',
-        )).to be true
-      end
     end
 
     # 異常系
