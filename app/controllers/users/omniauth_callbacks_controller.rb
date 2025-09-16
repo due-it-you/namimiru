@@ -7,6 +7,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should also create an action method in this controller like this:
   # def twitter
   # end
+  def google_oauth2
+    auth = request.env["omniauth.auth"]
+    social_profile = SocialProfile.find_by(provider: auth.provider, uid: auth.uid)
+
+    if social_profile.present?
+      @user = social_profile.user
+    else
+      @user = User.create(name: nil, email: nil, encrypted_password: nil)
+      @user.social_profiles.create(provider: auth.provider, uid: auth.uid)
+    end
+
+    sign_in_and_redirect @user, event: :authentication
+    set_flash_message(:notice, :success, kind: 'google') if is_navigational_format?
+  end
 
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
