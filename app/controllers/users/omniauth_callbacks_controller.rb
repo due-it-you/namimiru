@@ -14,7 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if social_profile.present?
       @user = social_profile.user
     else
-      @user = User.create(name: nil, email: nil, encrypted_password: nil)
+      @user = User.create(name: auth.info.name)
       @user.social_profiles.create(provider: auth.provider, uid: auth.uid)
     end
 
