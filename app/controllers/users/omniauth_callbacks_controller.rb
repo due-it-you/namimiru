@@ -14,12 +14,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if social_profile.present?
       @user = social_profile.user
     else
-      @user = User.create(name: auth.info.name)
-      @user.social_profiles.create(provider: auth.provider, uid: auth.uid)
+      User.transaction do
+        @user = User.new(name: auth.info.name || nil)
+        @user.social_login = true
+        @user.save!
+        @user.social_profiles.create!(provider: auth.provider, uid: auth.uid)
+      end
     end
 
     sign_in_and_redirect @user, event: :authentication
     set_flash_message(:notice, :success, kind: 'google') if is_navigational_format?
+  rescue => e
+    redirect_to new_user_session_path, alert: "Googleログイン処理に失敗しました。"
   end
 
   # More info at:
