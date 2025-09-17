@@ -30,6 +30,22 @@ class User < ApplicationRecord
     },
     unless: :social_login?
 
+  def self.from_google_oauth(auth)
+    social_profile = SocialProfile.find_by(provider: auth.provider, uid: auth.uid)
+
+    if social_profile.present?
+      user = social_profile.user
+    else
+      transaction do
+        user = User.new(name: auth.info.name || nil)
+        user.social_login = true
+        user.save!
+        user.social_profiles.create!(provider: auth.provider, uid: auth.uid)
+      end
+    end
+    user
+  end
+
   def social_login?
     social_login
   end

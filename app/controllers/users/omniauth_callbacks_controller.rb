@@ -9,23 +9,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
   def google_oauth2
     auth = request.env["omniauth.auth"]
-    social_profile = SocialProfile.find_by(provider: auth.provider, uid: auth.uid)
-
-    if social_profile.present?
-      @user = social_profile.user
-    else
-      User.transaction do
-        @user = User.new(name: auth.info.name || nil)
-        @user.social_login = true
-        @user.save!
-        @user.social_profiles.create!(provider: auth.provider, uid: auth.uid)
-      end
-    end
-
+    @user = User.from_google_oauth(auth)
     sign_in_and_redirect @user, event: :authentication
     set_flash_message(:notice, :success, kind: 'google') if is_navigational_format?
   rescue => e
-    redirect_to new_user_session_path, alert: "Googleログイン処理に失敗しました。"
+    flash[:danger] = "Googleログイン処理に失敗しました。"
+    redirect_to new_user_session_path and return
   end
 
   # More info at:
