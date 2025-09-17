@@ -8,16 +8,16 @@ class User < ApplicationRecord
 
   attr_accessor :social_login
 
-  validates :name, presence: { message: "を入力してください。" }, 
+  validates :name, presence: { message: "を入力してください。" },
     length: { maximum: 12, message: "は12文字以内にしてください。" },
     unless: :social_login?
-  validates :email, presence: { message: "を入力してください。" }, 
-    format: { 
-      with: /\A[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/, 
-      message: "の形式を満たしてください。" 
+  validates :email, presence: { message: "を入力してください。" },
+    format: {
+      with: /\A[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/,
+      message: "の形式を満たしてください。"
     },
     unless: :social_login?
-  validates :password, presence: { message: "を入力してください。" }, confirmation: true, 
+  validates :password, presence: { message: "を入力してください。" }, confirmation: true,
     length: {
       in: 8..72,
       too_short: "は8文字以上にしてください。",
