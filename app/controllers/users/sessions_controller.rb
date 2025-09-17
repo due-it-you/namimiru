@@ -24,7 +24,7 @@ class Users::SessionsController < Devise::SessionsController
     new_log_path
   end
 
-  def adter_sign_out_path_for(resource)
+  def after_sign_out_path_for(resource)
     new_user_session_path
   end
   # If you have extra params to permit, append them to the sanitizer.
