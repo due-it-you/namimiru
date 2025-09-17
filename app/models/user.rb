@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :social_profiles, dependent: :destroy
 
+  attr_accessor :social_login
+
   validates :name, presence: { message: "を入力してください。" }, 
     length: { maximum: 12, message: "は12文字以内にしてください。" },
     unless: :social_login?
@@ -27,4 +29,8 @@ class User < ApplicationRecord
       message: "は、英字小文字・英字大文字・数字がそれぞれ1つ以上含まれるようにしてください。"
     },
     unless: :social_login?
+
+  def social_login?
+    social_login
+  end
 end
