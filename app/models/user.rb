@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable,
     :omniauthable, omniauth_providers: %i[google_oauth2]
 
+  has_many :daily_records, dependent: :destroy
   has_many :social_profiles, dependent: :destroy
 
   attr_accessor :social_login
