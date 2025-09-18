@@ -21,5 +21,18 @@ RSpec.describe "Create", type: :system do
         expect(page).to have_content '記録の作成に失敗しました。'
       end
     end
+
+    context 'すでに今日の記録の作成が完了している場合' do
+      before do
+        user = create(:user)
+        create(:daily_record, user: user, created_at: Time.current)
+        sign_in user
+      end
+
+      it 'すでに完了していることを知らせるメッセージが表示されていること' do
+        visit new_daily_record_path
+        expect(page).to have_content 'すでに今日の記録は作成済みです。'
+      end
+    end
   end
 end
