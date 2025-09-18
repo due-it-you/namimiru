@@ -7,4 +7,10 @@ export default class extends Controller {
     const target = document.getElementById("current-mood-score");
     target.textContent = currentMoodScore;
   }
+
+  update() {
+    const currentMoodScore = document.getElementById("mood-range").value;
+    const target = document.getElementById("current-mood-score");
+    target.textContent = currentMoodScore;
+  }
 }
