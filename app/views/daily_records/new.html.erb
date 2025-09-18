@@ -3,9 +3,13 @@
   <div class="font-semibold text-string-base">
     今日はどんな気分？
   </div>
-  <div>
+  <div data-controller="daily-records--mood-score">
     <%= form_with model: @daily_record do |f| %>
-      <%= f.range_field :mood_score, in: -5..5, class: "w-full"%>
+      <div class="flex">
+        <%= f.range_field :mood_score, in: -5..5, id: "mood-range",class: "w-5/6 mr-2"%>
+        <div id="current-mood-score" class="flex justify-center items-center text-xl font-bold rounded-md aspect-square border border-border-base w-1/6">
+        </div>
+      </div>
       <%= f.text_area :memo, size: "70x5", class: "w-full border border-border-base rounded-md" %>
       <%= f.submit "記録する", class: "bg-logo-color text-white font-semibold w-full py-1 rounded-md" %>
     <% end %>
