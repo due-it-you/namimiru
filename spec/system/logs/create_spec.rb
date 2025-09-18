@@ -7,7 +7,7 @@ RSpec.describe "Create", type: :system do
         visit new_daily_record_path
         find_by_id('mood_range').set rand(-5..5)
         click_on '記録する'
-        expect(page).to have_current_path(new_daily_record_path)
+        expect(page).to have_current_path(charts_path)
         expect(page).to have_content '記録の作成が完了しました。'
       end
     end
