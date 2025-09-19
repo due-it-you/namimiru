@@ -3,7 +3,7 @@ class DailyRecordsController < ApplicationController
 
   def new; end
 
-  def create 
+  def create
     if current_user.already_recorded_today?
       flash[:alert] = "すでに今日の記録は作成済みです。"
       redirect_to charts_path and return
