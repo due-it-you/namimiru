@@ -31,6 +31,10 @@ class User < ApplicationRecord
     },
     unless: :social_login?
 
+  def already_recorded_today?
+    daily_records.where(created_at: Date.today.all_day).exists?
+  end
+
   def self.from_google_oauth(auth)
     social_profile = SocialProfile.find_by(provider: auth.provider, uid: auth.uid)
 

@@ -10,7 +10,7 @@ RSpec.describe "Signin", type: :system do
           fill_in 'メールアドレス', with: user.email
           fill_in 'パスワード', with: user.password
           click_on 'ログイン'
-          expect(page).to have_current_path(new_log_path)
+          expect(page).to have_current_path(new_daily_record_path)
           expect(page).to have_content 'ログインしました。'
         end
       end
