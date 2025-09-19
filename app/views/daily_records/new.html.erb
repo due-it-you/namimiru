@@ -4,7 +4,7 @@
     今日はどんな気分？
   </div>
   <div data-controller="daily-records--mood-score">
-    <%= form_with model: @daily_record do |f| %>
+    <%= form_with url: daily_records_path, method: :post do |f| %>
       <div class="flex">
         <%= f.range_field :mood_score, in: -5..5, id: "mood-range", data: { action: "input->daily-records--mood-score#update" } ,class: "w-5/6 mr-2" %>
         <div id="current-mood-score" class="flex justify-center items-center text-xl font-bold rounded-md aspect-square border border-border-base w-1/6">
