@@ -9,8 +9,8 @@ class DailyRecordsController < ApplicationController
       flash[:success] = "記録の作成が完了しました。"
       redirect_to charts_path
     else
-      flash[:danger] = "記録の作成に失敗しました。"
-      render :new
+      flash[:alert] = "記録の作成に失敗しました。"
+      redirect_to new_daily_record_path
     end
   end
 
