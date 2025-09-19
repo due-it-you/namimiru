@@ -48,6 +48,9 @@ RSpec.configure do |config|
   # rspecのテストコード中でFactory_botのメソッドを使用する際に、クラス名の指定を省略できるようになる
   config.include FactoryBot::Syntax::Methods
 
+  # RSpecのsystem specでDeviseを使えるようにする
+  config.include Devise::Test::IntegrationHelpers, type: :system
+
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
