@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "Create", type: :system do
   describe '記録作成機能' do
+    let(:user) { create(:user) }
+    before do
+      sign_in user
+    end
+
     context '記録の作成に成功した場合' do
       it '成功を知らせるフラッシュメッセージが表示されること' do
         visit new_daily_record_path
