@@ -4,6 +4,11 @@ class DailyRecordsController < ApplicationController
   def new; end
 
   def create 
+    if current_user.already_recorded_today?
+      flash[:alert] = "すでに今日の記録は作成済みです。"
+      redirect_to charts_path and return
+    end
+
     daily_record = current_user.daily_records.new(daily_record_params)
     if daily_record.save
       flash[:success] = "記録の作成が完了しました。"
