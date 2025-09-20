@@ -1,0 +1,17 @@
+<div>
+  <div>
+    <%= render 'shared/flash_message' %>
+  </div>
+  <!-- 現在ログインしているユーザー -->
+  <%= link_to user_chart_path(@current_user.id) do %>
+    <div class="border border-border-base rounded-md p-4">
+      <% if @current_user.name.blank? %>
+        ユーザーネーム未設定
+      <% else %>
+        <div class="font-semibold">
+          <%= @current_user.name %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

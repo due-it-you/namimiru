@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    sessions: "users/sessions",
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
   root to: "pages#top"
+
+  resources :daily_records, only: %i[new create]
+  resources :charts, only: %i[index]
+  resources :users, only: [] do
+    resource :chart, only: %i[show]
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
