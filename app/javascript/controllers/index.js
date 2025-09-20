@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ChartController from "./chart_controller"
+application.register("chart", ChartController)
+
 import DailyRecords__MoodScoreController from "./daily_records/mood_score_controller"
 application.register("daily-records--mood-score", DailyRecords__MoodScoreController)
 
