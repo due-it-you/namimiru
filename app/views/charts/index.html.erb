@@ -1,7 +1,6 @@
 <div>
-  <%= render 'shared/flash_message' %>
   <div>
-    <p class="font-semibold text-string-base text-md">過去のグラフ</p> 
+    <%= render 'shared/flash_message' %>
   </div>
   <!-- 現在ログインしているユーザー -->
   <%= link_to user_chart_path(@current_user.id) do %>

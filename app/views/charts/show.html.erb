@@ -1,15 +1,21 @@
 <div>
   <div>
+    <p class="font-semibold text-string-base text-md">過去のグラフ</p> 
+  </div>
+  <div>
     <canvas 
-      height="350" 
-      id="myChart"
-      class="my-4"
-      data-controller="charts--display"
-      data-chart-labels="<%= @labels.to_json %>"
-      data-chart-data="<%= @data.to_json %>">
+       height="350" 
+       id="myChart"
+       class="my-4"
+       data-controller="charts--display"
+       data-chart-labels="<%= @labels.to_json %>"
+       data-chart-data="<%= @data.to_json %>">
     </canvas>
   </div>
   <div>
+    <div>
+      <p class="font-semibold text-string-base text-md mt-8 mb-4">前回の記録</p> 
+    </div>
     <div id="latest-record" class="border border-border-base p-4 rounded-md text-string-base">
       <div class="text-sm">
         <%= @latest_record.created_at.strftime("%Y/%m/%d %H:%M") %>
