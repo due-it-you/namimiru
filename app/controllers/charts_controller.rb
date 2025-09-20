@@ -2,6 +2,7 @@ class ChartsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @current_user = current_user
     @latest_record = current_user.daily_records.order(created_at: :ASC).last
 
     # グラフ表示のためのラベルとデータ

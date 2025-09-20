@@ -1,16 +1,28 @@
 <div>
   <%= render 'shared/flash_message' %>
   <div>
-   <p class="font-semibold text-string-base text-md">過去のグラフ</p> 
+    <p class="font-semibold text-string-base text-md">過去のグラフ</p> 
   </div>
+  <!-- 現在ログインしているユーザー -->
+  <%= link_to user_chart_path(@current_user.id) do %>
+    <div class="border border-border-base rounded-md p-4">
+      <% if @current_user.name.blank? %>
+        ユーザーネーム未設定
+      <% else %>
+        <div class="font-semibold">
+          <%= @current_user.name %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
   <div>
     <canvas 
-      height="350" 
-      id="myChart"
-      class="my-4"
-      data-controller="charts--display"
-      data-chart-labels="<%= @labels.to_json %>"
-      data-chart-data="<%= @data.to_json %>">
+       height="350" 
+       id="myChart"
+       class="my-4"
+       data-controller="charts--display"
+       data-chart-labels="<%= @labels.to_json %>"
+       data-chart-data="<%= @data.to_json %>">
     </canvas>
   </div>
   <div>
