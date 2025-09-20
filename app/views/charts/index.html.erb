@@ -1,10 +1,13 @@
 <div>
-  グラフ確認画面
   <%= render 'shared/flash_message' %>
+  <div>
+   <p class="font-semibold text-string-base text-md">過去のグラフ</p> 
+  </div>
   <div>
     <canvas 
       height="350" 
       id="myChart"
+      class="my-4"
       data-controller="charts--display"
       data-chart-labels="<%= @labels.to_json %>"
       data-chart-data="<%= @data.to_json %>">
