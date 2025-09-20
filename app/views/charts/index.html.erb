@@ -2,36 +2,12 @@
   グラフ確認画面
   <%= render 'shared/flash_message' %>
   <div>
-    <canvas height="400" id="myChart"></canvas>
+    <canvas 
+      height="400" 
+      id="myChart"
+      data-controller="charts--display"
+      data-chart-labels="<%= @labels.to_json %>"
+      data-chart-data="<%= @data.to_json %>">
+    </canvas>
   </div>
 </div>
-<script>
-  const ctx = document.getElementById('myChart');
-
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: [
-        <% @daily_records.each do |daily_record| %>
-          "<%= daily_record.created_at.strftime("%m/%d") %>",
-        <% end %>
-      ],
-      datasets: [{
-        label: '# of Votes',
-        data: [
-          <% @daily_records.each do |daily_record| %>
-            <%= daily_record.mood_score %>,
-          <% end %>
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
