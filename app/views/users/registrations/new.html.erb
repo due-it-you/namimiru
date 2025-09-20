@@ -1,0 +1,42 @@
+<div>
+  <div class="font-semibold text-xl text-center text-string-base">
+    新規登録
+  </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+
+    <div class="space-y-4 mt-8">
+      <div class="field">
+        <%= f.label :name, "ユーザーネーム", class: "text-string-base font-semibold" %><br>
+        <%= f.text_field :name, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autofocus: true %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email, "メールアドレス", class: "text-string-base font-semibold" %><br />
+        <%= f.email_field :email, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autocomplete: "email" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, "パスワード", class: "text-string-base font-semibold" %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autocomplete: "new-password" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, "パスワード（確認用）", class: "text-string-base font-semibold" %><br />
+        <%= f.password_field :password_confirmation, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autocomplete: "new-password" %>
+      </div>
+    </div>
+
+    <div class="actions flex justify-center mt-12">
+      <%= f.submit "送信", class: "bg-logo-color text-white font-semibold w-full py-1 rounded-md" %>
+    </div>
+  <% end %>
+
+  <%= link_to "すでにアカウントを持っている方はこちら", 
+    new_session_path(resource_name), 
+    class: "text-xs text-blue-400"
+  %><br />
+<div>

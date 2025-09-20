@@ -4,5 +4,11 @@
 
 import { application } from "./application"
 
+import Charts__DisplayController from "./charts/display_controller"
+application.register("charts--display", Charts__DisplayController)
+
+import DailyRecords__MoodScoreController from "./daily_records/mood_score_controller"
+application.register("daily-records--mood-score", DailyRecords__MoodScoreController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)

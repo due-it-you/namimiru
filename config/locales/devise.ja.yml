@@ -1,0 +1,6 @@
+ja:
+  devise:
+    registrations:
+      user:
+        signed_up: "アカウント登録が完了しました。"
+        failure: "アカウントの登録に失敗しました。"

@@ -15,11 +15,14 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
   <body>
     <div class="bg-[#FFFFFD]">
-      <%= yield %>
+      <div class="my-28 mx-12">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
