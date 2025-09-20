@@ -20,6 +20,6 @@ user = User.create!(
     mood_score: rand(-5..5),
     memo: Faker::Books::Lovecraft.paragraph,
     created_at: n.days.ago,
-    updated_at: n.days.ago 
+    updated_at: n.days.ago
   )
 end
