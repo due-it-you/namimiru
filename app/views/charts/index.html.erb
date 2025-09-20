@@ -1,5 +1,37 @@
-<div data-controller="chart">
+<div>
   グラフ確認画面
   <%= render 'shared/flash_message' %>
-  <canvas id="myChart"></canvas>
+  <div>
+    <canvas height="400" id="myChart"></canvas>
+  </div>
 </div>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [
+        <% @daily_records.each do |daily_record| %>
+          "<%= daily_record.created_at.strftime("%m月%d日") %>",
+        <% end %>
+      ],
+      datasets: [{
+        label: '# of Votes',
+        data: [
+          <% @daily_records.each do |daily_record| %>
+            <%= daily_record.mood_score %>,
+          <% end %>
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
