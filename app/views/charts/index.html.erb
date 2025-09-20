@@ -15,31 +15,4 @@
       <% end %>
     </div>
   <% end %>
-  <div>
-    <canvas 
-       height="350" 
-       id="myChart"
-       class="my-4"
-       data-controller="charts--display"
-       data-chart-labels="<%= @labels.to_json %>"
-       data-chart-data="<%= @data.to_json %>">
-    </canvas>
-  </div>
-  <div>
-    <div id="latest-record" class="border border-border-base p-4 rounded-md text-string-base">
-      <div class="text-sm">
-        <%= @latest_record.created_at.strftime("%Y/%m/%d %H:%M") %>
-      </div>  
-      <div class="my-2">
-        <span class="text-md">気分： </span>
-        <span class="font-semibold text-xl"><%= @latest_record.mood_score %></span>
-      </div>
-      <div class="font-light">
-        <%= @latest_record.memo %>
-      </div>
-    </div>
-  </div>
-  <div>
-    <%= link_to "さらに過去の記録を見る", "#", class: "border border-border-base block w-full mt-4 py-2 text-center text-string-base font-semibold bg-white rounded-md" %>
-  </div>
 </div>
