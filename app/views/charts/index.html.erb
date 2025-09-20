@@ -13,7 +13,7 @@
     data: {
       labels: [
         <% @daily_records.each do |daily_record| %>
-          "<%= daily_record.created_at.strftime("%m月%d日") %>",
+          "<%= daily_record.created_at.strftime("%m/%d") %>",
         <% end %>
       ],
       datasets: [{
