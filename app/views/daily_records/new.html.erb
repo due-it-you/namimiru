@@ -6,13 +6,15 @@
   <div data-controller="daily-records--mood-score">
     <%= form_with url: daily_records_path, method: :post, scope: :daily_record do |f| %>
       <div>
-        <div class="flex text-md font-bold rounded-md border border-border-base">
-          <div id="current-mood-icon">
+        <div class="flex items-center font-bold rounded-md border border-border-base p-4">
+          <!-- 顔アイコン -->
+          <div id="current-mood-icon" class="text-3xl">
           </div>
-          <div id="current-mood" >
+          <!-- 気分の表記（絶不調・とてもつらい・普通など） -->
+          <div id="current-mood" class="ml-2 text-md">
           </div>
         </div>
-        <%= f.range_field :mood_score, in: -5..5, id: "mood-range", data: { action: "input->daily-records--mood-score#update" } ,class: "w-full mr-2" %>
+        <%= f.range_field :mood_score, in: -5..5, id: "mood-range", data: { action: "input->daily-records--mood-score#update" } ,class: "w-full my-4" %>
       </div>
       <div class="my-4">
         <p class="font-semibold text-string-base">気付きメモ（任意）</p>
