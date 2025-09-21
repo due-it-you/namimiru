@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :charts, only: %i[index]
   resources :users, only: [] do
     resource :chart, only: %i[show]
+    resources :daily_records, only: %i[index]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
