@@ -2,8 +2,8 @@ class DailyRecordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    user = User.find(params[:user_id])
-    @daily_records = user.daily_records.order(created_at: :DESC)
+    @user = User.find(params[:user_id])
+    @daily_records = @user.daily_records.order(created_at: :DESC)
   end
 
   def new; end
