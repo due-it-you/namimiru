@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  # ログイン時のルートパス
+  authenticated :user do
+    root to: "daily_records#new", as: "user_authenticated_root"
+  end
+  # 非ログイン時のルートパス
+  root to: "pages#top"
+
   devise_for :users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
-  root to: "pages#top"
 
   resources :daily_records, only: %i[new create]
   resources :charts, only: %i[index]
