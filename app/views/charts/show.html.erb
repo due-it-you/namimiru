@@ -34,7 +34,7 @@
       <div class="my-2">
         <span class="text-md">気分： </span>
         <span class="font-semibold text-xl">
-          <% @latest_record.mood_score %>
+          <%= mood_display(@latest_record.mood_score) %>
         </span>
       </div>
       <div class="font-light">
