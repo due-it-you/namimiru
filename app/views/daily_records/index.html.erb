@@ -1,0 +1,29 @@
+<div>
+  <div class="flex">
+    <% if @user.name.blank? %>
+      ユーザーネーム未設定
+    <% else %>
+      <div class="font-semibold">
+        <%= @user.name %>
+      </div>
+    <% end %>
+    <span class="font-semibold text-string-base text-md">さんの記録履歴</span> 
+  </div>
+  <% @daily_records.each do |daily_record| %>
+    <!-- 記録のカードUI -->
+    <div class="border border-border-base p-4 my-4 rounded-md text-string-base">
+      <div class="text-sm">
+        <%= daily_record.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </div>  
+      <div class="my-2">
+        <span class="text-md">気分： </span>
+        <span class="font-semibold text-md">
+          <%= mood_display(daily_record.mood_score) %>
+        </span>
+      </div>
+      <div class="font-light">
+        <%= daily_record.memo %>
+      </div>
+    </div>
+  <% end %>
+</div>
