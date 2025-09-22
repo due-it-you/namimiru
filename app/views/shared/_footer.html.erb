@@ -1,10 +1,32 @@
-<footer class="fixed bottom-0 z-100 bg-[#FDFBF9] h-16 w-full">
-  <div class="flex">
+<footer class="flex items-center justify-center fixed bottom-0 z-100 bg-[#FDFBF9] h-16 w-full">
+  <div class="grid grid-cols-4 gap-4">
     <!-- 記録作成アイコン -->
-    <div>
-    </div>
-    <!-- 記録確認アイコン -->
-    <div>
-    </div>
+    <%= link_to new_daily_record_path do %>
+      <div class="flex flex-col items-center justify-center">
+        <%= image_tag 'create_daily_records_icon.png', alt: '記録作成のアイコン', size: '30x30' %>
+        <p class="text-xs">記録作成</p>
+      </div>
+    <% end %>
+    <!-- グラフ確認アイコン -->
+    <%= link_to charts_path do %>
+      <div class="flex flex-col items-center justify-center">
+        <%= image_tag 'index_daily_records_icon.png', alt: 'グラフ確認のアイコン', size: '30x30' %>
+        <p class="text-xs">グラフ</p>
+      </div>
+    <% end %>
+    <!-- 連携情報アイコン -->
+    <%= link_to "#" do %>
+      <div class="flex flex-col items-center justify-center">
+        <%= image_tag 'index_care_relations_icon.png', alt: '連携情報アイコン', size: '30x30' %>
+        <p class="text-xs">連携情報</p>
+      </div>
+    <% end %>
+    <!-- マイページアイコン -->
+    <%= link_to "#" do %>
+      <div class="flex flex-col items-center justify-center">
+        <%= image_tag 'my_page_icon.png', alt: 'マイページアイコン', size: '30x30' %>
+        <p class="text-xs">マイページ</p>
+      </div>
+    <% end %>
   </div>
 </footer>
