@@ -12,15 +12,20 @@
           <%= f.email_field :email, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autofocus: true, autocomplete: "email" %>
         </div>
 
+        <div data-controller="password-field">
         <div class="field">
           <%= f.label :password, class: "text-string-base font-semibold" %><br />
-          <%= f.password_field :password,  class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autocomplete: "current-password" %>
+          <%= f.password_field :password,  class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autocomplete: "current-password", id: "user-password" %>
+        </div>
+        <div class="text-sm">
+          <input type="checkbox" data-action="password-field#switchVisible"> パスワード表示
+        </div>
         </div>
 
         <% if devise_mapping.rememberable? %>
           <div class="field">
             <%= f.check_box :remember_me %>
-            <%= f.label :remember_me, class: "text-sm" %>
+            <%= f.label :remember_me, class: "text-md" %>
           </div>
         <% end %>
       </div>
