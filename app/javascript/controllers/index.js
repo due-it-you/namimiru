@@ -12,3 +12,6 @@ application.register("daily-records--mood-score", DailyRecords__MoodScoreControl
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import PasswordFieldController from "./password_field_controller"
+application.register("password-field", PasswordFieldController)
