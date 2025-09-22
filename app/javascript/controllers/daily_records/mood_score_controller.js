@@ -5,13 +5,16 @@ export default class extends Controller {
   connect() {
     const currentMoodTarget = document.getElementById("current-mood");
     const currentMoodIconTarget = document.getElementById("current-mood-icon");
+    const currentMoodScoreTarget = document.getElementById("current-mood-score");
     currentMoodTarget.textContent = "普通";
     currentMoodIconTarget.textContent = "🙂";
+    currentMoodScoreTarget.textContent = "0";
   }
 
   update() {
     const currentMoodScore = document.getElementById("mood-range").value;
     const currentMoodTarget = document.getElementById("current-mood");
+    const currentMoodScoreTarget = document.getElementById("current-mood-score");
     const currentMoodIconTarget = document.getElementById("current-mood-icon");
     const labels = {
       "-5": ["絶不調", "😵‍💫"],
@@ -31,5 +34,6 @@ export default class extends Controller {
 
     currentMoodTarget.textContent = currentMood;
     currentMoodIconTarget.textContent = currentMoodIcon;
+    currentMoodScoreTarget.textContent = currentMoodScore;
   }
 }
