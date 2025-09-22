@@ -24,6 +24,9 @@
         <%= yield %>
       </div>
     </div>
-    <%= render 'shared/footer' %>
+    <!-- 新規登録・ログイン・トップ画面ではフッターは非表示-->
+    <% unless (current_page?(root_path) || current_page?(new_user_registration_path) || current_page?(new_user_session_path)) && !user_signed_in? %>
+      <%= render 'shared/footer' %>
+    <% end %>
   </body>
 </html>
