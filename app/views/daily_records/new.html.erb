@@ -13,6 +13,9 @@
           <!-- 気分の表記（絶不調・とてもつらい・普通など） -->
           <div id="current-mood" class="ml-2 text-md">
           </div>
+          <div>
+            （<span id="current-mood-score"></span>）
+          </div>
         </div>
         <%= f.range_field :mood_score, in: -5..5, id: "mood-range", data: { action: "input->daily-records--mood-score#update" } ,class: "w-full my-4" %>
       </div>
