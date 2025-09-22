@@ -2,6 +2,9 @@
   <div>
     <%= render 'shared/flash_message' %>
   </div>
+  <div class="font-semibold text-string-base text-sm my-4">
+    どのユーザーのグラフを確認しますか？
+  </div>
   <!-- 現在ログインしているユーザー -->
   <%= link_to user_chart_path(@current_user.id) do %>
     <div class="border border-border-base rounded-md p-4">
