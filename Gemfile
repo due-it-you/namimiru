@@ -7,6 +7,8 @@ gem "rails-i18n", "~> 7.0.0"
 gem "devise", "~> 4.9"
 gem "devise-i18n"
 gem "devise-i18n-views"
+
+gem "kaminari"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use postgresql as the database for Active Record
