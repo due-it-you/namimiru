@@ -30,6 +30,10 @@ class DailyRecordsController < ApplicationController
     end
   end
 
+  def edit
+    @daily_record = DailyRecord.find(params[:id])
+  end
+
   private
 
   def daily_record_params
