@@ -8,18 +8,20 @@
     </div> 
   </div>
   <div class="text-string-base">
-    <%= form_with url: user_daily_record_path(@daily_record.user.id, @daily_record.id), method: :put do |f| %> 
-      <!-- 気分 -->
-      <div class="mt-4">
-        <div class="font-semibold text-string-base text-md">
-          気分
-        </div> 
-        <div class="my-2 p-2 border border-border-base rounded-md">
-          <span class="font-semibold text-md">
-            <%= mood_display(@daily_record.mood_score) %>
-            （<%= @daily_record.mood_score %>）
-          </span>
+    <%= form_with url: user_daily_record_path(@daily_record.user.id, @daily_record.id), method: :put, scope: :daily_record do |f| %> 
+      <div data-controller="daily-records--mood-score">
+        <div class="flex items-center font-bold rounded-md border border-border-base p-4">
+          <!-- 顔アイコン -->
+          <div id="current-mood-icon" class="text-3xl">
+          </div>
+          <!-- 気分の表記（絶不調・とてもつらい・普通など） -->
+          <div id="current-mood" class="ml-2 text-md">
+          </div>
+          <div>
+            （<span id="current-mood-score"></span>）
+          </div>
         </div>
+        <%= f.range_field :mood_score, in: -5..5, id: "mood-range", data: { action: "input->daily-records--mood-score#update" } , value: @daily_record.mood_score, class: "w-full my-4" %>
       </div>
       <!-- 気付きメモ -->
       <div class="mt-4"> 
