@@ -34,6 +34,17 @@ class DailyRecordsController < ApplicationController
     @daily_record = DailyRecord.find(params[:id])
   end
 
+  def update
+    daily_record = DailyRecord.find(params[:id])
+    if daily_record.update(daily_record_params)
+      flash[:success] = "記録の更新に成功しました。"
+      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+    else
+      flash[:alert] = "記録の更新に失敗しました。"
+      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+    end
+  end
+
   private
 
   def daily_record_params
