@@ -5,7 +5,11 @@ class DailyRecordsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-  @daily_records = @user.daily_records.order(created_at: :DESC).page(params[:page]).per(ONE_WEEK_DAYS)
+    @daily_records = @user.daily_records.order(created_at: :DESC).page(params[:page]).per(ONE_WEEK_DAYS)
+  end
+
+  def show
+    @daily_record = DailyRecord.find(params[:id])
   end
 
   def new; end
