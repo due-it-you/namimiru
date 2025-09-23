@@ -34,6 +34,9 @@
       <div class="text-sm text-right my-2">
         <%= @daily_record.created_at.strftime("%Y/%m/%d %H:%M") %>
       </div>  
+      <div>
+        <%= f.submit "更新", class: "my-8 bg-logo-color text-white font-semibold w-full py-1 rounded-md" %>
+      </div>
     <% end %>
   </div>
 </div>
