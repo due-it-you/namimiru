@@ -27,4 +27,9 @@
       </div>
     </div>
   <% end %>
+  <div class="w-full flex justify-center">
+    <div>
+      <%= paginate @daily_records, window: 2 %>
+    </div>
+  </div>
 </div>

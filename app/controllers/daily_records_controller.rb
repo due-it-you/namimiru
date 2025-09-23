@@ -1,9 +1,11 @@
 class DailyRecordsController < ApplicationController
   before_action :authenticate_user!
 
+  ONE_WEEK_DAYS = 7.freeze
+
   def index
     @user = User.find(params[:user_id])
-    @daily_records = @user.daily_records.order(created_at: :DESC)
+  @daily_records = @user.daily_records.order(created_at: :DESC).page(params[:page]).per(ONE_WEEK_DAYS)
   end
 
   def new; end
