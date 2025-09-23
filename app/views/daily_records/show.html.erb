@@ -2,10 +2,13 @@
   <div>
     <%= render 'shared/flash_message' %>
   </div>
-  <div class="font-semibold text-string-base text-xl">
-    記録の詳細
-  </div> 
-  <div id="latest-record" class="text-string-base">
+  <div class="flex items-center">
+    <div class="font-semibold text-string-base text-xl mr-4">
+      記録の詳細
+    </div> 
+    <%= link_to "編集", edit_user_daily_record_path(@daily_record.user.id, @daily_record.id), class: "text-white font-medium bg-logo-color rounded-md px-4 py-2"%>
+  </div>
+  <div class="text-string-base">
     <!-- 気分 -->
     <div class="mt-4">
       <div class="font-semibold text-string-base text-md">
