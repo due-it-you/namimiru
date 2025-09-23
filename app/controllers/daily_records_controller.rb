@@ -1,9 +1,15 @@
 class DailyRecordsController < ApplicationController
   before_action :authenticate_user!
 
+  ONE_WEEK_DAYS = 7.freeze
+
   def index
     @user = User.find(params[:user_id])
-    @daily_records = @user.daily_records.order(created_at: :DESC)
+    @daily_records = @user.daily_records.order(created_at: :DESC).page(params[:page]).per(ONE_WEEK_DAYS)
+  end
+
+  def show
+    @daily_record = DailyRecord.find(params[:id])
   end
 
   def new; end
@@ -21,6 +27,21 @@ class DailyRecordsController < ApplicationController
     else
       flash[:alert] = "記録の作成に失敗しました。"
       redirect_to new_daily_record_path
+    end
+  end
+
+  def edit
+    @daily_record = DailyRecord.find(params[:id])
+  end
+
+  def update
+    daily_record = DailyRecord.find(params[:id])
+    if daily_record.update(daily_record_params)
+      flash[:success] = "記録の更新に成功しました。"
+      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+    else
+      flash[:alert] = "記録の更新に失敗しました。"
+      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
     end
   end
 
