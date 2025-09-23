@@ -1,0 +1,38 @@
+<div>
+  <div>
+    <%= render 'shared/flash_message' %>
+  </div>
+  <div class="flex items-center">
+    <div class="font-semibold text-string-base text-xl mr-4">
+      記録の編集
+    </div> 
+  </div>
+  <div class="text-string-base">
+    <%= form_with url: user_daily_record_path(@daily_record.user.id, @daily_record.id), method: :put do |f| %> 
+      <!-- 気分 -->
+      <div class="mt-4">
+        <div class="font-semibold text-string-base text-md">
+          気分
+        </div> 
+        <div class="my-2 p-2 border border-border-base rounded-md">
+          <span class="font-semibold text-md">
+            <%= mood_display(@daily_record.mood_score) %>
+            （<%= @daily_record.mood_score %>）
+          </span>
+        </div>
+      </div>
+      <!-- 気付きメモ -->
+      <div class="mt-4"> 
+        <div class="font-semibold text-string-base text-md my-2">
+          気付きメモ
+        </div> 
+        <%= f.text_area :memo, size: "70x5", value: @daily_record.memo, class: "w-full p-4 mt-2 border border-border-base rounded-md" %>
+      </div>
+      <!-- 作成時間 -->
+      <div class="text-sm text-right my-2">
+        <%= @daily_record.created_at.strftime("%Y/%m/%d %H:%M") %>
+      </div>  
+    <% end %>
+  </div>
+</div>
+</div>
