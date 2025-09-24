@@ -45,6 +45,17 @@ class DailyRecordsController < ApplicationController
     end
   end
 
+  def destroy
+    daily_record = DailyRecord.find(params[:id])
+    if daily_record.destroy
+      flash[:success] = "記録の削除が完了しました。"
+      redirect_to user_daily_records_path(daily_record.user.id)
+    else
+      flash[:alert] = "記録の削除に失敗しました。"
+      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+    end
+  end
+
   private
 
   def daily_record_params
