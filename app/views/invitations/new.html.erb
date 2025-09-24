@@ -6,4 +6,12 @@
     <%= f.email_field :email, class: "border border-border-base rounded-md w-full my-2 p-2", placeholder: "xxxxx@example.com" %>
     <%= f.submit "招待メールを送信", class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8" %>
   <% end %>
+  <div class="flex items-center mb-8">
+    <div class="flex-grow border-t border-gray-400"></div>
+    <span class="text-xs mx-4 text-gray-700">招待コードを入力する場合</span>
+    <div class="flex-grow border-t border-gray-400"></div>
+  </div>
+  <div>
+    <%= link_to "招待コードを入力", "#", class: "block w-full text-center border border-border-base rounded-md text-string-base font-semibold py-2 px-4" %>
+  </div>
 </div>
