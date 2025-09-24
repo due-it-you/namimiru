@@ -1,0 +1,8 @@
+<div>
+  <%= form_with url: "#", method: :post do |f| %>
+    <div class="text-string-base font-semibold">
+       招待する相手のメールアドレスを入力してください。
+    </div>
+    <%= f.email_field :email, class: "border border-border-base rounded-md" %>
+  <% end %>
+</div>
