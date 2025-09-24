@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
-  resources :daily_records, only: %i[new create]
+  resources :daily_records, only: %i[new create destroy]
   resources :charts, only: %i[index]
   resources :users, only: [] do
     resource :chart, only: %i[show]

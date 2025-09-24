@@ -38,6 +38,11 @@
         <%= f.submit "更新", class: "my-8 bg-logo-color text-white font-semibold w-full py-1 rounded-md" %>
       </div>
     <% end %>
+    <div class="w-1/8">
+      <%= link_to daily_record_path(@daily_record.id), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" } do %>
+        <%= image_tag "trash_icon.png" %>
+      <% end %>
+    </div>
   </div>
 </div>
 </div>

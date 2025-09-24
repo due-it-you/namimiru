@@ -1,4 +1,7 @@
 <div>
+  <div>
+    <%= render 'shared/flash_message' %>
+  </div>
   <div class="flex">
     <% if @user.name.blank? %>
       ユーザーネーム未設定
