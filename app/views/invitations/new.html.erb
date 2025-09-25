@@ -1,5 +1,8 @@
 <div>
-  <%= form_with url: "#", method: :post do |f| %>
+  <div>
+    <%= render 'shared/flash_message' %>
+  </div>
+  <%= form_with url: invitation_path, method: :post, scope: :invitation do |f| %>
     <div class="text-string-base font-semibold text-sm">
        招待する相手のメールアドレスを入力してください。
     </div>
