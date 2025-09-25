@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :daily_records, only: %i[new create destroy]
   resources :care_relations, only: %i[index]
   resources :charts, only: %i[index]
-  resource :invitation, only: %i[new]
+  resource :invitation, only: %i[new create]
   resources :users, only: [] do
     resource :chart, only: %i[show]
     resources :daily_records, only: %i[index show edit update]
