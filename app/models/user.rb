@@ -11,13 +11,15 @@ class User < ApplicationRecord
 
   validates :name, presence: { message: "を入力してください。" },
     length: { maximum: 12, message: "は12文字以内にしてください。" },
-    unless: :social_login?
+    unless: :social_login?,
+    on: :create
   validates :email, presence: { message: "を入力してください。" },
     format: {
       with: /\A[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/,
       message: "の形式を満たしてください。"
     },
-    unless: :social_login?
+    unless: :social_login?,
+    on: :create
   validates :password, presence: { message: "を入力してください。" }, confirmation: true,
     length: {
       in: 8..72,
@@ -29,7 +31,8 @@ class User < ApplicationRecord
       with: /\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[!-~]+\z/,
       message: "は、英字小文字・英字大文字・数字がそれぞれ1つ以上含まれるようにしてください。"
     },
-    unless: :social_login?
+    unless: :social_login?,
+    on: :create
 
   def already_recorded_today?
     daily_records.where(created_at: Date.today.all_day).exists?
