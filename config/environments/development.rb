@@ -11,14 +11,14 @@ Rails.application.configure do
   end
 
   # Gmail用のAction Mailerの設定
-  config.action_mailer.default_url_options = {  host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = {  host: "localhost", port: 3000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:         "smtp.gmail.com",
     port:            587,
     domain:          "gmail.com",
     user_name:       "namimiruofficial@gmail.com",
-    password:        ENV['GOOGLE_PASSWORD'],
+    password:        ENV["GOOGLE_PASSWORD"],
     authentication:  "plain",
     enable_starttls: true,
     open_timeout:    5,

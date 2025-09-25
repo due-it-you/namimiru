@@ -1,7 +1,7 @@
 class InvitationsController < ApplicationController
   def new; end
 
-  def create 
+  def create
     invitee_email = email_params[:email]
     invitation_token = SecureRandom.alphanumeric(12)
 
@@ -12,7 +12,7 @@ class InvitationsController < ApplicationController
 
     if current_user.update(invitation_token: invitation_token, invitation_created_at: Time.now)
       InvitationMailer
-        .with(inviter: current_user,invitee_email: invitee_email)
+        .with(inviter: current_user, invitee_email: invitee_email)
         .invite.deliver_later
       flash[:success] = "入力したメールアドレスに招待メールを送信しました。"
       redirect_to new_invitation_path
