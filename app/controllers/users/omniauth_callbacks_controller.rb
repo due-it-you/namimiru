@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  include Devise::Controller::Rememberable
+  include Devise::Controllers::Rememberable
 
   skip_before_action :authenticate_user!
   # You should configure your model like this:
