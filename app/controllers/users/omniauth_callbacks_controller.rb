@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  include Devise::Controller::Rememberable
+
   skip_before_action :authenticate_user!
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
@@ -11,6 +13,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     auth = request.env["omniauth.auth"]
     @user = User.from_google_oauth(auth)
+
+    remember_me(@user)
+
     sign_in_and_redirect @user, event: :authentication
     set_flash_message(:notice, :success, kind: "google") if is_navigational_format?
   rescue => e
