@@ -50,6 +50,7 @@ class User < ApplicationRecord
         user.social_login = true
         user.save!
         user.social_profiles.create!(provider: auth.provider, uid: auth.uid)
+        user.social_login = false
       end
     end
     user
