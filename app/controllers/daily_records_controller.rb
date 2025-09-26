@@ -1,6 +1,4 @@
 class DailyRecordsController < ApplicationController
-  before_action :authenticate_user!
-
   ONE_WEEK_DAYS = 7.freeze
 
   def index
