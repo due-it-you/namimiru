@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   }
 
   resources :daily_records, only: %i[new create destroy]
-  resources :care_relations, only: %i[index new]
+  resources :care_relations, only: %i[index new create]
   resources :charts, only: %i[index]
   resource :invitation, only: %i[new create]
   resources :users, only: [] do
