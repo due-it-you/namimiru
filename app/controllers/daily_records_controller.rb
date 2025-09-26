@@ -1,6 +1,4 @@
 class DailyRecordsController < ApplicationController
-  before_action :authenticate_user!
-
   ONE_WEEK_DAYS = 7.freeze
 
   def index
@@ -38,9 +36,20 @@ class DailyRecordsController < ApplicationController
     daily_record = DailyRecord.find(params[:id])
     if daily_record.update(daily_record_params)
       flash[:success] = "記録の更新に成功しました。"
-      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id), status: :see_other
     else
       flash[:alert] = "記録の更新に失敗しました。"
+      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+    end
+  end
+
+  def destroy
+    daily_record = DailyRecord.find(params[:id])
+    if daily_record.destroy
+      flash[:success] = "記録の削除が完了しました。"
+      redirect_to user_daily_records_path(daily_record.user.id), status: :see_other
+    else
+      flash[:alert] = "記録の削除に失敗しました。"
       redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
     end
   end
