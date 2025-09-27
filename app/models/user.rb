@@ -7,8 +7,8 @@ class User < ApplicationRecord
   has_many :daily_records, dependent: :destroy
   has_many :social_profiles, dependent: :destroy
   # 自己結合の多対多の関連付け
-  has_many :being_supported_relationships, class_name:"CareRelation", foreign_key: :supported_id, dependent: :destroy
-  has_many :supporting_relationships, class_name:"CareRelation", foreign_key: :supporter_id, dependent: :destroy
+  has_many :being_supported_relationships, class_name: "CareRelation", foreign_key: :supported_id, dependent: :destroy
+  has_many :supporting_relationships, class_name: "CareRelation", foreign_key: :supporter_id, dependent: :destroy
   has_many :supporters, through: :being_supported_relationships, source: :supporter
   has_many :supportings, through: :supporting_relationships, source: :supported
 
@@ -41,7 +41,7 @@ class User < ApplicationRecord
     unless: :social_login?,
     on: :create
   validates :invitation_token, format: { with: /\A[A-Za-z0-9]{12}\Z/ }, on: :update
-  validates :invitee_role, presence: true, inclusion: { in: ["supported", "supporter"], message: "を選択してください。" } , on: :update
+  validates :invitee_role, presence: true, inclusion: { in: [ "supported", "supporter" ], message: "を選択してください。" }, on: :update
 
   def already_recorded_today?
     daily_records.where(created_at: Date.today.all_day).exists?
@@ -69,9 +69,9 @@ class User < ApplicationRecord
 
   def self.assign_care_relation_ids(inviter:, invitee:)
     if inviter.invitee_role == "supported"
-      [invitee.id, inviter.id]
+      [ invitee.id, inviter.id ]
     else
-      [inviter.id, invitee.id]
+      [ inviter.id, invitee.id ]
     end
   end
 
