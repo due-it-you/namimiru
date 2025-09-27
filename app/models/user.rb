@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   attr_accessor :social_login
 
+  INVITATION_EXPIRATION_MINUTES = 15.minutes.freeze
+
   validates :name, presence: { message: "を入力してください。" },
     length: { maximum: 12, message: "は12文字以内にしてください。" },
     unless: :social_login?,
@@ -71,5 +73,9 @@ class User < ApplicationRecord
     else
       [inviter.id, invitee.id]
     end
+  end
+
+  def invitation_token_expired?
+    self.invitation_created_at <= INVITATION_EXPIRATION_MINUTES.ago
   end
 end
