@@ -5,15 +5,12 @@ class CareRelationsController < ApplicationController
   def new; end
 
   def create
-    invitation_token = invitation_token_params[:invitation_token]
-    inviter = User.find_by(invitation_token: invitation_token)
+    inviter = User.find_by(invitation_token: invitation_token_params[:invitation_token])
     invitee = current_user
     # 招待されたユーザーの役割に応じて「支援者」「双極性障害の方」のいずれかに振り分け
     supported_id, supporter_id = User.assign_care_relation_ids(inviter: inviter, invitee: invitee)
 
-    # 招待コードが存在していないか有効期限を超えている場合
     return redirect_to(new_care_relation_path, alert: "招待コードが存在していないか、有効期限を超えています。") if inviter.nil? || inviter.invitation_token_expired?
-    # すでに連携済みの場合
     return redirect_to(new_care_relation_path, alert: "すでに連携済みです。") if CareRelation.where(supported_id: supported_id, supporter_id: supporter_id).exists?
 
     @care_relation = CareRelation.new(supported_id: supported_id, supporter_id: supporter_id)
