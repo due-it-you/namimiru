@@ -1,0 +1,2 @@
+class CareRelation < ApplicationRecord
+end
