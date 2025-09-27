@@ -39,6 +39,7 @@ class User < ApplicationRecord
     unless: :social_login?,
     on: :create
   validates :invitation_token, format: { with: /\A[A-Za-z0-9]{12}\Z/ }, on: :update
+  validates :invitee_role, presence: true, inclusion: { in: ["supported", "supporter"], message: "を選択してください。" } , on: :update
 
   def already_recorded_today?
     daily_records.where(created_at: Date.today.all_day).exists?
