@@ -17,13 +17,7 @@ class CareRelationsController < ApplicationController
     end
 
     # 招待されたユーザーの役割に応じて「支援者」「双極性障害の方」のいずれかに振り分け
-    if inviter.invitee_role == "supported"
-      supported_id = invitee.id
-      supporter_id = inviter.id
-    else
-      supported_id = inviter.id
-      supporter_id = invitee.id
-    end
+    supported_id, supporter_id = User.assign_care_relation_ids(inviter: inviter, invitee: invitee)
 
     if CareRelation.where(supported_id: supported_id, supporter_id: supporter_id).exists?
       flash[:alert] = "すでに連携済みです。"

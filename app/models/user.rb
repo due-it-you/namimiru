@@ -64,4 +64,12 @@ class User < ApplicationRecord
   def social_login?
     social_login
   end
+
+  def self.assign_care_relation_ids(inviter:, invitee:)
+    if inviter.invitee_role == "supported"
+      [invitee.id, inviter.id]
+    else
+      [inviter.id, invitee.id]
+    end
+  end
 end
