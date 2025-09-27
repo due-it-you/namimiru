@@ -6,6 +6,11 @@ class User < ApplicationRecord
 
   has_many :daily_records, dependent: :destroy
   has_many :social_profiles, dependent: :destroy
+  # 自己結合の多対多の関連付け
+  has_many :being_supported_relationships, class_name:"CareRelation", foreign_key: :supported_id, dependent: :destroy
+  has_many :supporting_relationships, class_name:"CareRelation", foreign_key: :supporter_id, dependent: :destroy
+  has_many :supporters, through: :being_supported_relationships, source: :supporter
+  has_many :supportings, through: :supporting_relationships, source: :supported
 
   attr_accessor :social_login
 
