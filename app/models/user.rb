@@ -6,8 +6,15 @@ class User < ApplicationRecord
 
   has_many :daily_records, dependent: :destroy
   has_many :social_profiles, dependent: :destroy
+  # 自己結合の多対多の関連付け
+  has_many :being_supported_relationships, class_name: "CareRelation", foreign_key: :supported_id, dependent: :destroy
+  has_many :supporting_relationships, class_name: "CareRelation", foreign_key: :supporter_id, dependent: :destroy
+  has_many :supporters, through: :being_supported_relationships, source: :supporter
+  has_many :supportings, through: :supporting_relationships, source: :supported
 
   attr_accessor :social_login
+
+  INVITATION_EXPIRATION_MINUTES = 15.minutes.freeze
 
   validates :name, presence: { message: "を入力してください。" },
     length: { maximum: 12, message: "は12文字以内にしてください。" },
@@ -34,6 +41,7 @@ class User < ApplicationRecord
     unless: :social_login?,
     on: :create
   validates :invitation_token, format: { with: /\A[A-Za-z0-9]{12}\Z/ }, on: :update
+  validates :invitee_role, presence: true, inclusion: { in: [ "supported", "supporter" ], message: "を選択してください。" }, on: :update
 
   def already_recorded_today?
     daily_records.where(created_at: Date.today.all_day).exists?
@@ -57,5 +65,17 @@ class User < ApplicationRecord
 
   def social_login?
     social_login
+  end
+
+  def self.assign_care_relation_ids(inviter:, invitee:)
+    if inviter.invitee_role == "supported"
+      [ invitee.id, inviter.id ]
+    else
+      [ inviter.id, invitee.id ]
+    end
+  end
+
+  def invitation_token_expired?
+    self.invitation_created_at <= INVITATION_EXPIRATION_MINUTES.ago
   end
 end
