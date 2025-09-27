@@ -2,7 +2,8 @@ class InvitationsController < ApplicationController
   def new; end
 
   def create
-    invitee_email = email_params[:email]
+    invitee_email = invitation_params[:email]
+    invitee_role = invitation_params[:invitee_role]
     invitation_token = SecureRandom.alphanumeric(12)
 
     if User.exists?(invitation_token: invitation_token)
@@ -10,7 +11,7 @@ class InvitationsController < ApplicationController
       redirect_to new_invitation_path
     end
 
-    if current_user.update(invitation_token: invitation_token, invitation_created_at: Time.now)
+    if current_user.update(invitation_token: invitation_token, invitation_created_at: Time.now, invitee_role: invitee_role)
       InvitationMailer
         .with(inviter: current_user, invitee_email: invitee_email)
         .invite.deliver_later
@@ -24,7 +25,7 @@ class InvitationsController < ApplicationController
 
   private
 
-  def email_params
-    params.require(:invitation).permit(:email)
+  def invitation_params
+    params.require(:invitation).permit(:email, :invitee_role)
   end
 end
