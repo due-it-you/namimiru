@@ -27,6 +27,11 @@ class CareRelationsController < ApplicationController
     end
   end
 
+  def show
+    @care_relation = CareRelation.find(params[:id])
+    @user = @care_relation.supported == current_user ? @care_relation.supporter : @care_relation.supported
+  end
+
   private
 
   def invitation_token_params
