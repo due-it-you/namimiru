@@ -1,6 +1,7 @@
 class CareRelationsController < ApplicationController
   def index
-    @current_user = current_user
+    @care_relations_supporting = current_user.supporting_relationships.includes(:supported)
+    @care_relations_supporter = current_user.being_supported_relationships.includes(:supporter)
   end
 
   def new; end
@@ -24,6 +25,11 @@ class CareRelationsController < ApplicationController
       flash[:alert] = "連携できませんでした。"
       redirect_to new_care_relation_path
     end
+  end
+
+  def show
+    @care_relation = CareRelation.find(params[:id])
+    @user = @care_relation.supported == current_user ? @care_relation.supporter : @care_relation.supported
   end
 
   private
