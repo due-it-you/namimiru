@@ -1,5 +1,7 @@
 class CareRelationsController < ApplicationController
-  def index; end
+  def index
+    @current_user = current_user
+  end
 
   def new; end
 
