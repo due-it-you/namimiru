@@ -2,12 +2,15 @@
   <div>
     <%= render 'shared/flash_message' %>
   </div>
-  連携情報一覧画面
-  <%= link_to "招待＋", new_invitation_path, class: "text-white font-medium bg-logo-color rounded-md px-4 py-2"%>
-  <div>
-    <div class="font-semibold text-string-base text-sm my-4">
+  <div class="flex items-center">
+    <div class="font-semibold text-string-base text-md my-4 mr-4">
       連携状態のユーザー
     </div>
+    <div>
+      <%= link_to "招待＋", new_invitation_path, class: "text-white font-medium bg-logo-color rounded-md px-4 py-2"%>
+    </div>
+  </div>
+  <div class="my-4">
     <% @care_relations_supporting.each do |supporting_relation| %>
       <hr class="border-gray-200">
       <div>
