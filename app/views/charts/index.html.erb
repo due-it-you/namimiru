@@ -30,14 +30,16 @@
   <% end %>
   <!-- 連携状態にあり, 支援の対象になるユーザーの一覧 -->
   <% @current_user.supportings.each do |supported_person| %>
-    <div class="border border-border-base rounded-md p-4">
-      <% if supported_person.name.blank? %>
-        ユーザーネーム未設定
-      <% else %>
-        <div class="font-semibold">
-          <%= supported_person.name %>
-        </div>
-      <% end %>
-    </div>
+    <%= link_to user_chart_path(supported_person.id) do %>
+      <div class="border border-border-base rounded-md p-4">
+        <% if supported_person.name.blank? %>
+          ユーザーネーム未設定
+        <% else %>
+          <div class="font-semibold">
+            <%= supported_person.name %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
