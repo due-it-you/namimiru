@@ -2,10 +2,13 @@
   <div>
     <%= render 'shared/flash_message' %>
   </div>
-  <div class="font-semibold text-string-base text-sm my-4">
+  <div class="font-semibold text-string-base text-md my-4">
     どのユーザーのグラフを確認しますか？
   </div>
   <!-- 現在ログインしているユーザー -->
+  <div class="font-semibold text-string-base text-sm my-4">
+    自身のグラフ
+  </div>
   <%= link_to user_chart_path(@current_user.id) do %>
     <div class="border border-border-base rounded-md p-4">
       <% if @current_user.name.blank? %>
@@ -13,6 +16,26 @@
       <% else %>
         <div class="font-semibold">
           <%= @current_user.name %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="font-semibold text-string-base text-sm my-4">
+    連携状態のユーザーのグラフ
+  </div>
+  <% if @current_user.supportings.none? %>
+    <div class="font-semibold text-string-base text-sm my-4">
+      <p>連携状態のユーザーがいません。</p>
+    </div>
+  <% end %>
+  <!-- 連携状態にあり, 支援の対象になるユーザーの一覧 -->
+  <% @current_user.supportings.each do |supported_person| %>
+    <div class="border border-border-base rounded-md p-4">
+      <% if supported_person.name.blank? %>
+        ユーザーネーム未設定
+      <% else %>
+        <div class="font-semibold">
+          <%= supported_person.name %>
         </div>
       <% end %>
     </div>
