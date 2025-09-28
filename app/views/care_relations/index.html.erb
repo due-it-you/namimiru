@@ -4,4 +4,47 @@
   </div>
   連携情報一覧画面
   <%= link_to "招待＋", new_invitation_path, class: "text-white font-medium bg-logo-color rounded-md px-4 py-2"%>
+  <div>
+    <div class="font-semibold text-string-base text-sm my-4">
+      連携状態のユーザー
+    </div>
+    <% if @current_user.supportings.none? && @current_user.supporters.none? %>
+      <div class="font-semibold text-string-base text-sm my-4">
+        <p>連携状態のユーザーがいません。</p>
+      </div>
+    <% end %>
+    <!-- 支援の対象となるユーザーの一覧 -->
+    <% @current_user.supportings.each do |supported_person| %>
+      <hr class="border-gray-200">
+      <div>
+        <%= link_to "#" do %>
+          <div class="p-4">
+            <% if supported_person.name.blank? %>
+              ユーザーネーム未設定
+            <% else %>
+              <div class="font-semibold">
+                <%= supported_person.name %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <!-- 支援する側のユーザーの一覧 -->
+    <% @current_user.supporters.each do |supporter| %>
+      <hr class="border-gray-200">
+      <%= link_to "#" do %>
+        <div class="p-4">
+          <% if supporter.name.blank? %>
+            ユーザーネーム未設定
+          <% else %>
+            <div class="font-semibold">
+              <%= supporter.name %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+    <hr class="border-gray-200">
+  </div>
 </div>
