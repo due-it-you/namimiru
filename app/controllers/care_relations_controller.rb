@@ -1,6 +1,7 @@
 class CareRelationsController < ApplicationController
   def index
-    @current_user = current_user
+    @care_relations_supporting = current_user.supporting_relationships.includes(:supported)
+    @care_relations_supporter = current_user.being_supported_relationships.includes(:supporter)
   end
 
   def new; end
