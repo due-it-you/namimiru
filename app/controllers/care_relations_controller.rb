@@ -12,6 +12,7 @@ class CareRelationsController < ApplicationController
     inviter = User.find_by(invitation_token: invitation_token_params[:invitation_token])
     invitee = current_user
 
+    return redirect_to(new_care_relation_path, alert: "同一ユーザーで連携は出来ません。") if inviter == invitee
     return redirect_to(new_care_relation_path, alert: "招待コードが存在していないか、有効期限を超えています。") if inviter.nil? || inviter.invitation_token_expired?
 
     # 招待されたユーザーの役割に応じて「支援者」「双極性障害の方」のいずれかに振り分け
