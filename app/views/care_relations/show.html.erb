@@ -29,5 +29,10 @@
         <% end %>
       </div>
     </div>
+    <div class="w-1/8 mt-8">
+      <%= link_to care_relation_path(@care_relation.id), data: { turbo_method: :delete, turbo_confirm: "本当に連携を解除しますか？" } do %>
+        <%= image_tag "trash_icon.png" %>
+      <% end %>
+    </div>
   </div>
 </div>
