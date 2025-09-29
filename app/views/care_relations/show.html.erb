@@ -1,0 +1,38 @@
+<div>
+  <div class="font-semibold text-string-base text-xl">
+    連携情報 詳細
+  </div>
+  <div class="my-4">
+    <!-- ユーザーネーム -->
+    <div class="font-semibold text-string-base text-md">
+      ユーザーネーム
+    </div>
+    <div class="my-2 border border-border-base rounded-md">
+      <div class="px-4 py-2">
+        <% if @user.name.nil? %>
+          ユーザーネーム未設定 
+        <% else %>
+          <%= @user.name %>
+        <% end %>
+      </div>
+    </div>
+    <!-- 役割 -->
+    <div class="font-semibold text-string-base text-md">
+      役割
+    </div>
+    <div class="my-2 border border-border-base rounded-md">
+      <div class="px-4 py-2">
+        <% if @care_relation.supported == current_user %>
+          支援者
+        <% else %>
+          当事者
+        <% end %>
+      </div>
+    </div>
+    <div class="w-1/8 mt-8">
+      <%= link_to care_relation_path(@care_relation.id), data: { turbo_method: :delete, turbo_confirm: "本当に連携を解除しますか？" } do %>
+        <%= image_tag "trash_icon.png" %>
+      <% end %>
+    </div>
+  </div>
+</div>
