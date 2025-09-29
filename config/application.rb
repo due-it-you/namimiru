@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Myapp
   class Application < Rails::Application
+    config.time_zone = "Tokyo"
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.2
 
