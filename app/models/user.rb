@@ -78,4 +78,8 @@ class User < ApplicationRecord
   def invitation_token_expired?
     self.invitation_created_at <= INVITATION_EXPIRATION_MINUTES.ago
   end
+
+  def absent_from_the_care_relation?(care_relation)
+    care_relation.supported != self && care_relation.supporter != self
+  end
 end

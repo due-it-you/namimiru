@@ -43,8 +43,8 @@ class CareRelationsController < ApplicationController
   def authorize_care_relation!
     @care_relation = CareRelation.find(params[:id])
     # アクセスしようとしている連携情報に、
-    # 現在ログインしているユーザーの情報がなければ権限なしとしてリダイレクト
-    if @care_relation.supported != current_user && @care_relation.supporter != current_user
+    # 現在ログイン中のユーザーの情報がなければ権限なしとしてリダイレクト
+    if current_user.absent_from_the_care_relation?(@care_relation)
       flash[:alert] = "アクセスしようとしているページの権限がありません。"
       redirect_to care_relations_path
     end
