@@ -1,4 +1,48 @@
 <div>
-  連携情報一覧画面
-  <%= link_to "招待＋", new_invitation_path, class: "text-white font-medium bg-logo-color rounded-md px-4 py-2"%>
+  <div>
+    <%= render 'shared/flash_message' %>
+  </div>
+  <div class="flex items-center">
+    <div class="font-semibold text-string-base text-md my-4 mr-4">
+      連携状態のユーザー
+    </div>
+    <div>
+      <%= link_to "招待＋", new_invitation_path, class: "text-white font-medium bg-logo-color rounded-md px-4 py-2"%>
+    </div>
+  </div>
+  <div class="my-4">
+    <% @care_relations_supporting.each do |supporting_relation| %>
+      <hr class="border-gray-200">
+      <div>
+        <%= link_to care_relation_path(supporting_relation.id) do %>
+          <div class="p-4">
+            <% if supporting_relation.supported.name.blank? %>
+              ユーザーネーム未設定
+            <% else %>
+              <div class="font-semibold">
+                <%= supporting_relation.supported.name %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <% @care_relations_supporter.each do |supporter_relation| %>
+      <hr class="border-gray-200">
+      <div>
+        <%= link_to care_relation_path(supporter_relation.id) do %>
+          <div class="p-4">
+            <% if supporter_relation.supporter.name.blank? %>
+              ユーザーネーム未設定
+            <% else %>
+              <div class="font-semibold">
+                <%= supporter_relation.supporter.name %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <hr class="border-gray-200">
+  </div>
 </div>

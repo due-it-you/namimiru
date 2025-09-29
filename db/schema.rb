@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_09_26_081722) do
+ActiveRecord::Schema[7.2].define(version: 2025_09_27_090947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "care_relations", force: :cascade do |t|
+    t.bigint "supported_id"
+    t.bigint "supporter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supported_id", "supporter_id"], name: "index_care_relations_on_supported_id_and_supporter_id", unique: true
+    t.index ["supported_id"], name: "index_care_relations_on_supported_id"
+    t.index ["supporter_id"], name: "index_care_relations_on_supporter_id"
+  end
 
   create_table "daily_records", force: :cascade do |t|
     t.integer "mood_score", null: false
@@ -46,10 +56,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_26_081722) do
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.string "remember_token"
+    t.string "invitee_role"
+
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "care_relations", "users", column: "supported_id"
+  add_foreign_key "care_relations", "users", column: "supporter_id"
   add_foreign_key "daily_records", "users"
   add_foreign_key "social_profiles", "users"
 end
