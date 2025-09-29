@@ -1,5 +1,5 @@
 class CareRelationsController < ApplicationController
-  before_action :authorize_care_relation!, only: %i[show]
+  before_action :authorize_care_relation!, only: %i[show destroy]
 
   def index
     @care_relations_supporting = current_user.supporting_relationships.includes(:supported)
@@ -33,6 +33,17 @@ class CareRelationsController < ApplicationController
   def show
     @care_relation = CareRelation.find(params[:id])
     @user = @care_relation.supported == current_user ? @care_relation.supporter : @care_relation.supported
+  end
+
+  def destroy
+    care_relation = CareRelation.find(params[:id])
+    if care_relation.destroy
+      flash[:success] = "連携の解除に成功しました！"
+      redirect_to care_relations_path, status: :see_other
+    else
+      flash[:alert] = "連携の解除に失敗しました。"
+      redirect_to care_relations_path
+    end
   end
 
   private
