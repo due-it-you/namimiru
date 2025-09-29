@@ -1,4 +1,6 @@
 class CareRelationsController < ApplicationController
+  before_action :authorize_care_relation!, only: %i[show]
+
   def index
     @care_relations_supporting = current_user.supporting_relationships.includes(:supported)
     @care_relations_supporter = current_user.being_supported_relationships.includes(:supporter)
@@ -36,5 +38,15 @@ class CareRelationsController < ApplicationController
 
   def invitation_token_params
     params.require(:user).permit(:invitation_token)
+  end
+
+  def authorize_care_relation!
+    @care_relation = CareRelation.find(params[:id])
+    # アクセスしようとしている連携情報に、
+    # 現在ログインしているユーザーの情報がなければ権限なしとしてリダイレクト
+    if @care_relation.supported != current_user && @care_relation.supporter != current_user
+      flash[:alert] = "アクセスしようとしているページの権限がありません。"
+      redirect_to care_relations_path
+    end
   end
 end
