@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
+  devise_scope :user do
+    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+  end
+
   resources :daily_records, only: %i[new create destroy]
   resources :care_relations, only: %i[index new create show destroy]
   resources :charts, only: %i[index]
