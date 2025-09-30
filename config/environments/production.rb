@@ -85,15 +85,14 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { protocol: "https", host: "namimiru-app.onrender.com" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
+    enable_starttls_auto: true,
     address:         "smtp.gmail.com",
     port:            587,
     domain:          "gmail.com",
     user_name:       "namimiruofficial@gmail.com",
     password:        ENV["GOOGLE_PASSWORD"],
-    authentication:  "plain",
-    enable_starttls: true,
-    open_timeout:    5,
-    read_timeout:    5 }
+    authentication:  "plain"
+    }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
