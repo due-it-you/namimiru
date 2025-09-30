@@ -20,7 +20,7 @@ Rails.application.configure do
     domain:          "gmail.com",
     user_name:       "namimiruofficial@gmail.com",
     password:        ENV["GOOGLE_PASSWORD"],
-    authentication:  "plain",
+    authentication:  "plain"
     }
 
   # Settings specified here will take precedence over those in config/application.rb.

@@ -91,7 +91,7 @@ Rails.application.configure do
     domain:          "gmail.com",
     user_name:       "namimiruOfficial@gmail.com",
     password:        ENV["GOOGLE_PASSWORD"],
-    authentication:  "plain",
+    authentication:  "plain"
     }
 
 
