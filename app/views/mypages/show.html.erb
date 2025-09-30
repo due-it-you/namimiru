@@ -1,0 +1,23 @@
+<div>
+  <div>
+    <%= render 'shared/flash_message' %>
+  </div>
+  <div class="flex items-center">
+    <div class="font-semibold text-string-base text-xl mr-4">
+      マイページ
+    </div> 
+  </div>
+  <div class="mt-4 mb-2 font-semibold text-string-base text-md">
+    ユーザーネーム 
+  </div>
+  <div class="border border-border-base rounded-md px-4 py-2">
+    <% if current_user.name %>
+      <%= current_user.name %> 
+    <% else %>
+      ユーザーネーム未設定
+    <% end %>
+  </div>
+  <div>
+    <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "mt-24 font-semibold text-red-400" %> 
+  </div>
+</div>
