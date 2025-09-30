@@ -57,7 +57,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_27_090947) do
     t.datetime "invitation_created_at"
     t.string "remember_token"
     t.string "invitee_role"
-
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
