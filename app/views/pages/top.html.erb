@@ -15,7 +15,7 @@
       </div>
     <% end %>
     <%= link_to "メールアドレスで新規登録", new_user_registration_path, class: "block w-full mt-4 py-2 text-center text-white font-semibold bg-[#67BDB7] rounded-md" %>
-    <%= link_to "ログインせずに試す", "#", class: "border border-[#B6B6B6] block w-full mt-4 py-2 text-center text-[#484848] font-semibold bg-white rounded-md" %>
+    <%= button_to "ゲストログインで試してみる", users_guest_sign_in_path, method: :post, class: "border border-[#B6B6B6] block w-full mt-4 py-2 text-center text-[#484848] font-semibold bg-white rounded-md" %>
     <div class="flex items-center my-8">
       <div class="flex-grow border-t border-gray-400"></div>
       <span class="text-xs mx-4 text-gray-700">すでにアカウントを持っている場合</span>
