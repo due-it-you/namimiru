@@ -10,7 +10,8 @@ class Users::SessionsController < Devise::SessionsController
       user.password = SecureRandom.urlsafe_base64
     end
     sign_in user
-    redirect_to root_path, success: "ゲストユーザーとしてログインしました"
+    flash[:success] = "ゲストユーザーとしてログインしました。"
+    redirect_to new_daily_record_path
   end
 
   # GET /resource/sign_in
