@@ -17,4 +17,7 @@
       ユーザーネーム未設定
     <% end %>
   </div>
+  <div>
+    <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "mt-24 font-semibold text-red-400" %> 
+  </div>
 </div>
