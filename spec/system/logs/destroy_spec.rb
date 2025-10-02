@@ -16,7 +16,7 @@ RSpec.describe "Update", type: :system do
         end
         expect(page).to have_current_path user_daily_records_path(user.id)
         expect(page).to have_content "記録の削除が完了しました。"
-        expect(page).not_to have_content daily_record.mood_score
+        expect(page).not_to have_content "（#{daily_record.mood_score}）"
         expect(page).not_to have_content daily_record.memo
       end
     end
