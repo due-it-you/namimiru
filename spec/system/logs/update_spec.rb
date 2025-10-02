@@ -6,7 +6,7 @@ RSpec.describe "Update", type: :system do
     let(:daily_record) { create(:daily_record, user: user) }
 
     before do
-      sign_in user 
+      sign_in user
       visit user_daily_record_path(user.id, daily_record.id)
       click_link "編集"
     end
