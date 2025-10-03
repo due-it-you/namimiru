@@ -14,7 +14,7 @@ RSpec.describe InvitationMailer, type: :mailer do
     end
 
     it "メールを実際に送信できていること" do
-      expect{ mail.deliver_now }.to change{ ActionMailer::Base.deliveries.size }.by(1)
+      expect { mail.deliver_now }.to change { ActionMailer::Base.deliveries.size }.by(1)
     end
   end
 end
