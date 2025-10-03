@@ -1,4 +1,4 @@
-RSpec.describe "Update", type: :system do
+RSpec.describe "DailyRecordsDestroy", type: :system do
   describe "記録削除機能" do
     let(:user) { create(:user) }
     let(:daily_record) { create(:daily_record, user: user) }
