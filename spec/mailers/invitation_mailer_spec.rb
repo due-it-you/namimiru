@@ -12,5 +12,9 @@ RSpec.describe InvitationMailer, type: :mailer do
       last_mail = ActionMailer::Base.deliveries.last
       expect(last_mail.body).to match(user.invitation_token)
     end
+
+    it "メールを実際に送信できていること" do
+      expect{ mail.deliver_now }.to change{ ActionMailer::Base.deliveries.size }.by(1)
+    end
   end
 end
