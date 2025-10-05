@@ -18,8 +18,12 @@
 
       gtag('config', 'G-447LGM8V3Z');
     </script>
-
-    <link rel="manifest" href="/manifest.json">
+    <!-- ブラウザーがPWAアプリを端末にインストールする際に必要な情報（アプリ名やアイコンなど）となるファイルの指定 -->
+    <link rel="manifest" href="<%= pwa_manifest_path(format: :json) %>">
+    <!-- iOSからPWAアプリとして開いた時に、アドレスバーを非表示 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- iOSからPWAアプリとして開いた時に、ステータスバーを背景透過 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <%= favicon_link_tag('favicon.ico') %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
