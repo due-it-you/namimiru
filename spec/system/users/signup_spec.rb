@@ -6,10 +6,10 @@ RSpec.describe "Signup", type: :system do
     context 'フォームの入力値が正常' do
       it 'ユーザーの新規作成が成功する' do
         visit new_user_registration_path
-        fill_in 'ユーザーネーム', with: '松永 拓朗'
-        fill_in 'メールアドレス', with: 'polarbear1001@gmail.com'
-        fill_in 'パスワード', with: 'G473888g!'
-        fill_in 'パスワード（確認用）', with: 'G473888g!'
+        fill_in 'user[name]', with: '松永 拓朗'
+        fill_in 'user[email]', with: 'polarbear1001@gmail.com'
+        fill_in 'user[password]', with: 'G473888g!'
+        fill_in 'user[password_confirmation]', with: 'G473888g!'
         click_on '送信'
         expect(page).to have_content('アカウント登録が完了しました。')
         expect(page).to have_current_path(new_daily_record_path)
