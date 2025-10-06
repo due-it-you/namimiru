@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "pages#top"
 
   get "/terms_of_service" => "pages#terms_of_service"
+  get "/privacy_policy" => "pages#privacy_policy"
 
   devise_for :users, controllers: {
     registrations: "users/registrations",
