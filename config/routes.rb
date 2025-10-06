@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   # 非ログイン時のルートパス
   root to: "pages#top"
 
+  get "/terms_of_service" => "pages#terms_of_service"
+
   devise_for :users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions",
