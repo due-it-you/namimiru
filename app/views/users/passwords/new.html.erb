@@ -1,12 +1,17 @@
-<%= form_with url: user_password_path, scope: :user, method: :post, local: true do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "border border-border-base rounded-md w-full my-2 p-2" %>
+<div>
+  <div class="font-semibold text-string-base text-md mb-8">
+    パスワード再設定用のメール送信
   </div>
+  <%= form_with url: user_password_path, scope: :user, method: :post, local: true do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="actions">
-    <%= f.submit "パスワード再設定用リンクを送信", class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8" %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "border border-border-base rounded-md w-full my-2 p-2" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "パスワード再設定用リンクを送信", class: "bg-logo-color text-white text-sm w-full font-semibold rounded-md py-2 px-4 my-8" %>
+    </div>
+  <% end %>
+</div>
