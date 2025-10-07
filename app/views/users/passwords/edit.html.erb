@@ -1,23 +1,26 @@
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+<div>
+  <div class="font-semibold text-string-base text-md mb-8">
+    新しいパスワードの設定
   </div>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="field">
+      <%= f.label :password, "新しいパスワード" %><br />
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+      <% end %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "border border-border-base rounded-md w-full my-2 p-2" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.label :password_confirmation, "新しいパスワード（確認用）" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "border border-border-base rounded-md w-full my-2 p-2" %>
+    </div>
 
-<%= render "users/shared/links" %>
+    <div class="actions">
+      <%= f.submit "パスワードを変更", class: "bg-logo-color text-white text-sm w-full font-semibold rounded-md py-2 px-4 my-8" %>
+    </div>
+  <% end %>
+</div>
