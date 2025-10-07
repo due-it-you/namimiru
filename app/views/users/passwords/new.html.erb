@@ -1,16 +1,12 @@
-<h2>Forgot your password?</h2>
-
 <%= form_with url: user_password_path, scope: :user, method: :post, local: true do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "border border-border-base rounded-md w-full my-2 p-2" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+    <%= f.submit "パスワード再設定用リンクを送信", class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8" %>
   </div>
 <% end %>
-
-<%= render "users/shared/links" %>
