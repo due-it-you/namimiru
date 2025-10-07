@@ -6,12 +6,15 @@
     <%= render "users/shared/error_messages", resource: resource %>
     <%= f.hidden_field :reset_password_token %>
 
-    <div class="field">
+    <div data-controller="password-field" class="field">
       <%= f.label :password, "新しいパスワード" %><br />
       <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em><br />
       <% end %>
-      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "border border-border-base rounded-md w-full my-2 p-2" %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "border border-border-base rounded-md w-full my-2 p-2", id: "user-password" %>
+      <div>
+        <input type="checkbox" data-action="password-field#switchVisible"> パスワード表示
+      </div>
     </div>
 
     <div class="field">
