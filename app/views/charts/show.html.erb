@@ -29,8 +29,13 @@
     <!-- 直近一件の記録 -->
     <% if @latest_record.present? %>
       <div id="latest-record" class="border border-border-base p-4 rounded-md text-string-base">
-        <div class="text-sm">
+        <div class="text-sm flex">
           <%= @latest_record.created_at.strftime("%Y/%m/%d %H:%M") %>
+          <% if @latest_record.is_uneasy %>
+            <div class="ml-2">
+              ❤️💭
+            </div>
+          <% end %>
         </div>  
         <div class="my-2">
           <span class="text-md">気分： </span>

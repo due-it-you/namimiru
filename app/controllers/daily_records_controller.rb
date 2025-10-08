@@ -57,6 +57,6 @@ class DailyRecordsController < ApplicationController
   private
 
   def daily_record_params
-    params.require(:daily_record).permit(:mood_score, :memo)
+    params.require(:daily_record).permit(:mood_score, :memo, :is_uneasy)
   end
 end

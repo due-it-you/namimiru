@@ -23,6 +23,21 @@
         <p class="font-semibold text-string-base">気付きメモ（任意）</p>
         <%= f.text_area :memo, size: "70x5", class: "w-full p-4 mt-2 border border-border-base rounded-md" %>
       </div>
+      <div class="my-4 font-semibold text-string-base text-sm">
+        <div>心がザワザワしている場合はチェックを入れてください。</div>
+
+        <label class="inline-flex items-center cursor-pointer mt-2">
+          <%= f.check_box :is_uneasy, class: "sr-only peer" %>
+          <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4
+                      peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer
+                      dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
+                      peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px]
+                      after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full
+                      after:h-5 after:w-5 after:transition-all dark:border-gray-600
+                      peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
+          </div>
+        </label>
+      </div>
       <%= f.submit "記録する", class: "my-8 bg-logo-color text-white font-semibold w-full py-1 rounded-md" %>
     <% end %>
   </div>
