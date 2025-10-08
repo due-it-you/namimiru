@@ -30,6 +30,13 @@
         </div> 
         <%= f.text_area :memo, size: "70x5", value: @daily_record.memo, class: "w-full p-4 mt-2 border border-border-base rounded-md" %>
       </div>
+      <!-- 心のザワザワ -->
+      <div class="my-4 font-semibold text-string-base">
+        <div>
+          心がザワザワしている場合はチェックを入れてください。
+        </div>
+        <%= f.check_box :is_uneasy, { checked: @daily_record.is_uneasy } %> 
+      </div>
       <!-- 作成時間 -->
       <div class="text-sm text-right my-2">
         <%= @daily_record.created_at.strftime("%Y/%m/%d %H:%M") %>
