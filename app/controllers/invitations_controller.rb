@@ -11,7 +11,10 @@ class InvitationsController < ApplicationController
       redirect_to new_invitation_path
     end
 
-    if current_user.update(invitation_token: invitation_token, invitation_created_at: Time.now, invitee_role: invitee_role)
+    # context: :invitationはupdateメソッドには使用出来ないため、
+    # saveメソッドを使用して更新処理を実行
+    current_user.assign_attributes(invitation_token: invitation_token, invitation_created_at: Time.now, invitee_role: invitee_role)
+    if current_user.save(context: :invitation)
       InvitationMailer
         .with(inviter: current_user, invitee_email: invitee_email)
         .invite.deliver_later
