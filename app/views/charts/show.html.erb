@@ -13,6 +13,16 @@
     <span class="font-semibold text-string-base text-md">さんのグラフ</span> 
   </div>
   <div>
+    <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
+      <option value="last_week">直近1週間</option>
+      <option value="last_month">直近1ヶ月</option>
+      <option value="last_3_months">直近3ヶ月</option>
+      <option value="last_6_months">直近6ヶ月</option>
+      <option value="last_year">直近1年間</option>
+      <option value="all_time">全期間</option>
+    </select>
+  </div>
+  <div>
     <canvas 
           height="350" 
           id="myChart"
