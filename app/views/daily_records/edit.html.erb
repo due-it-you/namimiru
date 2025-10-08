@@ -31,7 +31,7 @@
         <%= f.text_area :memo, size: "70x5", value: @daily_record.memo, class: "w-full p-4 mt-2 border border-border-base rounded-md" %>
       </div>
       <!-- 心のざわざわ -->
-      <div class="my-4 font-semibold text-string-base">
+      <div class="my-4 text-sm font-semibold text-string-base">
         <div>心がザワザワしている場合はチェックを入れてください。</div>
 
         <label class="inline-flex items-center cursor-pointer mt-2">
@@ -44,9 +44,6 @@
                       after:h-5 after:w-5 after:transition-all dark:border-gray-600
                       peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
           </div>
-          <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-            心がざわざわしている
-          </span>
         </label>
       </div>
       <!-- 作成時間 -->
