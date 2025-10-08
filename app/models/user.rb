@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :rememberable, :timeoutable,
-    :omniauthable, omniauth_providers: %i[google_oauth2]
+    :omniauthable, :recoverable, omniauth_providers: %i[google_oauth2]
 
   has_many :daily_records, dependent: :destroy
   has_many :social_profiles, dependent: :destroy
@@ -40,8 +40,8 @@ class User < ApplicationRecord
     },
     unless: :social_login?,
     on: :create
-  validates :invitation_token, format: { with: /\A[A-Za-z0-9]{12}\Z/ }, on: :update
-  validates :invitee_role, presence: true, inclusion: { in: [ "supported", "supporter" ], message: "を選択してください。" }, on: :update
+  validates :invitation_token, format: { with: /\A[A-Za-z0-9]{12}\Z/ }, on: :invitation
+  validates :invitee_role, inclusion: { in: [ "supported", "supporter" ], message: "を選択してください。" }, on: :invitation
 
   def already_recorded_today?
     daily_records.where(created_at: Date.today.all_day).exists?
