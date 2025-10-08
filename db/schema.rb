@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_09_27_090947) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_06_103850) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_27_090947) do
     t.index ["supported_id", "supporter_id"], name: "index_care_relations_on_supported_id_and_supporter_id", unique: true
     t.index ["supported_id"], name: "index_care_relations_on_supported_id"
     t.index ["supporter_id"], name: "index_care_relations_on_supporter_id"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "subject", null: false
+    t.text "message", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "daily_records", force: :cascade do |t|
