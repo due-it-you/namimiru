@@ -1,5 +1,5 @@
 class ChartsController < ApplicationController
-  before_action :authorize_the_chart!, only: %i[show]
+  before_action :authorize_the_chart!, only: %i[show data]
 
   def index
     @current_user = current_user
@@ -15,6 +15,15 @@ class ChartsController < ApplicationController
       .order(created_at: :ASC)
     @labels = daily_records.map { |record| record.created_at.strftime("%m/%d").to_json }
     @data = daily_records.map { |record| record.mood_score }
+  end
+
+  def data 
+    user = User.find(params[:user_id])
+    daily_records = user.daily_records.with_selected_range(params[:range])
+    labels = daily_records.map { |record| record.created_at.strftime("%m/%d").to_json }
+    data = daily_records.map { |record| record.mood_score }
+    chart_data = { labels: labels, data: data }
+    render json: chart_data
   end
 
   private
