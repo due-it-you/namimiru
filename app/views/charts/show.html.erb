@@ -16,7 +16,8 @@
     <div 
           data-controller="charts--display" 
           data-chart-labels="<%= @labels.to_json %>"
-          data-chart-data="<%= @data.to_json %>">
+          data-chart-data="<%= @data.to_json %>"
+          data-charts--display-user-id-value="<%= current_user.id %>">
           <select data-action="charts--display#update" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
             <option value="last_week">直近1週間</option>
             <option value="last_month">直近1ヶ月</option>
