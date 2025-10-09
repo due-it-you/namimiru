@@ -17,7 +17,7 @@ class ChartsController < ApplicationController
     @data = daily_records.map { |record| record.mood_score }
   end
 
-  def data 
+  def data
     user = User.find(params[:user_id])
     daily_records = user.daily_records.with_selected_range(params[:range])
     labels = daily_records.map { |record| record.created_at.strftime("%m/%d").to_json }
