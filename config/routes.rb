@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   resource :mypage, only: %i[show]
   resource :invitation, only: %i[new create]
   resources :users, only: [] do
-    resource :chart, only: %i[show]
+    resource :chart, only: %i[show] do
+      get "data", on: :member
+    end
     resources :daily_records, only: %i[index show edit update]
   end
 
