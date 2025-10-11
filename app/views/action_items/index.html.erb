@@ -31,10 +31,12 @@
       </div>
     </div>
   </div>
-
-  <div class="fixed bottom-20 right-4 z-50">
-    <button class="rounded-full px-5 py-3 bg-gray-900 text-white shadow-lg">
-      ＋ 追加
-    </button>
-  </div>
+  
+  <%= link_to new_action_item_path do %>
+    <div class="fixed bottom-20 right-4 z-50">
+      <button class="rounded-full px-5 py-3 bg-gray-900 text-white shadow-lg">
+        ＋ 追加
+      </button>
+    </div>
+  <% end %>
 </div>
