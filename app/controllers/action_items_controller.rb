@@ -1,5 +1,7 @@
 class ActionItemsController < ApplicationController
   def index; end
 
-  def new; end
+  def new
+    @action_item = ActionItem.new
+  end
 end
