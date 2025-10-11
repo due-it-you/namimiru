@@ -5,6 +5,7 @@ class User < ApplicationRecord
     :omniauthable, :recoverable, omniauth_providers: %i[google_oauth2]
 
   has_many :daily_records, dependent: :destroy
+  has_many :action_items, dependent: :destroy
   has_many :social_profiles, dependent: :destroy
   # 自己結合の多対多の関連付け
   has_many :being_supported_relationships, class_name: "CareRelation", foreign_key: :supported_id, dependent: :destroy
