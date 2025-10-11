@@ -5,7 +5,7 @@ class ActionItemsController < ApplicationController
     @action_item = ActionItem.new
   end
 
-  def create 
+  def create
     action_item = current_user.action_items.new(action_item_params)
     if action_item.save
       flash[:success] = "項目を作成しました。"
