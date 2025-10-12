@@ -7,13 +7,13 @@
     <p class="text-string-base text-md font-semibold mt-2 flex justify-center">気分</p>
     <p class="text-string-base text-2xl font-semibold mt-2 flex justify-center">0</p>
     <div class="flex justify-center my-4">
-      <input type="range" min="-5" max="5" value="<%= @mood_score %>" class="w-full mx-4 mb-4">  
+      <input type="range" min="-5" max="5" value="<%= @mood_score %>" data-action="action-items--lists#update" class="w-full mx-4 mb-4">  
     </div>
   </div>
   <hr class="text-gray-300" />
 
   <!-- リスト -->
-  <%= turbo_frame_tag "action_items_list" do %>
+  <%= turbo_frame_tag "action_items_list", data: { "action-items--lists-target": "listsFrame" } do %>
     <div class="relative flex justify-between">
       <!-- 出来るかもリスト -->
       <div class="w-1/2 flex flex-col items-center pr-2">

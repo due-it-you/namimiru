@@ -1,7 +1,7 @@
 class ActionItemsController < ApplicationController
   def index
     latest_mood_score = current_user.daily_records.order(created_at: :desc).first&.mood_score
-    @mood_score =  latest_mood_score || 0
+    @mood_score =  params[:mood_score] || latest_mood_score || 0
     @can_list = []
     @cannot_list = []
     current_user.action_items.each do |action_item|
