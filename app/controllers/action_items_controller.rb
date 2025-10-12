@@ -2,15 +2,8 @@ class ActionItemsController < ApplicationController
   def index
     latest_mood_score = current_user.daily_records.order(created_at: :desc).first&.mood_score
     @mood_score =  params[:mood_score] || latest_mood_score || 0
-    @can_list = []
-    @cannot_list = []
-    current_user.action_items.each do |action_item|
-      if @mood_score.to_i >= action_item.enabled_from.to_i
-        @can_list << action_item
-      else
-        @cannot_list << action_item
-      end
-    end
+    @can_list = current_user.action_items.capable(@mood_score)
+    @cannot_list = current_user.action_items.incapable(@mood_score)
     if turbo_frame_request?
       render partial: "action_items/lists_frame"
     end
