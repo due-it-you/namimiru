@@ -11,6 +11,9 @@ class ActionItemsController < ApplicationController
         @cannot_list << action_item
       end
     end
+    if turbo_frame_request?
+      render partial: "action_items/lists_frame"
+    end
   end
 
   def new
