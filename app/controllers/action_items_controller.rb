@@ -1,5 +1,8 @@
 class ActionItemsController < ApplicationController
-  def index; end
+  def index
+    latest_mood_score = current_user.daily_records.order(created_at: :desc).first.mood_score
+    @mood_score =  latest_mood_score || 0
+  end
 
   def new
     @action_item = ActionItem.new
