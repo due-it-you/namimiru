@@ -5,7 +5,7 @@ class ActionItemsController < ApplicationController
     @can_list = []
     @cannot_list = []
     current_user.action_items.each do |action_item|
-      if @mood_score.to_s >= action_item.enabled_from.to_s
+      if @mood_score.to_i >= action_item.enabled_from.to_i
         @can_list << action_item
       else
         @cannot_list << action_item
