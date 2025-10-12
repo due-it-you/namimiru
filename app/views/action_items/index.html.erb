@@ -1,13 +1,24 @@
-<div class="mx-4 mb-24 mt-4" data-controller="action-items--lists">
+<div class="mx-4 mb-24 mt-4" data-controller="action-items--lists daily-records--mood-score">
   <div>
     <%= render 'shared/flash_message' %>
   </div>
   <!-- 気分 -->
   <div class="mt-8">
     <p class="text-string-base text-md font-semibold mt-2 flex justify-center">気分</p>
-    <p class="text-string-base text-2xl font-semibold mt-2 flex justify-center">0</p>
-    <div class="flex justify-center my-4">
-      <input type="range" min="-5" max="5" value="<%= @mood_score %>" data-action="action-items--lists#update" class="w-full mx-4 mb-4">  
+    <div class="flex items-center justify-center font-bold rounded-md p-4">
+      <!-- 顔アイコン -->
+      <div id="current-mood-icon" class="text-3xl">
+      </div>
+      <!-- 気分の表記（絶不調・とてもつらい・普通など） -->
+      <div id="current-mood" class="ml-2 text-md">
+      </div>
+      <div>
+        （<span id="current-mood-score"></span>）
+      </div>
+    </div>
+    <!-- スライダー -->
+    <div class="flex justify-center my-2">
+      <input type="range" min="-5" max="5" value="<%= @mood_score %>" id="mood-range" data-action="action-items--lists#update daily-records--mood-score#update" class="w-full mx-4 mb-4">  
     </div>
   </div>
   <hr class="text-gray-300" />
