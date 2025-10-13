@@ -17,7 +17,7 @@
       </div>
 
       <div data-controller="password-field" class="field">
-        <%= f.label :password, "パスワード", class: "text-string-base font-semibold" %>
+        <%= f.label :password, "パスワード (必須： 英字小文字, 英字大文字, 数字, 合計8文字以上)", class: "text-string-base font-semibold" %>
         <% if @minimum_password_length %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %><br />
