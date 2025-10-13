@@ -22,6 +22,7 @@ class User < ApplicationRecord
     unless: :social_login?,
     on: :create
   validates :email, presence: { message: "を入力してください。" },
+    uniqueness: { message: "は既に登録されています。" },
     format: {
       with: /\A[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/,
       message: "の形式を満たしてください。"
