@@ -8,20 +8,20 @@
     <div class="space-y-4 mt-8">
       <div class="field">
         <%= f.label :name, "ユーザーネーム", class: "text-string-base font-semibold" %><br>
-        <%= f.text_field :name, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autofocus: true %>
+        <%= f.text_field :name, class: "w-full mt-1 px-3 py-1 border border-border-base rounded-md", autofocus: true, placeholder: "立花 隆子" %>
       </div>
 
       <div class="field">
         <%= f.label :email, "メールアドレス", class: "text-string-base font-semibold" %><br />
-        <%= f.email_field :email, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autocomplete: "email" %>
+        <%= f.email_field :email, class: "w-full mt-1 px-3 py-1 border border-border-base rounded-md", autocomplete: "email", placeholder: "test@example.com" %>
       </div>
 
       <div data-controller="password-field" class="field">
-        <%= f.label :password, "パスワード", class: "text-string-base font-semibold" %>
+        <%= f.label :password, "パスワード (必須： 英字小文字, 英字大文字, 数字, 合計8文字以上)", class: "text-string-base font-semibold" %>
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %><br />
-        <%= f.password_field :password, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autocomplete: "new-password", id: "user-password" %>
+        <%= f.password_field :password, class: "w-full mt-1 px-3 py-1 border border-border-base rounded-md", autocomplete: "new-password", id: "user-password" %>
         <div>
           <input type="checkbox" data-action="password-field#switchVisible"> パスワード表示
         </div>
@@ -31,6 +31,14 @@
         <%= f.label :password_confirmation, "パスワード（確認用）", class: "text-string-base font-semibold" %><br />
         <%= f.password_field :password_confirmation, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autocomplete: "new-password" %>
       </div>
+    </div>
+    <!-- 利用規約・プライバシーポリシーの同意 -->
+    <div class="mt-4">
+      <input type="checkbox" required class="mr-2"> 
+      <a href="/terms_of_service" class="text-blue-400">利用規約</a>
+      および
+      <a href="/privacy_policy" class="text-blue-400">プライバシーポリシー</a>
+      に同意します。
     </div>
 
     <div class="actions flex justify-center mt-12">
@@ -43,7 +51,7 @@
     class: "text-xs text-blue-400"
   %>
 
-  <div class="mt-8">
-    <%= link_to "戻る", root_path, class: "bg-gray-500 text-white font-semibold py-2 px-4 rounded-md" %>
-  </div>
+<div class="mt-8">
+  <%= link_to "戻る", root_path, class: "bg-gray-500 text-white font-semibold py-2 px-4 rounded-md" %>
+</div>
 <div>
