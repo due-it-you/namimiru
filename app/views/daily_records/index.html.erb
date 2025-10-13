@@ -1,4 +1,4 @@
-<div>
+<div class="my-28 mx-12">
   <div>
     <%= render 'shared/flash_message' %>
   </div>
@@ -16,8 +16,14 @@
     <!-- 記録のカードUI -->
     <%= link_to user_daily_record_path(@user.id, daily_record.id) do %>
       <div class="border border-border-base p-4 my-4 rounded-md text-string-base">
-        <div class="text-sm">
+        <div class="text-sm flex">
           <%= daily_record.created_at.strftime("%Y/%m/%d %H:%M") %>
+          <!-- 心がザワザワ状態だと記録した場合に表示 -->
+          <% if daily_record.is_uneasy %>
+            <div class="ml-2">
+              ❤️💭
+            </div>
+          <% end %>
         </div>  
         <div class="my-2">
           <span class="text-md">気分： </span>

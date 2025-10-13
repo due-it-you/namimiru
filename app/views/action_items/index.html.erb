@@ -1,0 +1,36 @@
+<div class="mx-4" data-controller="action-items--lists daily-records--mood-score">
+  <div>
+    <%= render 'shared/flash_message' %>
+  </div>
+  <!-- 気分 -->
+  <div class="mt-8">
+    <p class="text-string-base text-md font-semibold mt-2 flex justify-center">気分</p>
+    <div class="flex items-center justify-center font-bold rounded-md p-4">
+      <!-- 顔アイコン -->
+      <div id="current-mood-icon" class="text-3xl">
+      </div>
+      <!-- 気分の表記（絶不調・とてもつらい・普通など） -->
+      <div id="current-mood" class="ml-2 text-md">
+      </div>
+      <div>
+        （<span id="current-mood-score"></span>）
+      </div>
+    </div>
+    <!-- スライダー -->
+    <div class="flex justify-center my-2">
+      <input type="range" min="-5" max="5" value="<%= @mood_score %>" id="mood-range" data-action="action-items--lists#update daily-records--mood-score#update" class="w-full mx-4 mb-4">  
+    </div>
+  </div>
+  <hr class="text-gray-300" />
+
+  <!-- 行動項目追加ボタン -->
+  <%= link_to new_action_item_path do %>
+    <button class="rounded-full w-full px-5 py-2 my-4 bg-gray-900 text-white font-semibold shadow-lg">
+      ＋ 追加
+    </button>
+  <% end %>
+  <hr class="text-gray-300" />
+
+  <!-- リスト -->
+  <%= render "action_items/lists_frame" %>
+</div>

@@ -1,4 +1,4 @@
-<div>
+<div class="my-28 mx-12">
   <div>
     <%= render 'shared/flash_message' %>
   </div>
@@ -28,6 +28,15 @@
       </div> 
       <div class="p-4 font-light border border-border-base rounded-md">
         <%= @daily_record.memo %>
+      </div>
+    </div>
+    <!-- 心がザワザワしている状態と記録した場合に表示 -->
+    <div class="mt-4"> 
+      <div class="font-semibold text-string-base text-md my-2">
+        心のザワザワ状況
+      </div> 
+      <div class="p-4 font-light border border-border-base rounded-md">
+        <%= @daily_record.is_uneasy ? "心のザワザワがあった ❤️💭" : "心のザワザワはなかった" %>
       </div>
     </div>
     <!-- 作成時間 -->

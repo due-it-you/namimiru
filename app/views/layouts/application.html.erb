@@ -31,8 +31,12 @@
   </head>
 
   <body>
-    <div class="bg-[#FFFFFD]">
-      <div class="my-28 mx-12">
+    <!-- 新規登録・ログイン・トップ画面ではヘッダーは非表示-->
+    <% if user_signed_in? %>
+      <%= render 'shared/header' %>
+    <% end %>
+    <div class="bg-[#FFFFFD] mt-16 mb-24">
+      <div>
         <%= yield %>
       </div>
     </div>
