@@ -1,4 +1,4 @@
-<div>
+<div class="my-28 mx-12">
   <div class="font-semibold text-xl text-center text-string-base">
     ログイン
   </div>
@@ -9,7 +9,7 @@
       <div class="space-y-4">
         <div class="field">
           <%= f.label :email, class: "text-string-base font-semibold" %><br />
-          <%= f.email_field :email, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autofocus: true, autocomplete: "email" %>
+          <%= f.email_field :email, class: "w-full mt-1 px-2 py-1 border border-border-base rounded-md", autofocus: true, autocomplete: "email", placeholder: "test@example.com" %>
         </div>
 
         <div data-controller="password-field">

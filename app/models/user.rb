@@ -5,6 +5,7 @@ class User < ApplicationRecord
     :omniauthable, :recoverable, omniauth_providers: %i[google_oauth2]
 
   has_many :daily_records, dependent: :destroy
+  has_many :action_items, dependent: :destroy
   has_many :social_profiles, dependent: :destroy
   # 自己結合の多対多の関連付け
   has_many :being_supported_relationships, class_name: "CareRelation", foreign_key: :supported_id, dependent: :destroy
@@ -21,6 +22,7 @@ class User < ApplicationRecord
     unless: :social_login?,
     on: :create
   validates :email, presence: { message: "を入力してください。" },
+    uniqueness: { message: "は既に登録されています。" },
     format: {
       with: /\A[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\z/,
       message: "の形式を満たしてください。"

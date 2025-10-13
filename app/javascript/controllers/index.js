@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ActionItems__ListsController from "./action_items/lists_controller"
+application.register("action-items--lists", ActionItems__ListsController)
+
 import Charts__DisplayController from "./charts/display_controller"
 application.register("charts--display", Charts__DisplayController)
 

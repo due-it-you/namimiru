@@ -1,4 +1,4 @@
-<div>
+<div class="my-28 mx-12">
   <div>
     <%= render 'shared/flash_message' %>
   </div>
@@ -13,14 +13,27 @@
     <span class="font-semibold text-string-base text-md">さんのグラフ</span> 
   </div>
   <div>
-    <canvas 
-          height="350" 
-          id="myChart"
-          class="my-4"
-          data-controller="charts--display"
+    <div 
+          data-controller="charts--display" 
           data-chart-labels="<%= @labels.to_json %>"
-          data-chart-data="<%= @data.to_json %>">
-    </canvas>
+          data-chart-data="<%= @data.to_json %>"
+          data-charts--display-user-id-value="<%= @user.id %>">
+          <select data-action="charts--display#update" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
+            <option value="last_week">直近1週間</option>
+            <option value="last_month" selected>直近1ヶ月</option>
+            <option value="last_3_months">直近3ヶ月</option>
+            <option value="last_6_months">直近6ヶ月</option>
+            <option value="last_year">直近1年間</option>
+            <option value="all_time">全期間</option>
+          </select>
+    </div>
+    <div>
+      <canvas 
+                    height="350" 
+                    id="myChart"
+                    class="my-4">
+      </canvas>
+    </div>
   </div>
   <div>
     <div>
@@ -29,8 +42,13 @@
     <!-- 直近一件の記録 -->
     <% if @latest_record.present? %>
       <div id="latest-record" class="border border-border-base p-4 rounded-md text-string-base">
-        <div class="text-sm">
+        <div class="text-sm flex">
           <%= @latest_record.created_at.strftime("%Y/%m/%d %H:%M") %>
+          <% if @latest_record.is_uneasy %>
+            <div class="ml-2">
+              ❤️💭
+            </div>
+          <% end %>
         </div>  
         <div class="my-2">
           <span class="text-md">気分： </span>
