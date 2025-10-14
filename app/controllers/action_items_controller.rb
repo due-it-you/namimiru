@@ -48,6 +48,17 @@ class ActionItemsController < ApplicationController
     end
   end
 
+  def destroy
+    action_item = current_user.action_items.find(params[:id])
+    if action_item.destroy
+      flash[:success] = "行動項目を削除しました。"
+      redirect_to action_items_path
+    else
+      flash[:success] = "行動項目を削除できませんでした。"
+      redirect_to action_items_path
+    end
+  end
+
   private
 
   def action_item_params
