@@ -4,9 +4,14 @@
     <div class="w-1/2 flex flex-col items-center pr-2">
       <p class="text-string-base font-semibold mt-4">できるかも</p>
       <div class="mt-2 space-y-2 w-full">
-        <% @can_list.each do |can_item| %>
+        <% @diff_can_items.each do |diff_can_item| %>
+          <div class="p-2 mx-2 border border-green-300 rounded-lg text-center">
+            <%= diff_can_item.name%>
+          </div>
+        <% end %>
+        <% @not_diff_can_items.each do |not_diff_can_item| %>
           <div class="p-2 mx-2 border border-gray-300 rounded-lg text-center">
-            <%= can_item.name%>
+            <%= not_diff_can_item.name%>
           </div>
         <% end %>
       </div>
