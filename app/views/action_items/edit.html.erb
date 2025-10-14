@@ -1,6 +1,6 @@
 <div class="my-28 mx-12" data-controller="daily-records--mood-score">
-  <p class="text-string-base font-semibold text-xl">項目の作成</p>
-  <div class="my-8">
+  <p class="text-string-base font-semibold text-xl">項目の編集</p>
+  <div class="mt-8 mb-4">
     <%= form_with model: @action_item do |f| %>
       <div>
         <p><%= f.label :name, "項目名" %></p>
@@ -31,6 +31,11 @@
       </div>
 
       <%= f.submit "更新", class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8" %>
+    <% end %>
+  </div>
+  <div class="w-1/8">
+    <%= link_to action_item_path(@action_item.id), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, id: "trash-icon" do %>
+      <%= image_tag "trash_icon.png" %>
     <% end %>
   </div>
 </div>
