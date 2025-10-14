@@ -4,11 +4,13 @@
     <div class="w-1/2 flex flex-col items-center pr-2">
       <p class="text-string-base font-semibold mt-4">できるかも</p>
       <div class="mt-2 space-y-2 w-full">
+        <!-- 差分の項目 -->
         <% @diff_can_items.each do |diff_can_item| %>
-          <div class="p-2 mx-2 border border-green-300 rounded-lg text-center">
+          <div class="p-2 mx-2 border-2 border-green-300 rounded-lg text-center">
             <%= diff_can_item.name%>
           </div>
         <% end %>
+        <!-- 差分ではない項目 -->
         <% @not_diff_can_items.each do |not_diff_can_item| %>
           <div class="p-2 mx-2 border border-gray-300 rounded-lg text-center">
             <%= not_diff_can_item.name%>
@@ -24,11 +26,13 @@
     <div class="w-1/2 flex flex-col items-center pl-2">
       <p class="text-string-base font-semibold mt-4">できないかも</p>
       <div class="mt-2 space-y-2 w-full">
+        <!-- 差分の項目 -->
         <% @diff_cannot_items.each do |diff_cannot_item| %>
-          <div class="p-2 mx-2 border border-red-300 rounded-lg text-center">
+          <div class="p-2 mx-2 border-2 border-red-300 rounded-lg text-center">
             <%= diff_cannot_item.name%>
           </div>
         <% end %>
+        <!-- 差分ではない項目 -->
         <% @not_diff_cannot_items.each do |not_diff_cannot_item| %>
           <div class="p-2 mx-2 border border-gray-300 rounded-lg text-center">
             <%= not_diff_cannot_item.name%>
