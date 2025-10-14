@@ -37,7 +37,7 @@ class ActionItemsController < ApplicationController
     @action_item = current_user.action_items.find(params[:id])
   end
 
-  def update 
+  def update
     action_item = current_user.action_items.find(params[:id])
     if action_item.update(action_item_params)
       flash[:success] = "行動項目を更新しました。"
