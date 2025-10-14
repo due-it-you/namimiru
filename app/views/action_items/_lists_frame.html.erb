@@ -24,9 +24,14 @@
     <div class="w-1/2 flex flex-col items-center pl-2">
       <p class="text-string-base font-semibold mt-4">できないかも</p>
       <div class="mt-2 space-y-2 w-full">
-        <% @cannot_list.each do |cannot_item| %>
+        <% @diff_cannot_items.each do |diff_cannot_item| %>
+          <div class="p-2 mx-2 border border-red-300 rounded-lg text-center">
+            <%= diff_cannot_item.name%>
+          </div>
+        <% end %>
+        <% @not_diff_cannot_items.each do |not_diff_cannot_item| %>
           <div class="p-2 mx-2 border border-gray-300 rounded-lg text-center">
-            <%= cannot_item.name%>
+            <%= not_diff_cannot_item.name%>
           </div>
         <% end %>
       </div>

@@ -5,8 +5,12 @@ class ActionItemsController < ApplicationController
     @mood_score =  params[:mood_score] || latest_mood_score || 0
     @can_list = current_user.action_items.capable(@mood_score)
     @cannot_list = current_user.action_items.incapable(@mood_score)
+
     @diff_can_items = @can_list.to_a - current_user.action_items.capable(latest_mood_score)
     @not_diff_can_items = @can_list.to_a - @diff_can_items
+
+    @diff_cannot_items = @cannot_list.to_a - current_user.action_items.incapable(latest_mood_score)
+    @not_diff_cannot_items = @cannot_list.to_a - @diff_cannot_items
 
     if turbo_frame_request?
       render partial: "action_items/lists_frame"
