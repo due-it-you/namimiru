@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     end
     resources :daily_records, only: %i[index show edit update]
   end
-  resources :action_items, only: %i[index new create]
+  resources :action_items, only: %i[index new create edit update]
   resources :contacts, only: %i[new create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

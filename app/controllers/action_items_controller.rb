@@ -33,6 +33,10 @@ class ActionItemsController < ApplicationController
     end
   end
 
+  def edit
+    @action_item = current_user.action_items.find(params[:id])
+  end
+
   private
 
   def action_item_params
