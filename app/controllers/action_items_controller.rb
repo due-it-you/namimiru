@@ -37,6 +37,17 @@ class ActionItemsController < ApplicationController
     @action_item = current_user.action_items.find(params[:id])
   end
 
+  def update 
+    action_item = current_user.action_items.find(params[:id])
+    if action_item.update(action_item_params)
+      flash[:success] = "行動項目を更新しました。"
+      redirect_to action_items_path
+    else
+      flash[:alert] = "行動項目を更新出来ませんでした。"
+      redirect_to action_items_path
+    end
+  end
+
   private
 
   def action_item_params
