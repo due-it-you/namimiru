@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :supporting_relationships, class_name: "CareRelation", foreign_key: :supporter_id, dependent: :destroy
   has_many :supporters, through: :being_supported_relationships, source: :supporter
   has_many :supportings, through: :supporting_relationships, source: :supported
+  has_many :action_tags, through: :action_items
 
   attr_accessor :social_login
 
