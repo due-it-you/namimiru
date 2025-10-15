@@ -14,16 +14,18 @@
             <% end %>
           </div>
         <% end %>
+        <!-- タグ -->
+        <div class="inline-block p-1 border border-gray-200 text-gray-800 ml-2 text-xs rounded-md">
+          #テスト
+        </div>
         <!-- 差分ではない項目 -->
         <% @not_diff_can_items.each do |not_diff_can_item| %>
           <div>
             <%= link_to edit_action_item_path(not_diff_can_item.id), data: { turbo_frame: "_top" } do %>
               <div class="p-2 mx-2 border border-gray-300 rounded-md text-center">
-                <div class="flex items-center">
-                  <!-- タグのドットマーク -->
-                  <div class="inline-block px-1.5 py-1.5 mr-2 text-gray-800 text-xs rounded-full bg-blue-400"></div>
+                <div>
                   <!-- 項目名 -->
-                  <div>
+                  <div class="text-sm">
                     <%= not_diff_can_item.name%>
                   </div>
                 </div>
