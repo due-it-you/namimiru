@@ -5,33 +5,40 @@
       <p class="text-string-base font-semibold mt-4">できるかも</p>
       <div class="mt-2 space-y-2 w-full">
         <!-- 差分の項目 -->
-        <% @diff_can_items.each do |diff_can_item| %>
-          <div>
-            <%= link_to edit_action_item_path(diff_can_item.id), data: { turbo_frame: "_top" } do %>
-              <div class="p-2 mx-2 border-2 border-green-300 rounded-md text-center">
-                <%= diff_can_item.name%>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-        <!-- タグ -->
+        <% @diff_can_groups.each do |tag, items| %>
         <div class="inline-block p-1 border border-gray-200 text-gray-800 ml-2 text-xs rounded-md">
-          #テスト
+          #<%= tag.name %>
         </div>
+          <% items.each do |item| %>
+            <div>
+              <%= link_to edit_action_item_path(item.id), data: { turbo_frame: "_top" } do %>
+                <div class="p-2 mx-2 border-2 border-green-300 rounded-md text-center">
+                  <%= item.name%>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
         <!-- 差分ではない項目 -->
-        <% @not_diff_can_items.each do |not_diff_can_item| %>
-          <div>
-            <%= link_to edit_action_item_path(not_diff_can_item.id), data: { turbo_frame: "_top" } do %>
-              <div class="p-2 mx-2 border border-gray-300 rounded-md text-center">
-                <div>
-                  <!-- 項目名 -->
-                  <div class="text-sm">
-                    <%= not_diff_can_item.name%>
+        <% @not_diff_can_groups.each do |tag, items| %>
+          <!-- タグ -->
+          <div class="inline-block p-1 border border-gray-200 text-gray-800 ml-2 text-xs rounded-md">
+            #<%= tag.name %>
+          </div>
+          <% items.each do |item| %>
+            <div>
+              <%= link_to edit_action_item_path(item.id), data: { turbo_frame: "_top" } do %>
+                <div class="p-2 mx-2 border border-gray-300 rounded-md text-center">
+                  <div>
+                    <!-- 項目名 -->
+                    <div class="text-sm">
+                      <%= item.name%>
+                    </div>
                   </div>
                 </div>
-              </div>
-            <% end %>
-          </div>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -44,24 +51,36 @@
       <p class="text-string-base font-semibold mt-4">できないかも</p>
       <div class="mt-2 space-y-2 w-full">
         <!-- 差分の項目 -->
-        <% @diff_cannot_items.each do |diff_cannot_item| %>
-          <div>
-            <%= link_to edit_action_item_path(diff_cannot_item.id), data: { turbo_frame: "_top" } do %>
-              <div class="p-2 mx-2 border-2 border-red-300 rounded-md text-center">
-                <%= diff_cannot_item.name%>
-              </div>
-            <% end %>
+        <% @diff_cannot_groups.each do |tag, items| %>
+          <!-- タグ -->
+          <div class="inline-block p-1 border border-gray-200 text-gray-800 ml-2 text-xs rounded-md">
+            #<%= tag.name %>
           </div>
+          <% items.each do |item| %>
+            <div>
+              <%= link_to edit_action_item_path(item.id), data: { turbo_frame: "_top" } do %>
+                <div class="p-2 mx-2 border-2 border-red-300 rounded-md text-center">
+                  <%= item.name%>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
         <!-- 差分ではない項目 -->
-        <% @not_diff_cannot_items.each do |not_diff_cannot_item| %>
-          <div>
-            <%= link_to edit_action_item_path(not_diff_cannot_item.id), data: { turbo_frame: "_top" } do %>
-              <div class="p-2 mx-2 border border-gray-300 rounded-md text-center">
-                <%= not_diff_cannot_item.name%>
-              </div>
-            <% end %>
+        <% @not_diff_cannot_groups.each do |tag, items| %>
+          <!-- タグ -->
+          <div class="inline-block p-1 border border-gray-200 text-gray-800 ml-2 text-xs rounded-md">
+            #<%= tag.name %>
           </div>
+          <% items.each do |item| %>
+            <div>
+              <%= link_to edit_action_item_path(item.id), data: { turbo_frame: "_top" } do %>
+                <div class="p-2 mx-2 border border-gray-300 rounded-md text-center">
+                  <%= item.name%>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
