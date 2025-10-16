@@ -3,15 +3,23 @@ class ActionItemsController < ApplicationController
     latest_mood_score = current_user.daily_records.order(created_at: :desc).first&.mood_score
     # スライダーを変動させた後の値 || 初回アクセス時の初期値 || 記録がまだ存在しない場合の初期値
     @mood_score =  params[:mood_score] || latest_mood_score || 0
-    current_can_items, current_cannot_items = current_user.action_items.capable(@mood_score),  current_user.action_items.incapable(@mood_score)
-    latest_can_items, latest_cannot_items = current_user.action_items.capable(latest_mood_score), current_user.action_items.incapable(latest_mood_score)
+
+    action_items_scope = current_user.action_items.includes(:action_tag)
+    current_can_items, current_cannot_items = action_items_scope.capable(@mood_score),  action_items_scope.incapable(@mood_score)
+    latest_can_items, latest_cannot_items = action_items_scope.capable(latest_mood_score), action_items_scope.incapable(latest_mood_score)
 
     # 最新の記録の気分のリストと比べての項目の差分
-    @diff_can_items = current_can_items - latest_can_items
-    @not_diff_can_items = current_can_items - @diff_can_items
+    diff_can_items = current_can_items - latest_can_items
+    not_diff_can_items = current_can_items - diff_can_items
+    diff_cannot_items = current_cannot_items - latest_cannot_items
+    not_diff_cannot_items = current_cannot_items - diff_cannot_items
 
-    @diff_cannot_items = current_cannot_items - latest_cannot_items
-    @not_diff_cannot_items = current_cannot_items - @diff_cannot_items
+    # 項目をタグごとにまとめる
+    @diff_can_groups = diff_can_items.group_by(&:action_tag)
+    @not_diff_can_groups = not_diff_can_items.group_by(&:action_tag)
+
+    @diff_cannot_groups = diff_cannot_items.group_by(&:action_tag)
+    @not_diff_cannot_groups = not_diff_cannot_items.group_by(&:action_tag)
 
     if turbo_frame_request?
       render partial: "action_items/lists_frame"
