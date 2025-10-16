@@ -6,19 +6,32 @@
       <div class="mt-2 space-y-2 w-full">
         <!-- 差分の項目 -->
         <% @diff_can_items.each do |diff_can_item| %>
-          <%= link_to edit_action_item_path(diff_can_item.id), data: { turbo_frame: "_top" } do %>
-            <div class="p-2 mx-2 border-2 border-green-300 rounded-lg text-center">
-              <%= diff_can_item.name%>
-            </div>
-          <% end %>
+          <div>
+            <%= link_to edit_action_item_path(diff_can_item.id), data: { turbo_frame: "_top" } do %>
+              <div class="p-2 mx-2 border-2 border-green-300 rounded-md text-center">
+                <%= diff_can_item.name%>
+              </div>
+            <% end %>
+          </div>
         <% end %>
+        <!-- タグ -->
+        <div class="inline-block p-1 border border-gray-200 text-gray-800 ml-2 text-xs rounded-md">
+          #テスト
+        </div>
         <!-- 差分ではない項目 -->
         <% @not_diff_can_items.each do |not_diff_can_item| %>
-          <%= link_to edit_action_item_path(not_diff_can_item.id), data: { turbo_frame: "_top" } do %>
-            <div class="p-2 mx-2 border border-gray-300 rounded-lg text-center">
-              <%= not_diff_can_item.name%>
-            </div>
-          <% end %>
+          <div>
+            <%= link_to edit_action_item_path(not_diff_can_item.id), data: { turbo_frame: "_top" } do %>
+              <div class="p-2 mx-2 border border-gray-300 rounded-md text-center">
+                <div>
+                  <!-- 項目名 -->
+                  <div class="text-sm">
+                    <%= not_diff_can_item.name%>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
@@ -32,19 +45,23 @@
       <div class="mt-2 space-y-2 w-full">
         <!-- 差分の項目 -->
         <% @diff_cannot_items.each do |diff_cannot_item| %>
-          <%= link_to edit_action_item_path(diff_cannot_item.id), data: { turbo_frame: "_top" } do %>
-            <div class="p-2 mx-2 border-2 border-red-300 rounded-lg text-center">
-              <%= diff_cannot_item.name%>
-            </div>
-          <% end %>
+          <div>
+            <%= link_to edit_action_item_path(diff_cannot_item.id), data: { turbo_frame: "_top" } do %>
+              <div class="p-2 mx-2 border-2 border-red-300 rounded-md text-center">
+                <%= diff_cannot_item.name%>
+              </div>
+            <% end %>
+          </div>
         <% end %>
         <!-- 差分ではない項目 -->
         <% @not_diff_cannot_items.each do |not_diff_cannot_item| %>
-          <%= link_to edit_action_item_path(not_diff_cannot_item.id), data: { turbo_frame: "_top" } do %>
-            <div class="p-2 mx-2 border border-gray-300 rounded-lg text-center">
-              <%= not_diff_cannot_item.name%>
-            </div>
-          <% end %>
+          <div>
+            <%= link_to edit_action_item_path(not_diff_cannot_item.id), data: { turbo_frame: "_top" } do %>
+              <div class="p-2 mx-2 border border-gray-300 rounded-md text-center">
+                <%= not_diff_cannot_item.name%>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
