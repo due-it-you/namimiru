@@ -23,7 +23,13 @@ class ActionItemsController < ApplicationController
   end
 
   def create
-    action_item = current_user.action_items.new(action_item_params)
+    action_tag = current_user.action_tags.find_or_create_by(name: action_item_params[:tag_name])
+    action_item = current_user.action_items.new(
+      user_id: current_user.id,
+      action_tag_id: action_tag.id,
+      name: action_item_params[:name],
+      enabled_from: action_item_params[:enabled_from]
+    )
     if action_item.save
       flash[:success] = "項目を作成しました。"
       redirect_to action_items_path
@@ -62,6 +68,6 @@ class ActionItemsController < ApplicationController
   private
 
   def action_item_params
-    params.require(:action_item).permit(:name, :enabled_from)
+    params.require(:action_item).permit(:name, :enabled_from, :tag_name)
   end
 end

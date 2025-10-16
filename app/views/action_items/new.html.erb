@@ -2,14 +2,21 @@
   <p class="text-string-base font-semibold text-xl">項目の作成</p>
   <div class="my-8">
     <%= form_with model: @action_item do |f| %>
+      <!-- 項目名の入力 -->
       <div>
         <p><%= f.label :name, "項目名" %></p>
-        <%= f.text_field :name, placeholder: "例) 自炊", class: "border border-border-base rounded-md w-full my-2 p-2", required: true %>
+        <%= f.text_field :name, placeholder: "自炊", class: "border border-border-base rounded-md w-full my-2 p-2", required: true %>
       </div>
 
+      <!-- タグの入力 -->
+      <div class="mt-4">
+        <p><%= f.label :tag_name, "タグ (8文字以内)" %></p>
+        <%= f.text_field :tag_name, placeholder: "料理", class: "border border-border-base rounded-md w-full my-2 p-2", required: true %>
+      </div>
+
+      <!-- 気分の入力 -->
       <div class="mt-8">
         <p><%= f.label :enabled_from, "どの気分の段階から出来るようになりそうですか？" %></p>
-        <!-- 気分 -->
         <div class="mt-2">
           <div class="flex items-center justify-center font-bold rounded-md p-4">
             <!-- 顔アイコン -->
