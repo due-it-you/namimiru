@@ -15,11 +15,8 @@ class ActionItemsController < ApplicationController
     not_diff_cannot_items = current_cannot_items - diff_cannot_items
 
     # 項目をタグごとにまとめる
-    @diff_can_groups = diff_can_items.group_by(&:action_tag)
-    @not_diff_can_groups = not_diff_can_items.group_by(&:action_tag)
-
-    @diff_cannot_groups = diff_cannot_items.group_by(&:action_tag)
-    @not_diff_cannot_groups = not_diff_cannot_items.group_by(&:action_tag)
+    @diff_can_groups, @not_diff_can_groups = diff_can_items.group_by(&:action_tag), not_diff_can_items.group_by(&:action_tag)
+    @diff_cannot_groups, @not_diff_cannot_groups = diff_cannot_items.group_by(&:action_tag), not_diff_cannot_items.group_by(&:action_tag)
 
     if turbo_frame_request?
       render partial: "action_items/lists_frame"
