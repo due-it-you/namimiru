@@ -1,6 +1,6 @@
 class ActionItem < ApplicationRecord
   belongs_to :user
-  belongs_to :tag
+  belongs_to :action_tag
 
   validates :name, presence: true
   validates :enabled_from, presence: true, numericality: { in: -5..5 }
