@@ -21,15 +21,14 @@
       <input type="range" min="-5" max="5" value="<%= @mood_score %>" id="mood-range" data-action="action-items--lists#update daily-records--mood-score#update" class="w-full mx-4 mb-4">  
     </div>
   </div>
-  <hr class="text-gray-300" />
 
   <!-- 行動項目追加ボタン -->
   <%= link_to new_action_item_path do %>
-    <button class="rounded-full w-full px-5 py-2 my-4 bg-gray-900 text-white font-semibold shadow-lg">
+    <button class="rounded-full w-full px-5 py-2 my-4 bg-logo-color text-white font-semibold shadow-lg">
       ＋ 追加
     </button>
   <% end %>
-  <hr class="text-gray-300" />
+  <hr class="text-gray-200" />
 
   <!-- リスト -->
   <%= render "action_items/lists_frame" %>

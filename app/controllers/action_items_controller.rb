@@ -3,8 +3,21 @@ class ActionItemsController < ApplicationController
     latest_mood_score = current_user.daily_records.order(created_at: :desc).first&.mood_score
     # スライダーを変動させた後の値 || 初回アクセス時の初期値 || 記録がまだ存在しない場合の初期値
     @mood_score =  params[:mood_score] || latest_mood_score || 0
-    @can_list = current_user.action_items.capable(@mood_score)
-    @cannot_list = current_user.action_items.incapable(@mood_score)
+
+    action_items_with_tag = current_user.action_items.includes(:action_tag)
+    current_can_items, current_cannot_items = action_items_with_tag.capable(@mood_score),  action_items_with_tag.incapable(@mood_score)
+    latest_can_items, latest_cannot_items = action_items_with_tag.capable(latest_mood_score), action_items_with_tag.incapable(latest_mood_score)
+
+    # 最新の記録の気分のリストと比べての項目の差分
+    diff_can_items = current_can_items - latest_can_items
+    not_diff_can_items = current_can_items - diff_can_items
+    diff_cannot_items = current_cannot_items - latest_cannot_items
+    not_diff_cannot_items = current_cannot_items - diff_cannot_items
+
+    # 項目をタグごとにまとめる
+    @diff_can_groups, @not_diff_can_groups = diff_can_items.group_by(&:action_tag), not_diff_can_items.group_by(&:action_tag)
+    @diff_cannot_groups, @not_diff_cannot_groups = diff_cannot_items.group_by(&:action_tag), not_diff_cannot_items.group_by(&:action_tag)
+
     if turbo_frame_request?
       render partial: "action_items/lists_frame"
     end
@@ -15,7 +28,16 @@ class ActionItemsController < ApplicationController
   end
 
   def create
-    action_item = current_user.action_items.new(action_item_params)
+    action_tag = current_user.action_tags.find_or_create_by(
+      # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
+      name:  action_item_params[:tag_name].presence || current_user.action_tags.find(action_item_params[:action_tag_id]).name || "未分類"
+    )
+    action_item = current_user.action_items.new(
+      user_id: current_user.id,
+      action_tag_id: action_tag.id,
+      name: action_item_params[:name],
+      enabled_from: action_item_params[:enabled_from]
+    )
     if action_item.save
       flash[:success] = "項目を作成しました。"
       redirect_to action_items_path
@@ -25,9 +47,43 @@ class ActionItemsController < ApplicationController
     end
   end
 
+  def edit
+    @action_item = current_user.action_items.find(params[:id])
+  end
+
+  def update
+    action_item = current_user.action_items.find(params[:id])
+    action_tag = current_user.action_tags.find_or_create_by(
+      # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
+      name: action_item_params[:tag_name].presence || current_user.action_tags.find(action_item_params[:action_tag_id]).name || "未分類"
+    )
+    if action_item.update(
+      name: action_item_params[:name],
+      enabled_from: action_item_params[:enabled_from],
+      action_tag_id: action_tag.id
+    )
+      flash[:success] = "行動項目を更新しました。"
+      redirect_to action_items_path
+    else
+      flash[:alert] = "行動項目を更新出来ませんでした。"
+      redirect_to action_items_path
+    end
+  end
+
+  def destroy
+    action_item = current_user.action_items.find(params[:id])
+    if action_item.destroy
+      flash[:success] = "行動項目を削除しました。"
+      redirect_to action_items_path
+    else
+      flash[:success] = "行動項目を削除できませんでした。"
+      redirect_to action_items_path
+    end
+  end
+
   private
 
   def action_item_params
-    params.require(:action_item).permit(:name, :enabled_from)
+    params.require(:action_item).permit(:name, :action_tag_id, :enabled_from, :tag_name)
   end
 end

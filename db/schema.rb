@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_11_103712) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_16_073229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +20,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_11_103712) do
     t.integer "enabled_from", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "action_tag_id"
+    t.index ["action_tag_id"], name: "index_action_items_on_action_tag_id"
     t.index ["user_id"], name: "index_action_items_on_user_id"
+  end
+
+  create_table "action_tags", force: :cascade do |t|
+    t.string "name", default: "未分類", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["name"], name: "index_action_tags_on_name", unique: true
+    t.index ["user_id"], name: "index_action_tags_on_user_id"
   end
 
   create_table "care_relations", force: :cascade do |t|
@@ -79,7 +90,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_11_103712) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "action_items", "action_tags"
   add_foreign_key "action_items", "users"
+  add_foreign_key "action_tags", "users"
   add_foreign_key "care_relations", "users", column: "supported_id"
   add_foreign_key "care_relations", "users", column: "supporter_id"
   add_foreign_key "daily_records", "users"
