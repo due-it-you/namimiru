@@ -28,7 +28,7 @@ class ActionItemsController < ApplicationController
   end
 
   def create
-    action_tag = current_user.action_tags.find_or_create_by(name: action_item_params[:tag_name].presence || "未分類" )
+    action_tag = current_user.action_tags.find_or_create_by(name: action_item_params[:tag_name].presence || "未分類")
     action_item = current_user.action_items.new(
       user_id: current_user.id,
       action_tag_id: action_tag.id,
