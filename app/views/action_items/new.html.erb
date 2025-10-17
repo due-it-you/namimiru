@@ -11,7 +11,9 @@
       <!-- タグの入力 -->
       <div class="mt-4">
         <p><%= f.label :tag_name, "タグ (8文字以内)" %></p>
-        <%= f.text_field :tag_name, placeholder: "料理", class: "border border-border-base rounded-md w-full my-2 p-2" %>
+        <div class="my-2">
+          <%= f.combobox :action_tag_id, current_user.action_tags.order(:name), name_when_new: "action_item[tag_name]", input: { placeholder: "料理" } %>
+        </div>
       </div>
 
       <!-- 気分の入力 -->
