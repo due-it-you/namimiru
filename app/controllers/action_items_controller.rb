@@ -28,7 +28,10 @@ class ActionItemsController < ApplicationController
   end
 
   def create
-    action_tag = current_user.action_tags.find_or_create_by(name: action_item_params[:tag_name].presence || "未分類")
+    action_tag = current_user.action_tags.find_or_create_by(
+      # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
+      name:  action_item_params[:tag_name].presence || current_user.action_tags.find(action_item_params[:action_tag_id]).name || "未分類"
+    )
     action_item = current_user.action_items.new(
       user_id: current_user.id,
       action_tag_id: action_tag.id,
@@ -50,7 +53,15 @@ class ActionItemsController < ApplicationController
 
   def update
     action_item = current_user.action_items.find(params[:id])
-    if action_item.update(action_item_params)
+    action_tag = current_user.action_tags.find_or_create_by(
+      # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
+      name: action_item_params[:tag_name].presence || current_user.action_tags.find(action_item_params[:action_tag_id]).name || "未分類"
+    )
+    if action_item.update(
+      name: action_item_params[:name],
+      enabled_from: action_item_params[:enabled_from],
+      action_tag_id: action_tag.id
+    )
       flash[:success] = "行動項目を更新しました。"
       redirect_to action_items_path
     else
@@ -73,6 +84,6 @@ class ActionItemsController < ApplicationController
   private
 
   def action_item_params
-    params.require(:action_item).permit(:name, :enabled_from, :tag_name)
+    params.require(:action_item).permit(:name, :action_tag_id, :enabled_from, :tag_name)
   end
 end
