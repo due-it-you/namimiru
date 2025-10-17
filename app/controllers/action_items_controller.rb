@@ -29,8 +29,8 @@ class ActionItemsController < ApplicationController
 
   def create
     action_tag = current_user.action_tags.find_or_create_by(
-      # 既存のタグが選択された場合 || 既存のタグにない名称が入力された場合 || 未入力の場合
-      name: current_user.action_tags.find(action_item_params[:action_tag_id]).name || action_item_params[:tag_name].presence || "未分類"
+      # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
+      name:  action_item_params[:tag_name].presence || current_user.action_tags.find(action_item_params[:action_tag_id]).name || "未分類"
     )
     action_item = current_user.action_items.new(
       user_id: current_user.id,
@@ -54,8 +54,8 @@ class ActionItemsController < ApplicationController
   def update
     action_item = current_user.action_items.find(params[:id])
     action_tag = current_user.action_tags.find_or_create_by(
-      # 既存のタグが選択された場合 || 既存のタグにない名称が入力された場合 || 未入力の場合
-      name: current_user.action_tags.find(action_item_params[:action_tag_id]).name || action_item_params[:tag_name].presence || "未分類"
+      # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
+      name: action_item_params[:tag_name].presence || current_user.action_tags.find(action_item_params[:action_tag_id]).name || "未分類"
     )
     if action_item.update(
       name: action_item_params[:name],
