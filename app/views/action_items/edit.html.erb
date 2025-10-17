@@ -2,9 +2,18 @@
   <p class="text-string-base font-semibold text-xl">項目の編集</p>
   <div class="mt-8 mb-4">
     <%= form_with model: @action_item do |f| %>
+      <!-- 項目名の入力 -->
       <div>
         <p><%= f.label :name, "項目名" %></p>
         <%= f.text_field :name, placeholder: "例) 自炊", class: "border border-border-base rounded-md w-full my-2 p-2", required: true %>
+      </div>
+
+      <!-- タグの入力 -->
+      <div class="mt-4">
+        <p><%= f.label :tag_name, "タグ (8文字以内)" %></p>
+        <div class="my-2">
+          <%= f.combobox :action_tag_id, current_user.action_tags.order(:name), name_when_new: "action_item[tag_name]", value: @action_item.action_tag.name ,input: { placeholder: "料理" } %>
+        </div>
       </div>
 
       <div class="mt-8">

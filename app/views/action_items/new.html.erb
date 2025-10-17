@@ -10,7 +10,7 @@
 
       <!-- タグの入力 -->
       <div class="mt-4">
-        <p><%= f.label :tag_name, "タグ (8文字以内)" %></p>
+        <p><%= f.label :action_tag_id, "タグ (8文字以内)" %></p>
         <div class="my-2">
           <%= f.combobox :action_tag_id, current_user.action_tags.order(:name), name_when_new: "action_item[tag_name]", input: { placeholder: "料理" } %>
         </div>
