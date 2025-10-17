@@ -73,6 +73,6 @@ class ActionItemsController < ApplicationController
   private
 
   def action_item_params
-    params.require(:action_item).permit(:name, :enabled_from, :tag_name)
+    params.require(:action_item).permit(:name, :action_tag_id, :enabled_from, :tag_name)
   end
 end
