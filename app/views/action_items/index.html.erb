@@ -1,4 +1,4 @@
-<div class="mx-4" data-controller="action-items--lists daily-records--mood-score">
+<div class="mx-4" data-controller="action-items--lists action-items--present-tags daily-records--mood-score">
   <div>
     <%= render 'shared/flash_message' %>
   </div>
@@ -30,7 +30,7 @@
   <% end %>
 
   <!-- タグ検索 -->
-  <div class="overflow-x-auto my-2 py-2" data-controller="action-items--present-tags">
+  <div class="overflow-x-auto my-2 py-2">
     <div id="present-tags-list" class="flex space-x-2">
       <% @present_tags.each do |tag| %> 
         <div data-action="click->action-items--present-tags#toggleActive click->action-items--present-tags#updateLists" class="shrink-0 border border-gray-400 text-sm rounded-lg px-2 py-1">

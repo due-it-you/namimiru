@@ -2,6 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="action-items--present-tags"
 export default class extends Controller {
+  static targets = ["listsFrame"]
+
   connect() {
   }
 
@@ -31,5 +33,16 @@ export default class extends Controller {
   }
 
   updateLists(e) {
+    const selectedTag = e.target
+    const selectedTagName = e.target.textContent.trim().replace(/^# /, "")
+    const frame = this.listsFrameTarget
+
+    if (selectedTag.active) {
+      // 選択されたタグに関する項目を表示
+
+    } else {
+      // 全ての項目を表示
+
+    }
   }
 }
