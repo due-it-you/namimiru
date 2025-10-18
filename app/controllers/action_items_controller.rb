@@ -5,8 +5,17 @@ class ActionItemsController < ApplicationController
     @mood_score =  params[:mood_score] || latest_mood_score || 0
 
     action_items_with_tag = current_user.action_items.includes(:action_tag)
-    current_can_items, current_cannot_items = action_items_with_tag.capable(@mood_score),  action_items_with_tag.incapable(@mood_score)
-    latest_can_items, latest_cannot_items = action_items_with_tag.capable(latest_mood_score), action_items_with_tag.incapable(latest_mood_score)
+    # 現在リストの中に存在する全てのタグの名前
+    @present_tags = action_items_with_tag.map(&:action_tag).uniq
+    selected_tag_name = params[:selected_tag_name]
+    if selected_tag_name.present?
+      selected_tag = current_user.action_tags.find_by(name: selected_tag_name)
+      current_can_items, current_cannot_items = selected_tag.action_items.capable(@mood_score),  selected_tag.action_items.incapable(@mood_score)
+      latest_can_items, latest_cannot_items = selected_tag.action_items.capable(latest_mood_score), selected_tag.action_items.incapable(latest_mood_score)
+    else
+      current_can_items, current_cannot_items = action_items_with_tag.capable(@mood_score),  action_items_with_tag.incapable(@mood_score)
+      latest_can_items, latest_cannot_items = action_items_with_tag.capable(latest_mood_score), action_items_with_tag.incapable(latest_mood_score)
+    end
 
     # 最新の記録の気分のリストと比べての項目の差分
     diff_can_items = current_can_items - latest_can_items

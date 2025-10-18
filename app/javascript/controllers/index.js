@@ -7,6 +7,9 @@ import { application } from "./application"
 import ActionItems__ListsController from "./action_items/lists_controller"
 application.register("action-items--lists", ActionItems__ListsController)
 
+import ActionItems__PresentTagsController from "./action_items/present_tags_controller"
+application.register("action-items--present-tags", ActionItems__PresentTagsController)
+
 import Charts__DisplayController from "./charts/display_controller"
 application.register("charts--display", Charts__DisplayController)
 
