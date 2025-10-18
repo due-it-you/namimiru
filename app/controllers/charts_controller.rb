@@ -24,22 +24,8 @@ class ChartsController < ApplicationController
 
   def data
     user = User.find(params[:user_id])
-    daily_records = user.daily_records.with_selected_range(params[:range])
-    range = case params[:range]
-            when "last_week"
-              (1.week.ago.to_date..Date.current)
-            when "last_month"
-              (1.month.ago.to_date..Date.current)
-            when "last_3_months"
-              (3.months.ago.to_date..Date.current)
-            when "last_6_months"
-              (6.months.ago.to_date..Date.current)
-            when "last_year"
-              (1.year.ago.to_date..Date.current)
-            when "all_time"
-              (user.daily_records.order(created_at: :ASC).first.created_at.to_date..Date.current)
-          end
     # グラフ表示のためのラベルとデータ
+    range = selected_range_object(params[:range])
     score_by_date = {}
     score_and_time_pairs = user.daily_records.pluck(:mood_score, :created_at)
     score_and_time_pairs.each do |score, created_at|
@@ -63,6 +49,23 @@ class ChartsController < ApplicationController
     if !CareRelation.exists?(supported_id: user.id, supporter_id: current_user.id) && !CareRelation.exists?(supported_id: current_user.id, supporter_id: user.id)
       flash[:alert] = "このグラフのユーザーと連携状態にありません。"
       redirect_to charts_path
+    end
+  end
+
+  def selected_range_object(selected_range)
+    case selected_range
+    when "last_week"
+      (1.week.ago.to_date..Date.current)
+    when "last_month"
+      (1.month.ago.to_date..Date.current)
+    when "last_3_months"
+      (3.months.ago.to_date..Date.current)
+    when "last_6_months"
+      (6.months.ago.to_date..Date.current)
+    when "last_year"
+      (1.year.ago.to_date..Date.current)
+    when "all_time"
+      (user.daily_records.order(created_at: :ASC).first.created_at.to_date..Date.current)
     end
   end
 end
