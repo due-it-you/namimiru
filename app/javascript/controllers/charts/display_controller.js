@@ -24,7 +24,11 @@ export default class extends Controller {
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            min: -5,
+            max: 5,
+            ticks: {
+              stepSize: 1
+            }
           }
         }
       }
