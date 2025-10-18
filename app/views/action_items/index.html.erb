@@ -32,9 +32,15 @@
   <!-- タグ検索 -->
   <div class="overflow-x-auto my-2 py-2">
     <div id="present-tags-list" class="flex space-x-2">
-      <% @present_tags.each do |tag| %> 
-        <div data-action="click->action-items--present-tags#toggleActive click->action-items--present-tags#updateLists" class="shrink-0 border border-gray-400 text-sm rounded-lg px-2 py-1">
-          # <%= tag.name %>
+      <% if @present_tags.present? %>
+        <% @present_tags.each do |tag| %> 
+          <div data-action="click->action-items--present-tags#toggleActive click->action-items--present-tags#updateLists" class="shrink-0 border border-gray-400 text-sm rounded-lg px-2 py-1">
+            # <%= tag.name %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="text-string-base font-semibold text-sm">
+          まだ項目が存在しません。
         </div>
       <% end %>
     </div> 
