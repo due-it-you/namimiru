@@ -10,11 +10,12 @@ class ChartsController < ApplicationController
     @latest_record = @user.daily_records.order(created_at: :ASC).last
 
     # グラフ表示のためのラベルとデータ
-    daily_records = @user.daily_records
-      .where(created_at: 1.months.ago.beginning_of_day..Time.current.end_of_day)
-      .order(created_at: :ASC)
-    @labels = daily_records.map { |record| record.created_at.strftime("%m/%d").to_json }
-    @data = daily_records.map { |record| record.mood_score }
+    one_month = (1.months.ago.to_date..Date.current)
+    @labels = one_month.to_a
+    @data = one_month.map do |date| 
+      record = @user.daily_records.find_by(created_at: date.all_day)
+      record&.mood_score
+    end
   end
 
   def data
