@@ -33,16 +33,17 @@ export default class extends Controller {
   }
 
   updateLists(e) {
+    const moodScore = document.getElementById("mood-range").value;
     const selectedTag = e.target
     const selectedTagName = e.target.textContent.trim().replace(/^# /, "")
     const frame = this.listsFrameTarget
 
     if (selectedTag.active) {
       // 選択されたタグに関する項目を表示
-      frame.src = `/action_items?mood_score=${e.target.value}&selected_tag_name=${selectedTagName}`
+      frame.src = `/action_items?mood_score=${moodScore}&selected_tag_name=${selectedTagName}`
     } else {
       // 全ての項目を表示
-      frame.src = `/action_items?mood_score=${e.target.value}`
+      frame.src = `/action_items?mood_score=${moodScore}`
     }
   }
 }
