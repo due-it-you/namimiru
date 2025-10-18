@@ -25,7 +25,7 @@ class ChartsController < ApplicationController
   def data
     user = User.find(params[:user_id])
     # グラフ表示のためのラベルとデータ
-    range = selected_range_object(params[:range])
+    range = selected_range_object(params[:range], user)
     score_by_date = {}
     score_and_time_pairs = user.daily_records.pluck(:mood_score, :created_at)
     score_and_time_pairs.each do |score, created_at|
@@ -52,7 +52,7 @@ class ChartsController < ApplicationController
     end
   end
 
-  def selected_range_object(selected_range)
+  def selected_range_object(selected_range, user)
     case selected_range
     when "last_week"
       (1.week.ago.to_date..Date.current)
