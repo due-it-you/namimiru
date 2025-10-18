@@ -4,4 +4,32 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   connect() {
   }
+
+  toggleActive(e) {
+    const presentTagsList = Array.from(document.getElementById("present-tags-list").children)
+    const selectedTag = e.target
+
+    presentTagsList.forEach((tag) => {
+      const isClicked = tag === selectedTag
+      if (isClicked) {
+        // 選択されたタグの見た目の切り替え
+        selectedTag.active = !selectedTag.active;
+        selectedTag.classList.toggle("bg-orange-400")
+        selectedTag.classList.toggle("text-white")
+        selectedTag.classList.toggle("font-semibold")
+        selectedTag.classList.toggle("border")
+        selectedTag.classList.toggle("border-gray-400")
+      } else {
+        // 選択されたタグ以外の全てのタグを非アクティブ化
+        tag.active = false;
+        tag.classList.remove("bg-orange-400")
+        tag.classList.remove("text-white")
+        tag.classList.remove("font-semibold")
+        tag.classList.add("border")
+        tag.classList.add("border-gray-400")
+      }});
+  }
+
+  updateLists(e) {
+  }
 }
