@@ -22,6 +22,8 @@ export default class extends Controller {
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             min: -5,
