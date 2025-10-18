@@ -18,7 +18,8 @@ export default class extends Controller {
         datasets: [{
           label: '',
           data: data,
-          borderWidth: 1
+          borderWidth: 1,
+          spanGaps: true,
         }]
       },
       options: {
