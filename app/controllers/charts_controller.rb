@@ -37,7 +37,7 @@ class ChartsController < ApplicationController
             when "last_year"
               (1.year.ago.to_date..Date.current)
             when "all_time"
-              (@user.daily_records.order(created_at: :DSC).first.created_at.to_date..Date.current)
+              (user.daily_records.order(created_at: :ASC).first.created_at.to_date..Date.current)
           end
     # グラフ表示のためのラベルとデータ
     score_by_date = {}
