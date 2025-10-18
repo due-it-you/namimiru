@@ -39,10 +39,10 @@ export default class extends Controller {
 
     if (selectedTag.active) {
       // 選択されたタグに関する項目を表示
-
+      frame.src = `/action_items?mood_score=${e.target.value}&selected_tag_name=${selectedTagName}`
     } else {
       // 全ての項目を表示
-
+      frame.src = `/action_items?mood_score=${e.target.value}`
     }
   }
 }
