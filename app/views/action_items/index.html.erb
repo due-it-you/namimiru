@@ -28,7 +28,20 @@
       ＋ 追加
     </button>
   <% end %>
+
+  <!-- タグ検索 -->
+  <div class="overflow-x-auto my-2 py-2">
+    <div class="flex space-x-2">
+      <% @present_tags.each do |tag| %> 
+        <div class="shrink-0 border border-gray-400 text-sm rounded-lg px-2 py-1">
+          # <%= tag.name %>
+        </div>
+      <% end %>
+    </div> 
+  </div>
+
   <hr class="text-gray-200" />
+
 
   <!-- リスト -->
   <%= render "action_items/lists_frame" %>

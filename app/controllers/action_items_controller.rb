@@ -5,6 +5,8 @@ class ActionItemsController < ApplicationController
     @mood_score =  params[:mood_score] || latest_mood_score || 0
 
     action_items_with_tag = current_user.action_items.includes(:action_tag)
+    # 現在リストの中に存在する全てのタグの名前
+    @present_tags = action_items_with_tag.map(&:action_tag).uniq
     current_can_items, current_cannot_items = action_items_with_tag.capable(@mood_score),  action_items_with_tag.incapable(@mood_score)
     latest_can_items, latest_cannot_items = action_items_with_tag.capable(latest_mood_score), action_items_with_tag.incapable(latest_mood_score)
 
