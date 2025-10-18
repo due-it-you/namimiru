@@ -14,7 +14,7 @@ class ChartsController < ApplicationController
     score_and_time_pairs = @user.daily_records.pluck(:mood_score, :created_at)
     score_and_time_pairs.each do |score, created_at|
       date = created_at.to_date
-      score_by_date[date] = score 
+      score_by_date[date] = score
     end
 
     one_month = (1.months.ago.to_date..Date.current)
@@ -30,7 +30,7 @@ class ChartsController < ApplicationController
     score_and_time_pairs = user.daily_records.pluck(:mood_score, :created_at)
     score_and_time_pairs.each do |score, created_at|
       date = created_at.to_date
-      score_by_date[date] = score 
+      score_by_date[date] = score
     end
 
     labels = range.to_a
