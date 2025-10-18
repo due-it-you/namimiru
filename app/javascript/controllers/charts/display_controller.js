@@ -22,9 +22,15 @@ export default class extends Controller {
         }]
       },
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
-            beginAtZero: true
+            min: -5,
+            max: 5,
+            ticks: {
+              stepSize: 1
+            }
           }
         }
       }
