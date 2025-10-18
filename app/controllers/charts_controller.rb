@@ -25,8 +25,30 @@ class ChartsController < ApplicationController
   def data
     user = User.find(params[:user_id])
     daily_records = user.daily_records.with_selected_range(params[:range])
-    labels = daily_records.map { |record| record.created_at.strftime("%m/%d").to_json }
-    data = daily_records.map { |record| record.mood_score }
+    range = case params[:range]
+            when "last_week"
+              (1.week.ago.to_date..Date.current)
+            when "last_month"
+              (1.month.ago.to_date..Date.current)
+            when "last_3_months"
+              (3.months.ago.to_date..Date.current)
+            when "last_6_months"
+              (6.months.ago.to_date..Date.current)
+            when "last_year"
+              (1.year.ago.to_date..Date.current)
+            when "all_time"
+              (@user.daily_records.order(created_at: :DSC).first.created_at.to_date..Date.current)
+          end
+    # グラフ表示のためのラベルとデータ
+    score_by_date = {}
+    score_and_time_pairs = user.daily_records.pluck(:mood_score, :created_at)
+    score_and_time_pairs.each do |score, created_at|
+      date = created_at.to_date
+      score_by_date[date] = score 
+    end
+
+    labels = range.to_a
+    data = range.map { |date| score_by_date[date] }
     chart_data = { labels: labels, data: data }
     render json: chart_data
   end
