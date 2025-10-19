@@ -9,6 +9,13 @@ export default class extends Controller {
     const labels = JSON.parse(this.element.dataset.chartLabels)
     const data = JSON.parse(this.element.dataset.chartData)
 
+    // グラフの縦横幅
+    this.fixedHeight = 320
+    this.defaultWidth = 253
+
+    document.getElementById('myChart').style.width = this.defaultWidth+"px";
+    document.getElementById('myChart').style.height = this.fixedHeight+"px";
+
     const ctx = document.getElementById('myChart');
 
     this.chart = new Chart(ctx, {
@@ -23,7 +30,7 @@ export default class extends Controller {
         }]
       },
       options: {
-        responsive: true,
+        responsive: false,
         maintainAspectRatio: false,
         scales: {
           y: {
@@ -46,6 +53,30 @@ export default class extends Controller {
       const res = await fetch(url);
       const json = await res.json();
       const { labels, data } = json;
+
+      // 期間によってグラフのX軸をスクロール可能に変更
+      const aroundOneMonthDays = 40
+      const widthEachData = 4
+
+      // 直近３ヶ月以上の期間のグラフの時にスクロール表示
+      if (data.length >= aroundOneMonthDays) {
+        // 右端を起点にスクロール
+        const wrapper = document.querySelector('.overflow-x-scroll')
+        if (wrapper) {
+          requestAnimationFrame(() => {
+            wrapper.scrollLeft = wrapper.scrollWidth
+          })
+        }
+        // データ数に合わせた横幅の設定
+        const scrollableWidth = data.length*widthEachData
+        document.getElementById('myChart').style.width = scrollableWidth+"px";
+        this.chart.resize(scrollableWidth, this.fixedHeight)
+      } else {
+        // 固定された横幅の設定
+        this.chart.resize(this.defaultWidth, this.fixedHeight)
+      }
+
+      // グラフ内のデータの更新
       this.chart.data.labels = Array.from(labels);
       this.chart.data.datasets[0].data = Array.from(data);
       this.chart.update();
