@@ -18,7 +18,7 @@ export default class extends Controller {
 
     const ctx = document.getElementById('myChart');
 
-    const defaultChartLineColor = "rgba(103, 189, 183, 0.5)"
+    const defaultChartLineColor = "rgba(103, 189, 183, 0.7)"
 
     this.chart = new Chart(ctx, {
       type: 'line',
