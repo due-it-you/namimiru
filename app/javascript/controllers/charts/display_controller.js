@@ -18,6 +18,8 @@ export default class extends Controller {
 
     const ctx = document.getElementById('myChart');
 
+    const defaultChartLineColor = "#67BDB7"
+
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -27,6 +29,7 @@ export default class extends Controller {
           data: data,
           borderWidth: 1,
           spanGaps: true,
+          borderColor: defaultChartLineColor
         }]
       },
       options: {
