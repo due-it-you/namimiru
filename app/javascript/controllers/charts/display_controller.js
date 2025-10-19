@@ -9,8 +9,12 @@ export default class extends Controller {
     const labels = JSON.parse(this.element.dataset.chartLabels)
     const data = JSON.parse(this.element.dataset.chartData)
 
-    document.getElementById('myChart').style.width = "253px";
-    document.getElementById('myChart').style.height = "320px";
+    // グラフの縦横幅
+    this.fixedHeight = 320
+    this.defaultWidth = 253
+
+    document.getElementById('myChart').style.width = this.defaultWidth+"px";
+    document.getElementById('myChart').style.height = this.fixedHeight+"px";
 
     const ctx = document.getElementById('myChart');
 
@@ -53,8 +57,6 @@ export default class extends Controller {
       // 期間によってグラフのX軸をスクロール可能に変更
       const aroundOneMonthDays = 40
       const widthEachData = 4
-      const fixedHeight = 320
-      const defaultWidth = 253
 
       // 直近３ヶ月以上の期間のグラフの時にスクロール表示
       if (data.length >= aroundOneMonthDays) {
@@ -68,10 +70,10 @@ export default class extends Controller {
         // データ数に合わせた横幅の設定
         const scrollableWidth = data.length*widthEachData
         document.getElementById('myChart').style.width = scrollableWidth+"px";
-        this.chart.resize(scrollableWidth, fixedHeight)
+        this.chart.resize(scrollableWidth, this.fixedHeight)
       } else {
         // 固定された横幅の設定
-        this.chart.resize(defaultWidth, fixedHeight)
+        this.chart.resize(this.defaultWidth, this.fixedHeight)
       }
 
       // グラフ内のデータの更新
