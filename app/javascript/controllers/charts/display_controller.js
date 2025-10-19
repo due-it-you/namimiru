@@ -56,11 +56,21 @@ export default class extends Controller {
       const fixedHeight = 320
       const defaultWidth = 253
 
+      // 直近３ヶ月以上の期間のグラフの時にスクロール表示
       if (data.length >= aroundOneMonthDays) {
+        // 右端を起点にスクロール
+        const wrapper = document.querySelector('.overflow-x-scroll')
+        if (wrapper) {
+          requestAnimationFrame(() => {
+            wrapper.scrollLeft = wrapper.scrollWidth
+          })
+        }
+        // データ数に合わせた横幅の設定
         const scrollableWidth = data.length*widthEachData
         document.getElementById('myChart').style.width = scrollableWidth+"px";
         this.chart.resize(scrollableWidth, fixedHeight)
       } else {
+        // 固定された横幅の設定
         this.chart.resize(defaultWidth, fixedHeight)
       }
 
