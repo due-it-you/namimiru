@@ -6,7 +6,7 @@
   <div data-controller="daily-records--mood-score">
     <%= form_with url: daily_records_path, method: :post, scope: :daily_record do |f| %>
       <div>
-        <div class="flex items-center font-bold rounded-md border border-border-base p-4">
+        <div class="flex items-center font-bold rounded-md border border-gray-200 p-4">
           <!-- 顔アイコン -->
           <div id="current-mood-icon" class="text-3xl">
           </div>
@@ -21,7 +21,7 @@
       </div>
       <div class="my-4">
         <p class="font-semibold text-string-base">気付きメモ（任意）</p>
-        <%= f.text_area :memo, size: "70x5", class: "w-full p-4 mt-2 border border-border-base rounded-md" %>
+        <%= f.text_area :memo, size: "70x5", class: "w-full p-4 mt-2 border border-gray-300 rounded-md" %>
       </div>
       <div class="my-4 font-semibold text-string-base text-sm">
         <div>心がザワザワしている場合はチェックを入れてください。</div>
