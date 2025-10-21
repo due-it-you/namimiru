@@ -9,8 +9,9 @@
   <div class="font-semibold text-string-base text-sm my-4">
     自身のグラフ
   </div>
+  <hr class="text-gray-200">
   <%= link_to user_chart_path(@current_user.id) do %>
-    <div class="border border-border-base rounded-md p-4">
+    <div class="p-4">
       <% if @current_user.name.blank? %>
         ユーザーネーム未設定
       <% else %>
@@ -20,7 +21,8 @@
       <% end %>
     </div>
   <% end %>
-  <div class="font-semibold text-string-base text-sm my-4">
+  <hr class="text-gray-200">
+  <div class="font-semibold text-string-base text-sm mt-12 mb-4">
     連携状態のユーザーのグラフ
   </div>
   <% if @current_user.supportings.none? %>
@@ -29,9 +31,10 @@
     </div>
   <% end %>
   <!-- 連携状態にあり, 支援の対象になるユーザーの一覧 -->
+  <hr class="text-gray-200">
   <% @current_user.supportings.each do |supported_person| %>
     <%= link_to user_chart_path(supported_person.id) do %>
-      <div class="border border-border-base rounded-md p-4 my-4">
+      <div class="p-4">
         <% if supported_person.name.blank? %>
           ユーザーネーム未設定
         <% else %>
@@ -41,5 +44,6 @@
         <% end %>
       </div>
     <% end %>
+    <hr class="text-gray-200">
   <% end %>
 </div>
