@@ -11,7 +11,7 @@
   </div>
   <hr class="text-gray-200">
   <%= link_to user_chart_path(@current_user.id) do %>
-    <div class="p-4">
+    <div class="p-4 flex items-center justify-between">
       <% if @current_user.name.blank? %>
         ユーザーネーム未設定
       <% else %>
@@ -19,6 +19,7 @@
           <%= @current_user.name %>
         </div>
       <% end %>
+      <span class="text-gray-400 text-2xl">›</span>
     </div>
   <% end %>
   <hr class="text-gray-200">
@@ -34,7 +35,7 @@
   <hr class="text-gray-200">
   <% @current_user.supportings.each do |supported_person| %>
     <%= link_to user_chart_path(supported_person.id) do %>
-      <div class="p-4">
+      <div class="p-4 flex items-center justify-between">
         <% if supported_person.name.blank? %>
           ユーザーネーム未設定
         <% else %>
@@ -42,6 +43,7 @@
             <%= supported_person.name %>
           </div>
         <% end %>
+        <span class="text-gray-400 text-2xl">›</span>
       </div>
     <% end %>
     <hr class="text-gray-200">
