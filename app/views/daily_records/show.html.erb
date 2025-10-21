@@ -14,7 +14,7 @@
       <div class="font-semibold text-string-base text-md">
         気分
       </div> 
-      <div class="my-2 p-2 border border-border-base rounded-md">
+      <div class="my-2 p-3 border border-gray-300 rounded-md">
         <span class="font-semibold text-md">
           <%= mood_display(@daily_record.mood_score) %>
           （<%= @daily_record.mood_score %>）
@@ -26,7 +26,7 @@
       <div class="font-semibold text-string-base text-md my-2">
         気付きメモ
       </div> 
-      <div class="p-4 font-light border border-border-base rounded-md">
+      <div class="p-3 font-light border border-gray-300 rounded-md">
         <%= @daily_record.memo %>
       </div>
     </div>
@@ -35,7 +35,7 @@
       <div class="font-semibold text-string-base text-md my-2">
         心のザワザワ状況
       </div> 
-      <div class="p-4 font-light border border-border-base rounded-md">
+      <div class="p-3 font-light border border-gray-300 rounded-md">
         <%= @daily_record.is_uneasy ? "心のザワザワがあった ❤️💭" : "心のザワザワはなかった" %>
       </div>
     </div>
