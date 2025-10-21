@@ -5,3 +5,13 @@
   --color-border-base: #B6B6B6;
   --color-logo-color: #67BDB7;
 }
+
+@layer utilities {
+  input[type="range"]::-webkit-slider-thumb {
+    @apply bg-green-500 rounded-full;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    @apply bg-gray-300 rounded-full;
+  }
+}
