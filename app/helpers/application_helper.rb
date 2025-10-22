@@ -3,7 +3,7 @@ module ApplicationHelper
     {
       site: 'ナミミル | 双極性障害の方のための記録・自己理解アプリ',
       charset: 'utf-8',
-      description: 'ナミミルは、双極性障害の方が気分の波を記録し、日々の変化を可視化して自己理解を深めるためのWebアプリです。記録を通じて自分に合った生活リズムを見つけられます。',
+      description: '気分の波を記録し、双極性障害の波に合わせた自分だけの生活リズムを見つけられます。また、記録した波を家族や友人と共有することも出来ます。',
       keywords: '双極性障害,躁鬱,記録アプリ',
       canonical: request.original_url,
       separator: '|',
