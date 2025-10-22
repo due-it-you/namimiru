@@ -13,14 +13,14 @@ module ApplicationHelper
         description: :description,
         type: 'website',
         url: request.original_url,
-#        image: image_url('top_image.jpg'),# 配置するパスやファイル名によって変更する
+        image: image_url('namimiru_logo_ogp.png'),# 配置するパスやファイル名によって変更する
         local: 'ja-JP',
       },
-#      twitter: {
-#        card: 'summary_large_image', # Twitterで表示する場合は大きいカードに変更
-#        site: '@あなたのツイッターアカウント', # アプリの公式Twitterアカウントがあれば、アカウント名を記載
-#        image: image_url('top_image.jpg'),# 配置するパスやファイル名によって変更
-#      }
+      twitter: {
+        card: 'summary_large_image', # Twitterで表示する場合は大きいカードに変更
+        site: '@namimiru_app', # アプリの公式Twitterアカウントがあれば、アカウント名を記載
+        image: image_url('namimiru_logo_ogp.png'),# 配置するパスやファイル名によって変更
+      }
     }
   end
 end
