@@ -7,11 +7,46 @@
 }
 
 @layer utilities {
-  input[type="range"]::-webkit-slider-thumb {
-    @apply bg-green-500 rounded-full;
+  input[type="range"] {
+    /* デフォルトの appearance を削除（必須）*/
+    -webkit-appearance: none;
+    appearance: none;
+
+    touch-action: none;
+
+    border-radius: 10px;
+
+    /* outline を削除してデフォルトの focus のスタイルを無効に */
+    outline: none;
+
+    /* デフォルトの背景色を透明に（Track をベンダープレフィックスで設定する場合）*/
+    background: transparent;
+
+    /* カーソルを pointer に */
+    cursor: pointer;
+
+    /* 幅を設定（任意の値）*/
+    height: 20px;
+    width: 95%;
   }
 
-  input[type="range"]::-webkit-slider-runnable-track {
-    @apply bg-gray-300 rounded-full;
+  /* Thumb: Chrome, Safari, Opera, Edge Chromium */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 25px;
+    width: 25px;
+    border: 1px solid rgba(0, 0, 0, 0.20);
+    background-color: #ffffff;
+    border-radius: 50%;
+  }
+
+  /* Thumb: Firefox */
+  input[type="range"]::-moz-range-thumb {
+    border: 1px solid rgba(0, 0, 0, 0.20);
+    height: 25px;
+    width: 25px;
+    background-color: #ffffff;
+    border-radius: 50%;
   }
 }
