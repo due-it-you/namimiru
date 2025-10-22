@@ -13,22 +13,28 @@ export default class extends Controller {
 
     presentTagsList.forEach((tag) => {
       const isClicked = tag === selectedTag
+
+      const backgroundColor = "bg-gray-600"
+      const textColor = "text-white"
+      const fontWeight = "font-semibold"
+      const borderColor = "border-gray-400"
+
       if (isClicked) {
         // 選択されたタグの見た目の切り替え
         selectedTag.active = !selectedTag.active;
-        selectedTag.classList.toggle("bg-orange-400")
-        selectedTag.classList.toggle("text-white")
-        selectedTag.classList.toggle("font-semibold")
+        selectedTag.classList.toggle(backgroundColor)
+        selectedTag.classList.toggle(textColor)
+        selectedTag.classList.toggle(fontWeight)
         selectedTag.classList.toggle("border")
-        selectedTag.classList.toggle("border-gray-400")
+        selectedTag.classList.toggle(borderColor)
       } else {
         // 選択されたタグ以外の全てのタグを非アクティブ化
         tag.active = false;
-        tag.classList.remove("bg-orange-400")
-        tag.classList.remove("text-white")
-        tag.classList.remove("font-semibold")
+        tag.classList.remove(backgroundColor)
+        tag.classList.remove(textColor)
+        tag.classList.remove(fontWeight)
         tag.classList.add("border")
-        tag.classList.add("border-gray-400")
+        tag.classList.add(borderColor)
       }});
   }
 
