@@ -27,7 +27,6 @@ export default class extends Controller {
         datasets: [{
           label: '',
           data: data,
-          borderWidth: 1,
           spanGaps: true,
           borderColor: defaultChartLineColor,
           backgroundColor: defaultChartLineColor,

@@ -1,0 +1,42 @@
+<div data-controller="daily-records--mood-score range-slider--current-mood">
+  <%= form_with url: url, method: method, scope: :daily_record do |f| %>
+    <div class="my-8">
+      <hr class="text-gray-200">
+      <div class="flex items-center justify-center font-bold p-4">
+        <!-- 顔アイコン -->
+        <div id="current-mood-icon" class="text-2xl">
+        </div>
+        <!-- 気分の表記（絶不調・とてもつらい・普通など） -->
+        <div id="current-mood" class="ml-2 text-md text-gray-800">
+        </div>
+        <div>
+          （<span id="current-mood-score"></span>）
+        </div>
+      </div>
+      <hr class="text-gray-200">
+      <%= f.range_field :mood_score, in: -5..5, id: "mood-range", data: { action: "input->daily-records--mood-score#update input->range-slider--current-mood#updateColor" } ,class: "w-full mt-6" %>
+    </div>
+    <div class="my-4">
+      <p class="font-semibold text-string-base">気付きメモ（任意）</p>
+      <%= f.text_area :memo, size: "70x5", placeholder: "散歩後に寝込んでしまうことが増えてきたので、回数か距離を減らしてみようと思う...!" ,class: "w-full p-4 mt-2 border border-gray-300 rounded-md text-sm" %>
+    </div>
+    <div class="my-4 font-semibold text-string-base text-sm">
+      <div class="my-2">
+        <div>心がザワザワしている場合はチェックを入れてください。</div>
+      </div>
+
+      <label class="inline-flex items-center cursor-pointer mt-2">
+        <%= f.check_box :is_uneasy, class: "sr-only peer" %>
+        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4
+                    peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer
+                    dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
+                    peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px]
+                    after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full
+                    after:h-5 after:w-5 after:transition-all dark:border-gray-600
+                    peer-checked:bg-blue-600">
+        </div>
+      </label>
+    </div>
+    <%= f.submit "記録する", class: "my-8 bg-logo-color text-white font-semibold w-full shadow-md py-1 rounded-md" %>
+  <% end %>
+</div>
