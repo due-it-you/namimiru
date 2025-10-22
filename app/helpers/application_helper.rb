@@ -1,7 +1,7 @@
 module ApplicationHelper
   def default_meta_tags
     {
-      site: 'ナミミル',
+      site: 'ナミミル | 双極性障害の方のための記録・自己理解アプリ',
       charset: 'utf-8',
       description: 'ナミミルは、双極性障害の方が気分の波を記録し、日々の変化を可視化して自己理解を深めるためのWebアプリです。記録を通じて自分に合った生活リズムを見つけられます。',
       keywords: '双極性障害,躁鬱,記録アプリ',
