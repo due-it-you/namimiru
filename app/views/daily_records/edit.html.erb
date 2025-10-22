@@ -7,58 +7,6 @@
       記録の編集
     </div> 
   </div>
-  <div class="text-string-base">
-    <%= form_with url: user_daily_record_path(@daily_record.user.id, @daily_record.id), method: :put, scope: :daily_record do |f| %> 
-      <div data-controller="daily-records--mood-score">
-        <div class="flex items-center font-bold rounded-md border border-border-base p-4">
-          <!-- 顔アイコン -->
-          <div id="current-mood-icon" class="text-3xl">
-          </div>
-          <!-- 気分の表記（絶不調・とてもつらい・普通など） -->
-          <div id="current-mood" class="ml-2 text-md">
-          </div>
-          <div>
-            （<span id="current-mood-score"></span>）
-          </div>
-        </div>
-        <%= f.range_field :mood_score, in: -5..5, id: "mood-range", data: { action: "input->daily-records--mood-score#update" } , value: @daily_record.mood_score, class: "w-full my-4" %>
-      </div>
-      <!-- 気付きメモ -->
-      <div class="mt-4"> 
-        <div class="font-semibold text-string-base text-md my-2">
-          気付きメモ
-        </div> 
-        <%= f.text_area :memo, size: "70x5", value: @daily_record.memo, class: "w-full p-4 mt-2 border border-border-base rounded-md" %>
-      </div>
-      <!-- 心のざわざわ -->
-      <div class="my-4 text-sm font-semibold text-string-base">
-        <div>心がザワザワしている場合はチェックを入れてください。</div>
-
-        <label class="inline-flex items-center cursor-pointer mt-2">
-          <%= f.check_box :is_uneasy, class: "sr-only peer" %>
-          <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4
-                      peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer
-                      dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
-                      peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px]
-                      after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full
-                      after:h-5 after:w-5 after:transition-all dark:border-gray-600
-                      peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
-          </div>
-        </label>
-      </div>
-      <!-- 作成時間 -->
-      <div class="text-sm text-right my-2">
-        <%= @daily_record.created_at.strftime("%Y/%m/%d %H:%M") %>
-      </div>  
-      <div>
-        <%= f.submit "更新", class: "my-8 bg-logo-color text-white font-semibold w-full py-1 rounded-md" %>
-      </div>
-    <% end %>
-    <div class="w-1/8">
-      <%= link_to daily_record_path(@daily_record.id), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, id: "trash-icon" do %>
-        <%= image_tag "trash_icon.png" %>
-      <% end %>
-    </div>
-  </div>
-</div>
+  <!-- 記録編集フォーム -->
+  <%= render partial: "daily_records/shared/form", locals: { url: user_daily_record_path(@daily_record.user.id, @daily_record.id), method: :put } %>
 </div>

@@ -1,0 +1,23 @@
+<%= link_to user_daily_record_path(user.id, daily_record.id) do %>
+  <div id="latest-record" class="border border-gray-300 p-4 rounded-md text-string-base">
+    <div class="text-sm flex">
+      <%= daily_record.created_at.strftime("%Y/%m/%d %H:%M") %>
+      <% if daily_record.is_uneasy %>
+        <div class="ml-2">
+          ❤️💭
+        </div>
+      <% end %>
+    </div>  
+    <div class="my-2">
+      <span class="text-md">気分： </span>
+      <span class="font-semibold text-md">
+        <%= mood_display(daily_record.mood_score) %>
+        （<%= daily_record.mood_score %>）
+      </span>
+      <span class="text-gray-400 text-2xl">›</span>
+    </div>
+    <div class="font-light">
+      <%= daily_record.memo %>
+    </div>
+  </div>
+<% end %>

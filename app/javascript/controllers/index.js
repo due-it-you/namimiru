@@ -21,3 +21,6 @@ application.register("hello", HelloController)
 
 import PasswordFieldController from "./password_field_controller"
 application.register("password-field", PasswordFieldController)
+
+import RangeSlider__CurrentMoodController from "./range_slider/current_mood_controller"
+application.register("range-slider--current-mood", RangeSlider__CurrentMoodController)

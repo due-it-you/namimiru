@@ -1,0 +1,40 @@
+<%= form_with model: model do |f| %>
+  <!-- 項目名の入力 -->
+  <div>
+    <p><%= f.label :name, "項目名" %></p>
+    <%= f.text_field :name, placeholder: "自炊", class: "border border-gray-300 rounded-md w-full my-2 p-2", required: true %>
+  </div>
+
+  <!-- タグの入力 -->
+  <div class="mt-4">
+    <p><%= f.label :action_tag_id, "タグ (8文字以内)" %></p>
+    <div class="my-2">
+      <%= f.combobox :action_tag_id, current_user.action_tags.order(:name), name_when_new: "action_item[tag_name]", input: { placeholder: "料理" } %>
+    </div>
+  </div>
+
+  <!-- 気分の入力 -->
+  <div class="mt-8">
+    <p><%= f.label :enabled_from, "どの気分の段階から出来るようになりそうですか？" %></p>
+    <div class="mt-2">
+      <div class="flex items-center justify-center font-bold rounded-md p-4">
+        <!-- 顔アイコン -->
+        <div id="current-mood-icon" class="text-3xl">
+        </div>
+        <!-- 気分の表記（絶不調・とてもつらい・普通など） -->
+        <div id="current-mood" class="ml-2 text-md">
+        </div>
+        <div>
+          （<span id="current-mood-score"></span>）
+        </div>
+      </div>
+      <div class="flex items-center justify-center font-bold rounded-md">
+        から出来そう...!
+      </div>
+      <!-- スライダー -->
+      <%= f.range_field :enabled_from, min: "-5", max: "5", id: "mood-range", data: { action: "daily-records--mood-score#update input->range-slider--current-mood#updateColor" } , class: "w-full my-4" %>
+    </div>
+  </div>
+
+  <%= f.submit "作成", class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8" %>
+<% end %>
