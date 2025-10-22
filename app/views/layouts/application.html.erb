@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "ナミミル" %></title>
+    <title><%= content_for(:title) || "ナミミル | 双極性障害の方向けの記録・自己理解アプリ" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -30,6 +30,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- combobox default css -->
     <%= combobox_style_tag %>
+    <!-- meta-tags -->
+    <%= display_meta_tags(default_meta_tags) %>
   </head>
 
   <body>
