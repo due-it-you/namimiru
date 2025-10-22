@@ -1,48 +1,11 @@
 <div class="my-28 mx-12" data-controller="daily-records--mood-score">
   <p class="text-string-base font-semibold text-xl">項目の編集</p>
   <div class="mt-8 mb-4">
-    <%= form_with model: @action_item do |f| %>
-      <!-- 項目名の入力 -->
-      <div>
-        <p><%= f.label :name, "項目名" %></p>
-        <%= f.text_field :name, placeholder: "例) 自炊", class: "border border-border-base rounded-md w-full my-2 p-2", required: true %>
-      </div>
-
-      <!-- タグの入力 -->
-      <div class="mt-4">
-        <p><%= f.label :tag_name, "タグ (8文字以内)" %></p>
-        <div class="my-2">
-          <%= f.combobox :action_tag_id, current_user.action_tags.order(:name), name_when_new: "action_item[tag_name]", value: @action_item.action_tag.name ,input: { placeholder: "料理" } %>
-        </div>
-      </div>
-
-      <div class="mt-8">
-        <p><%= f.label :enabled_from, "どの気分の段階から出来るようになりそうですか？" %></p>
-        <!-- 気分 -->
-        <div class="mt-2">
-          <div class="flex items-center justify-center font-bold rounded-md p-4">
-            <!-- 顔アイコン -->
-            <div id="current-mood-icon" class="text-3xl">
-            </div>
-            <!-- 気分の表記（絶不調・とてもつらい・普通など） -->
-            <div id="current-mood" class="ml-2 text-md">
-            </div>
-            <div>
-              （<span id="current-mood-score"></span>）
-            </div>
-          </div>
-          <div class="flex items-center justify-center font-bold rounded-md">
-            から出来そう...!
-          </div>
-          <!-- スライダー -->
-          <%= f.range_field :enabled_from, min: "-5", max: "5", id: "mood-range", data: { action: "daily-records--mood-score#update" } , class: "w-full my-4" %>
-        </div>
-      </div>
-
-      <%= f.submit "更新", class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8" %>
-    <% end %>
+    <!-- 行動項目編集フォーム -->
+    <%= render partial: "action_items/shared/form", locals: { model: @action_item }%>
   </div>
   <div class="w-1/8">
+    <!-- 行動項目削除ボタン -->
     <%= link_to action_item_path(@action_item.id), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, id: "trash-icon" do %>
       <%= image_tag "trash_icon.png" %>
     <% end %>

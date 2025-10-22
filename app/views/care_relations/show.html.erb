@@ -7,7 +7,7 @@
     <div class="font-semibold text-string-base text-md">
       ユーザーネーム
     </div>
-    <div class="my-2 border border-border-base rounded-md">
+    <div class="my-2 border border-gray-300 rounded-md">
       <div class="px-4 py-2">
         <% if @user.name.nil? %>
           ユーザーネーム未設定 
@@ -20,7 +20,7 @@
     <div class="font-semibold text-string-base text-md">
       役割
     </div>
-    <div class="my-2 border border-border-base rounded-md">
+    <div class="my-2 border border-gray-300 rounded-md">
       <div class="px-4 py-2">
         <% if @care_relation.supported == current_user %>
           支援者
@@ -29,6 +29,7 @@
         <% end %>
       </div>
     </div>
+    <!-- 連携状態解除ボタン -->
     <div class="w-1/8 mt-8">
       <%= link_to care_relation_path(@care_relation.id), data: { turbo_method: :delete, turbo_confirm: "本当に連携を解除しますか？" }, id: "trash-icon" do %>
         <%= image_tag "trash_icon.png" %>

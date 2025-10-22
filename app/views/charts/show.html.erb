@@ -40,29 +40,10 @@
     </div>
     <!-- 直近一件の記録 -->
     <% if @latest_record.present? %>
-      <div id="latest-record" class="border border-border-base p-4 rounded-md text-string-base">
-        <div class="text-sm flex">
-          <%= @latest_record.created_at.strftime("%Y/%m/%d %H:%M") %>
-          <% if @latest_record.is_uneasy %>
-            <div class="ml-2">
-              ❤️💭
-            </div>
-          <% end %>
-        </div>  
-        <div class="my-2">
-          <span class="text-md">気分： </span>
-          <span class="font-semibold text-xl">
-            <%= mood_display(@latest_record.mood_score) %>
-            （<%= @latest_record.mood_score %>）
-          </span>
-        </div>
-        <div class="font-light">
-          <%= @latest_record.memo %>
-        </div>
-      </div>
+      <%= render partial: "daily_records/shared/link_card", locals: { user: current_user, daily_record: @latest_record } %>
     <% end %>
   </div>
   <div>
-    <%= link_to "さらに過去の記録を見る", user_daily_records_path(@user.id), class: "border border-border-base block w-full mt-4 py-2 text-center text-string-base font-semibold bg-white rounded-md" %>
+    <%= link_to "さらに過去の記録を見る", user_daily_records_path(@user.id), class: "border border-gray-300 shadow-md block w-full mt-4 py-2 text-center text-string-base font-semibold bg-white rounded-md" %>
   </div>
 </div>
