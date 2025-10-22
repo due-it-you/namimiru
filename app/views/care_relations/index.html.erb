@@ -7,7 +7,7 @@
       連携状態のユーザー
     </div>
     <div>
-      <%= link_to "招待＋", new_invitation_path, class: "text-white font-medium bg-logo-color rounded-md px-4 py-2"%>
+      <%= link_to "招待＋", new_invitation_path, class: "text-white font-medium bg-logo-color shadow-md rounded-md px-4 py-2"%>
     </div>
   </div>
   <div class="my-4">
@@ -15,7 +15,7 @@
       <hr class="border-gray-200">
       <div>
         <%= link_to care_relation_path(supporting_relation.id) do %>
-          <div class="p-4">
+          <div class="p-4 flex items-center justify-between">
             <% if supporting_relation.supported.name.blank? %>
               ユーザーネーム未設定
             <% else %>
@@ -23,6 +23,7 @@
                 <%= supporting_relation.supported.name %>
               </div>
             <% end %>
+            <span class="text-gray-400 text-2xl">›</span>
           </div>
         <% end %>
       </div>
