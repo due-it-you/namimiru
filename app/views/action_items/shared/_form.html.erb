@@ -32,7 +32,7 @@
         から出来そう...!
       </div>
       <!-- スライダー -->
-      <%= f.range_field :enabled_from, min: "-5", max: "5", id: "mood-range", data: { action: "daily-records--mood-score#update" } , class: "w-full my-4" %>
+      <%= f.range_field :enabled_from, min: "-5", max: "5", id: "mood-range", data: { action: "daily-records--mood-score#update input->range-slider--current-mood#updateColor" } , class: "w-full my-4" %>
     </div>
   </div>
 
