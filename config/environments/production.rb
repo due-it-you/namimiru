@@ -3,7 +3,7 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   # セッションIDクッキーの有効期限
-  config.session_store :cache_store, expire_after: 24.hours
+  config.session_store :cache_store, expire_after: 48.hours
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
