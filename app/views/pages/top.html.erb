@@ -4,7 +4,7 @@
 
       <!-- バッジ -->
       <div class="inline-flex items-center gap-2 rounded-full bg-[#E8F4F2] px-3 py-1 text-[11px] font-medium text-[#2c6f6b]">
-        いまの気分をやさしく残す
+        自分に合った生き方を見つける
       </div>
 
       <!-- ロゴ + タイトル -->
@@ -21,6 +21,10 @@
           <span class="hidden sm:inline">して、</span>
           <span class="block sm:inline">自己理解を<span class="text-[#1b827b]">深める</span></span>
         </h1>
+
+        <div class="mt-1 inline-flex items-center gap-2 rounded-full bg-[#F3FBFA] px-3 py-1 text-[11px] font-medium text-[#2c6f6b]">
+          対象：双極性障害のご本人 / 支援者（ご家族など）
+        </div>
 
         <p class="mx-4 text-center text-[15px] leading-relaxed text-[#5e6d6c]">
         気分と行動の両側面から、自分に合った生活リズムを見つける。
@@ -48,7 +52,10 @@
 
       <section id="features" class="mx-auto max-w-screen-sm px-0 py-6">
         <h2 class="text-xl font-bold">できること</h2>
-        <p class="mt-1 text-[15px] text-[#5e6d6c]">気分と行動を両面から記録し、「自分の波」を見える化。</p>
+        <div class="mt-1 text-[15px] text-[#5e6d6c]">
+          <p>気分と行動を両面から記録し、</p>
+          <p>あなたの「双極性障害の波」を見える化。</p>
+        </div>
 
         <div class="mt-5 grid gap-3">
           <!-- 気分マップ -->
@@ -60,7 +67,7 @@
               <div class="min-w-0">
                 <h3 class="font-semibold">気分マップ</h3>
                 <p class="mt-1 text-sm text-[#5e6d6c] text-pretty">
-                1日の気分を数値とメモで記録。波の傾向を知り、気づきを得られます。
+                1日の気分を数値とメモで記録。グラフで波の傾向を知り、気づきを得られます。
                 </p>
               </div>
             </div>
@@ -151,8 +158,8 @@
         <div class="mt-5 grid gap-2">
           <%= link_to "無料で始める", new_user_registration_path,
             class: "h-12 inline-flex items-center justify-center rounded-lg bg-[#67BDB7] px-4 font-semibold text-white active:scale-[0.99]" %>
-          <%= button_to "ゲストで30秒体験", users_guest_sign_in_path, method: :post,
-      class: "h-12 inline-flex items-center justify-center rounded-lg border border-[#B6B6B6] bg-white px-4 font-semibold active:scale-[0.99]" %>
+          <%= button_to "ゲストログインで体験", users_guest_sign_in_path, method: :post,
+            class: "h-12 inline-flex items-center justify-center rounded-lg border border-[#B6B6B6] bg-white px-4 font-semibold active:scale-[0.99]" %>
         </div>
       </section>
       <!-- フッターCTA -->
