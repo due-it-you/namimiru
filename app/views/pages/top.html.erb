@@ -26,9 +26,7 @@
           対象：双極性障害のご本人 / 支援者（ご家族など）
         </div>
 
-        <p class="mx-4 text-center text-[15px] leading-relaxed text-[#5e6d6c]">
-        気分と行動の両側面から、自分に合った生活リズムを見つける。
-        </p>
+        <p class="mx-4 text-center text-[15px] leading-relaxed text-[#5e6d6c]">気分と行動の両側面から、自分に合った生活リズムを見つける。</p>
       </div>
 
       <!-- CTA -->
@@ -56,6 +54,10 @@
           <p>気分と行動を両面から記録し、</p>
           <p>あなたの「<span class="font-semibold text-[#1b827b]">双極性障害の波</span>」から</p>
           <p>「<span class="font-semibold text-[#1b827b]">あなたに合った生活リズム</span>」を見つける手助けをします。</p>
+        </div>
+
+        <div class="w-2/3 mx-auto text-center">
+          <%= image_tag "bulb_moment.jpg" %>
         </div>
 
         <div class="mt-5 grid gap-3">
@@ -165,27 +167,33 @@
 
         </div>
 
-        <div class="mt-5 grid gap-2">
-          <%= link_to "無料で始める", new_user_registration_path,
-            class: "h-12 inline-flex items-center justify-center rounded-lg bg-[#67BDB7] px-4 font-semibold text-white active:scale-[0.99]" %>
-          <%= button_to "ゲストログインで体験", users_guest_sign_in_path, method: :post,
-            class: "h-12 inline-flex items-center justify-center rounded-lg border border-[#B6B6B6] bg-white px-4 font-semibold active:scale-[0.99]" %>
+        <div class="mt-16 grid gap-3">
+          <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false },
+            class: "flex items-center justify-center gap-2 border border-[#B6B6B6] w-full py-3 text-center text-[#484848] font-semibold bg-white rounded-md active:scale-[0.99]" do %>
+            <%= image_tag 'google_logo.png', alt: 'Googleのロゴ', size: '20x20' %>
+            <span>Googleアカウントで新規登録</span>
+          <% end %>
+
+          <%= link_to "メールアドレスで新規登録", new_user_registration_path,
+            class: "w-full py-3 text-center text-white font-semibold bg-[#67BDB7] rounded-md active:scale-[0.99]" %>
+
+          <%= button_to "ゲストログインで試してみる", users_guest_sign_in_path, method: :post,
+          class: "w-full py-3 text-center font-semibold text-[#484848] bg-white border border-[#B6B6B6] rounded-md active:scale-[0.99]" %>
         </div>
       </section>
+
       <!-- フッターCTA -->
       <section class="mx-auto max-w-screen-sm px-0 py-8">
         <div class="rounded-3xl bg-gradient-to-r from-[#67BDB7] to-[#49a8a0] p-6 text-white">
           <h2 class="text-xl font-extrabold text-balance">
             <p>気分と行動の“波”を</p>
             <p>理解して、</p>
-            <p>自分らしいリズムを。
+            <p>自分らしいリズムを。</p>
           </h2>
-          <p class="mt-1 text-white/90">ナミミルが、あなたの「整える力」を支えます。</p>
+          <p class="mt-1 text-white/90">このWebアプリを開発したキッカケはこちら</p>
           <div class="mt-4 grid gap-2">
-            <%= link_to "無料で始める", new_user_registration_path,
+            <%= link_to "開発した経緯", behind_the_scene_path,
               class: "h-12 inline-flex items-center justify-center rounded-lg bg-white px-4 font-semibold text-[#25625d] active:scale-[0.99]" %>
-            <%= button_to "ゲストで試す", users_guest_sign_in_path, method: :post,
-              class: "h-12 inline-flex items-center justify-center rounded-lg border border-white/70 bg-transparent px-4 font-semibold text-white active:scale-[0.99]" %>
           </div>
         </div>
       </section>
