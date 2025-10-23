@@ -1,33 +1,178 @@
-  <div class="my-28 mx-12">
-    <div class="flex justify-center">
-      <%= image_tag 'namimiru_logo_192x192.png', alt: 'ナミミルのロゴ', size: '36x36' %>
-      <div class="ml-2 text-3xl font-bold text-[#484848]">
-        ナミミル
+<div class="mx-4">
+  <section class="mx-auto max-w-screen-sm px-4 pt-8 pb-6">
+    <div class="space-y-6">
+
+      <!-- バッジ -->
+      <div class="inline-flex items-center gap-2 rounded-full bg-[#E8F4F2] px-3 py-1 text-[11px] font-medium text-[#2c6f6b]">
+        いまの気分をやさしく残す
       </div>
-    </div>
-    <div class="text-[#484848] text-center mt-2">
-      言いにくい“いまの気分”を共有する
-    </div>
-    <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } ,class:  "flex justify-center border border-[#B6B6B6] block w-full mt-8 py-2 text-center text-[#484848] font-semibold bg-white rounded-md" do %>
-      <%= image_tag 'google_logo.png', alt: 'Googleのロゴ', size: '24x24' %>
-      <div class="ml-2">
-        Googleアカウントで新規登録
+
+      <!-- ロゴ + タイトル -->
+      <div class="flex flex-col items-center gap-2">
+        <div class="flex items-center justify-center">
+          <%= image_tag 'namimiru_logo_192x192.png', alt: 'ナミミルのロゴ', size: '36x36' %>
+          <div class="ml-2 text-3xl font-bold">ナミミル</div>
+        </div>
+
+        <!-- 見出し：モバイルで改行、横幅では横並び -->
+        <h1 class="mx-4 text-balance text-2xl sm:text-3xl font-extrabold leading-snug tracking-tight text-center">
+          <span class="block sm:inline">気分の波を</span>
+          <span class="sm:ml-1 text-[#1b827b]">記録</span>
+          <span class="hidden sm:inline">して、</span>
+          <span class="block sm:inline">自己理解を<span class="text-[#1b827b]">深める</span></span>
+        </h1>
+
+        <p class="mx-4 text-center text-[15px] leading-relaxed text-[#5e6d6c]">
+        気分と行動の両側面から、自分に合った生活リズムを見つける。
+        </p>
       </div>
-    <% end %>
-    <%= link_to "メールアドレスで新規登録", new_user_registration_path, class: "block w-full mt-4 py-2 text-center text-white font-semibold bg-[#67BDB7] rounded-md" %>
-    <%= button_to "ゲストログインで試してみる", users_guest_sign_in_path, method: :post, class: "border border-[#B6B6B6] block w-full mt-4 py-2 text-center text-[#484848] font-semibold bg-white rounded-md" %>
-    <div class="flex items-center my-8">
-      <div class="flex-grow border-t border-gray-400"></div>
-      <span class="text-xs mx-4 text-gray-700">すでにアカウントを持っている場合</span>
-      <div class="flex-grow border-t border-gray-400"></div>
-    </div>
-    <div>
-      <%= link_to "メールアドレスでログイン", new_user_session_path, class: "block w-full mt-4 py-2 text-center text-white font-semibold bg-[#67BDB7] rounded-md" %>
-    </div>
-    <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false } ,class:  "flex justify-center border border-[#B6B6B6] block w-full mt-8 py-2 text-center text-[#484848] font-semibold bg-white rounded-md" do %>
-      <%= image_tag 'google_logo.png', alt: 'Googleのロゴ', size: '24x24' %>
-      <div class="ml-2">
-        Googleアカウントでログイン
+
+      <!-- CTA -->
+      <div class="grid gap-3">
+        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false },
+          class: "flex items-center justify-center gap-2 border border-[#B6B6B6] w-full py-3 text-center text-[#484848] font-semibold bg-white rounded-md active:scale-[0.99]" do %>
+          <%= image_tag 'google_logo.png', alt: 'Googleのロゴ', size: '20x20' %>
+          <span>Googleアカウントで新規登録</span>
+        <% end %>
+
+        <%= link_to "メールアドレスで新規登録", new_user_registration_path,
+          class: "w-full py-3 text-center text-white font-semibold bg-[#67BDB7] rounded-md active:scale-[0.99]" %>
+
+        <%= button_to "ゲストログインで試してみる", users_guest_sign_in_path, method: :post,
+          class: "w-full py-3 text-center font-semibold text-[#484848] bg-white border border-[#B6B6B6] rounded-md active:scale-[0.99]" %>
       </div>
-    <% end %>
-  </div>
+
+      <p class="text-center text-[11px] text-[#6b7a79]">
+      無料で始められます。記録はいつでも削除できます。
+      </p>
+
+      <section id="features" class="mx-auto max-w-screen-sm px-0 py-6">
+        <h2 class="text-xl font-bold">できること</h2>
+        <p class="mt-1 text-[15px] text-[#5e6d6c]">気分と行動を両面から記録し、「自分の波」を見える化。</p>
+
+        <div class="mt-5 grid gap-3">
+          <!-- 気分マップ -->
+          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4">
+            <div class="flex items-start gap-3">
+              <div class="h-9 w-9 rounded-full bg-[#E8F4F2] flex items-center justify-center shrink-0">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-[#1b827b]" fill="currentColor"><path d="M12 6a6 6 0 100 12 6 6 0 000-12zm1 6a1 1 0 01-1 1H8.5a1 1 0 110-2H12a1 1 0 011 1z"/></svg>
+              </div>
+              <div class="min-w-0">
+                <h3 class="font-semibold">気分マップ</h3>
+                <p class="mt-1 text-sm text-[#5e6d6c] text-pretty">
+                1日の気分を数値とメモで記録。波の傾向を知り、気づきを得られます。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 行動マップ -->
+          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4">
+            <div class="flex items-start gap-3">
+              <div class="h-9 w-9 rounded-full bg-[#E8F4F2] flex items-center justify-center shrink-0">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-[#1b827b]" fill="currentColor"><path d="M5 3h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2zm2 4v10h10V7H7z"/></svg>
+              </div>
+              <div class="min-w-0">
+                <h3 class="font-semibold">行動マップ</h3>
+                <div class="mt-1 space-y-1.5 text-sm text-[#5e6d6c] leading-relaxed">
+                  <p>
+                  <span class="block sm:inline">気分によって</span>
+                  <span class="block sm:inline sm:ml-1">『出来そうなこと / 出来なさそうなこと』を記録。</span>
+                  </p>
+                  <p>
+                  <span class="block sm:inline">今の気分に対して</span>
+                  <span class="block sm:inline sm:ml-1">『これから出来ること / これから出来なくなること』を知ることができます。</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 生活リズム -->
+          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4">
+            <div class="flex items-start gap-3">
+              <div class="h-9 w-9 rounded-full bg-[#E8F4F2] flex items-center justify-center shrink-0">
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-[#1b827b]" fill="currentColor"><path d="M3 3h18v2H3V3zm0 8h18v2H3v-2zm0 8h18v2H3v-2z"/></svg>
+              </div>
+              <div class="min-w-0">
+                <h3 class="font-semibold">無理のない生活リズムを発見</h3>
+                <p class="mt-1 text-sm text-[#5e6d6c] text-pretty">
+                気分と行動の両側面から、自分に合ったペースを見つけられます。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 使い方 -->
+      <section id="how" class="mx-auto max-w-screen-sm px-0 py-6">
+        <h2 class="text-xl font-bold">使い方</h2>
+        <p class="mt-1 text-[15px] text-[#5e6d6c]">3ステップで自己理解を深める。</p>
+
+        <div class="mt-4 grid gap-3">
+
+          <!-- Step 1 -->
+          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4 flex items-start gap-3">
+            <div class="flex-none h-8 w-8 aspect-square rounded-full bg-[#67BDB7] text-white flex items-center justify-center text-sm font-bold leading-none">1</div>
+            <div class="min-w-0">
+              <h3 class="font-semibold">気分・行動を記録</h3>
+              <div class="mt-1 text-sm text-[#5e6d6c]">
+                <p class="text-pretty">毎日の気分と行動を記録。</p>
+                <p class="text-pretty">シンプルなUIで続けやすい。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4 flex items-start gap-3">
+            <div class="flex-none h-8 w-8 aspect-square rounded-full bg-[#67BDB7] text-white flex items-center justify-center text-sm font-bold leading-none">2</div>
+            <div class="min-w-0">
+              <h3 class="font-semibold">現状を知る</h3>
+              <div class="mt-1 text-sm text-[#5e6d6c]">
+                <p class="text-pretty">現状どんな気分の波で、どんな時に何が出来て何が出来ないかを知ります。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4 flex items-start gap-3">
+            <div class="flex-none h-8 w-8 aspect-square rounded-full bg-[#67BDB7] text-white flex items-center justify-center text-sm font-bold leading-none">3</div>
+            <div class="min-w-0">
+              <h3 class="font-semibold">合った生活リズムを発見</h3>
+              <div class="mt-1 text-sm text-[#5e6d6c]">
+                <p class="text-pretty">気分マップと行動マップから、生きやすい生活リズムを見つける。</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-5 grid gap-2">
+          <%= link_to "無料で始める", new_user_registration_path,
+            class: "h-12 inline-flex items-center justify-center rounded-lg bg-[#67BDB7] px-4 font-semibold text-white active:scale-[0.99]" %>
+          <%= button_to "ゲストで30秒体験", users_guest_sign_in_path, method: :post,
+      class: "h-12 inline-flex items-center justify-center rounded-lg border border-[#B6B6B6] bg-white px-4 font-semibold active:scale-[0.99]" %>
+        </div>
+      </section>
+      <!-- フッターCTA -->
+      <section class="mx-auto max-w-screen-sm px-0 py-8">
+        <div class="rounded-3xl bg-gradient-to-r from-[#67BDB7] to-[#49a8a0] p-6 text-white">
+          <h2 class="text-xl font-extrabold text-balance">
+            <p>気分と行動の“波”を</p>
+            <p>理解して、</p>
+            <p>自分らしいリズムを。
+          </h2>
+          <p class="mt-1 text-white/90">ナミミルが、あなたの「整える力」を支えます。</p>
+          <div class="mt-4 grid gap-2">
+            <%= link_to "無料で始める", new_user_registration_path,
+              class: "h-12 inline-flex items-center justify-center rounded-lg bg-white px-4 font-semibold text-[#25625d] active:scale-[0.99]" %>
+            <%= button_to "ゲストで試す", users_guest_sign_in_path, method: :post,
+              class: "h-12 inline-flex items-center justify-center rounded-lg border border-white/70 bg-transparent px-4 font-semibold text-white active:scale-[0.99]" %>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+</div>
