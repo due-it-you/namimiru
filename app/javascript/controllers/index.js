@@ -3,12 +3,9 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
-import { Application } from '@hotwired/stimulus'
-
 // stimulus-components
 import Dialog from '@stimulus-components/dialog'
 
-const application = Application.start()
 application.register('dialog', Dialog)
 
 import ActionItems__ListsController from "./action_items/lists_controller"
