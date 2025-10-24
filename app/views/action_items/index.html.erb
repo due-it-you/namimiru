@@ -6,10 +6,43 @@
   <div class="mt-8">
     <div class="text-string-base text-md font-semibold mt-2 flex justify-center items-center">
       気分 
-      <!-- 使い方アイコン -->
-      <span class="aspect-square h-5 ml-2">
-        <%= image_tag "question_icon.svg" %>
-      </span>
+      <div data-controller="dialog" data-action="click->dialog#backdropClose">
+        <!-- モーダル本体 -->
+        <dialog
+            data-dialog-target="dialog"
+            data-action="click->dialog#backdropClose"
+            class="w-[92vw] mt-24 ml-4 max-w-md rounded-2xl bg-white p-5 shadow-2xl"
+            >
+            <!-- ヘッダー -->
+            <div class="flex items-start justify-between gap-4">
+              <h3 id="mood-help-title" class="text-lg font-bold text-[#25625d]">気分スライダーの使い方</h3>
+              <button
+                  type="button"
+                  data-action="dialog#close"
+                  class="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-[#F3FBFA] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#67BDB7]"
+                  aria-label="閉じる"
+                  >
+                  <!-- × アイコン -->
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="#25625d" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- ボディ -->
+            <div class="mt-3 space-y-3 text-[15px] leading-relaxed text-[#5e6d6c]">
+              <p><span class="font-semibold text-[#1b827b]">スライダー</span>を動かして、いまの気分（-5〜+5）を選びます。</p>
+              <p>数値に応じて<span class="font-semibold text-[#1b827b]">顔アイコン・ラベル</span>が更新されます。</p>
+              <p>この値を基準に、<span class="font-semibold text-[#1b827b]">出来そう/出来なさそう</span>な行動の閾値を見つけていきます。</p>
+            </div>
+        </dialog>
+        <!-- モーダルを開くアイコン -->
+        <button type="button" data-action="dialog#open"> 
+          <div class="aspect-square h-5 ml-2">
+            <%= image_tag "question_icon.svg" %>
+          </div>
+        </button>
+      </div>
     </div>
     <div class="flex items-center justify-center font-bold rounded-md p-4">
       <!-- 顔アイコン -->
