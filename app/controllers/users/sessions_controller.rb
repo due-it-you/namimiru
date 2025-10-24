@@ -8,6 +8,7 @@ class Users::SessionsController < Devise::SessionsController
     user = User.find_or_create_by(email: "guest@example.com") do |user|
       user.name = "ゲストユーザー"
       user.password = SecureRandom.urlsafe_base64
+      user.is_guest = true
     end
     sign_in user
     flash[:success] = "ゲストユーザーとしてログインしました。"
