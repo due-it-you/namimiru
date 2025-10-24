@@ -3,7 +3,7 @@ class ActionTag < ApplicationRecord
 
   belongs_to :user
 
-  validates :name, presence: true, length: { maximum: 8 }, uniqueness: true
+  validates :name, presence: true, length: { maximum: 8 }
 
   def to_combobox_display
     name
