@@ -3,10 +3,6 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
-// stimulus-components
-import Dialog from '@stimulus-components/dialog'
-
-application.register('dialog', Dialog)
 
 import ActionItems__ListsController from "./action_items/lists_controller"
 application.register("action-items--lists", ActionItems__ListsController)
@@ -28,3 +24,6 @@ application.register("password-field", PasswordFieldController)
 
 import RangeSlider__CurrentMoodController from "./range_slider/current_mood_controller"
 application.register("range-slider--current-mood", RangeSlider__CurrentMoodController)
+
+import StepDialogController from "./step_dialog_controller"
+application.register("step-dialog", StepDialogController)
