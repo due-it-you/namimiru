@@ -68,6 +68,9 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+          
+      - name: Install JS deps (include optional)
+        run: npm ci --include=optional
 
       - name: Run tests
         env:

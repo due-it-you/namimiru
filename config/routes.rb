@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get "/terms_of_service" => "pages#terms_of_service"
   get "/privacy_policy" => "pages#privacy_policy"
+  get "/behind_the_scene" => "pages#behind_the_scene"
 
   devise_for :users, controllers: {
     registrations: "users/registrations",
