@@ -15,7 +15,7 @@
                    m-0 w-[92vw] max-w-md rounded-2xl bg-white p-5 shadow-2xl
                    max-h-[80vh] overflow-y-auto overscroll-contain">
                    <!-- ヘッダー -->
-                   <div class="flex items-start justify-between gap-4">
+                   <div class="flex justify-end items-start">
                      <button
                          type="button"
                          data-action="dialog#close"
@@ -28,7 +28,6 @@
                        </svg>
                      </button>
                    </div>
-
                    <!-- ボディ -->
                    <div data-controller="step-dialog">
                      <!-- １枚目 -->
@@ -102,6 +101,11 @@
                      <div id="step3" style="display: none;" data-step-dialog-target="step">
                        <div class="mt-3 space-y-3 text-[15px] leading-relaxed text-[#5e6d6c]">
                          <h3 id="mood-help-title" class="text-lg font-bold text-[#25625d]">変化を確認</h3>
+                         <div class="flex justify-center">
+                           <div class="w-full">
+                             <%= image_tag "step3.png" %>
+                           </div>
+                         </div>
                          <p>
                          行動マップでは、現在の気分を基準にして
                          <span class="font-semibold text-[#1b827b]">「これから出来るようになること」</span> と
@@ -109,9 +113,11 @@
                          を確認できます。
                          </p>
                          <p>
-                         ・<span class="font-semibold text-[#1b827b]">これから出来るようになること</span> → 
+                         ・<span class="font-semibold text-[#1b827b]">これから出来るようになること</span><br>
+                         → 
                          <span class="font-semibold text-[#1b827b]">緑色の枠線</span><br>
-                         ・<span class="font-semibold text-[#1b827b]">これから出来なくなること</span> → 
+                         ・<span class="font-semibold text-[#1b827b]">これから出来なくなること</span><br>
+                         → 
                          <span class="font-semibold text-[#d45a5a]">赤色の枠線</span>
                          </p>
                        </div>
