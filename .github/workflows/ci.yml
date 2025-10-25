@@ -70,7 +70,9 @@ jobs:
           bundler-cache: true
           
       - name: Install JS deps (include optional)
-        run: npm ci --include=optional
+        run: |
+          npm ci --include=optional
+          npm install @parcel/watcher
 
       - name: Run tests
         env:
