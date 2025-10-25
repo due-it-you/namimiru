@@ -70,9 +70,7 @@ jobs:
           bundler-cache: true
           
       - name: Install JS deps (include optional)
-        run: |
-          npm ci --include=optional
-          npm rebuild lightningcss --force
+        run: npm ci --include=optional
 
       - name: Run tests
         env:
