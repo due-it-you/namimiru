@@ -72,8 +72,7 @@ jobs:
       - name: Install JS deps (include optional)
         run: |
           npm ci --include=optional
-          npm install @parcel/watcher
-          npm install lightningcss-linux-x64-gnu --no-save
+          npm rebuild lightningcss --force
 
       - name: Run tests
         env:
