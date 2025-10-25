@@ -1,7 +1,7 @@
 {
   "name": "app",
   "private": true,
-  "devdependencies": {
+  "devDependencies": {
     "esbuild": "^0.25.9"
   },
   "scripts": {
