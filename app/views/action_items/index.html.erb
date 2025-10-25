@@ -4,7 +4,148 @@
   </div>
   <!-- 気分 -->
   <div class="mt-8">
-    <p class="text-string-base text-md font-semibold mt-2 flex justify-center">気分</p>
+    <div class="text-string-base text-md font-semibold mt-2 flex justify-center items-center">
+      気分 
+      <div data-controller="dialog" data-action="click->dialog#backdropClose">
+        <!-- モーダル本体 -->
+        <dialog
+            data-dialog-target="dialog"
+            data-action="click->dialog#backdropClose"
+            class="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+                   m-0 w-[92vw] max-w-md rounded-2xl bg-white p-5 shadow-2xl
+                   max-h-[80vh] overflow-y-auto overscroll-contain">
+                   <!-- ヘッダー -->
+                   <div class="flex justify-end items-start">
+                     <button
+                         type="button"
+                         data-action="dialog#close"
+                         class="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-[#F3FBFA] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#67BDB7]"
+                         aria-label="閉じる"
+                         >
+                         <!-- × アイコン -->
+                       <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="#25625d" stroke-width="2">
+                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/>
+                       </svg>
+                     </button>
+                   </div>
+                   <!-- ボディ -->
+                   <div data-controller="step-dialog">
+                     <!-- １枚目 -->
+                     <div id="step1" style="display: block;" data-step-dialog-target="step">
+                       <div class="mt-3 space-y-3 text-[15px] leading-relaxed text-[#5e6d6c]">
+                         <h3 id="mood-help-title" class="text-lg font-bold text-[#25625d]">行動マップとは</h3>
+                         <div class="flex justify-center">
+                           <div class="w-3/4">
+                             <%= image_tag "step1.png" %>
+                           </div>
+                         </div>
+                         <p>
+                         行動マップは、
+                         <span class="font-semibold text-[#1b827b]">『自分が無理せずできる範囲』</span>
+                         を見つけていくためのツールです。
+                         </p>
+                         <p>
+                         「これができないなら、
+                         <span class="font-semibold text-[#1b827b]">こういう行動ならできそう</span>
+                         」という考えを繰り返していくことで、
+                         自分の<span class="font-semibold text-[#1b827b]">波に合った無理しない生き方</span>を
+                         少しずつ探すことができます。
+                         </p>
+                       </div>
+                       <div class="mt-6 flex justify-end">
+                         <button
+                             data-action="step-dialog#nextStep"
+                             class="rounded-lg bg-[#67BDB7] px-5 py-2 text-white font-semibold shadow-sm hover:opacity-95 active:scale-[0.98] transition-all"
+                             >
+                             次へ →
+                         </button>
+                       </div>
+                     </div>
+
+                     <!-- ２枚目 -->
+                     <div id="step2" style="display: none;" data-step-dialog-target="step">
+                       <h3 id="mood-help-title" class="text-lg font-bold text-[#25625d]">項目を作成する</h3>
+                       <div class="mt-3 space-y-3 text-[15px] leading-relaxed text-[#5e6d6c]">
+                         <div class="flex justify-center">
+                           <div class="w-full">
+                             <%= image_tag "step2.png" %>
+                           </div>
+                         </div>
+                         <p>
+                         追加ボタンから項目を追加できます。日常の行動（例：
+                         <span class="font-semibold text-[#1b827b]">自炊</span>、
+                         <span class="font-semibold text-[#1b827b]">外食</span> など）を作成しましょう。
+                         </p>
+                         <p>
+                         それらを <span class="font-semibold text-[#1b827b]">「料理」タグ</span> でまとめて管理すると、後から
+                         <span class="font-semibold text-[#1b827b]">便利に確認</span>できます。
+                         </p>
+                       </div>
+                       <div class="mt-6 flex justify-between">
+                         <button
+                             data-action="step-dialog#prevStep"
+                             class="rounded-lg border border-[#67BDB7] px-5 py-2 text-[#25625d] font-semibold bg-white hover:bg-[#F3FBFA] active:scale-[0.98] transition-all"
+                             >
+                             ← 戻る
+                         </button>
+                           <button
+                               data-action="step-dialog#nextStep"
+                               class="rounded-lg bg-[#67BDB7] px-5 py-2 text-white font-semibold shadow-sm hover:opacity-95 active:scale-[0.98] transition-all"
+                               >
+                               次へ →
+                           </button>
+                       </div>
+                     </div>
+
+                     <!-- ３枚目 -->
+                     <div id="step3" style="display: none;" data-step-dialog-target="step">
+                       <div class="mt-3 space-y-3 text-[15px] leading-relaxed text-[#5e6d6c]">
+                         <h3 id="mood-help-title" class="text-lg font-bold text-[#25625d]">変化を確認</h3>
+                         <div class="flex justify-center">
+                           <div class="w-full">
+                             <%= image_tag "step3.png" %>
+                           </div>
+                         </div>
+                         <p>
+                         行動マップでは、現在の気分を基準にして
+                         <span class="font-semibold text-[#1b827b]">「これから出来るようになること」</span> と
+                         <span class="font-semibold text-[#1b827b]">「これから出来なくなること」</span>
+                         を確認できます。
+                         </p>
+                         <p>
+                         ・<span class="font-semibold text-[#1b827b]">これから出来るようになること</span><br>
+                         → 
+                         <span class="font-semibold text-[#1b827b]">緑色の枠線</span><br>
+                         ・<span class="font-semibold text-[#1b827b]">これから出来なくなること</span><br>
+                         → 
+                         <span class="font-semibold text-[#d45a5a]">赤色の枠線</span>
+                         </p>
+                       </div>
+                       <div class="mt-6 flex justify-between">
+                         <button
+                             data-action="step-dialog#prevStep"
+                             class="rounded-lg border border-[#67BDB7] px-5 py-2 text-[#25625d] font-semibold bg-white hover:bg-[#F3FBFA] active:scale-[0.98] transition-all"
+                             >
+                             ← 戻る
+                         </button>
+                           <button
+                               data-action="dialog#close"
+                               class="rounded-lg bg-[#67BDB7] px-5 py-2 text-white font-semibold shadow-sm hover:opacity-95 active:scale-[0.98] transition-all"
+                               >
+                               はじめる
+                           </button>
+                       </div>
+                     </div>
+                   </div>
+        </dialog>
+        <!-- モーダルを開くアイコン -->
+        <button type="button" data-action="dialog#open"> 
+          <div class="aspect-square pt-0.5 h-5 ml-2">
+            <%= image_tag "question_icon.svg" %>
+          </div>
+        </button>
+      </div>
+    </div>
     <div class="flex items-center justify-center font-bold rounded-md p-4">
       <!-- 顔アイコン -->
       <div id="current-mood-icon" class="text-3xl">
