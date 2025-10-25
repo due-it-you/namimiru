@@ -1,7 +1,7 @@
 {
   "name": "app",
   "private": true,
-  "devDependencies": {
+  "devdependencies": {
     "esbuild": "^0.25.9"
   },
   "scripts": {
@@ -16,5 +16,8 @@
     "@tailwindcss/cli": "^4.1.13",
     "chart.js": "^4.5.0",
     "tailwindcss": "^4.1.13"
+  },
+  "optionalDependencies": {
+    "lightningcss-linux-x64-gnu": "1.21.5"
   }
 }
