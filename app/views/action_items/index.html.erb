@@ -30,19 +30,61 @@
             </div>
 
             <!-- ボディ -->
-            <div class="mt-3 space-y-3 text-[15px] leading-relaxed text-[#5e6d6c]">
-              <p>
-              行動マップは、
-              <span class="font-semibold text-[#1b827b]">『自分が無理せずできる範囲』</span>
-              を見つけていくためのツールです。
-              </p>
-              <p>
-              「これができないなら、
-              <span class="font-semibold text-[#1b827b]">こういう行動ならできそう</span>
-              」という考えを繰り返していくことで、
-              自分の<span class="font-semibold text-[#1b827b]">波に合った無理しない生き方</span>を
-              少しずつ探すことができます。
-              </p>
+            <div data-controller="step-dialog">
+              <!-- １枚目 -->
+              <div id="step1" style="display: block;" data-step-dialog-target="step">
+                <div class="mt-3 space-y-3 text-[15px] leading-relaxed text-[#5e6d6c]">
+                  <p>
+                  行動マップは、
+                  <span class="font-semibold text-[#1b827b]">『自分が無理せずできる範囲』</span>
+                  を見つけていくためのツールです。
+                  </p>
+                  <p>
+                  「これができないなら、
+                  <span class="font-semibold text-[#1b827b]">こういう行動ならできそう</span>
+                  」という考えを繰り返していくことで、
+                  自分の<span class="font-semibold text-[#1b827b]">波に合った無理しない生き方</span>を
+                  少しずつ探すことができます。
+                  </p>
+                </div>
+                <button data-action="step-dialog#nextStep">次へ</button>
+              </div>
+
+              <!-- ２枚目 -->
+              <div id="step2"  style="display: none;" data-step-dialog-target="step">
+                <div class="mt-3 space-y-3 text-[15px] leading-relaxed text-[#5e6d6c]">
+                  <p>
+                  追加ボタンから項目を追加できます。日常の行動（例：
+                  <span class="font-semibold text-[#1b827b]">自炊</span>、
+                  <span class="font-semibold text-[#1b827b]">外食</span> など）を作成しましょう。
+                  </p>
+                  <p>
+                  それらを <span class="font-semibold text-[#1b827b]">「料理」タグ</span> でまとめて管理すると、後から
+                  <span class="font-semibold text-[#1b827b]">便利に確認</span>できます。
+                  </p>
+                </div>
+                <button data-action="step-dialog#prevStep">戻る</button>
+                <button data-action="step-dialog#nextStep">次へ</button>
+              </div>
+
+              <!-- ３枚目 -->
+              <div id="step2"  style="display: none;" data-step-dialog-target="step">
+                <div class="mt-3 space-y-3 text-[15px] leading-relaxed text-[#5e6d6c]">
+                  <p>
+                  行動マップでは、現在の気分を基準にして
+                  <span class="font-semibold text-[#1b827b]">「これから出来るようになること」</span> と
+                  <span class="font-semibold text-[#1b827b]">「これから出来なくなること」</span>
+                  を確認できます。
+                  </p>
+                  <p>
+                  ・<span class="font-semibold text-[#1b827b]">これから出来るようになること</span> → 
+                  <span class="font-semibold text-[#1b827b]">緑色の枠線</span><br>
+                  ・<span class="font-semibold text-[#1b827b]">これから出来なくなること</span> → 
+                  <span class="font-semibold text-[#d45a5a]">赤色の枠線</span>
+                  </p>
+                </div>
+                <button data-action="step-dialog#prevStep">戻る</button>
+              </div>
             </div>
         </dialog>
         <!-- モーダルを開くアイコン -->
