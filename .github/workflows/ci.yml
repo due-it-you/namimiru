@@ -73,6 +73,7 @@ jobs:
         run: |
           npm ci --include=optional
           npm install @parcel/watcher
+          npm install lightningcss-linux-x64-gnu --no-save
 
       - name: Run tests
         env:
