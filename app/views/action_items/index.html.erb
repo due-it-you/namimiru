@@ -4,8 +4,11 @@
   </div>
   <!-- 気分 -->
   <div class="mt-8">
-    <div class="text-string-base text-md font-semibold mt-2 flex justify-center items-center">
-      気分 
+    <div class="text-string-base text-md font-semibold mt-2 flex justify-between items-center">
+      <div class="mr-17"></div>
+      <div>
+        気分 
+      </div>
       <div data-controller="dialog" data-action="click->dialog#backdropClose">
         <!-- モーダル本体 -->
         <dialog
@@ -139,10 +142,17 @@
                    </div>
         </dialog>
         <!-- モーダルを開くアイコン -->
-        <button type="button" data-action="dialog#open"> 
-          <div class="aspect-square pt-0.5 h-5 ml-2">
-            <%= image_tag "question_icon.svg" %>
-          </div>
+        <button
+            type="button"
+            data-action="dialog#open"
+            class="ml-2 inline-flex h-7 items-center rounded-full
+                   px-3 text-[13px] font-semibold text-[#25625d]
+                   border border-[#67BDB7]/70 bg-white
+                   hover:bg-[#F3FBFA] active:scale-[.98]
+                   focus:outline-none focus-visible:ring-2 focus-visible:ring-[#67BDB7]
+                   transition"
+            aria-label="使い方を開く">
+          使い方
         </button>
       </div>
     </div>
