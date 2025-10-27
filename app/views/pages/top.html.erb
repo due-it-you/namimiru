@@ -57,6 +57,7 @@
         <!-- 見出し -->
         <header class="text-center">
           <h2 class="text-2xl font-bold tracking-tight text-[#224c49]">できること</h2>
+          <h3 class="mt-8 text-xl font-bold tracking-tight text-[#224c49]">記録・自己理解</h3>
           <p class="mt-2 text-[15px] leading-relaxed text-[#5e6d6c]">
           気分と行動を両面から記録し、
           <span class="font-semibold text-[#1b827b]">双極性障害の波</span>から
@@ -119,7 +120,52 @@
               </div>
             </div>
           </article>
+
         </div>
+      </section>
+      <!-- 共有に関する項目 -->
+      <section>
+        <header class="text-center">
+          <h3 class="mt-8 text-xl font-bold tracking-tight text-[#224c49]">記録の共有</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-[#5e6d6c]">
+          また、家族や友人などの周囲の人と
+          <span class="font-semibold text-[#1b827b]">気分の記録</span>を共有することで
+          <span class="font-semibold text-[#1b827b]">現状の波の相互理解</span>を手助けします。
+          </p>
+        </header>
+
+        <!-- 記録の共有 -->
+        <article class="mt-8 rounded-2xl border border-[#E8F4F2] bg-white p-4 shadow-sm transition hover:shadow-md">
+          <div class="flex items-start gap-3">
+            <div class="shrink-0 flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8F4F2] ring-1 ring-[#d9eeec]">
+              <%= image_tag "share_icon.svg", class: "h-6 w-6" %>
+            </div>
+            <div class="min-w-0">
+              <h3 class="font-semibold text-[#224c49]">共有して認識をあわせる</h3>
+              <p class="mt-1 text-sm leading-relaxed text-[#5e6d6c]">
+              自身の波の状況は
+              <span class="font-semibold text-[#1b827b]">なかなか伝えにくかったりするもの</span>
+              です。
+              </p>
+              <p class="mt-1 text-sm leading-relaxed text-[#5e6d6c]">
+              そこで、
+              <span class="font-semibold text-[#1b827b]">家族や周囲の人のアカウントと連携</span>
+              することで、
+              <span class="font-semibold text-[#1b827b]">気分の波の記録をグラフなどで共有</span>
+              できます。
+              これによって、連携した人はいつでも波の変化を確認し、
+              <span class="font-semibold text-[#1b827b]">その時の状態に合わせたコミュニケーション</span>
+              を取ることができます。
+              </p>
+            </div>
+          </div>
+          <!-- 行動マップのイラスト画像 -->
+          <div>
+            <div class="mt-3 overflow-hidden rounded-xl border border-[#E8F4F2] bg-white">
+              <%= image_tag "step1.png", class: "w-full h-36 object-contain" %>
+            </div>
+          </div>
+        </article>
       </section>
 
       <!-- 使い方 -->
@@ -196,6 +242,6 @@
         </div>
       </section>
 
-    </div>
+          </div>
   </section>
-</div>
+    </div>
