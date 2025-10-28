@@ -2,25 +2,25 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   skip_before_action :authenticate_user!
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+   # before_action :configure_sign_up_params, only: [:create]
+   # before_action :configure_account_update_params, only: [:update]
 
-  # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+   # GET /resource/sign_up
+   # def new
+   #   super
+   # end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+   # POST /resource
+   # def create
+   #   super
+   # end
 
-  # GET /resource/edit
-  # def edit
-  #   super
-  # end
+   # GET /resource/edit
+   # def edit
+   #   super
+   # end
 
-  # PUT /resource
+   # PUT /resource
    def update
     if current_user.update_without_password(account_update_params)
       flash[:success] = "ユーザーネームの更新に成功しました。"
