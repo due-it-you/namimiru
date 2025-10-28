@@ -2,10 +2,11 @@
   <div>
     <%= render 'shared/flash_message' %>
   </div>
-  <div class="flex items-center">
+  <div class="flex justify-between items-center">
     <div class="font-semibold text-string-base text-xl mr-4">
       マイページ
     </div> 
+    <%= link_to "編集", edit_user_registration_path, class: "text-white font-medium bg-logo-color rounded-md px-4 py-1.5"%>
   </div>
   <div class="mt-4 mb-2 font-semibold text-string-base text-md">
     ユーザーネーム 
