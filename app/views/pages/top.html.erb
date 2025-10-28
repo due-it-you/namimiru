@@ -42,6 +42,25 @@
 
         <%= button_to "ゲストログインで試してみる", users_guest_sign_in_path, method: :post,
           class: "w-full py-3 text-center font-semibold text-[#484848] bg-white border border-[#B6B6B6] rounded-md active:scale-[0.99]" %>
+
+
+        <!-- 区切り線 -->
+        <div class="flex items-center my-3">
+          <div class="flex-1 border-t border-gray-200"></div>
+          <span class="mx-2 text-xs text-gray-400">または</span>
+          <div class="flex-1 border-t border-gray-200"></div>
+        </div>
+
+        <!-- Googleログイン -->
+        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false },
+          class: "flex items-center justify-center gap-2 border border-[#B6B6B6] w-full py-3 text-center text-[#484848] font-semibold bg-white rounded-md active:scale-[0.99]" do %>
+          <%= image_tag 'google_logo.png', alt: 'Googleのロゴ', size: '20x20' %>
+          <span>Googleアカウントでログイン</span>
+        <% end %>
+
+        <!-- メールログイン -->
+        <%= link_to "メールアドレスでログイン", new_user_session_path,
+          class: "w-full py-3 text-center text-[#25625d] font-semibold bg-[#F3FBFA] border border-[#67BDB7]/30 rounded-md hover:bg-[#E8F4F2] active:scale-[0.99]" %>
       </div>
 
       <p class="text-center text-[11px] text-[#6b7a79]">
@@ -243,6 +262,6 @@
         </div>
       </section>
 
-          </div>
-  </section>
     </div>
+  </section>
+</div>
