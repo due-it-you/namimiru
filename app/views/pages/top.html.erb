@@ -42,86 +42,150 @@
 
         <%= button_to "ゲストログインで試してみる", users_guest_sign_in_path, method: :post,
           class: "w-full py-3 text-center font-semibold text-[#484848] bg-white border border-[#B6B6B6] rounded-md active:scale-[0.99]" %>
+
+
+        <!-- 区切り線 -->
+        <div class="flex items-center my-3">
+          <div class="flex-1 border-t border-gray-200"></div>
+          <span class="mx-2 text-xs text-gray-400">または</span>
+          <div class="flex-1 border-t border-gray-200"></div>
+        </div>
+
+        <!-- Googleログイン -->
+        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false },
+          class: "flex items-center justify-center gap-2 border border-[#B6B6B6] w-full py-3 text-center text-[#484848] font-semibold bg-white rounded-md active:scale-[0.99]" do %>
+          <%= image_tag 'google_logo.png', alt: 'Googleのロゴ', size: '20x20' %>
+          <span>Googleアカウントでログイン</span>
+        <% end %>
+
+        <!-- メールログイン -->
+        <%= link_to "メールアドレスでログイン", new_user_session_path,
+          class: "w-full py-3 text-center text-[#25625d] font-semibold bg-[#F3FBFA] border border-[#67BDB7]/30 rounded-md hover:bg-[#E8F4F2] active:scale-[0.99]" %>
       </div>
 
       <p class="text-center text-[11px] text-[#6b7a79]">
       無料で始められます。記録はいつでも削除できます。
       </p>
 
-      <section id="features" class="mx-auto max-w-screen-sm px-0 py-6">
-        <h2 class="text-xl font-bold">できること</h2>
-        <div class="mt-1 text-[15px] text-[#5e6d6c]">
-          <p>気分と行動を両面から記録し、</p>
-          <p>あなたの「<span class="font-semibold text-[#1b827b]">双極性障害の波</span>」から</p>
-          <p>「<span class="font-semibold text-[#1b827b]">あなたに合った生活リズム</span>」を見つける手助けをします。</p>
+      <section id="features" class="relative mx-auto max-w-screen-md px-4 py-10">
+        <!-- 背景のやわらかいグラデ影（装飾） -->
+        <div class="pointer-events-none absolute inset-0 -z-10">
+          <div class="mx-auto h-48 w-48 rounded-full bg-[#E8F4F2] blur-3xl opacity-60 translate-x-10 -translate-y-6"></div>
         </div>
 
-        <div class="w-2/3 mx-auto text-center">
-          <%= image_tag "bulb_moment.jpg" %>
-        </div>
+        <!-- 見出し -->
+        <header class="text-center">
+          <h2 class="text-2xl font-bold tracking-tight text-[#224c49]">できること</h2>
+          <h3 class="mt-8 text-xl font-bold tracking-tight text-[#224c49]">記録・自己理解</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-[#5e6d6c]">
+          気分と行動を両面から記録し、
+          <span class="font-semibold text-[#1b827b]">双極性障害の波</span>から
+          <span class="font-semibold text-[#1b827b]">あなたに合った生活リズム</span>を見つける手助けをします。
+          </p>
+        </header>
 
-        <div class="mt-5 grid gap-3">
+        <!-- 機能カード -->
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
           <!-- 気分マップ -->
-          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4">
+          <article class="rounded-2xl border border-[#E8F4F2] bg-white p-4 shadow-sm transition hover:shadow-md">
             <div class="flex items-start gap-3">
-              <div class="h-9 w-9 rounded-full bg-[#E8F4F2] flex items-center justify-center shrink-0">
-                <!-- 波（気分マップ） -->
-                <div class="p-1">
-                  <%= image_tag "mood_wave.svg" %>
-                </div>
+              <div class="shrink-0 flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8F4F2] ring-1 ring-[#d9eeec]">
+                <%= image_tag "mood_wave.svg", class: "h-6 w-6" %>
               </div>
               <div class="min-w-0">
-                <h3 class="font-semibold">気分マップ</h3>
-                <p class="mt-1 text-sm text-[#5e6d6c] text-pretty">
+                <h3 class="font-semibold text-[#224c49]">気分マップ</h3>
+                <p class="mt-1 text-sm leading-relaxed text-[#5e6d6c]">
                 1日の気分を数値とメモで記録。グラフで波の傾向を知り、気づきを得られます。
                 </p>
               </div>
             </div>
-          </div>
+            <!-- 気分マップのイラスト画像 -->
+            <div class="mt-3 md:mt-15 overflow-hidden rounded-xl border border-[#E8F4F2] bg-white">
+              <%= image_tag "mood_map.png", class: "w-full h-36 object-contain" %>
+            </div>
+          </article>
 
           <!-- 行動マップ -->
-          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4">
+          <article class="rounded-2xl border border-[#E8F4F2] bg-white p-4 shadow-sm transition hover:shadow-md">
             <div class="flex items-start gap-3">
-              <div class="h-9 w-9 rounded-full bg-[#E8F4F2] flex items-center justify-center shrink-0">
-                <!-- 行動している人（行動マップ） -->
-                <div class="p-2">
-                  <%= image_tag "surf.svg" %>
-                </div>
+              <div class="shrink-0 flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8F4F2] ring-1 ring-[#d9eeec]">
+                <%= image_tag "surf.svg", class: "h-6 w-6" %>
               </div>
               <div class="min-w-0">
-                <h3 class="font-semibold">行動マップ</h3>
-                <div class="mt-1 space-y-1.5 text-sm text-[#5e6d6c] leading-relaxed">
-                  <p>
-                  <span class="block sm:inline">気分によって</span>
-                  <span class="block sm:inline sm:ml-1">『出来そうなこと / 出来なさそうなこと』を記録。</span>
-                  </p>
-                  <p>
-                  <span class="block sm:inline">今の気分に対して</span>
-                  <span class="block sm:inline sm:ml-1">『これから出来ること / これから出来なくなること』を知ることができます。</span>
-                  </p>
-                </div>
+                <h3 class="font-semibold text-[#224c49]">行動マップ</h3>
+                <p class="mt-1 text-sm leading-relaxed text-[#5e6d6c]">
+                気分にあわせて「出来そう / 出来なさそう」を記録。いまの気分から
+                「これから出来ること / 出来なくなること」を把握できます。
+                </p>
               </div>
             </div>
-          </div>
+            <!-- 行動マップのイラスト画像 -->
+            <div class="mt-3 overflow-hidden rounded-xl border border-[#E8F4F2] bg-white">
+              <%= image_tag "step1.png", class: "w-full h-36 object-contain" %>
+            </div>
+          </article>
 
           <!-- 生活リズム -->
-          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4">
+          <article class="sm:col-span-2 rounded-2xl border border-[#E8F4F2] bg-white p-5 shadow-sm transition hover:shadow-md">
             <div class="flex items-start gap-3">
-              <div class="h-9 w-9 rounded-full bg-[#E8F4F2] flex items-center justify-center shrink-0">
-                <!-- 電球 -->
-                <div class="p-2">
-                  <%= image_tag "light_bulb.svg" %>
-                </div>
+              <div class="shrink-0 flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8F4F2] ring-1 ring-[#d9eeec]">
+                <%= image_tag "light_bulb.svg", class: "h-6 w-6" %>
               </div>
               <div class="min-w-0">
-                <h3 class="font-semibold">無理のない生活リズムを発見</h3>
-                <p class="mt-1 text-sm text-[#5e6d6c] text-pretty">
+                <h3 class="font-semibold text-[#224c49]">無理のない生活リズムを発見</h3>
+                <p class="mt-1 text-sm leading-relaxed text-[#5e6d6c]">
                 気分と行動の両側面から、自分に合ったペースを見つけられます。
                 </p>
               </div>
             </div>
-          </div>
+          </article>
+
         </div>
+      </section>
+      <!-- 共有に関する項目 -->
+      <section>
+        <header class="text-center">
+          <h3 class="mt-8 text-xl font-bold tracking-tight text-[#224c49]">記録の共有</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-[#5e6d6c]">
+          また、家族や友人などの周囲の人と
+          <span class="font-semibold text-[#1b827b]">気分の記録</span>を共有することで
+          <span class="font-semibold text-[#1b827b]">現状の波の相互理解</span>を手助けします。
+          </p>
+        </header>
+
+        <!-- 記録の共有 -->
+        <article class="mt-8 rounded-2xl border border-[#E8F4F2] bg-white p-4 shadow-sm transition hover:shadow-md">
+          <div class="flex items-start gap-3">
+            <div class="shrink-0 flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8F4F2] ring-1 ring-[#d9eeec]">
+              <%= image_tag "share_icon.svg", class: "h-6 w-6" %>
+            </div>
+            <div class="min-w-0">
+              <h3 class="font-semibold text-[#224c49]">共有して認識をあわせる</h3>
+              <p class="mt-1 text-sm leading-relaxed text-[#5e6d6c]">
+              自身の波の状況は
+              <span class="font-semibold text-[#1b827b]">なかなか伝えにくかったりするもの</span>
+              です。
+              </p>
+              <p class="mt-1 text-sm leading-relaxed text-[#5e6d6c]">
+              そこで、
+              <span class="font-semibold text-[#1b827b]">家族や周囲の人のアカウントと連携</span>
+              することで、
+              <span class="font-semibold text-[#1b827b]">気分の波の記録をグラフなどで共有</span>
+              できます。
+              これによって、連携した人はいつでも波の変化を確認し、
+              <span class="font-semibold text-[#1b827b]">その時の状態に合わせたコミュニケーション</span>
+              を取ることができます。
+              </p>
+              <p class="mt-1 text-sm leading-relaxed text-[#5e6d6c]">（共有される情報：当事者の気分の記録, 気分の記録のグラフ）</p>
+            </div>
+          </div>
+          <!-- 記録の共有のイラスト画像 -->
+          <div class="mt-4">
+            <div class="mt-3 overflow-hidden rounded-xl border border-[#E8F4F2] bg-white">
+              <%= image_tag "share_daily_records.png", class: "w-full h-44 object-contain" %>
+            </div>
+          </div>
+        </article>
       </section>
 
       <!-- 使い方 -->
@@ -178,9 +242,45 @@
             class: "w-full py-3 text-center text-white font-semibold bg-[#67BDB7] rounded-md active:scale-[0.99]" %>
 
           <%= button_to "ゲストログインで試してみる", users_guest_sign_in_path, method: :post,
-          class: "w-full py-3 text-center font-semibold text-[#484848] bg-white border border-[#B6B6B6] rounded-md active:scale-[0.99]" %>
+            class: "w-full py-3 text-center font-semibold text-[#484848] bg-white border border-[#B6B6B6] rounded-md active:scale-[0.99]" %>
         </div>
       </section>
+
+      <!-- ホーム画面への追加 -->
+      <section id="how" class="mx-auto max-w-screen-sm px-0 py-6">
+        <h2 class="text-xl font-bold">ホーム画面に追加</h2>
+        <p class="mt-1 text-[15px] text-[#5e6d6c]">ナミミルは他のアプリと同様にホーム画面に追加できます。</p>
+        <div class="my-4 w-full md:w-1/2">
+          <%= image_tag "namimiru_app_in_home.png" %>
+        </div>
+
+        <!-- iOSの場合 -->
+        <h3 class="mt-4 text-lg font-bold">iOSの方 (Safari)</h3>
+        <p class="mt-1 text-[15px] text-gray-700 font-semibold">1. ブラウザの共有アイコンをタップ</p>
+        <!-- ブラウザの共有アイコンを示すスクリーンショット -->
+        <div class="my-4 w-full md:w-1/2">
+          <%= image_tag "ios_safari_share_icon.jpg" %>
+        </div>
+        <p class="mt-8 text-[15px] text-gray-700 font-semibold">2. 「ホーム画面に追加」をタップ</p>
+        <!-- ホーム画面に追加の項目を示すスクリーンショット -->
+        <div class="my-4 w-full md:w-1/2">
+          <%= image_tag "ios_safari_add_to_home.jpg" %>
+        </div>
+
+        <!-- Androidの場合 -->
+        <h3 class="mt-8 text-lg font-bold">Androidの方 (Chrome)</h3>
+        <p class="mt-1 text-[15px] text-gray-700 font-semibold">1. ブラウザのその他アイコンをタップ</p>
+        <!-- ブラウザの設定アイコンを示すスクリーンショット -->
+        <div class="my-4 w-full md:w-1/2">
+          <%= image_tag "android_chrome_options_icon.png" %>
+        </div>
+        <p class="mt-8 text-[15px] text-gray-700 font-semibold">2. 「ホーム画面に追加」をタップ</p>
+        <!-- ホーム画面に追加の項目を示すスクリーンショット -->
+        <div class="my-4 w-full md:w-1/2">
+          <%= image_tag "android_chrome_add_to_home.png" %>
+        </div>
+      </section>
+
 
       <!-- フッターCTA -->
       <section class="mx-auto max-w-screen-sm px-0 py-8">
