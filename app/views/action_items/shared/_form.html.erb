@@ -1,4 +1,15 @@
 <%= form_with model: model do |f| %>
+  <!-- 項目の種類 -->
+  <div class="mt-4">
+    <p><%= f.label :behavior_type, "項目の種類" %></p>
+    <div class="my-2">
+      <%= f.select :behavior_type, 
+        [["できそうかも/できなさそうかも", 0], ["躁状態の時にやらない方がいい", 1]], 
+        { include_blank: "項目の種類を選択してください" },
+        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" %>
+    </div>
+  </div>
+
   <!-- 項目名の入力 -->
   <div>
     <p><%= f.label :name, "項目名" %></p>
