@@ -45,7 +45,8 @@ class ActionItemsController < ApplicationController
       user_id: current_user.id,
       action_tag_id: action_tag.id,
       name: action_item_params[:name],
-      enabled_from: action_item_params[:enabled_from]
+      enabled_from: action_item_params[:enabled_from],
+      behavior_type: action_item_params[:behavior_type].to_i
     )
     if action_item.save
       flash[:success] = "項目を作成しました。"
@@ -93,6 +94,6 @@ class ActionItemsController < ApplicationController
   private
 
   def action_item_params
-    params.require(:action_item).permit(:name, :action_tag_id, :enabled_from, :tag_name)
+    params.require(:action_item).permit(:name, :action_tag_id, :enabled_from, :tag_name, :behavior_type)
   end
 end
