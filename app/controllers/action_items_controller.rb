@@ -10,8 +10,8 @@ class ActionItemsController < ApplicationController
     selected_tag_name = params[:selected_tag_name]
     if selected_tag_name.present?
       selected_tag = current_user.action_tags.find_by(name: selected_tag_name)
-      current_can_items, current_cannot_items = selected_tag.action_items.capable(@mood_score),  selected_tag.action_items.incapable(@mood_score)
-      latest_can_items, latest_cannot_items = selected_tag.action_items.capable(latest_mood_score), selected_tag.action_items.incapable(latest_mood_score)
+      current_can_items, current_cannot_items = selected_tag.action_items.dynamic.capable(@mood_score),  selected_tag.action_items.dynamic.incapable(@mood_score)
+      latest_can_items, latest_cannot_items = selected_tag.action_items.dynamic.capable(latest_mood_score), selected_tag.action_items.dynamic.incapable(latest_mood_score)
     else
       current_can_items, current_cannot_items = action_items_with_tag.capable(@mood_score),  action_items_with_tag.incapable(@mood_score)
       latest_can_items, latest_cannot_items = action_items_with_tag.capable(latest_mood_score), action_items_with_tag.incapable(latest_mood_score)
