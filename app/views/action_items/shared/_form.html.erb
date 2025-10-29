@@ -6,7 +6,8 @@
       <%= f.select :behavior_type, 
         [["できそうかも/できなさそうかも", 0], ["躁状態の時にやらない方がいい", 1]], 
         { include_blank: "項目の種類を選択してください" },
-        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" %>
+        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
+        data: { action: "action-items--form#toggleMoodScoreForm" } %>
     </div>
   </div>
 

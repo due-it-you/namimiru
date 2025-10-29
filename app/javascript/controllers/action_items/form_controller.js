@@ -4,4 +4,17 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   connect() {
   }
+
+  toggleMoodScoreForm(e) {
+    const rangeSlider = document.getElementById("mood-range");
+    const moodScoreForm = document.getElementById("input-mood-score-form");
+
+    if (e.target.value == 1) {
+      rangeSlider.disabled = true;
+      moodScoreForm.hidden = true;
+    } else if (e.target.value == 0) {
+      rangeSlider.disabled = false;
+      moodScoreForm.hidden = false;
+    }
+  }
 }
