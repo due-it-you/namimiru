@@ -16,7 +16,9 @@
   <div class="w-1/2 flex flex-col items-center pl-2 text-gray-700" id="cannot-list">
     <div class="flex justify-center items-center mt-4">
       <p class="text-string-base font-semibold">できないかも</p>
-      <%= image_tag "switch_lists.svg", class: "aspect-square h-6 ml-2" %>
+      <div data-action="click->action-items--lists#toggleListsVisible">
+        <%= image_tag "switch_lists.svg", class: "aspect-square h-6 ml-2" %>
+      </div>
     </div>
     <div class="mt-2 space-y-2 w-full" id="cannot-list-body">
       <%= render "action_items/cannot_items_list", diff_cannot_groups: @diff_cannot_groups ,not_diff_cannot_groups: @not_diff_cannot_groups %>
@@ -27,7 +29,9 @@
   <div class="w-1/2 flex flex-col items-center pl-2 text-gray-700" id="avoid-list">
     <div class="flex justify-center items-center mt-4">
       <p class="text-string-base text-sm font-semibold">やらない方がいい</p>
-      <%= image_tag "switch_lists.svg", class: "aspect-square h-6 ml-2" %>
+      <div data-action="click->action-items--lists#toggleListsVisible">
+        <%= image_tag "switch_lists.svg", class: "aspect-square h-6 ml-2" %>
+      </div>
     </div>
     <div class="mt-2 space-y-2 w-full" id="avoid-list-body">
       <%= render "action_items/avoid_items_list", avoid_groups: @avoid_groups %>

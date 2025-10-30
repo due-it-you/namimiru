@@ -50,4 +50,12 @@ export default class extends Controller {
       avoidList.hidden = false;
     }
   }
+
+  toggleListsVisible() {
+    const cannotList = document.getElementById("cannot-list")
+    const avoidList = document.getElementById("avoid-list")
+
+    cannotList.hidden = !cannotList.hidden
+    avoidList.hidden = !avoidList.hidden
+  }
 }
