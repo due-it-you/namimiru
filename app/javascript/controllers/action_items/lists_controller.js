@@ -10,12 +10,15 @@ export default class extends Controller {
     const avoidList = document.getElementById("avoid-list")
     const moodScore = this.moodScoreTarget.value
 
+    // 最新の記録の気分が躁状態なら
     if (moodScore > 0) {
-      cannotList.hidden = false;
-      avoidList.hidden = true;
-    } else if (moodScore <= 0) {
+      // やらない方がいいリストを先に表示
       cannotList.hidden = true;
       avoidList.hidden = false;
+    } else if (moodScore <= 0) {
+      // できないかもリストを先に表示
+      cannotList.hidden = false;
+      avoidList.hidden = true;
     }
   }
 
