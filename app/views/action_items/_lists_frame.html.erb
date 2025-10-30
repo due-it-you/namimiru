@@ -13,7 +13,7 @@
   <div class="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200"></div>
 
   <!-- 出来ないかもリスト -->
-  <div class="w-1/2 flex flex-col items-center pl-2 text-gray-700" <%= @mood_score.to_i <= 0 ? "hidden" : "" %>>
+  <div class="w-1/2 flex flex-col items-center pl-2 text-gray-700" id="cannot-list" <%= @mood_score.to_i <= 0 ? "hidden" : "" %>>
     <p class="text-string-base font-semibold mt-4">できないかも</p>
     <div class="mt-2 space-y-2 w-full" id="cannot-list-body">
       <%= render "action_items/cannot_items_list", diff_cannot_groups: @diff_cannot_groups ,not_diff_cannot_groups: @not_diff_cannot_groups %>
@@ -21,7 +21,7 @@
   </div>
 
   <!-- やらない方がいいリスト -->
-  <div class="w-1/2 flex flex-col items-center pl-2 text-gray-700" <%= @mood_score.to_i > 0 ? "hidden" : "" %>>
+  <div class="w-1/2 flex flex-col items-center pl-2 text-gray-700" id="avoid-list" <%= @mood_score.to_i > 0 ? "hidden" : "" %>>
     <p class="text-string-base font-semibold mt-4">やらない方がいい</p>
     <div class="mt-2 space-y-2 w-full" id="avoid-list-body">
       <%= render "action_items/avoid_items_list", avoid_groups: @avoid_groups %>

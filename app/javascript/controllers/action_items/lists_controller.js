@@ -2,9 +2,20 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="action-items--lists"
 export default class extends Controller {
-  static targets = ["listsFrame"]
+  static targets = ["moodScore"]
 
   connect() {
+    const cannotList = document.getElementById("cannot-list")
+    const avoidList = document.getElementById("avoid-list")
+    const moodScore = this.moodScoreTarget.value
+
+    if (moodScore == "0") {
+      cannotList.hidden = false;
+      avoidList.hidden = true;
+    } else if (moodScore == "1") {
+      cannotList.hidden = true;
+      avoidList.hidden = false;
+    }
   }
 
   async update(e) {
@@ -24,5 +35,19 @@ export default class extends Controller {
     )
 
     Turbo.renderStreamMessage(await res.text())
+  }
+
+  toggleListsHidden(e) {
+    const cannotList = document.getElementById("cannot-list")
+    const avoidList = document.getElementById("avoid-list")
+    const moodScore = e.target.value
+
+    if (moodScore == "0") {
+      cannotList.hidden = false;
+      avoidList.hidden = true;
+    } else if (moodScore == "1") {
+      cannotList.hidden = true;
+      avoidList.hidden = false;
+    }
   }
 }
