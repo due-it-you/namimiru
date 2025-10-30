@@ -32,8 +32,9 @@ class ActionItemsController < ApplicationController
     @diff_can_groups, @not_diff_can_groups = diff_can_items.group_by(&:action_tag), not_diff_can_items.group_by(&:action_tag)
     @diff_cannot_groups, @not_diff_cannot_groups = diff_cannot_items.group_by(&:action_tag), not_diff_cannot_items.group_by(&:action_tag)
 
-    if turbo_frame_request?
-      render partial: "action_items/lists_frame"
+    respond_to do |f|
+      f.html
+      f.turbo_stream
     end
   end
 
