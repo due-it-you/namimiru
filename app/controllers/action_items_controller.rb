@@ -26,7 +26,7 @@ class ActionItemsController < ApplicationController
     not_diff_cannot_items = current_cannot_items - diff_cannot_items
 
     # やらない方がいいリストの項目
-    @avoid_groups = avoid_items.group_by(&:action_tag) 
+    @avoid_groups = avoid_items.group_by(&:action_tag)
 
     # できるかも/できないかもリストの差分と非差分の項目
     @diff_can_groups, @not_diff_can_groups = diff_can_items.group_by(&:action_tag), not_diff_can_items.group_by(&:action_tag)
