@@ -56,10 +56,10 @@ class ActionItemsController < ApplicationController
     )
     if action_item.save
       flash[:success] = "項目を作成しました。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     else
       flash[:alert] = "項目の作成が出来ませんでした。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     end
   end
 
@@ -79,10 +79,10 @@ class ActionItemsController < ApplicationController
       action_tag_id: action_tag.id
     )
       flash[:success] = "行動項目を更新しました。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     else
       flash[:alert] = "行動項目を更新出来ませんでした。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     end
   end
 
@@ -90,10 +90,10 @@ class ActionItemsController < ApplicationController
     action_item = current_user.action_items.find(params[:id])
     if action_item.destroy
       flash[:success] = "行動項目を削除しました。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     else
       flash[:success] = "行動項目を削除できませんでした。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     end
   end
 
