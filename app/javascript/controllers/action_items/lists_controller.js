@@ -10,10 +10,10 @@ export default class extends Controller {
     const avoidList = document.getElementById("avoid-list")
     const moodScore = this.moodScoreTarget.value
 
-    if (moodScore == "0") {
+    if (moodScore > 0) {
       cannotList.hidden = false;
       avoidList.hidden = true;
-    } else if (moodScore == "1") {
+    } else if (moodScore <= 0) {
       cannotList.hidden = true;
       avoidList.hidden = false;
     }
