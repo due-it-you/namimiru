@@ -7,8 +7,8 @@ export default class extends Controller {
   connect() {
   }
 
-  update(e) {
-    const frame = this.listsFrameTarget;
+  async update(e) {
+    const moodScore = e.target.value
     const tagsList = Array.from(document.getElementById("present-tags-list").children)
     let activeTagName;
     tagsList.forEach((tag) => {
@@ -18,6 +18,11 @@ export default class extends Controller {
     })
     // もしnullなら空文字に変換
     const name = activeTagName ?? "";
-    frame.src = `/action_items?mood_score=${e.target.value}&selected_tag_name=${name}`
+    const res = await fetch(
+      `/action_items?mood_score=${moodScore}&selected_tag_name=${name}`,
+      { headers: { Accept: "text/vnd.turbo-stream.html" } }
+    )
+
+    Turbo.renderStreamMessage(await res.text())
   }
 }
