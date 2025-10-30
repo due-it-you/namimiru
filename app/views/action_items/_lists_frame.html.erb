@@ -24,22 +24,7 @@
   <div class="w-1/2 flex flex-col items-center pl-2 text-gray-700" <%= @mood_score.to_i > 0 ? "hidden" : "" %>>
     <p class="text-string-base font-semibold mt-4">やらない方がいい</p>
     <div class="mt-2 space-y-2 w-full" id="avoid-list-body">
-      <!-- 差分の項目 -->
-      <% @avoid_groups.each do |tag, items| %>
-        <div class="my-4 space-y-2">
-          <!-- タグ -->
-          <div class="inline-block p-1 border border-gray-200 text-gray-700 ml-2 text-xs rounded-md">
-            # <%= tag.name %>
-          </div>
-          <% items.each do |item| %>
-            <div>
-              <div class="p-2 mx-2 border-2 border-red-300 rounded-md text-sm text-center">
-                <%= item.name%>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render "action_items/avoid_items_list", avoid_groups: @avoid_groups %>
     </div>
   </div>
 
