@@ -5,6 +5,7 @@ export default class extends Controller {
   static targets = ["moodScore"]
 
   connect() {
+    this.count = 0
     const cannotList = document.getElementById("cannot-list")
     const avoidList = document.getElementById("avoid-list")
     const moodScore = this.moodScoreTarget.value
@@ -37,21 +38,32 @@ export default class extends Controller {
     Turbo.renderStreamMessage(await res.text())
   }
 
+  // スライダーを変動させると自動でリストを切り替える
   toggleListsHidden(e) {
+    // 一度でも手動でリストを切り替えした場合、リロードしない限りスライダーを動かしても自動で切り替えされない
+    if (this.count > 0) {
+      return
+    }
     const cannotList = document.getElementById("cannot-list")
     const avoidList = document.getElementById("avoid-list")
     const moodScore = e.target.value
 
-    if (moodScore == "0") {
+    // 躁状態なら
+    if (moodScore <= 0) {
+      // やらない方がいいリストを表示
       cannotList.hidden = false;
       avoidList.hidden = true;
-    } else if (moodScore == "1") {
+      // 鬱状態なら
+    } else if (moodScore > 0) {
+      // できないかもリストを表示
       cannotList.hidden = true;
       avoidList.hidden = false;
     }
   }
 
+  // ユーザーが手動でリストを切り替える
   toggleListsVisible() {
+    this.count++;
     const cannotList = document.getElementById("cannot-list")
     const avoidList = document.getElementById("avoid-list")
 
