@@ -169,7 +169,7 @@
     </div>
     <!-- スライダー -->
     <div class="flex justify-center my-2">
-      <input type="range" min="-5" max="5" value="<%= @mood_score %>" id="mood-range" data-action="action-items--lists#update daily-records--mood-score#update input->range-slider--current-mood#updateColor" class="w-full mx-4 mb-4">  
+      <input type="range" min="-5" max="5" value="<%= @mood_score %>" id="mood-range" data-action-items--lists-target="moodScore" data-action="action-items--lists#update action-items--lists#toggleListsHidden daily-records--mood-score#update input->range-slider--current-mood#updateColor" class="w-full mx-4 mb-4">  
     </div>
   </div>
 

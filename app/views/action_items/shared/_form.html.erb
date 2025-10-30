@@ -1,4 +1,16 @@
 <%= form_with model: model do |f| %>
+  <!-- 項目の種類 -->
+  <div class="mt-4">
+    <p><%= f.label :behavior_type, "項目の種類" %></p>
+    <div class="my-2">
+      <%= f.select :behavior_type, 
+        [["できそうかも/できなさそうかも", "dynamic"], ["躁状態の時にやらない方がいい行動", "avoid"]], 
+        { include_blank: "項目の種類を選択してください" },
+        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
+        data: { action: "action-items--form#toggleMoodScoreForm" } %>
+    </div>
+  </div>
+
   <!-- 項目名の入力 -->
   <div>
     <p><%= f.label :name, "項目名" %></p>
@@ -14,7 +26,7 @@
   </div>
 
   <!-- 気分の入力 -->
-  <div class="mt-8">
+  <div class="mt-8" id="input-mood-score-form">
     <p><%= f.label :enabled_from, "どの気分の段階から出来るようになりそうですか？" %></p>
     <div class="mt-2">
       <div class="flex items-center justify-center font-bold rounded-md p-4">
