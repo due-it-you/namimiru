@@ -76,7 +76,8 @@ class ActionItemsController < ApplicationController
     if action_item.update(
       name: action_item_params[:name],
       enabled_from: action_item_params[:enabled_from],
-      action_tag_id: action_tag.id
+      action_tag_id: action_tag.id,
+      behavior_type: action_item_params[:behavior_type]
     )
       flash[:success] = "行動項目を更新しました。"
       redirect_to action_items_path(format: :html)
