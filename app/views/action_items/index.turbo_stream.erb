@@ -1,0 +1,19 @@
+<%= turbo_stream.replace "can-list-body" do %>
+  <div class="mt-2  w-full" id="can-list-body">
+    <%= render "action_items/can_items_list", 
+      diff_can_groups: @diff_can_groups, not_diff_can_groups: @not_diff_can_groups %>
+  </div>
+<% end %>
+
+<%= turbo_stream.replace "cannot-list-body" do %>
+  <div class="mt-2  w-full" id="cannot-list-body">
+    <%= render "action_items/cannot_items_list", 
+      diff_cannot_groups: @diff_cannot_groups, not_diff_cannot_groups: @not_diff_cannot_groups %>
+  </div>
+<% end %>
+
+<%= turbo_stream.replace "avoid-list-body" do %>
+  <div class="mt-2  w-full" id="avoid-list-body">
+    <%= render "action_items/avoid_items_list", avoid_groups: @avoid_groups %>
+  </div>
+<% end %>

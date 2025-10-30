@@ -10,11 +10,13 @@ class ActionItemsController < ApplicationController
     selected_tag_name = params[:selected_tag_name]
     if selected_tag_name.present?
       selected_tag = current_user.action_tags.find_by(name: selected_tag_name)
-      current_can_items, current_cannot_items = selected_tag.action_items.capable(@mood_score),  selected_tag.action_items.incapable(@mood_score)
-      latest_can_items, latest_cannot_items = selected_tag.action_items.capable(latest_mood_score), selected_tag.action_items.incapable(latest_mood_score)
+      current_can_items, current_cannot_items = selected_tag.action_items.dynamic.capable(@mood_score),  selected_tag.action_items.dynamic.incapable(@mood_score)
+      latest_can_items, latest_cannot_items = selected_tag.action_items.dynamic.capable(latest_mood_score), selected_tag.action_items.dynamic.incapable(latest_mood_score)
+      avoid_items = selected_tag.action_items.avoid
     else
-      current_can_items, current_cannot_items = action_items_with_tag.capable(@mood_score),  action_items_with_tag.incapable(@mood_score)
-      latest_can_items, latest_cannot_items = action_items_with_tag.capable(latest_mood_score), action_items_with_tag.incapable(latest_mood_score)
+      current_can_items, current_cannot_items = action_items_with_tag.dynamic.capable(@mood_score),  action_items_with_tag.dynamic.incapable(@mood_score)
+      latest_can_items, latest_cannot_items = action_items_with_tag.dynamic.capable(latest_mood_score), action_items_with_tag.dynamic.incapable(latest_mood_score)
+      avoid_items = action_items_with_tag.avoid
     end
 
     # 最新の記録の気分のリストと比べての項目の差分
@@ -23,12 +25,16 @@ class ActionItemsController < ApplicationController
     diff_cannot_items = current_cannot_items - latest_cannot_items
     not_diff_cannot_items = current_cannot_items - diff_cannot_items
 
-    # 項目をタグごとにまとめる
+    # やらない方がいいリストの項目
+    @avoid_groups = avoid_items.group_by(&:action_tag)
+
+    # できるかも/できないかもリストの差分と非差分の項目
     @diff_can_groups, @not_diff_can_groups = diff_can_items.group_by(&:action_tag), not_diff_can_items.group_by(&:action_tag)
     @diff_cannot_groups, @not_diff_cannot_groups = diff_cannot_items.group_by(&:action_tag), not_diff_cannot_items.group_by(&:action_tag)
 
-    if turbo_frame_request?
-      render partial: "action_items/lists_frame"
+    respond_to do |f|
+      f.html
+      f.turbo_stream
     end
   end
 
@@ -45,14 +51,15 @@ class ActionItemsController < ApplicationController
       user_id: current_user.id,
       action_tag_id: action_tag.id,
       name: action_item_params[:name],
-      enabled_from: action_item_params[:enabled_from]
+      enabled_from: action_item_params[:enabled_from],
+      behavior_type: action_item_params[:behavior_type]
     )
     if action_item.save
       flash[:success] = "項目を作成しました。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     else
       flash[:alert] = "項目の作成が出来ませんでした。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     end
   end
 
@@ -69,13 +76,14 @@ class ActionItemsController < ApplicationController
     if action_item.update(
       name: action_item_params[:name],
       enabled_from: action_item_params[:enabled_from],
-      action_tag_id: action_tag.id
+      action_tag_id: action_tag.id,
+      behavior_type: action_item_params[:behavior_type]
     )
       flash[:success] = "行動項目を更新しました。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     else
       flash[:alert] = "行動項目を更新出来ませんでした。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     end
   end
 
@@ -83,16 +91,16 @@ class ActionItemsController < ApplicationController
     action_item = current_user.action_items.find(params[:id])
     if action_item.destroy
       flash[:success] = "行動項目を削除しました。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     else
       flash[:success] = "行動項目を削除できませんでした。"
-      redirect_to action_items_path
+      redirect_to action_items_path(format: :html)
     end
   end
 
   private
 
   def action_item_params
-    params.require(:action_item).permit(:name, :action_tag_id, :enabled_from, :tag_name)
+    params.require(:action_item).permit(:name, :action_tag_id, :enabled_from, :tag_name, :behavior_type)
   end
 end

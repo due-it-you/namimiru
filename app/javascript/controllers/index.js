@@ -3,9 +3,9 @@
 // ./bin/rails generate stimulus controllerName
 
 import { application } from "./application"
-// stimulus-components
-import Dialog from '@stimulus-components/dialog'
-application.register('dialog', Dialog)
+
+import ActionItems__FormController from "./action_items/form_controller"
+application.register("action-items--form", ActionItems__FormController)
 
 import ActionItems__ListsController from "./action_items/lists_controller"
 application.register("action-items--lists", ActionItems__ListsController)

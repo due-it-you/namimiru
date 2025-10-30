@@ -1,0 +1,36 @@
+<!-- 差分の項目 -->
+<% diff_cannot_groups.each do |tag, items| %>
+  <div class="my-4 space-y-2">
+    <!-- タグ -->
+    <div class="inline-block p-1 border border-gray-200 text-gray-700 ml-2 text-xs rounded-md">
+      # <%= tag.name %>
+    </div>
+    <% items.each do |item| %>
+      <div>
+        <%= link_to edit_action_item_path(item.id) do %>
+          <div class="p-2 mx-2 border-2 border-red-300 rounded-md text-sm text-center">
+            <%= item.name%>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<!-- 差分ではない項目 -->
+<% not_diff_cannot_groups.each do |tag, items| %>
+  <div class="my-4 space-y-2">
+    <!-- タグ -->
+    <div class="inline-block p-1 border border-gray-200 text-gray-700 ml-2 text-xs rounded-md">
+      # <%= tag.name %>
+    </div>
+    <% items.each do |item| %>
+      <div>
+        <%= link_to edit_action_item_path(item.id) do %>
+          <div class="p-2 mx-2 border border-gray-300 rounded-md text-sm text-center">
+            <%= item.name%>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
