@@ -52,7 +52,7 @@ class ActionItemsController < ApplicationController
       action_tag_id: action_tag.id,
       name: action_item_params[:name],
       enabled_from: action_item_params[:enabled_from],
-      behavior_type: action_item_params[:behavior_type].to_i
+      behavior_type: action_item_params[:behavior_type]
     )
     if action_item.save
       flash[:success] = "項目を作成しました。"

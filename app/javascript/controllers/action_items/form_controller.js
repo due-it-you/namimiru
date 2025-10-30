@@ -9,10 +9,10 @@ export default class extends Controller {
     const rangeSlider = document.getElementById("mood-range");
     const moodScoreForm = document.getElementById("input-mood-score-form");
 
-    if (e.target.value == 1) {
+    if (e.target.value == "avoid") {
       rangeSlider.disabled = true;
       moodScoreForm.hidden = true;
-    } else if (e.target.value == 0) {
+    } else if (e.target.value == "dynamic") {
       rangeSlider.disabled = false;
       moodScoreForm.hidden = false;
     }
