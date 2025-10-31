@@ -68,7 +68,6 @@
       </p>
 
       <section id="features" class="relative mx-auto max-w-screen-md px-4 py-10">
-        <!-- 背景のやわらかいグラデ影（装飾） -->
         <div class="pointer-events-none absolute inset-0 -z-10">
           <div class="mx-auto h-48 w-48 rounded-full bg-[#E8F4F2] blur-3xl opacity-60 translate-x-10 -translate-y-6"></div>
         </div>
@@ -188,116 +187,139 @@
         </article>
       </section>
 
-      <!-- 使い方 -->
-      <section id="how" class="mx-auto max-w-screen-sm px-0 py-6">
-        <h2 class="text-xl font-bold">使い方</h2>
-        <p class="mt-1 text-[15px] text-[#5e6d6c]">3ステップで自己理解を深める。</p>
-
-        <div class="mt-4 grid gap-3">
-
-          <!-- Step 1 -->
-          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4 flex items-start gap-3">
-            <div class="flex-none h-8 w-8 aspect-square rounded-full bg-[#67BDB7] text-white flex items-center justify-center text-sm font-bold leading-none">1</div>
-            <div class="min-w-0">
-              <h3 class="font-semibold">気分・行動を記録</h3>
-              <div class="mt-1 text-sm text-[#5e6d6c]">
-                <p class="text-pretty">毎日の気分と行動を記録。</p>
-                <p class="text-pretty">シンプルなUIで続けやすい。</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4 flex items-start gap-3">
-            <div class="flex-none h-8 w-8 aspect-square rounded-full bg-[#67BDB7] text-white flex items-center justify-center text-sm font-bold leading-none">2</div>
-            <div class="min-w-0">
-              <h3 class="font-semibold">現状を知る</h3>
-              <div class="mt-1 text-sm text-[#5e6d6c]">
-                <p class="text-pretty">現状どんな気分の波で、どんな時に何が出来て何が出来ないかを知ります。</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4 flex items-start gap-3">
-            <div class="flex-none h-8 w-8 aspect-square rounded-full bg-[#67BDB7] text-white flex items-center justify-center text-sm font-bold leading-none">3</div>
-            <div class="min-w-0">
-              <h3 class="font-semibold">合った生活リズムを発見</h3>
-              <div class="mt-1 text-sm text-[#5e6d6c]">
-                <p class="text-pretty">気分マップと行動マップから、生きやすい生活リズムを見つける。</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="mt-16 grid gap-3">
-          <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false },
-            class: "flex items-center justify-center gap-2 border border-[#B6B6B6] w-full py-3 text-center text-[#484848] font-semibold bg-white rounded-md active:scale-[0.99]" do %>
-            <%= image_tag 'google_logo.png', alt: 'Googleのロゴ', size: '20x20' %>
-            <span>Googleアカウントで新規登録</span>
-          <% end %>
-
-          <%= link_to "メールアドレスで新規登録", new_user_registration_path,
-            class: "w-full py-3 text-center text-white font-semibold bg-[#67BDB7] rounded-md active:scale-[0.99]" %>
-
-          <%= button_to "ゲストログインで試してみる", users_guest_sign_in_path, method: :post,
-            class: "w-full py-3 text-center font-semibold text-[#484848] bg-white border border-[#B6B6B6] rounded-md active:scale-[0.99]" %>
-        </div>
-      </section>
-
       <!-- ホーム画面への追加 -->
       <section id="how" class="mx-auto max-w-screen-sm px-0 py-6">
-        <h2 class="text-xl font-bold">ホーム画面に追加</h2>
-        <p class="mt-1 text-[15px] text-[#5e6d6c]">ナミミルは他のアプリと同様にホーム画面に追加できます。</p>
-        <div class="my-4 w-full md:w-1/2">
-          <%= image_tag "namimiru_app_in_home.png" %>
-        </div>
+        <header class="text-center">
+          <h3 class="mt-8 text-xl font-bold tracking-tight text-[#224c49]">ホーム画面に追加</h3>
+          <p class="mt-1 text-[15px] text-[#5e6d6c]">ナミミルは他のアプリと同様にホーム画面に追加できます。</p>
+          </p>
+        </header>
+        <div class="text-center">
+          <div>
+            <div class="my-4 w-full md:w-1/2 mx-auto">
+              <%= image_tag "namimiru_app_in_home.png" %>
+            </div>
 
-        <!-- iOSの場合 -->
-        <h3 class="mt-4 text-lg font-bold">iOSの方 (Safari)</h3>
-        <p class="mt-1 text-[15px] text-gray-700 font-semibold">1. ブラウザの共有アイコンをタップ</p>
-        <!-- ブラウザの共有アイコンを示すスクリーンショット -->
-        <div class="my-4 w-full md:w-1/2">
-          <%= image_tag "ios_safari_share_icon.jpg" %>
-        </div>
-        <p class="mt-8 text-[15px] text-gray-700 font-semibold">2. 「ホーム画面に追加」をタップ</p>
-        <!-- ホーム画面に追加の項目を示すスクリーンショット -->
-        <div class="my-4 w-full md:w-1/2">
-          <%= image_tag "ios_safari_add_to_home.jpg" %>
-        </div>
+            <!-- iOSの場合 -->
+            <h3 class="mt-4 text-lg font-bold">iOSの方 (Safari)</h3>
+            <p class="mt-1 text-[15px] text-gray-700 font-semibold">1. ブラウザの共有アイコンをタップ</p>
+            <!-- ブラウザの共有アイコンを示すスクリーンショット -->
+            <div class="my-4 w-full md:w-1/2 mx-auto">
+              <%= image_tag "ios_safari_share_icon.jpg" %>
+            </div>
+            <p class="mt-8 text-[15px] text-gray-700 font-semibold">2. 「ホーム画面に追加」をタップ</p>
+            <!-- ホーム画面に追加の項目を示すスクリーンショット -->
+            <div class="my-4 w-full md:w-1/2 mx-auto">
+              <%= image_tag "ios_safari_add_to_home.jpg" %>
+            </div>
 
-        <!-- Androidの場合 -->
-        <h3 class="mt-8 text-lg font-bold">Androidの方 (Chrome)</h3>
-        <p class="mt-1 text-[15px] text-gray-700 font-semibold">1. ブラウザのその他アイコンをタップ</p>
-        <!-- ブラウザの設定アイコンを示すスクリーンショット -->
-        <div class="my-4 w-full md:w-1/2">
-          <%= image_tag "android_chrome_options_icon.png" %>
-        </div>
-        <p class="mt-8 text-[15px] text-gray-700 font-semibold">2. 「ホーム画面に追加」をタップ</p>
-        <!-- ホーム画面に追加の項目を示すスクリーンショット -->
-        <div class="my-4 w-full md:w-1/2">
-          <%= image_tag "android_chrome_add_to_home.png" %>
-        </div>
-      </section>
-
-
-      <!-- フッターCTA -->
-      <section class="mx-auto max-w-screen-sm px-0 py-8">
-        <div class="rounded-3xl bg-gradient-to-r from-[#67BDB7] to-[#49a8a0] p-6 text-white">
-          <h2 class="text-xl font-extrabold text-balance">
-            <p>気分と行動の“波”を</p>
-            <p>理解して、</p>
-            <p>自分らしいリズムを。</p>
-          </h2>
-          <p class="mt-1 text-white/90">このWebアプリを開発したキッカケはこちら</p>
-          <div class="mt-4 grid gap-2">
-            <%= link_to "開発した経緯", behind_the_scene_path,
-              class: "h-12 inline-flex items-center justify-center rounded-lg bg-white px-4 font-semibold text-[#25625d] active:scale-[0.99]" %>
+            <!-- Androidの場合 -->
+            <h3 class="mt-8 text-lg font-bold">Androidの方 (Chrome)</h3>
+            <p class="mt-1 text-[15px] text-gray-700 font-semibold">1. ブラウザのその他アイコンをタップ</p>
+            <!-- ブラウザの設定アイコンを示すスクリーンショット -->
+            <div class="my-4 w-full md:w-1/2 mx-auto">
+              <%= image_tag "android_chrome_options_icon.png" %>
+            </div>
+            <p class="mt-8 text-[15px] text-gray-700 font-semibold">2. 「ホーム画面に追加」をタップ</p>
+            <!-- ホーム画面に追加の項目を示すスクリーンショット -->
+            <div class="my-4 w-full md:w-1/2 mx-auto">
+              <%= image_tag "android_chrome_add_to_home.png" %>
+            </div>
           </div>
         </div>
       </section>
 
+      <div class="mt-16 grid gap-3">
+        <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false },
+          class: "flex items-center justify-center gap-2 border border-[#B6B6B6] w-full py-3 text-center text-[#484848] font-semibold bg-white rounded-md active:scale-[0.99]" do %>
+          <%= image_tag 'google_logo.png', alt: 'Googleのロゴ', size: '20x20' %>
+          <span>Googleアカウントで新規登録</span>
+        <% end %>
+
+        <%= link_to "メールアドレスで新規登録", new_user_registration_path,
+          class: "w-full py-3 text-center text-white font-semibold bg-[#67BDB7] rounded-md active:scale-[0.99]" %>
+
+        <%= button_to "ゲストログインで試してみる", users_guest_sign_in_path, method: :post,
+          class: "w-full py-3 text-center font-semibold text-[#484848] bg-white border border-[#B6B6B6] rounded-md active:scale-[0.99]" %>
+      </div>
+  </section>
+
+
+
+  <!-- 使い方 -->
+  <section id="how" class="mx-auto max-w-screen-sm px-0 py-6">
+    <h2 class="text-xl font-bold">使い方</h2>
+    <p class="mt-1 text-[15px] text-[#5e6d6c]">3ステップで自己理解を深める。</p>
+
+    <div class="mt-4 grid gap-3">
+
+      <!-- Step 1 -->
+      <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4 flex items-start gap-3">
+        <div class="flex-none h-8 w-8 aspect-square rounded-full bg-[#67BDB7] text-white flex items-center justify-center text-sm font-bold leading-none">1</div>
+        <div class="min-w-0">
+          <h3 class="font-semibold">気分・行動を記録</h3>
+          <div class="mt-1 text-sm text-[#5e6d6c]">
+            <p class="text-pretty">毎日の気分と行動を記録。</p>
+            <p class="text-pretty">シンプルなUIで続けやすい。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4 flex items-start gap-3">
+        <div class="flex-none h-8 w-8 aspect-square rounded-full bg-[#67BDB7] text-white flex items-center justify-center text-sm font-bold leading-none">2</div>
+        <div class="min-w-0">
+          <h3 class="font-semibold">現状を知る</h3>
+          <div class="mt-1 text-sm text-[#5e6d6c]">
+            <p class="text-pretty">現状どんな気分の波で、どんな時に何が出来て何が出来ないかを知ります。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="rounded-2xl border border-[#E8F4F2] bg-white p-4 flex items-start gap-3">
+        <div class="flex-none h-8 w-8 aspect-square rounded-full bg-[#67BDB7] text-white flex items-center justify-center text-sm font-bold leading-none">3</div>
+        <div class="min-w-0">
+          <h3 class="font-semibold">合った生活リズムを発見</h3>
+          <div class="mt-1 text-sm text-[#5e6d6c]">
+            <p class="text-pretty">気分マップと行動マップから、生きやすい生活リズムを見つける。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16 grid gap-3">
+      <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: false },
+        class: "flex items-center justify-center gap-2 border border-[#B6B6B6] w-full py-3 text-center text-[#484848] font-semibold bg-white rounded-md active:scale-[0.99]" do %>
+        <%= image_tag 'google_logo.png', alt: 'Googleのロゴ', size: '20x20' %>
+        <span>Googleアカウントで新規登録</span>
+      <% end %>
+
+      <%= link_to "メールアドレスで新規登録", new_user_registration_path,
+        class: "w-full py-3 text-center text-white font-semibold bg-[#67BDB7] rounded-md active:scale-[0.99]" %>
+
+      <%= button_to "ゲストログインで試してみる", users_guest_sign_in_path, method: :post,
+        class: "w-full py-3 text-center font-semibold text-[#484848] bg-white border border-[#B6B6B6] rounded-md active:scale-[0.99]" %>
     </div>
   </section>
+
+
+  <!-- フッターCTA -->
+  <section class="mx-auto max-w-screen-sm px-0 py-8">
+    <div class="rounded-3xl bg-gradient-to-r from-[#67BDB7] to-[#49a8a0] p-6 text-white">
+      <h2 class="text-xl font-extrabold text-balance">
+        <p>気分と行動の“波”を</p>
+        <p>理解して、</p>
+        <p>自分らしいリズムを。</p>
+      </h2>
+      <p class="mt-1 text-white/90">このWebアプリを開発したキッカケはこちら</p>
+      <div class="mt-4 grid gap-2">
+        <%= link_to "開発した経緯", behind_the_scene_path,
+          class: "h-12 inline-flex items-center justify-center rounded-lg bg-white px-4 font-semibold text-[#25625d] active:scale-[0.99]" %>
+      </div>
+    </div>
+  </section>
+
+    </div>
+    </section>
 </div>
