@@ -35,21 +35,32 @@ export default class extends Controller {
         tag.classList.remove(fontWeight)
         tag.classList.add("border")
         tag.classList.add(borderColor)
-      }});
+      }
+    });
   }
 
-  updateLists(e) {
+  async updateLists(e) {
     const moodScore = document.getElementById("mood-range").value;
     const selectedTag = e.target
     const selectedTagName = e.target.textContent.trim().replace(/^# /, "")
-    const frame = this.listsFrameTarget
 
     if (selectedTag.active) {
       // 選択されたタグに関する項目を表示
-      frame.src = `/action_items?mood_score=${moodScore}&selected_tag_name=${selectedTagName}`
+      const res = await fetch(
+        `/action_items?mood_score=${moodScore}&selected_tag_name=${selectedTagName}`,
+        { headers: { Accept: "text/vnd.turbo-stream.html" } }
+      )
+
+      Turbo.renderStreamMessage(await res.text())
     } else {
       // 全ての項目を表示
-      frame.src = `/action_items?mood_score=${moodScore}`
+      // 選択されたタグに関する項目を表示
+      const res = await fetch(
+        `/action_items?mood_score=${moodScore}`,
+        { headers: { Accept: "text/vnd.turbo-stream.html" } }
+      )
+
+      Turbo.renderStreamMessage(await res.text())
     }
   }
 }
