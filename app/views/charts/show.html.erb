@@ -21,6 +21,7 @@
           data-controller="charts--display" 
           data-chart-labels="<%= @labels.to_json %>"
           data-chart-data="<%= @data.to_json %>"
+          data-chart-uneasy-flags="<%= @uneasy_flags.to_json %>"
           data-charts--display-user-id-value="<%= @user.id %>"
           class="mt-4">
           <select data-action="charts--display#update" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
