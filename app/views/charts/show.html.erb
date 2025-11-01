@@ -1,24 +1,29 @@
-<div class="my-28 mx-12">
-  <div>
-    <%= render 'shared/flash_message' %>
-  </div>
-  <div class="flex">
-    <% if @user.name.blank? %>
-      ユーザーネーム未設定
-    <% else %>
-      <div class="font-semibold">
-        <%= @user.name %>
-      </div>
-    <% end %>
-    <span class="font-semibold text-string-base text-md">さんのグラフ</span> 
-  </div>
-  <div>
+<div class="min-h-[calc(100vh-4rem)] bg-[#F8FAFA]">
+  <div class="mx-auto max-w-3xl px-5 py-12">
+    <div>
+      <%= render 'shared/flash_message' %>
+    </div>
+
+    <!-- タイトル -->
+    <div class="flex items-baseline gap-2">
+      <% if @user.name.blank? %>
+        <span class="text-gray-700 text-base font-semibold">ユーザーネーム未設定</span>
+      <% else %>
+        <div class="text-gray-800 text-base font-semibold">
+          <%= @user.name %>
+        </div>
+      <% end %>
+      <span class="text-[#25625d] text-[15px] font-semibold">さんのグラフ</span>
+    </div>
+
+    <!-- 範囲セレクト -->
     <div 
           data-controller="charts--display" 
           data-chart-labels="<%= @labels.to_json %>"
           data-chart-data="<%= @data.to_json %>"
-          data-charts--display-user-id-value="<%= @user.id %>">
-          <select data-action="charts--display#update" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
+          data-charts--display-user-id-value="<%= @user.id %>"
+          class="mt-4">
+          <select data-action="charts--display#update" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
             <option value="last_week">直近1週間</option>
             <option value="last_month" selected>直近1ヶ月</option>
             <option value="last_3_months">直近3ヶ月</option>
@@ -27,25 +32,34 @@
             <option value="all_time">全期間</option>
           </select>
     </div>
+
     <!-- グラフ -->
-    <div class="flex justify-center">
-      <div class="overflow-x-scroll">
-        <div class="h-80">
-          <canvas id="myChart" dir="rtl" class="left-0 top-0"></canvas>
+    <div class="mt-4">
+      <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+        <div class="flex justify-center">
+          <div class="overflow-x-scroll">
+            <div class="h-80">
+              <canvas id="myChart" dir="rtl" class="left-0 top-0"></canvas>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div>
-    <div>
-      <p class="font-semibold text-string-base text-md mt-8 mb-4">前回の記録</p> 
+
+    <!-- 前回の記録 -->
+    <div class="mt-8">
+      <p class="text-[15px] font-semibold text-[#25625d] mb-3">前回の記録</p>
+      <% if @latest_record.present? %>
+        <%= render partial: "daily_records/shared/link_card", locals: { user: current_user, daily_record: @latest_record } %>
+      <% end %>
     </div>
-    <!-- 直近一件の記録 -->
-    <% if @latest_record.present? %>
-      <%= render partial: "daily_records/shared/link_card", locals: { user: current_user, daily_record: @latest_record } %>
-    <% end %>
-  </div>
-  <div>
-    <%= link_to "さらに過去の記録を見る", user_daily_records_path(@user.id), class: "border border-gray-300 shadow-md block w-full mt-4 py-2 text-center text-string-base font-semibold bg-white rounded-md" %>
+
+    <!-- さらに過去の記録 -->
+    <div class="mt-4">
+      <%= link_to "さらに過去の記録を見る",
+        user_daily_records_path(@user.id),
+        class: "block w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-center text-sm font-semibold text-gray-800
+                          shadow-sm transition hover:bg-[#F3FBFA] focus:outline-none focus:ring-4 focus:ring-[#67BDB7]/20" %>
+    </div>
   </div>
 </div>
