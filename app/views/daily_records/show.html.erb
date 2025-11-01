@@ -2,45 +2,51 @@
   <div>
     <%= render 'shared/flash_message' %>
   </div>
+
   <div class="flex items-center">
-    <div class="font-semibold text-string-base text-xl mr-4">
+    <div class="font-semibold text-xl text-[#25625d] mr-4">
       記録の詳細
     </div> 
-    <%= link_to "編集", edit_user_daily_record_path(@daily_record.user.id, @daily_record.id), class: "text-white font-medium bg-logo-color rounded-md px-4 py-2"%>
+    <%= link_to "編集", edit_user_daily_record_path(@daily_record.user.id, @daily_record.id),
+      class: "text-white font-medium bg-logo-color rounded-md px-4 py-2 shadow-sm hover:opacity-90 transition" %>
   </div>
-  <div class="text-string-base">
+
+  <div class="text-gray-800">
     <!-- 気分 -->
     <div class="mt-4">
-      <div class="font-semibold text-string-base text-md">
+      <div class="font-semibold text-md text-[#25625d]">
         気分
       </div> 
-      <div class="my-2 p-3 border border-gray-300 rounded-md">
-        <span class="font-semibold text-md">
+      <div class="my-2 p-3 rounded-md border border-gray-200 bg-white">
+        <span class="font-semibold text-md text-gray-800">
           <%= mood_display(@daily_record.mood_score) %>
           （<%= @daily_record.mood_score %>）
         </span>
       </div>
     </div>
+
     <!-- 気付きメモ -->
     <div class="mt-4"> 
-      <div class="font-semibold text-string-base text-md my-2">
+      <div class="font-semibold text-md text-[#25625d] my-2">
         気付きメモ
       </div> 
-      <div class="p-3 font-light border border-gray-300 rounded-md">
+      <div class="p-3 font-light rounded-md border border-gray-200 bg-white text-gray-800">
         <%= @daily_record.memo %>
       </div>
     </div>
+
     <!-- 心がザワザワしている状態と記録した場合に表示 -->
     <div class="mt-4"> 
-      <div class="font-semibold text-string-base text-md my-2">
+      <div class="font-semibold text-md text-[#25625d] my-2">
         心のザワザワ状況
       </div> 
-      <div class="p-3 font-light border border-gray-300 rounded-md">
+      <div class="p-3 font-light rounded-md border border-gray-200 bg-white text-gray-800">
         <%= @daily_record.is_uneasy ? "心のザワザワがあった ❤️💭" : "心のザワザワはなかった" %>
       </div>
     </div>
+
     <!-- 作成時間 -->
-    <div class="text-sm text-right my-2">
+    <div class="text-sm text-right my-2 text-gray-500">
       <%= @daily_record.created_at.strftime("%Y/%m/%d %H:%M") %>
     </div>  
   </div>

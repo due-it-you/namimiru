@@ -1,20 +1,22 @@
 <%= form_with model: model do |f| %>
   <!-- 項目の種類 -->
   <div class="mt-4">
-    <p><%= f.label :behavior_type, "項目の種類" %></p>
+    <p class="text-sm font-medium text-[#25625d]"><%= f.label :behavior_type, "項目の種類" %></p>
     <div class="my-2">
       <%= f.select :behavior_type, 
         [["できそうかも/できなさそうかも", "dynamic"], ["躁状態の時にやらない方がいい行動", "avoid"]], 
         { include_blank: "項目の種類を選択してください" },
-        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5",
+        class: "bg-white border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-[#67BDB7] focus:border-[#67BDB7] block w-full p-2.5",
         data: { action: "action-items--form#toggleMoodScoreForm" } %>
     </div>
   </div>
 
   <!-- 項目名の入力 -->
-  <div>
-    <p><%= f.label :name, "項目名" %></p>
-    <%= f.text_field :name, placeholder: "自炊", class: "border border-gray-300 rounded-md w-full my-2 p-2", required: true %>
+  <div class="mt-4">
+    <p class="text-sm font-medium text-[#25625d]"><%= f.label :name, "項目名" %></p>
+    <%= f.text_field :name, placeholder: "自炊",
+    class: "bg-white border border-gray-200 rounded-md w-full my-2 p-2 text-gray-700 focus:ring-[#67BDB7] focus:border-[#67BDB7]",
+    required: true %>
   </div>
 
   <!-- タグの入力 -->
@@ -27,26 +29,25 @@
 
   <!-- 気分の入力 -->
   <div class="mt-8" id="input-mood-score-form">
-    <p><%= f.label :enabled_from, "どの気分の段階から出来るようになりそうですか？" %></p>
-    <div class="mt-2">
-      <div class="flex items-center justify-center font-bold rounded-md p-4">
-        <!-- 顔アイコン -->
-        <div id="current-mood-icon" class="text-3xl">
-        </div>
-        <!-- 気分の表記（絶不調・とてもつらい・普通など） -->
-        <div id="current-mood" class="ml-2 text-md">
-        </div>
-        <div>
-          （<span id="current-mood-score"></span>）
-        </div>
+    <p class="text-sm font-medium text-[#25625d]">
+    <%= f.label :enabled_from, "どの気分の段階から出来るようになりそうですか？" %>
+    </p>
+
+    <div class="mt-3">
+      <div class="flex items-center justify-center font-semibold text-[#25625d] rounded-md p-3">
+        <div id="current-mood-icon" class="text-2xl"></div>
+        <div id="current-mood" class="ml-2 text-sm"></div>
+        <div class="text-sm">（<span id="current-mood-score"></span>）</div>
       </div>
-      <div class="flex items-center justify-center font-bold rounded-md">
-        から出来そう...!
-      </div>
-      <!-- スライダー -->
-      <%= f.range_field :enabled_from, min: "-5", max: "5", id: "mood-range", data: { action: "daily-records--mood-score#update input->range-slider--current-mood#updateColor" } , class: "w-full my-4" %>
+
+      <div class="text-center text-sm text-gray-600 my-1">から出来そう…！</div>
+
+      <%= f.range_field :enabled_from, min: "-5", max: "5", id: "mood-range",
+        data: { action: "daily-records--mood-score#update input->range-slider--current-mood#updateColor" },
+        class: "w-full my-4" %>
     </div>
   </div>
 
-  <%= f.submit "作成", class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8" %>
+  <%= f.submit "作成",
+    class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8 shadow-sm hover:opacity-90 transition" %>
 <% end %>

@@ -1,51 +1,58 @@
-<div class="my-28 mx-12">
-  <div>
-    <%= render 'shared/flash_message' %>
-  </div>
-  <div class="font-semibold text-string-base text-md my-4">
-    どのユーザーのグラフを確認しますか？
-  </div>
-  <!-- 現在ログインしているユーザー -->
-  <div class="font-semibold text-string-base text-sm my-4">
-    自身のグラフ
-  </div>
-  <hr class="text-gray-200">
-  <%= link_to user_chart_path(@current_user.id) do %>
-    <div class="p-4 flex items-center justify-between">
-      <% if @current_user.name.blank? %>
-        ユーザーネーム未設定
-      <% else %>
-        <div class="font-semibold">
-          <%= @current_user.name %>
-        </div>
-      <% end %>
-      <span class="text-gray-400 text-2xl">›</span>
+<div>
+  <div class="mx-auto max-w-xl px-5 py-12">
+    <div>
+      <%= render 'shared/flash_message' %>
     </div>
-  <% end %>
-  <hr class="text-gray-200">
-  <div class="font-semibold text-string-base text-sm mt-12 mb-4">
-    連携状態のユーザーのグラフ
-  </div>
-  <hr class="text-gray-200">
-  <% if @current_user.supportings.none? %>
-    <div class="font-semibold text-string-base text-sm my-4">
-      <p>連携状態のユーザーがいません。</p>
+    <div class="text-[#25625d] font-semibold">
+      どのユーザーのグラフを確認しますか？
     </div>
-  <% end %>
-  <!-- 連携状態にあり, 支援の対象になるユーザーの一覧 -->
-  <% @current_user.supportings.each do |supported_person| %>
-    <%= link_to user_chart_path(supported_person.id) do %>
-      <div class="p-4 flex items-center justify-between">
-        <% if supported_person.name.blank? %>
-          ユーザーネーム未設定
-        <% else %>
-          <div class="font-semibold">
-            <%= supported_person.name %>
+
+    <!-- 現在ログインしているユーザー -->
+    <section class="my-8">
+      <h2 class="text-sm font-semibold text-[#25625d] mb-3">
+        自身のグラフ
+      </h2>
+
+      <div class="overflow-hidden rounded-xl border border-gray-200 bg-white">
+        <%= link_to user_chart_path(@current_user.id), class: "block group" do %>
+          <div class="px-4 py-2 flex items-center justify-between hover:bg-[#F3FBFA] transition">
+            <% if @current_user.name.blank? %>
+              <span class="text-gray-700 text-sm">ユーザーネーム未設定</span>
+            <% else %>
+              <div class="font-semibold text-gray-800"><%= @current_user.name %></div>
+            <% end %>
+            <span class="text-gray-400 text-2xl group-hover:text-[#67BDB7] transition">›</span>
           </div>
         <% end %>
-        <span class="text-gray-400 text-2xl">›</span>
       </div>
-    <% end %>
-    <hr class="text-gray-200">
-  <% end %>
+    </section>
+
+    <!-- 連携ユーザー -->
+    <section>
+      <h2 class="text-sm font-semibold text-[#25625d] mb-3">
+        連携状態のユーザーのグラフ
+      </h2>
+
+      <% if @current_user.supportings.none? %>
+        <div class="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-600">
+          連携状態のユーザーがいません。
+        </div>
+      <% else %>
+        <div class="overflow-hidden rounded-xl border border-gray-200 bg-white divide-y divide-gray-100">
+          <% @current_user.supportings.each do |supported_person| %>
+            <%= link_to user_chart_path(supported_person.id), class: "block group" do %>
+              <div class="text-sm text-[#25625d] px-4 py-2 flex items-center justify-between hover:bg-[#F3FBFA] transition">
+                <% if supported_person.name.blank? %>
+                  <span class="text-gray-700 text-sm">ユーザーネーム未設定</span>
+                <% else %>
+                  <div class="font-semibold text-gray-800"><%= supported_person.name %></div>
+                <% end %>
+                <span class="text-gray-400 text-2xl group-hover:text-[#67BDB7] transition">›</span>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+  </div>
 </div>
