@@ -8,6 +8,7 @@ export default class extends Controller {
   connect() {
     const labels = JSON.parse(this.element.dataset.chartLabels)
     const data = JSON.parse(this.element.dataset.chartData)
+    const uneasy = JSON.parse(this.element.dataset.chartUneasyFlags)
 
     // グラフの縦横幅
     this.fixedHeight = 320
@@ -32,7 +33,8 @@ export default class extends Controller {
           backgroundColor: defaultChartLineColor,
           borderWidth: 2.5,
           pointStyle: "circle",
-          pointRadius: 1.5,
+          pointBackgroundColor: (c) => uneasy[c.dataIndex] ? "#eb6ea5" : "#25625d",
+          pointRadius: (c) => uneasy[c.dataIndex] ? 4 : 1.5,
           fill: true,
           tension: 0.1
         }]
