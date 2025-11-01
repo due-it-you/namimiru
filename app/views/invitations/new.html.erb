@@ -2,23 +2,45 @@
   <div>
     <%= render 'shared/flash_message' %>
   </div>
+
   <%= form_with model: @user, url: invitation_path, method: :post, scope: :invitation do |f| %>
-    <div class="text-string-base font-semibold text-sm">
-       招待する相手の役割を選択してください。
+
+    <div class="font-semibold text-sm text-[#25625d]">
+      招待する相手の役割を選択してください。
     </div>
-    <%= f.select :invitee_role, [["双極性障害を持つ方", "supported"], ["その家族や周囲の方", "supporter"]], { include_blank: "選択してください ▼" }, required: true, class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 mt-2 mb-8" %>
-    <div class="text-string-base font-semibold text-sm">
-       招待する相手のメールアドレスを入力してください。
-    </div>
-    <%= f.email_field :email, class: "border border-border-base rounded-md w-full my-2 p-2",required: true ,placeholder: "xxxxx@example.com" %>
-    <%= f.submit "招待メールを送信", class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8" %>
-  <% end %>
-  <div class="flex items-center mb-8">
-    <div class="flex-grow border-t border-gray-400"></div>
-    <span class="text-xs mx-4 text-gray-700">招待コードを入力する場合</span>
-    <div class="flex-grow border-t border-gray-400"></div>
+
+    <%= f.select :invitee_role,
+      [["双極性障害を持つ方", "supported"], ["その家族や周囲の方", "supporter"]],
+      { include_blank: "選択してください ▼" },
+      required: true,
+      class: "bg-white border border-gray-200 text-gray-800 text-sm rounded-lg focus:ring-[#67BDB7] focus:border-[#67BDB7] w-full p-2.5 mt-2 mb-8"
+    %>
+
+  <div class="font-semibold text-sm text-[#25625d]">
+    招待する相手のメールアドレスを入力してください。
   </div>
+
+  <%= f.email_field :email,
+    class: "border border-gray-200 rounded-md w-full my-2 p-2 text-gray-800 placeholder-gray-400",
+    required: true,
+    placeholder: "xxxxx@example.com"
+  %>
+
+<%= f.submit "招待メールを送信",
+  class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8 shadow-sm hover:opacity-90 transition"
+%>
+
+  <% end %>
+
+  <div class="flex items-center mb-8">
+    <div class="flex-grow border-t border-gray-300"></div>
+    <span class="text-xs mx-4 text-gray-500">招待コードを入力する場合</span>
+    <div class="flex-grow border-t border-gray-300"></div>
+  </div>
+
   <div>
-    <%= link_to "招待コードを入力", new_care_relation_path, class: "block w-full text-center border border-border-base rounded-md text-string-base font-semibold py-2 px-4" %>
+    <%= link_to "招待コードを入力", new_care_relation_path,
+      class: "block w-full text-center border border-gray-300 rounded-md text-gray-800 font-semibold py-2 px-4 bg-white hover:bg-gray-50 transition"
+    %>
   </div>
 </div>
