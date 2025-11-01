@@ -21,6 +21,7 @@
           data-controller="charts--display" 
           data-chart-labels="<%= @labels.to_json %>"
           data-chart-data="<%= @data.to_json %>"
+          data-chart-uneasy-flags="<%= @uneasy_flags.to_json %>"
           data-charts--display-user-id-value="<%= @user.id %>"
           class="mt-4">
           <select data-action="charts--display#update" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
@@ -36,6 +37,15 @@
     <!-- グラフ -->
     <div class="mt-4">
       <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+        <div class="mb-2 flex">
+          <span
+              class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-[#F8FAFA]
+                     px-2.5 py-1 text-xs font-medium text-gray-700"
+              aria-label="グラフの凡例">
+            <span class="inline-block h-2 aspect-square rounded-full bg-[#eb6ea5]"></span>
+            心がざわざわした日
+          </span>
+        </div>
         <div class="flex justify-center">
           <div class="overflow-x-scroll">
             <div class="h-80">
