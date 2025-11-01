@@ -11,15 +11,18 @@ class ChartsController < ApplicationController
 
     # グラフ表示のためのラベルとデータ
     score_by_date = {}
-    score_and_time_pairs = @user.daily_records.pluck(:mood_score, :created_at)
-    score_and_time_pairs.each do |score, created_at|
+    # { 記録が存在する日付: [気分の数値, ざわざわしているか], ... }
+    score_and_time_pairs = @user.daily_records.pluck(:mood_score, :is_uneasy,:created_at)
+    score_and_time_pairs.each do |score, is_uneasy, created_at|
       date = created_at.to_date
-      score_by_date[date] = score
+      score_by_date[date] = [score, is_uneasy]
     end
 
+    # 1ヶ月分の記録の配列で、記録が存在していればその記録のデータ、なければnil
     one_month = (1.months.ago.to_date..Date.current)
     @labels = one_month.to_a
-    @data = one_month.map { |date| score_by_date[date] }
+    @data = one_month.map { |date| score_by_date[date]&.first }
+    @uneasy_flags = one_month.map { |date| score_by_date[date]&.last }
   end
 
   def data
