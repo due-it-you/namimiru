@@ -30,15 +30,16 @@ class ChartsController < ApplicationController
     # グラフ表示のためのラベルとデータ
     range = selected_range_object(params[:range], user)
     score_by_date = {}
-    score_and_time_pairs = user.daily_records.pluck(:mood_score, :created_at)
-    score_and_time_pairs.each do |score, created_at|
+    score_and_time_pairs = user.daily_records.pluck(:mood_score, :is_uneasy, :created_at)
+    score_and_time_pairs.each do |score, is_uneasy, created_at|
       date = created_at.to_date
-      score_by_date[date] = score
+      score_by_date[date] = [score, is_uneasy]
     end
 
     labels = range.to_a
-    data = range.map { |date| score_by_date[date] }
-    chart_data = { labels: labels, data: data }
+    data = range.map { |date| score_by_date[date]&.first }
+    uneasy_flags = range.map { |date| score_by_date[date]&.last }
+    chart_data = { labels: labels, data: data, uneasy_flags: uneasy_flags }
     render json: chart_data
   end
 
