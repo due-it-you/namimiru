@@ -10,8 +10,11 @@ export default class extends Controller {
     const data = JSON.parse(this.element.dataset.chartData)
     const uneasy = JSON.parse(this.element.dataset.chartUneasyFlags)
     this.uneasyColor = "#eb6ea5"
-    this.notUneasyColor = "#25625d"
+    this.notUneasyColor = "rgba(103, 189, 183, 0.7)"
     this.uneasyFlags = uneasy.map(flag => (flag ? this.uneasyColor : this.notUneasyColor))
+    this.uneasyPointRadius = 3
+    this.notUneasyPointRadius = 1.5
+    const pointRadius = uneasy.map(flag => (flag ? this.uneasyPointRadius : this.notUneasyPointRadius ))
 
     // グラフの縦横幅
     this.fixedHeight = 320
@@ -37,6 +40,7 @@ export default class extends Controller {
           borderWidth: 2.5,
           pointStyle: "circle",
           pointBackgroundColor: this.uneasyFlags,
+          pointRadius: pointRadius,
           fill: true,
           tension: 0.1
         }]
@@ -67,6 +71,7 @@ export default class extends Controller {
       const { labels, data, uneasy_flags } = json;
 
       this.uneasyFlags = uneasy_flags.map(flag => (flag ? this.uneasyColor : this.notUneasyColor))
+      const pointRadius = uneasy_flags.map(flag => (flag ? this.uneasyPointRadius : this.notUneasyPointRadius ))
       // 期間によってグラフのX軸をスクロール可能に変更
       const aroundOneMonthDays = 40
       const widthEachData = 4
@@ -93,6 +98,7 @@ export default class extends Controller {
       this.chart.data.labels = Array.from(labels);
       this.chart.data.datasets[0].data = Array.from(data);
       this.chart.data.datasets[0].pointBackgroundColor = Array.from(this.uneasyFlags);
+      this.chart.data.datasets[0].pointRadius = Array.from(pointRadius);
       this.chart.update();
     } catch(err) {
       console.log("response error");
