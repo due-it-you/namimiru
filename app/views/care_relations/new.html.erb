@@ -2,16 +2,27 @@
   <div>
     <%= render 'shared/flash_message' %>
   </div>
-  <div class="text-string-base font-semibold text-xl">
+
+  <div class="font-semibold text-[#25625d] text-md">
     他のユーザーとの連携
   </div>
+
   <div class="my-8">
     <%= form_with url: care_relations_path, method: :post, scope: :user do |f| %>
-      <div class="text-string-base font-semibold text-sm">
+
+      <div class="font-semibold text-sm text-[#25625d]">
         招待コードを入力してください。
       </div>
-      <%= f.text_field :invitation_token, class: "border border-border-base rounded-md w-full my-2 p-2", placeholder: "招待コード" %>
-      <%= f.submit "招待コードの入力", class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8" %>
-    <% end %>
+
+      <%= f.text_field :invitation_token,
+        class: "border border-gray-200 rounded-md w-full my-2 p-2 text-gray-800 placeholder-gray-400 bg-white focus:ring-[#67BDB7] focus:border-[#67BDB7]",
+        placeholder: "招待コード"
+      %>
+
+    <%= f.submit "招待コードの入力",
+      class: "bg-logo-color text-white w-full font-semibold rounded-md py-2 px-4 my-8 shadow-sm hover:opacity-90 transition"
+    %>
+
+<% end %>
   </div>
 </div>
