@@ -1,5 +1,5 @@
 class ChartsController < ApplicationController
-  before_action :authorize_the_chart!, only: %i[show data]
+  before_action :authorize_the_chart!, only: %i[index]
 
   def index
     @user = User.find_by(id: params[:user_id]) || current_user 
@@ -29,7 +29,7 @@ class ChartsController < ApplicationController
   private
 
   def authorize_the_chart!
-    user = User.find(params[:user_id])
+    user = params[:user_id].present? ? User.find(params[:user_id]) : current_user
     # 自身のグラフを確認する時は常にアクセスを許可
     return if current_user == user
     # アクセスを試みているユーザーと連携状態にない場合にリダイレクト
