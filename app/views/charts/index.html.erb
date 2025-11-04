@@ -64,20 +64,20 @@
       </div>
     </div>
 
-    <!-- 前回の記録 -->
-    <div class="mt-8">
-      <p class="text-[15px] font-semibold text-[#25625d] mb-3">前回の記録</p>
-      <% if @latest_record.present? %>
-        <%= render partial: "daily_records/shared/link_card", locals: { user: current_user, daily_record: @latest_record } %>
-      <% end %>
-    </div>
+    <!-- ユーザーの記録 -->
+    <div>
+      <!-- 前回の記録 -->
+      <div class="mt-8">
+        <p class="text-[15px] font-semibold text-[#25625d] mb-3">前回の記録</p>
+        <% if @latest_record.present? %>
+          <%= render partial: "daily_records/shared/link_card", locals: { user: @user, daily_record: @latest_record } %>
+        <% end %>
+      </div>
 
-    <!-- さらに過去の記録 -->
-    <div class="mt-4">
-      <%= link_to "さらに過去の記録を見る",
-        user_daily_records_path(@user.id),
-        class: "block w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-center text-sm font-semibold text-gray-800
-                          shadow-sm transition hover:bg-[#F3FBFA] focus:outline-none focus:ring-4 focus:ring-[#67BDB7]/20" %>
+      <!-- さらに過去の記録 -->
+      <div class="mt-4">
+        <%= render partial: "charts/shared/daily_records_index_button", locals: { user: @user } %>
+      </div>
     </div>
   </div>
 </div>
