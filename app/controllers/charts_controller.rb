@@ -2,7 +2,7 @@ class ChartsController < ApplicationController
   before_action :authorize_the_chart!, only: %i[index]
 
   def index
-    @user = User.find_by(id: params[:user_id]) || current_user 
+    @user = User.find_by(id: params[:user_id]) || current_user
     @latest_record = @user.daily_records.order(created_at: :ASC).last
 
     # グラフ表示のためのラベルとデータ

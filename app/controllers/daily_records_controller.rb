@@ -66,7 +66,7 @@ class DailyRecordsController < ApplicationController
     daily_record = DailyRecord.find(params[:id])
     if daily_record.user != current_user
       flash[:alert] = "アクセス出来ないページです。"
-      redirect_to charts_path 
+      redirect_to charts_path
     end
   end
 end

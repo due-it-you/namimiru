@@ -1,5 +1,4 @@
 class ActionItemsController < ApplicationController
-
   def index
     latest_mood_score = current_user.daily_records.order(created_at: :desc).first&.mood_score
     # スライダーを変動させた後の値 || 初回アクセス時の初期値 || 記録がまだ存在しない場合の初期値
