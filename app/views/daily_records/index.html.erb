@@ -18,7 +18,7 @@
       <%= render partial: "daily_records/shared/card", locals: { user: @user, daily_record: daily_record } %>
     </div>
   <% end %>
-  <div class="w-full flex justify-center">
+  <div class="mt-8 w-full flex justify-center">
     <div>
       <%= paginate @daily_records, window: 2 %>
     </div>
