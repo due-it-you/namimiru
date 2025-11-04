@@ -1,12 +1,8 @@
 class ChartsController < ApplicationController
-  before_action :authorize_the_chart!, only: %i[show data]
+  before_action :authorize_the_chart!, only: %i[index]
 
   def index
-    @current_user = current_user
-  end
-
-  def show
-    @user = User.find(params[:user_id])
+    @user = User.find_by(id: params[:user_id]) || current_user
     @latest_record = @user.daily_records.order(created_at: :ASC).last
 
     # グラフ表示のためのラベルとデータ
@@ -19,34 +15,22 @@ class ChartsController < ApplicationController
     end
 
     # 1ヶ月分の記録の配列で、記録が存在していればその記録のデータ、なければnil
-    one_month = (1.months.ago.to_date..Date.current)
-    @labels = one_month.to_a
-    @data = one_month.map { |date| score_by_date[date]&.first }
-    @uneasy_flags = one_month.map { |date| score_by_date[date]&.last }
-  end
-
-  def data
-    user = User.find(params[:user_id])
-    # グラフ表示のためのラベルとデータ
-    range = selected_range_object(params[:range], user)
-    score_by_date = {}
-    score_and_time_pairs = user.daily_records.pluck(:mood_score, :is_uneasy, :created_at)
-    score_and_time_pairs.each do |score, is_uneasy, created_at|
-      date = created_at.to_date
-      score_by_date[date] = [ score, is_uneasy ]
+    range = selected_range_object(params[:range], @user) || (1.months.ago.to_date..Date.current)
+    @labels = range.to_a
+    @data = range.map { |date| score_by_date[date]&.first }
+    @uneasy_flags = range.map { |date| score_by_date[date]&.last }
+    chart_data = { labels: @labels, data: @data, uneasy_flags: @uneasy_flags }
+    respond_to do |f|
+      f.html
+      f.json { render json: chart_data }
+      f.turbo_stream
     end
-
-    labels = range.to_a
-    data = range.map { |date| score_by_date[date]&.first }
-    uneasy_flags = range.map { |date| score_by_date[date]&.last }
-    chart_data = { labels: labels, data: data, uneasy_flags: uneasy_flags }
-    render json: chart_data
   end
 
   private
 
   def authorize_the_chart!
-    user = User.find(params[:user_id])
+    user = params[:user_id].present? ? User.find(params[:user_id]) : current_user
     # 自身のグラフを確認する時は常にアクセスを許可
     return if current_user == user
     # アクセスを試みているユーザーと連携状態にない場合にリダイレクト

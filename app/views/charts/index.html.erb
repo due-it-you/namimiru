@@ -1,58 +1,85 @@
-<div>
-  <div class="mx-auto max-w-xl px-5 py-12">
+<div class="min-h-[calc(100vh-4rem)] bg-[#F8FAFA]">
+  <div class="mx-auto max-w-3xl px-5 py-12">
     <div>
       <%= render 'shared/flash_message' %>
     </div>
-    <div class="text-[#25625d] font-semibold">
-      どのユーザーのグラフを確認しますか？
+
+    <!-- 表示されているグラフのユーザーネーム -->
+    <div class="flex items-baseline gap-2">
+      <span class="text-gray-700 text-base font-semibold" id="username"><%= @user.name || "ユーザーネーム未設定" %></span>
+      <span class="text-[#25625d] text-[15px] font-semibold">さんのグラフ</span>
     </div>
 
-    <!-- 現在ログインしているユーザー -->
-    <section class="my-8">
-      <h2 class="text-sm font-semibold text-[#25625d] mb-3">
-        自身のグラフ
-      </h2>
-
-      <div class="overflow-hidden rounded-xl border border-gray-200 bg-white">
-        <%= link_to user_chart_path(@current_user.id), class: "block group" do %>
-          <div class="px-4 py-2 flex items-center justify-between hover:bg-[#F3FBFA] transition">
-            <% if @current_user.name.blank? %>
-              <span class="text-gray-700 text-sm">ユーザーネーム未設定</span>
-            <% else %>
-              <div class="font-semibold text-gray-800"><%= @current_user.name %></div>
-            <% end %>
-            <span class="text-gray-400 text-2xl group-hover:text-[#67BDB7] transition">›</span>
-          </div>
-        <% end %>
+    <div 
+            data-controller="charts--display" 
+            data-chart-labels="<%= @labels.to_json %>"
+            data-chart-data="<%= @data.to_json %>"
+            data-chart-uneasy-flags="<%= @uneasy_flags.to_json %>"
+            data-charts--display-user-id-value="<%= @user.id %>"
+            class="flex items-center mt-4 space-x-4">
+      <!-- 表示期間のセレクトボックス -->
+      <div>
+            <select data-action="charts--display#update" data-charts--display-target="range" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
+              <option value="last_week">直近1週間</option>
+              <option value="last_month" selected>直近1ヶ月</option>
+              <option value="last_3_months">直近3ヶ月</option>
+              <option value="last_6_months">直近6ヶ月</option>
+              <option value="last_year">直近1年間</option>
+              <option value="all_time">全期間</option>
+            </select>
       </div>
-    </section>
 
-    <!-- 連携ユーザー -->
-    <section>
-      <h2 class="text-sm font-semibold text-[#25625d] mb-3">
-        連携状態のユーザーのグラフ
-      </h2>
+      <!-- ユーザーのセレクトボックス -->
+      <div>
+        <select data-action="charts--display#update" data-charts--display-target="selectedUser" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
+          <!-- 現在ログインしているユーザー -->
+          <option value="<%= @user.id %>"><%= @user.name || "ユーザーネーム未設定" %></option> 
+          <!-- 連携状態にある 双極症を持つユーザー -->
+          <% @user.supportings.each do |supported_user| %>
+            <option value="<%= supported_user.id %>"><%= supported_user.name || "ユーザーネーム未設定" %></option>
+          <% end %>
+        </select>
+      </div>
+    </div>
 
-      <% if @current_user.supportings.none? %>
-        <div class="rounded-xl border border-dashed border-gray-300 bg-white p-4 text-sm text-gray-600">
-          連携状態のユーザーがいません。
+    <!-- グラフ -->
+    <div class="mt-4">
+      <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+        <div class="mb-2 flex">
+          <span
+              class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-[#F8FAFA]
+                     px-2.5 py-1 text-xs font-medium text-gray-700"
+              aria-label="グラフの凡例">
+            <span class="inline-block h-2 aspect-square rounded-full bg-[#eb6ea5]"></span>
+            心がざわざわした日
+          </span>
         </div>
-      <% else %>
-        <div class="overflow-hidden rounded-xl border border-gray-200 bg-white divide-y divide-gray-100">
-          <% @current_user.supportings.each do |supported_person| %>
-            <%= link_to user_chart_path(supported_person.id), class: "block group" do %>
-              <div class="text-sm text-[#25625d] px-4 py-2 flex items-center justify-between hover:bg-[#F3FBFA] transition">
-                <% if supported_person.name.blank? %>
-                  <span class="text-gray-700 text-sm">ユーザーネーム未設定</span>
-                <% else %>
-                  <div class="font-semibold text-gray-800"><%= supported_person.name %></div>
-                <% end %>
-                <span class="text-gray-400 text-2xl group-hover:text-[#67BDB7] transition">›</span>
-              </div>
-            <% end %>
+        <div class="flex justify-center">
+          <div class="overflow-x-scroll">
+            <div class="h-80">
+              <canvas id="myChart" dir="rtl" class="left-0 top-0"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ユーザーの記録 -->
+    <div>
+      <!-- 前回の記録 -->
+      <div class="mt-8">
+        <p class="text-[15px] font-semibold text-[#25625d] mb-3">前回の記録</p>
+        <div id="latest-record-link-card">
+          <% if @latest_record.present? %>
+            <%= render partial: "daily_records/shared/card", locals: { user: @user, daily_record: @latest_record } %>
           <% end %>
         </div>
-      <% end %>
-    </section>
+      </div>
+
+      <!-- さらに過去の記録 -->
+      <div class="mt-4" id="daily-records-index-button">
+        <%= render partial: "charts/shared/daily_records_index_button", locals: { user: @user } %>
+      </div>
+    </div>
   </div>
 </div>

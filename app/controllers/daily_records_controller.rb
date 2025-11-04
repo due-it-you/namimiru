@@ -1,4 +1,6 @@
 class DailyRecordsController < ApplicationController
+  before_action :specified_user, only: %i[show edit update destroy]
+
   ONE_WEEK_DAYS = 7.freeze
 
   def index
@@ -58,5 +60,13 @@ class DailyRecordsController < ApplicationController
 
   def daily_record_params
     params.require(:daily_record).permit(:mood_score, :memo, :is_uneasy)
+  end
+
+  def specified_user
+    daily_record = DailyRecord.find(params[:id])
+    if daily_record.user != current_user
+      flash[:alert] = "アクセス出来ないページです。"
+      redirect_to charts_path
+    end
   end
 end
