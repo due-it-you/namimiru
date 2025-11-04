@@ -16,15 +16,15 @@
       <span class="text-[#25625d] text-[15px] font-semibold">さんのグラフ</span>
     </div>
 
-    <div class="flex items-center mt-4 space-x-4">
-      <!-- 範囲セレクトボックス -->
-      <div 
+    <div 
             data-controller="charts--display" 
             data-chart-labels="<%= @labels.to_json %>"
             data-chart-data="<%= @data.to_json %>"
             data-chart-uneasy-flags="<%= @uneasy_flags.to_json %>"
             data-charts--display-user-id-value="<%= @user.id %>"
-            >
+            class="flex items-center mt-4 space-x-4">
+      <!-- 表示期間のセレクトボックス -->
+      <div>
             <select data-action="charts--display#update" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
               <option value="last_week">直近1週間</option>
               <option value="last_month" selected>直近1ヶ月</option>
@@ -35,7 +35,7 @@
             </select>
       </div>
 
-      <!-- ユーザーセレクトボックス -->
+      <!-- ユーザーのセレクトボックス -->
       <div>
         <select data-action="charts--display#update" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
           <!-- 現在ログインしているユーザー -->
