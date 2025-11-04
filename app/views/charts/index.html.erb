@@ -4,9 +4,9 @@
       <%= render 'shared/flash_message' %>
     </div>
 
-    <!-- タイトル -->
+    <!-- 表示されているグラフのユーザーネーム -->
     <div class="flex items-baseline gap-2">
-      <span class="text-gray-700 text-base font-semibold"><%= @user.name || "ユーザーネーム未設定" %></span>
+      <span class="text-gray-700 text-base font-semibold" id="username"><%= @user.name || "ユーザーネーム未設定" %></span>
       <span class="text-[#25625d] text-[15px] font-semibold">さんのグラフ</span>
     </div>
 

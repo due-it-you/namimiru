@@ -102,6 +102,10 @@ export default class extends Controller {
       this.chart.data.datasets[0].pointBackgroundColor = Array.from(this.uneasyFlags);
       this.chart.data.datasets[0].pointRadius = Array.from(pointRadius);
       this.chart.update();
+
+      // ユーザーネームの表示変更
+      const usernameTarget = document.getElementById("username")
+      usernameTarget.textContent = this.selectedUserTarget.options[this.selectedUserTarget.selectedIndex].text
     } catch(err) {
       console.log("response error");
     }
