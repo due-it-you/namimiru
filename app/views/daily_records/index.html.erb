@@ -15,7 +15,7 @@
   <% @daily_records.each do |daily_record| %>
     <!-- 記録のカードUI -->
     <div class="mt-4">
-      <%= render partial: "daily_records/shared/link_card", locals: { user: @user, daily_record: daily_record } %>
+      <%= render partial: "daily_records/shared/card", locals: { user: @user, daily_record: daily_record } %>
     </div>
   <% end %>
   <div class="w-full flex justify-center">

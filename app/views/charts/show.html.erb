@@ -60,7 +60,7 @@
     <div class="mt-8">
       <p class="text-[15px] font-semibold text-[#25625d] mb-3">前回の記録</p>
       <% if @latest_record.present? %>
-        <%= render partial: "daily_records/shared/link_card", locals: { user: current_user, daily_record: @latest_record } %>
+        <%= render partial: "daily_records/shared/card", locals: { user: current_user, daily_record: @latest_record } %>
       <% end %>
     </div>
 

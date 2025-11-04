@@ -1,7 +1,7 @@
 <%= turbo_stream.replace "latest-record-link-card" do %>
   <div id="latest-record-link-card">
   <% if @latest_record.present? %>
-    <%= render partial: "daily_records/shared/link_card", locals: { user: @user, daily_record: @latest_record } %>
+    <%= render partial: "daily_records/shared/card", locals: { user: @user, daily_record: @latest_record } %>
   <% end %>
   </div>
 <% end %>
