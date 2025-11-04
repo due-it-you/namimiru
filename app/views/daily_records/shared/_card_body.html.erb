@@ -16,7 +16,9 @@
           <%= mood_display(daily_record.mood_score) %>（<%= daily_record.mood_score %>）
         </span>
       </div>
-      <span class="text-gray-300 text-2xl group-hover:text-[#67BDB7] transition">›</span>
+      <% if daily_record.user.id == current_user.id %>
+        <span class="text-gray-300 text-2xl group-hover:text-[#67BDB7] transition">›</span>
+      <% end %>
     </div>
 
     <% if daily_record.memo.present? %>
