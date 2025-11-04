@@ -16,7 +16,7 @@
       <span class="text-[#25625d] text-[15px] font-semibold">さんのグラフ</span>
     </div>
 
-    <!-- 範囲セレクト -->
+    <!-- 範囲セレクトボックス -->
     <div 
           data-controller="charts--display" 
           data-chart-labels="<%= @labels.to_json %>"
@@ -32,6 +32,18 @@
             <option value="last_year">直近1年間</option>
             <option value="all_time">全期間</option>
           </select>
+    </div>
+
+    <!-- ユーザーセレクトボックス -->
+    <div>
+      <select>
+        <!-- 現在ログインしているユーザー -->
+        <option value="<%= @user.id %>"><%= @user.name || ユーザーネーム未設定 %></option> 
+        <!-- 連携状態にある 双極症を持つユーザー -->
+        <% @user.supportings.each do |supported_user| %>
+          <option value="<%= supported_user.id %>"><%= supported_user.name || ユーザーネーム未設定 %></option>
+        <% end %>
+      </select>
     </div>
 
     <!-- グラフ -->
