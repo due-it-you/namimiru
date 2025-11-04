@@ -23,7 +23,7 @@ class DailyRecordsController < ApplicationController
     daily_record = current_user.daily_records.new(daily_record_params)
     if daily_record.save
       flash[:success] = "記録の作成が完了しました。"
-      redirect_to charts_path 
+      redirect_to charts_path
     else
       flash[:alert] = "記録の作成に失敗しました。"
       redirect_to new_daily_record_path
