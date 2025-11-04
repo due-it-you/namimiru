@@ -4,6 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
 
   static values = { userId: Number }
+  static targets = [ "range", "selectedUser" ]
 
   connect() {
     const labels = JSON.parse(this.element.dataset.chartLabels)
@@ -61,8 +62,9 @@ export default class extends Controller {
     });
   }
 
-  async update(e) {
-    const range = e.target.value;
+  async update() {
+    const range = this.rangeTarget.value
+    const selectedUser = this.selectedUserTarget.value
     const url = `/users/${this.userIdValue}/chart/data?range=${range}`;
 
     try {
