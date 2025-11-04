@@ -4,7 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
 
   static values = { userId: Number }
-  static targets = [ "range", "selectedUser" ]
+  static targets = ["range", "selectedUser"]
 
   connect() {
     const labels = JSON.parse(this.element.dataset.chartLabels)
@@ -15,14 +15,14 @@ export default class extends Controller {
     this.uneasyFlags = uneasy.map(flag => (flag ? this.uneasyColor : this.notUneasyColor))
     this.uneasyPointRadius = 3
     this.notUneasyPointRadius = 1.5
-    const pointRadius = uneasy.map(flag => (flag ? this.uneasyPointRadius : this.notUneasyPointRadius ))
+    const pointRadius = uneasy.map(flag => (flag ? this.uneasyPointRadius : this.notUneasyPointRadius))
 
     // グラフの縦横幅
     this.fixedHeight = 320
     this.defaultWidth = 253
 
-    document.getElementById('myChart').style.width = this.defaultWidth+"px";
-    document.getElementById('myChart').style.height = this.fixedHeight+"px";
+    document.getElementById('myChart').style.width = this.defaultWidth + "px";
+    document.getElementById('myChart').style.height = this.fixedHeight + "px";
 
     const ctx = document.getElementById('myChart');
 
@@ -65,7 +65,7 @@ export default class extends Controller {
   async update() {
     const range = this.rangeTarget.value
     const userId = this.selectedUserTarget.value
-    const url = `/users/${userId}/chart/data?range=${range}`;
+    const url = `/charts.json?range=${range}&user_id=${userId}`;
 
     try {
       const res = await fetch(url);
@@ -73,7 +73,7 @@ export default class extends Controller {
       const { labels, data, uneasy_flags } = json;
 
       this.uneasyFlags = uneasy_flags.map(flag => (flag ? this.uneasyColor : this.notUneasyColor))
-      const pointRadius = uneasy_flags.map(flag => (flag ? this.uneasyPointRadius : this.notUneasyPointRadius ))
+      const pointRadius = uneasy_flags.map(flag => (flag ? this.uneasyPointRadius : this.notUneasyPointRadius))
       // 期間によってグラフのX軸をスクロール可能に変更
       const aroundOneMonthDays = 40
       const widthEachData = 4
@@ -88,8 +88,8 @@ export default class extends Controller {
           })
         }
         // データ数に合わせた横幅の設定
-        const scrollableWidth = data.length*widthEachData
-        document.getElementById('myChart').style.width = scrollableWidth+"px";
+        const scrollableWidth = data.length * widthEachData
+        document.getElementById('myChart').style.width = scrollableWidth + "px";
         this.chart.resize(scrollableWidth, this.fixedHeight)
       } else {
         // 固定された横幅の設定
@@ -106,7 +106,7 @@ export default class extends Controller {
       // ユーザーネームの表示変更
       const usernameTarget = document.getElementById("username")
       usernameTarget.textContent = this.selectedUserTarget.options[this.selectedUserTarget.selectedIndex].text
-    } catch(err) {
+    } catch (err) {
       console.log("response error");
     }
   }

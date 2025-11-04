@@ -67,7 +67,7 @@
     <!-- ユーザーの記録 -->
     <div>
       <!-- 前回の記録 -->
-      <div class="mt-8">
+      <div class="mt-8" id="latest-record-link-card">
         <p class="text-[15px] font-semibold text-[#25625d] mb-3">前回の記録</p>
         <% if @latest_record.present? %>
           <%= render partial: "daily_records/shared/link_card", locals: { user: @user, daily_record: @latest_record } %>
@@ -75,7 +75,7 @@
       </div>
 
       <!-- さらに過去の記録 -->
-      <div class="mt-4">
+      <div class="mt-4" id="daily-records-index-button">
         <%= render partial: "charts/shared/daily_records_index_button", locals: { user: @user } %>
       </div>
     </div>

@@ -2,7 +2,7 @@ class ChartsController < ApplicationController
   before_action :authorize_the_chart!, only: %i[show data]
 
   def index
-    @user = current_user 
+    @user = User.find_by(id: params[:user_id]) || current_user 
     @latest_record = @user.daily_records.order(created_at: :ASC).last
 
     # グラフ表示のためのラベルとデータ
@@ -15,10 +15,15 @@ class ChartsController < ApplicationController
     end
 
     # 1ヶ月分の記録の配列で、記録が存在していればその記録のデータ、なければnil
-    one_month = (1.months.ago.to_date..Date.current)
-    @labels = one_month.to_a
-    @data = one_month.map { |date| score_by_date[date]&.first }
-    @uneasy_flags = one_month.map { |date| score_by_date[date]&.last }
+    range = selected_range_object(params[:range], @user) || (1.months.ago.to_date..Date.current)
+    @labels = range.to_a
+    @data = range.map { |date| score_by_date[date]&.first }
+    @uneasy_flags = range.map { |date| score_by_date[date]&.last }
+    chart_data = { labels: @labels, data: @data, uneasy_flags: @uneasy_flags }
+    respond_to do |f|
+      f.html
+      f.json { render json: chart_data }
+    end
   end
 
   def data

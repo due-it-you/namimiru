@@ -1,0 +1,10 @@
+<%= turbo_stream.replace "latest-record-link-card" do %>
+  <p class="text-[15px] font-semibold text-[#25625d] mb-3">前回の記録</p>
+  <% if @latest_record.present? %>
+    <%= render partial: "daily_records/shared/link_card", locals: { user: @user, daily_record: @latest_record } %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.replace "daily-records-index-button" do %>
+  <%= render partial: "charts/shared/daily_records_index_button", locals: { user: @user } %>
+<% end %>
