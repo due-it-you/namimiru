@@ -103,6 +103,15 @@ export default class extends Controller {
       this.chart.data.datasets[0].pointRadius = Array.from(pointRadius);
       this.chart.update();
 
+      // グラフ以外の情報の入れ替え（直近の記録・記録履歴ボタン）
+      const turboStream = await fetch(
+        `/charts?user_id=${userId}`,
+        { headers: { Accept: "text/vnd.turbo-stream.html" } }
+      )
+
+      Turbo.renderStreamMessage(await turboStream.text())
+
+
       // ユーザーネームの表示変更
       const usernameTarget = document.getElementById("username")
       usernameTarget.textContent = this.selectedUserTarget.options[this.selectedUserTarget.selectedIndex].text

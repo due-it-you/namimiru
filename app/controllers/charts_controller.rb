@@ -23,6 +23,7 @@ class ChartsController < ApplicationController
     respond_to do |f|
       f.html
       f.json { render json: chart_data }
+      f.turbo_stream
     end
   end
 
