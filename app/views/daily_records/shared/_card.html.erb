@@ -1,0 +1,8 @@
+<% if daily_record.user_id == current_user.id %>
+  <!-- リンク付きカード -->
+  <%= link_to user_daily_record_path(user.id, daily_record.id), class: "block group" do %>
+    <%= render "daily_records/shared/card_body", user: user, daily_record: daily_record %>
+  <% end %>
+<% else %>
+  <%= render "daily_records/shared/card_body", user: user, daily_record: daily_record %>
+<% end %>
