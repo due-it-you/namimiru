@@ -6,13 +6,7 @@
 
     <!-- タイトル -->
     <div class="flex items-baseline gap-2">
-      <% if @user.name.blank? %>
-        <span class="text-gray-700 text-base font-semibold">ユーザーネーム未設定</span>
-      <% else %>
-        <div class="text-gray-800 text-base font-semibold">
-          <%= @user.name %>
-        </div>
-      <% end %>
+      <span class="text-gray-700 text-base font-semibold"><%= @user.name || "ユーザーネーム未設定" %></span>
       <span class="text-[#25625d] text-[15px] font-semibold">さんのグラフ</span>
     </div>
 
