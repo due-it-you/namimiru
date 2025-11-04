@@ -64,8 +64,8 @@ export default class extends Controller {
 
   async update() {
     const range = this.rangeTarget.value
-    const selectedUser = this.selectedUserTarget.value
-    const url = `/users/${this.userIdValue}/chart/data?range=${range}`;
+    const userId = this.selectedUserTarget.value
+    const url = `/users/${userId}/chart/data?range=${range}`;
 
     try {
       const res = await fetch(url);
