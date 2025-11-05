@@ -82,7 +82,7 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
         run: bin/rails db:prepare
 
-      - npm: Run RSpec
+      - name: Run RSpec
         env:
           RAILS_ENV: test
         run: bundle exec rspec
