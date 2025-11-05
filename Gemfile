@@ -78,5 +78,5 @@ group :test do
   gem "capybara"
   gem "faker"
   gem "selenium-webdriver"
-  gem 'capybara-playwright-driver'
+  gem "capybara-playwright-driver"
 end
