@@ -76,6 +76,9 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps chromium
 
+      - name: Use CI DB Config 
+        run: cp config/database.yml.ci config/database.yml
+
       - name: Prepare DB
         env:
           RAILS_ENV: test
@@ -85,4 +88,5 @@ jobs:
       - name: Run RSpec
         env:
           RAILS_ENV: test
+          SENDER_EMAIL: test@test.ci.com
         run: bundle exec rspec
