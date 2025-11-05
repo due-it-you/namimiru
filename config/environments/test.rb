@@ -9,6 +9,10 @@ Rails.application.configure do
   config.after_initialize do
   end
 
+  # Action Mailer テスト
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.default_options = { from: ENV.fetch("MAIL_FROM", "no-reply@namimiru.test") }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # While tests run files are not watched, reloading is not necessary.
