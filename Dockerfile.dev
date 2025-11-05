@@ -3,6 +3,13 @@ ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
 RUN apt-get update -qq \
 && apt-get install -y ca-certificates curl gnupg \
+&& curl -sL https://deb.nodesource.com/setup_20.x | bash - \
+&& apt-get install -y nodejs \
+&& npm install -g playwright \
+&& playwright install-deps \
+&& playwright install chromium \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/* \
 && mkdir -p /etc/apt/keyrings \
 && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
 && NODE_MAJOR=20 \
