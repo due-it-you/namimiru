@@ -70,6 +70,14 @@ RSpec.configure do |config|
   #
   # To enable this behaviour uncomment the line below.
   # config.infer_spec_type_from_file_location!
+  #
+  #RSpec.configure do |config|
+  config.before(:suite) do
+    unless Rails.public_path.join('assets').exist?
+      puts 'Precompiling assets...'
+      `RAILS_ENV=test bundle exec rake assets:precompile`
+    end
+  end
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
