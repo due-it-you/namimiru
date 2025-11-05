@@ -88,4 +88,5 @@ jobs:
       - name: Run RSpec
         env:
           RAILS_ENV: test
+          SENDER_EMAIL: test@test.ci.com
         run: bundle exec rspec
