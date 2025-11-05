@@ -76,6 +76,12 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps chromium
 
+      - name: Prepare DB
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+        run: bin/rails db:prepare
+
       - name: Run RSpec
         env:
           RAILS_ENV: test
