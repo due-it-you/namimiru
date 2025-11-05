@@ -11,7 +11,8 @@ Rails.application.configure do
 
   # Action Mailer テスト
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_options = { from: ENV.fetch("MAIL_FROM", "no-reply@namimiru.test") }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_options = { from: 'test@namimiru.app' }
 
   # Settings specified here will take precedence over those in config/application.rb.
 
