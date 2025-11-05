@@ -6,6 +6,11 @@ RSpec.describe InvitationMailer, type: :mailer do
     let!(:invitee_email) { "test@example.com" }
     let!(:mail) { InvitationMailer.with(inviter: user, invitee_email: invitee_email).invite }
 
+    before do
+      ActionMailer::Base.delivery_method = :test
+      ActionMailer::Base.deliveries.clear
+    end
+
     it "メール本文に招待コードが含まれていること" do
       user.update(invitation_token: SecureRandom.alphanumeric(12))
       mail.deliver_now
