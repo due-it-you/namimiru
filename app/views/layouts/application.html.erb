@@ -25,6 +25,7 @@
     <!-- iOSからPWAアプリとして開いた時に、ステータスバーを背景透過 -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <%= favicon_link_tag('favicon.ico') %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -39,7 +40,7 @@
     <% if user_signed_in? %>
       <%= render 'shared/header' %>
     <% end %>
-    <div class="bg-[#FFFFFD] mt-8 mb-12 w-full md:w-3/5 md:mx-auto">
+    <div class="mt-8 mb-12 w-full md:w-3/5 md:mx-auto">
       <div>
         <%= yield %>
       </div>

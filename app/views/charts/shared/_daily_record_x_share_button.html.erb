@@ -1,0 +1,13 @@
+<%= link_to daily_record_x_share_url(latest_record),
+  target: "_blank",
+  rel: "noopener noreferrer",
+  title: "Xでシェアする" do %>
+  <div class="rounded-2xl border bg-gray-700 hover:bg-gray-800 shadow-sm px-3 py-1">
+    <div class="flex items-center">
+      <%= image_tag "x_logo_white.png", size: "11x11" %>
+      <div class="text-xs text-white">
+        でシェア
+      </div>
+    </div>
+  </div>
+<% end %>
