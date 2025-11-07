@@ -3,8 +3,8 @@ module ChartsHelper
     text = <<~TEXT
       【#{mood_display(latest_record.mood_score)}】
 
-      今日の記録が出来ました！
+      ナミミルで今日の記録が出来ました！
     TEXT
-    "https://twitter.com/share?text=#{CGI.escape(text)}&url=https://namimiru.com"
+    "https://twitter.com/share?text=#{CGI.escape(text)}&url=https://namimiru.com&hashtags=双極症,双極性障害,ナミミル"
   end
 end
