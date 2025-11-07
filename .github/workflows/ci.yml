@@ -65,7 +65,7 @@ jobs:
           bundler-cache: true
 
       - name: Set up Node.js 
-        uses: actions/setup-node@4 
+        uses: actions/setup-node@v4 
         with:
           node-version: 20.x
           cache: npm
@@ -76,7 +76,17 @@ jobs:
       - name: Install Playwright
         run: npx playwright install --with-deps chromium
 
-      - npm: Run RSpec
+      - name: Use CI DB Config 
+        run: cp config/database.yml.ci config/database.yml
+
+      - name: Prepare DB
         env:
           RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+        run: bin/rails db:prepare
+
+      - name: Run RSpec
+        env:
+          RAILS_ENV: test
+          SENDER_EMAIL: test@test.ci.com
         run: bundle exec rspec
