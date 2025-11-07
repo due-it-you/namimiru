@@ -68,7 +68,18 @@
     <div>
       <!-- 前回の記録 -->
       <div class="mt-8">
-        <p class="text-[15px] font-semibold text-[#25625d] mb-3">前回の記録</p>
+        <div class="mb-3 flex items-center">
+          <p class="mr-2 text-[15px] font-semibold text-[#25625d]">前回の記録</p>
+          <!-- Xシェアボタン -->
+          <div class="rounded-2xl border border-gray-200 bg-black px-4 py-1">
+            <div class="flex items-center">
+              <%= image_tag "x_logo_white.png", size: "11x11" %>
+              <div class="text-xs text-white">
+                でシェア
+              </div>
+            </div>
+          </div>
+        </div>
         <div id="latest-record-link-card">
           <% if @latest_record.present? %>
             <%= render partial: "daily_records/shared/card", locals: { user: @user, daily_record: @latest_record } %>
