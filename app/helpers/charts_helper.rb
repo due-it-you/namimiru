@@ -5,6 +5,6 @@ module ChartsHelper
 
       ナミミルで今日の記録が出来ました！
     TEXT
-    "https://twitter.com/share?text=#{CGI.escape(text)}&url=https://namimiru.com&hashtags=双極症,双極性障害,ナミミル"
+    "https://twitter.com/intent/tweet?text=#{CGI.escape(text)}&url=https://namimiru.com&hashtags=双極症,双極性障害,ナミミル"
   end
 end
