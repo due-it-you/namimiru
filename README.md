@@ -86,12 +86,9 @@ UI/UX面に関しても、本サービスは都度母親からのフィードバ
 | データベース  | PostgreSQL 17.4 |
 | 開発環境  | Docker |
 | インフラ  | Render（Web Service）｜Neon（PostgreSQL）｜Upstash（Redis） |
-| API  | LINELoginAPI |
 
 ## ■ ER図
-<img width="637" height="557" alt="スクリーンショット 2025-09-02 16 45 47" src="https://github.com/user-attachments/assets/c955834e-9cc4-4e4f-a717-07916f962351" />
-
-[Gyazoスクリーンショットはこちら](https://gyazo.com/a03adfb99006518d0997c132ba0c8376)
+<img width="660" height="493" alt="スクリーンショット 2025-11-07 16 02 06" src="https://github.com/user-attachments/assets/5477385a-1d8e-49f8-bda2-f069fc80ce51" />
 
 ## ■ 画面遷移図
 <img width="391" height="613" alt="スクリーンショット 2025-09-02 16 48 09" src="https://github.com/user-attachments/assets/39bb31f0-f11b-4736-8549-3f9d35f91e79" />
