@@ -1,3 +1,4 @@
+<!-- 記録カードUIの内容 -->
 <div
     id="latest-record"
     class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:bg-[#F3FBFA]"
@@ -5,11 +6,13 @@
     <div class="flex items-center text-xs text-gray-500">
       <%= daily_record.created_at.strftime("%Y/%m/%d %H:%M") %>
   <% if daily_record.is_uneasy %>
+    <!-- ざわざわの記録をつけた際のマーク -->
     <span class="ml-2 text-[13px]">❤️💭</span>
   <% end %>
     </div>
 
     <div class="mt-2 flex items-center justify-between">
+      <!-- 気分 -->
       <div class="text-sm text-gray-700">
         <span class="text-gray-500">気分：</span>
         <span class="font-semibold text-gray-800">
@@ -21,6 +24,7 @@
       <% end %>
     </div>
 
+    <!-- メモ -->
     <% if daily_record.memo.present? %>
       <p class="mt-2 text-sm text-gray-700 leading-snug line-clamp-2">
       <%= daily_record.memo %>

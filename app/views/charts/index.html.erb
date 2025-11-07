@@ -68,7 +68,13 @@
     <div>
       <!-- 前回の記録 -->
       <div class="mt-8">
-        <p class="text-[15px] font-semibold text-[#25625d] mb-3">前回の記録</p>
+        <div class="mb-3 flex items-center">
+          <p class="mr-2 text-[15px] font-semibold text-[#25625d]">前回の記録</p>
+          <!-- Xシェアボタン -->
+          <% if @latest_record.present? %>
+            <%= render "charts/shared/daily_record_x_share_button", latest_record: @latest_record %>
+          <% end %>
+        </div>
         <div id="latest-record-link-card">
           <% if @latest_record.present? %>
             <%= render partial: "daily_records/shared/card", locals: { user: @user, daily_record: @latest_record } %>
