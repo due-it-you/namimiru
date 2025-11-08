@@ -44,11 +44,11 @@ class ActionItemsController < ApplicationController
 
   def create
     # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
-    tag_name = action_item_params[:tag_name].presence || 
-      current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name || 
+    tag_name = action_item_params[:tag_name].presence ||
+      current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name ||
       "未分類"
     action_tag = current_user.action_tags.find_or_initialize_by(name: tag_name)
-      
+
     @action_item = current_user.action_items.new(
       name: action_item_params[:name],
       enabled_from: action_item_params[:enabled_from],

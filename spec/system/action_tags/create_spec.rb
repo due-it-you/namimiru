@@ -15,12 +15,12 @@ RSpec.describe "CreateActionTags", type: :system do
       before do
         # comboboxを開く
         find('input[role="combobox"]#action_item_action_tag_id').click
-        # タグを入力 
+        # タグを入力
         find('input[role="combobox"]:visible').fill_in(with: '食事')
       end
-      
+
       it "/action_items.htmlにリダイレクトされること" do
-        click_on "commit"  
+        click_on "commit"
         expect(page).to have_current_path(action_items_path(format: :html))
       end
 
@@ -44,7 +44,7 @@ RSpec.describe "CreateActionTags", type: :system do
         before do
           # comboboxを開く
           find('input[role="combobox"]#action_item_action_tag_id').click
-          # 9文字のタグ名を入力 
+          # 9文字のタグ名を入力
           find('input[role="combobox"]:visible').fill_in(with: '123456789')
         end
 
@@ -61,4 +61,3 @@ RSpec.describe "CreateActionTags", type: :system do
     end
   end
 end
-
