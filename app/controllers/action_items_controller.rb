@@ -39,7 +39,7 @@ class ActionItemsController < ApplicationController
   end
 
   def new
-    @action_item = ActionItem.new
+    @action_item = current_user.action_items.new
   end
 
   def create
@@ -47,19 +47,18 @@ class ActionItemsController < ApplicationController
       # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
       name:  action_item_params[:tag_name].presence || current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name || "未分類"
     )
-    action_item = current_user.action_items.new(
+    @action_item = current_user.action_items.new(
       user_id: current_user.id,
       action_tag_id: action_tag.id,
       name: action_item_params[:name],
       enabled_from: action_item_params[:enabled_from],
       behavior_type: action_item_params[:behavior_type]
     )
-    if action_item.save
+    if @action_item.save
       flash[:success] = "項目を作成しました。"
       redirect_to action_items_path(format: :html)
     else
-      flash[:alert] = "項目の作成が出来ませんでした。"
-      redirect_to action_items_path(format: :html)
+      render :new, status: :unprocessable_entity
     end
   end
 

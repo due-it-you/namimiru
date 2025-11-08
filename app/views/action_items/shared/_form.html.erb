@@ -1,4 +1,5 @@
-<%= form_with model: model do |f| %>
+<%= form_with model: action_item do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <!-- 項目の種類 -->
   <div class="mt-4">
     <p class="text-sm font-medium text-[#25625d]"><%= f.label :behavior_type, "項目の種類" %></p>
