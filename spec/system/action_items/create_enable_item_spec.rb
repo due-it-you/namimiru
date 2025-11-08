@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'securerandom'
 
 RSpec.describe "CreateEnableItem", type: :system do
   describe "できるかも/できないかもリスト内の項目の作成機能" do
@@ -28,6 +29,26 @@ RSpec.describe "CreateEnableItem", type: :system do
       it "成功のフラッシュカードが表示されていること" do
         click_on "commit"
         expect(page).to have_content "項目を作成しました。"
+      end
+    end
+
+    # 異常系
+    context "作成が失敗した場合" do
+      context "項目名が上限の15文字を超えている場合" do
+        let(:random_action_item_name) { SecureRandom.alphanumeric(16) }
+        before do
+          fill_in "action_item[name]", with: random_action_item_name
+        end
+
+        it "画面に作成しようとした項目名が表示されていないこと" do
+          click_on "commit"
+          expect(page).not_to have_content random_action_item_name
+        end
+
+        it "失敗のフラッシュメッセージが表示されていること" do
+          click_on "commit"
+          expect(page).to have_content "項目名は15文字以内で入力してください。"
+        end
       end
     end
   end
