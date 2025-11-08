@@ -1,8 +1,7 @@
 class ActionItem < ApplicationRecord
   belongs_to :user
   belongs_to :action_tag
-
-  validates :name, length: { maximum: 15, message: "は15文字以内で入力してください。" }, presence: true
+  validates_associated :action_tag, message: "は8文字以内で入力してください。"
 
   enum :behavior_type, {
     dynamic: 0, # できるかも/できないかもリスト内の項目

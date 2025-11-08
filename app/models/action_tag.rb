@@ -3,7 +3,7 @@ class ActionTag < ApplicationRecord
 
   belongs_to :user
 
-  validates :name, presence: true, length: { maximum: 8 }
+  validates :name, presence: true, length: { maximum: 8, message: "は8文字以内で入力してください。" }
 
   def to_combobox_display
     name
