@@ -30,7 +30,7 @@ RSpec.describe "CreateAvoidItem", type: :system do
 
       it "作成した項目名が表示されていること" do
         click_on "commit"
-        find('#mood-range').set(1)
+        find("#switch-unenable-and-avoid-lists-icon").click
         expect(page).to have_content valid_action_item_name
       end
     end
