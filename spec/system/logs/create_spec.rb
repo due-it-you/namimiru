@@ -19,7 +19,7 @@ RSpec.describe "Create", type: :system do
 
     context 'すでに今日の記録の作成が完了している場合' do
       before do
-        create(:daily_record, user: user, created_at: Time.current)
+        create(:daily_record, user: user, created_at: 1.second.ago)
         sign_in user
       end
 
