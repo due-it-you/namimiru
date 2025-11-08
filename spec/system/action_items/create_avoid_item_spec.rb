@@ -17,7 +17,7 @@ RSpec.describe "CreateAvoidItem", type: :system do
       before do
         fill_in "action_item[name]", with: valid_action_item_name
       end
-        
+
       it "/action_items.htmlにリダイレクトされていること" do
         click_on "commit"
         expect(page).to have_current_path(action_items_path(format: :html))
@@ -43,7 +43,7 @@ RSpec.describe "CreateAvoidItem", type: :system do
         before do
           fill_in "action_item[name]", with: invalid_action_item_name
         end
-        
+
         it "/action_items/newの画面が表示されていること" do
           click_on "commit"
           expect(page).to have_current_path(new_action_item_path)
