@@ -16,7 +16,8 @@
   <div class="w-1/2 flex flex-col items-center pl-2 text-gray-700" id="cannot-list">
     <div class="flex justify-center items-center mt-4">
       <p class="text-string-base font-semibold">できないかも</p>
-      <div data-action="click->action-items--lists#toggleListsVisible">
+      <!-- できないかも / やらないほうがいいリストの表示の切り替え -->
+      <div id="switch-unenable-and-avoid-lists-icon" data-action="click->action-items--lists#toggleListsVisible">
         <%= image_tag "switch_lists.svg", class: "aspect-square h-6 ml-2" %>
       </div>
     </div>
@@ -29,7 +30,8 @@
   <div class="w-1/2 flex flex-col items-center pl-2 text-gray-700" id="avoid-list">
     <div class="flex justify-center items-center mt-4">
       <p class="text-string-base text-sm font-semibold">やらない方がいい</p>
-      <div data-action="click->action-items--lists#toggleListsVisible">
+      <!-- できないかも / やらないほうがいいリストの表示の切り替え -->
+      <div id="switch-unenable-and-avoid-lists-icon" data-action="click->action-items--lists#toggleListsVisible">
         <%= image_tag "switch_lists.svg", class: "aspect-square h-6 ml-2" %>
       </div>
     </div>
