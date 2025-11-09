@@ -76,6 +76,7 @@ class ActionItemsController < ApplicationController
       # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
       name: action_item_params[:tag_name].presence || current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name || "未分類"
     )
+    @action_item.action_tag = action_tag
     if @action_item.update(
       name: action_item_params[:name],
       enabled_from: action_item_params[:enabled_from],
