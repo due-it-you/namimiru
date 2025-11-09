@@ -128,6 +128,38 @@ RSpec.describe "UpdateActionItemAndTag", type: :system do
           end
         end
       end
+
+      context "「躁状態の時にやらない方がいい行動」 -> 「できそうかも/できなさそうかも」に更新した場合" do
+        let!(:avoid_action_item) { create(:action_item, name: "やらない方がいい行動", behavior_type: "avoid", user: user, action_tag: action_tag) }
+
+        before do
+          visit action_items_path(format: :html)
+          find("#switch-unenable-and-avoid-lists-icon").click
+          # 項目UIをクリックして編集画面に遷移
+          click_on avoid_action_item.name
+          select "できそうかも/できなさそうかも", from: "action_item[behavior_type]"
+        end
+
+        it "/action_items.htmlにリダイレクトされること" do
+          click_on "commit"
+          expect(page).to have_current_path(action_items_path(format: :html))
+        end
+
+        it "できそうかもリスト内で表示されていること" do
+          click_on "commit" 
+          within("#can-list") do
+            expect(page).to have_content avoid_action_item.name
+          end
+        end
+
+        it "躁状態の時にやらない方がいいリスト内で表示されていないこと" do
+          click_on "commit"           
+          find("#switch-unenable-and-avoid-lists-icon").click
+          within("#avoid-list") do
+            expect(page).not_to have_content avoid_action_item.name
+          end
+        end
+      end
     end
   end
 end
