@@ -10,3 +10,6 @@ ja:
     attributes:
       user:
         name: ユーザーネーム
+      action_item:
+        name: 項目名
+        action_tag: タグ名

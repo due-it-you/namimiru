@@ -39,27 +39,30 @@ class ActionItemsController < ApplicationController
   end
 
   def new
-    @action_item = ActionItem.new
+    @action_item = current_user.action_items.new
   end
 
   def create
-    action_tag = current_user.action_tags.find_or_create_by(
-      # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
-      name:  action_item_params[:tag_name].presence || current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name || "未分類"
-    )
-    action_item = current_user.action_items.new(
-      user_id: current_user.id,
-      action_tag_id: action_tag.id,
+    # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
+    tag_name = action_item_params[:tag_name].presence ||
+      current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name ||
+      "未分類"
+    action_tag = current_user.action_tags.find_or_initialize_by(name: tag_name)
+
+    @action_item = current_user.action_items.new(
       name: action_item_params[:name],
       enabled_from: action_item_params[:enabled_from],
       behavior_type: action_item_params[:behavior_type]
     )
-    if action_item.save
+    # 作成を試みる項目に入力されたタグのオブジェクトを関連付け
+    # ActionItemモデルのvalidates_associated :action_tagによってaction_item.saveで
+    # 関連付けられたaction_tagにもバリデーションが走る
+    @action_item.action_tag = action_tag
+    if @action_item.save
       flash[:success] = "項目を作成しました。"
       redirect_to action_items_path(format: :html)
     else
-      flash[:alert] = "項目の作成が出来ませんでした。"
-      redirect_to action_items_path(format: :html)
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -68,12 +71,13 @@ class ActionItemsController < ApplicationController
   end
 
   def update
-    action_item = current_user.action_items.find(params[:id])
+    @action_item = current_user.action_items.find(params[:id])
     action_tag = current_user.action_tags.find_or_create_by(
       # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
       name: action_item_params[:tag_name].presence || current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name || "未分類"
     )
-    if action_item.update(
+    @action_item.action_tag = action_tag
+    if @action_item.update(
       name: action_item_params[:name],
       enabled_from: action_item_params[:enabled_from],
       action_tag_id: action_tag.id,
@@ -82,8 +86,7 @@ class ActionItemsController < ApplicationController
       flash[:success] = "行動項目を更新しました。"
       redirect_to action_items_path(format: :html)
     else
-      flash[:alert] = "行動項目を更新出来ませんでした。"
-      redirect_to action_items_path(format: :html)
+      render :edit, status: :unprocessable_entity
     end
   end
 
