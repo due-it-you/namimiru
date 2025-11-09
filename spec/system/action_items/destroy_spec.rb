@@ -15,7 +15,7 @@ RSpec.describe "DeleteActionItem", type: :system do
     context "削除に成功した場合" do
       before do
         # 項目UIをクリック
-        click_on action_item.name 
+        click_on action_item.name
       end
 
       it "/action_items.htmlにリダイレクトしていること" do
@@ -52,4 +52,3 @@ RSpec.describe "DeleteActionItem", type: :system do
     end
   end
 end
-
