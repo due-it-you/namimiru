@@ -13,13 +13,12 @@ RSpec.describe "UpdateActionItemAndTag", type: :system do
     end
 
     describe "項目名・タグ名・気分の数値の更新" do
-
       context "更新が成功した場合" do
         before do
           fill_in "action_item[name]", with: "自炊"
           click_on "commit"
           # 作成された項目UIをクリックして編集画面に遷移
-          click_on "自炊" 
+          click_on "自炊"
           fill_in "action_item[name]", with: "更新後の項目名"
           # comboboxを開く
           find('input[role="combobox"]#action_item_action_tag_id').click
@@ -53,7 +52,7 @@ RSpec.describe "UpdateActionItemAndTag", type: :system do
             # 項目UIをクリックして編集画面に遷移
             click_on action_item.name
             # 不正な項目名を入力
-            fill_in "action_item[name]", with: invalid_random_action_item_name 
+            fill_in "action_item[name]", with: invalid_random_action_item_name
           end
 
           it "該当の編集画面が表示されていること" do
@@ -62,7 +61,7 @@ RSpec.describe "UpdateActionItemAndTag", type: :system do
           end
 
           it "エラーメッセージが表示されていること" do
-            click_on "commit" 
+            click_on "commit"
             expect(page).to have_content "項目名は15文字以内で入力してください。"
           end
         end
@@ -86,7 +85,7 @@ RSpec.describe "UpdateActionItemAndTag", type: :system do
           end
 
           it "エラーメッセージが表示されていること" do
-            click_on "commit" 
+            click_on "commit"
             expect(page).to have_content "タグ名は8文字以内で入力してください。"
           end
         end
@@ -95,7 +94,6 @@ RSpec.describe "UpdateActionItemAndTag", type: :system do
 
     describe "項目の種類の更新" do
       context "「できそうかも/できなさそうかも」 -> 「躁状態の時にやらない方がいい行動」に更新した場合" do
-
         before do
           visit action_items_path(format: :html)
           # 項目UIをクリックして編集画面に遷移
@@ -146,14 +144,14 @@ RSpec.describe "UpdateActionItemAndTag", type: :system do
         end
 
         it "できそうかもリスト内で表示されていること" do
-          click_on "commit" 
+          click_on "commit"
           within("#can-list") do
             expect(page).to have_content avoid_action_item.name
           end
         end
 
         it "躁状態の時にやらない方がいいリスト内で表示されていないこと" do
-          click_on "commit"           
+          click_on "commit"
           find("#switch-unenable-and-avoid-lists-icon").click
           within("#avoid-list") do
             expect(page).not_to have_content avoid_action_item.name
