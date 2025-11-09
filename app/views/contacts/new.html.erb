@@ -10,6 +10,9 @@
     <%= f.label :name, "お名前" %>
     <%= f.text_field :name, class: "border border-border-base rounded-md w-full my-2 p-2",required: true ,placeholder: "山田 太郎" %>
 
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email, class: "border border-border-base rounded-md w-full my-2 p-2",required: true %>
+
     <%= f.label :subject, "件名" %>
     <%= f.text_field :subject, class: "border border-border-base rounded-md w-full my-2 p-2",required: true ,placeholder: "◯◯について" %>
 

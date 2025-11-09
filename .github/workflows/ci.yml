@@ -40,6 +40,8 @@ jobs:
   run-rspec:
     name: run-rspec
     runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Tokyo
 
     services:
       postgres:

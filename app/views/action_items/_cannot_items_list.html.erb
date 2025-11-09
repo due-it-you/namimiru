@@ -8,7 +8,7 @@
     <% items.each do |item| %>
       <div>
         <%= link_to edit_action_item_path(item.id) do %>
-          <div class="p-2 mx-2 border-2 border-red-300 rounded-md text-sm text-center">
+          <div class="p-2 mx-2 border-2 border-red-300 rounded-md text-sm text-center break-all">
             <%= item.name%>
           </div>
         <% end %>
@@ -26,7 +26,7 @@
     <% items.each do |item| %>
       <div>
         <%= link_to edit_action_item_path(item.id) do %>
-          <div class="p-2 mx-2 border border-gray-300 rounded-md text-sm text-center">
+          <div class="p-2 mx-2 border border-gray-300 rounded-md text-sm text-center break-all">
             <%= item.name%>
           </div>
         <% end %>
