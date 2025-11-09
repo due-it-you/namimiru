@@ -71,12 +71,12 @@ class ActionItemsController < ApplicationController
   end
 
   def update
-    action_item = current_user.action_items.find(params[:id])
+    @action_item = current_user.action_items.find(params[:id])
     action_tag = current_user.action_tags.find_or_create_by(
       # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
       name: action_item_params[:tag_name].presence || current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name || "未分類"
     )
-    if action_item.update(
+    if @action_item.update(
       name: action_item_params[:name],
       enabled_from: action_item_params[:enabled_from],
       action_tag_id: action_tag.id,
@@ -85,8 +85,7 @@ class ActionItemsController < ApplicationController
       flash[:success] = "行動項目を更新しました。"
       redirect_to action_items_path(format: :html)
     else
-      flash[:alert] = "行動項目を更新出来ませんでした。"
-      redirect_to action_items_path(format: :html)
+      render :edit, status: :unprocessable_entity
     end
   end
 
