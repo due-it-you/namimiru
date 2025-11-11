@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_11_112222) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_11_112539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -54,14 +54,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_112222) do
     t.string "email"
   end
 
-  create_table "daily_records", force: :cascade do |t|
+  create_table "daily_records", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigserial "id", null: false
     t.integer "mood_score", null: false
     t.string "memo", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_uneasy", default: false, null: false
     t.uuid "user_uuid", null: false
-    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["user_uuid"], name: "index_daily_records_on_user_uuid"
     t.index ["uuid"], name: "index_daily_records_on_uuid", unique: true
   end
