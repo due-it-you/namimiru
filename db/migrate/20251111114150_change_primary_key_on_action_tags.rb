@@ -1,6 +1,6 @@
 class ChangePrimaryKeyOnActionTags < ActiveRecord::Migration[7.2]
   def change
-    remove_foreign_key :action_items, :action_tags 
+    remove_foreign_key :action_items, :action_tags
 
     execute 'ALTER TABLE action_tags DROP CONSTRAINT action_tags_pkey;'
     execute 'ALTER TABLE action_tags ADD PRIMARY KEY (uuid);'
