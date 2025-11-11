@@ -1,5 +1,5 @@
 class ActionTag < ApplicationRecord
-  has_many :action_items
+  has_many :action_items, primary_key: :uuid, foreign_key: :action_tag_uuid
 
   belongs_to :user, primary_key: :uuid, foreign_key: :user_uuid
 
