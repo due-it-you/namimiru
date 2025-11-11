@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_11_074525) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_11_075633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -25,7 +25,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_074525) do
     t.integer "behavior_type", default: 0, null: false
     t.uuid "user_uuid", null: false
     t.index ["action_tag_id"], name: "index_action_items_on_action_tag_id"
-    t.index ["user_id"], name: "index_action_items_on_user_id"
   end
 
   create_table "action_tags", force: :cascade do |t|
@@ -34,7 +33,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_074525) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.uuid "user_uuid", null: false
-    t.index ["user_id"], name: "index_action_tags_on_user_id"
   end
 
   create_table "care_relations", force: :cascade do |t|
@@ -44,9 +42,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_074525) do
     t.datetime "updated_at", null: false
     t.uuid "supported_uuid", null: false
     t.uuid "supporter_uuid", null: false
-    t.index ["supported_id", "supporter_id"], name: "index_care_relations_on_supported_id_and_supporter_id", unique: true
-    t.index ["supported_id"], name: "index_care_relations_on_supported_id"
-    t.index ["supporter_id"], name: "index_care_relations_on_supporter_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -66,7 +61,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_074525) do
     t.datetime "updated_at", null: false
     t.boolean "is_uneasy", default: false, null: false
     t.uuid "user_uuid", null: false
-    t.index ["user_id"], name: "index_daily_records_on_user_id"
   end
 
   create_table "social_profiles", force: :cascade do |t|
@@ -77,7 +71,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_074525) do
     t.datetime "updated_at", null: false
     t.uuid "user_uuid", null: false
     t.index ["provider", "uid"], name: "index_social_profiles_on_provider_and_uid", unique: true
-    t.index ["user_id"], name: "index_social_profiles_on_user_id"
   end
 
   create_table "users", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
