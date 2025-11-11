@@ -18,9 +18,9 @@ class CareRelationsController < ApplicationController
     # 招待されたユーザーの役割に応じて「支援者」「双極性障害の方」のいずれかに振り分け
     supported_id, supporter_id = User.assign_care_relation_ids(inviter: inviter, invitee: invitee)
 
-    return redirect_to(new_care_relation_path, alert: "すでに連携済みです。") if CareRelation.where(supported_id: supported_id, supporter_id: supporter_id).exists?
+    return redirect_to(new_care_relation_path, alert: "すでに連携済みです。") if CareRelation.where(supported_uuid: supported_id, supporter_uuid: supporter_id).exists?
 
-    @care_relation = CareRelation.new(supported_id: supported_id, supporter_id: supporter_id)
+    @care_relation = CareRelation.new(supported_uuid: supported_id, supporter_uuid: supporter_id)
     if @care_relation.save
       flash[:success] = "招待したユーザーと連携状態になりました！"
       redirect_to care_relations_path
