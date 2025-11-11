@@ -1,5 +1,5 @@
 class DailyRecord < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, primary_key: :uuid, foreign_key: :user_uuid
 
   validates :mood_score, presence: true, numericality: { in: -5..5 }
   validates :memo, length: { maximum: 500 }

@@ -1,7 +1,7 @@
 class ActionTag < ApplicationRecord
-  has_many :action_items
+  has_many :action_items, primary_key: :uuid, foreign_key: :action_tag_uuid
 
-  belongs_to :user
+  belongs_to :user, primary_key: :uuid, foreign_key: :user_uuid
 
   validates :name, presence: true, length: { maximum: 8, message: "は8文字以内で入力してください。" }
 

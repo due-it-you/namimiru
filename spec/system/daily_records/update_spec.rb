@@ -7,7 +7,7 @@ RSpec.describe "Update", type: :system do
 
     before do
       sign_in user
-      visit user_daily_record_path(user.id, daily_record.id)
+      visit user_daily_record_path(user.uuid, daily_record.id)
       click_link "編集"
     end
 
@@ -28,7 +28,7 @@ RSpec.describe "Update", type: :system do
           # 501文字分入力
           fill_in "daily_record[memo]", with: "あ" * 501
           click_on "記録する"
-          expect(page).to have_current_path user_daily_record_path(user.id, daily_record.id)
+          expect(page).to have_current_path user_daily_record_path(user.uuid, daily_record.id)
           expect(page).to have_content '記録の更新に失敗しました。'
           expect(page).to have_content daily_record.mood_score.to_s
           expect(page).to have_content daily_record.memo

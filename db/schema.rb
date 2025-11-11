@@ -10,38 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_09_101529) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_11_122929) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "action_items", force: :cascade do |t|
-    t.bigint "user_id", null: false
+  create_table "action_items", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigserial "id", null: false
     t.string "name", null: false
     t.integer "enabled_from"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "action_tag_id"
     t.integer "behavior_type", default: 0, null: false
-    t.index ["action_tag_id"], name: "index_action_items_on_action_tag_id"
-    t.index ["user_id"], name: "index_action_items_on_user_id"
+    t.uuid "user_uuid", null: false
+    t.uuid "action_tag_uuid", null: false
+    t.index ["action_tag_uuid"], name: "index_action_items_on_action_tag_uuid"
+    t.index ["user_uuid"], name: "index_action_items_on_user_uuid"
+    t.index ["uuid"], name: "index_action_items_on_uuid", unique: true
   end
 
-  create_table "action_tags", force: :cascade do |t|
+  create_table "action_tags", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigserial "id", null: false
     t.string "name", default: "未分類", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_action_tags_on_user_id"
+    t.uuid "user_uuid", null: false
+    t.index ["user_uuid"], name: "index_action_tags_on_user_uuid"
+    t.index ["uuid"], name: "index_action_tags_on_uuid", unique: true
   end
 
-  create_table "care_relations", force: :cascade do |t|
-    t.bigint "supported_id"
-    t.bigint "supporter_id"
+  create_table "care_relations", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigserial "id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["supported_id", "supporter_id"], name: "index_care_relations_on_supported_id_and_supporter_id", unique: true
-    t.index ["supported_id"], name: "index_care_relations_on_supported_id"
-    t.index ["supporter_id"], name: "index_care_relations_on_supporter_id"
+    t.uuid "supported_uuid", null: false
+    t.uuid "supporter_uuid", null: false
+    t.index ["supported_uuid", "supporter_uuid"], name: "index_care_relations_on_supported_uuid_and_supporter_uuid", unique: true
+    t.index ["supported_uuid"], name: "index_care_relations_on_supported_uuid"
+    t.index ["supporter_uuid"], name: "index_care_relations_on_supporter_uuid"
+    t.index ["uuid"], name: "index_care_relations_on_uuid", unique: true
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -53,27 +60,32 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_09_101529) do
     t.string "email"
   end
 
-  create_table "daily_records", force: :cascade do |t|
+  create_table "daily_records", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigserial "id", null: false
     t.integer "mood_score", null: false
     t.string "memo", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_uneasy", default: false, null: false
-    t.index ["user_id"], name: "index_daily_records_on_user_id"
+    t.uuid "user_uuid", null: false
+    t.index ["user_uuid"], name: "index_daily_records_on_user_uuid"
+    t.index ["uuid"], name: "index_daily_records_on_uuid", unique: true
   end
 
-  create_table "social_profiles", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "social_profiles", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigserial "id", null: false
     t.string "provider", null: false
     t.string "uid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "user_uuid", null: false
     t.index ["provider", "uid"], name: "index_social_profiles_on_provider_and_uid", unique: true
-    t.index ["user_id"], name: "index_social_profiles_on_user_id"
+    t.index ["user_uuid"], name: "index_social_profiles_on_user_uuid"
+    t.index ["uuid"], name: "index_social_profiles_on_uuid", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigserial "id", null: false
     t.string "email"
     t.string "encrypted_password"
     t.string "reset_password_token"
@@ -89,13 +101,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_09_101529) do
     t.string "invitee_role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
-  add_foreign_key "action_items", "action_tags"
-  add_foreign_key "action_items", "users"
-  add_foreign_key "action_tags", "users"
-  add_foreign_key "care_relations", "users", column: "supported_id"
-  add_foreign_key "care_relations", "users", column: "supporter_id"
-  add_foreign_key "daily_records", "users"
-  add_foreign_key "social_profiles", "users"
+  add_foreign_key "action_items", "action_tags", column: "action_tag_uuid", primary_key: "uuid"
+  add_foreign_key "action_items", "users", column: "user_uuid", primary_key: "uuid"
+  add_foreign_key "action_tags", "users", column: "user_uuid", primary_key: "uuid"
+  add_foreign_key "care_relations", "users", column: "supported_uuid", primary_key: "uuid"
+  add_foreign_key "care_relations", "users", column: "supporter_uuid", primary_key: "uuid"
+  add_foreign_key "daily_records", "users", column: "user_uuid", primary_key: "uuid"
+  add_foreign_key "social_profiles", "users", column: "user_uuid", primary_key: "uuid"
 end

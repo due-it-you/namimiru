@@ -45,7 +45,7 @@ class ActionItemsController < ApplicationController
   def create
     # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
     tag_name = action_item_params[:tag_name].presence ||
-      current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name ||
+      current_user.action_tags.find_by(uuid: action_item_params[:action_tag_id])&.name ||
       "未分類"
     action_tag = current_user.action_tags.find_or_initialize_by(name: tag_name)
 
@@ -80,7 +80,7 @@ class ActionItemsController < ApplicationController
     if @action_item.update(
       name: action_item_params[:name],
       enabled_from: action_item_params[:enabled_from],
-      action_tag_id: action_tag.id,
+      action_tag_uuid: action_tag.uuid,
       behavior_type: action_item_params[:behavior_type]
     )
       flash[:success] = "行動項目を更新しました。"
