@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_11_113646) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_11_114150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -28,12 +28,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_113646) do
     t.index ["user_uuid"], name: "index_action_items_on_user_uuid"
   end
 
-  create_table "action_tags", force: :cascade do |t|
+  create_table "action_tags", primary_key: "uuid", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigserial "id", null: false
     t.string "name", default: "未分類", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_uuid", null: false
-    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["user_uuid"], name: "index_action_tags_on_user_uuid"
     t.index ["uuid"], name: "index_action_tags_on_uuid", unique: true
   end
@@ -99,7 +99,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_113646) do
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
-  add_foreign_key "action_items", "action_tags"
+  add_foreign_key "action_items", "action_tags", column: "action_tag_uuid", primary_key: "uuid"
   add_foreign_key "action_items", "users", column: "user_uuid", primary_key: "uuid"
   add_foreign_key "action_tags", "users", column: "user_uuid", primary_key: "uuid"
   add_foreign_key "care_relations", "users", column: "supported_uuid", primary_key: "uuid"
