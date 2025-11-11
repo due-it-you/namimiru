@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_11_080113) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_11_080815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "action_items", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "name", null: false
     t.integer "enabled_from"
     t.datetime "created_at", null: false
@@ -32,14 +31,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_080113) do
     t.string "name", default: "未分類", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.uuid "user_uuid", null: false
     t.index ["user_uuid"], name: "index_action_tags_on_user_uuid"
   end
 
   create_table "care_relations", force: :cascade do |t|
-    t.bigint "supported_id"
-    t.bigint "supporter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "supported_uuid", null: false
@@ -61,7 +57,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_080113) do
   create_table "daily_records", force: :cascade do |t|
     t.integer "mood_score", null: false
     t.string "memo", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_uneasy", default: false, null: false
@@ -70,7 +65,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_080113) do
   end
 
   create_table "social_profiles", force: :cascade do |t|
-    t.bigint "user_id"
     t.string "provider", null: false
     t.string "uid", null: false
     t.datetime "created_at", null: false
