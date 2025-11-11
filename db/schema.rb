@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_11_121007) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_11_121824) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -44,9 +44,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_121007) do
     t.datetime "updated_at", null: false
     t.uuid "supported_uuid", null: false
     t.uuid "supporter_uuid", null: false
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["supported_uuid", "supporter_uuid"], name: "index_care_relations_on_supported_uuid_and_supporter_uuid", unique: true
     t.index ["supported_uuid"], name: "index_care_relations_on_supported_uuid"
     t.index ["supporter_uuid"], name: "index_care_relations_on_supporter_uuid"
+    t.index ["uuid"], name: "index_care_relations_on_uuid", unique: true
   end
 
   create_table "contacts", force: :cascade do |t|
