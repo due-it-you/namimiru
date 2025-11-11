@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_11_074136) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_11_074525) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -101,4 +101,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_11_074136) do
   end
 
   add_foreign_key "action_items", "action_tags"
+  add_foreign_key "action_items", "users", column: "user_uuid", primary_key: "uuid"
+  add_foreign_key "action_tags", "users", column: "user_uuid", primary_key: "uuid"
+  add_foreign_key "care_relations", "users", column: "supported_uuid", primary_key: "uuid"
+  add_foreign_key "care_relations", "users", column: "supporter_uuid", primary_key: "uuid"
+  add_foreign_key "daily_records", "users", column: "user_uuid", primary_key: "uuid"
+  add_foreign_key "social_profiles", "users", column: "user_uuid", primary_key: "uuid"
 end
