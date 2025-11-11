@@ -4,15 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :rememberable, :timeoutable,
     :omniauthable, :recoverable, omniauth_providers: %i[google_oauth2]
 
-  has_many :daily_records, dependent: :destroy
-  has_many :action_items, dependent: :destroy
-  has_many :social_profiles, dependent: :destroy
+  has_many :daily_records, primary_key: :uuid, foreign_key: :user_uuid, dependent: :destroy
+  has_many :action_items, primary_key: :uuid, foreign_key: :user_uuid, dependent: :destroy
+  has_many :social_profiles, primary_key: :uuid, foreign_key: :user_uuid, dependent: :destroy
   # 自己結合の多対多の関連付け
-  has_many :being_supported_relationships, class_name: "CareRelation", foreign_key: :supported_id, dependent: :destroy
-  has_many :supporting_relationships, class_name: "CareRelation", foreign_key: :supporter_id, dependent: :destroy
+  has_many :being_supported_relationships, class_name: "CareRelation", primary_key: :uuid, foreign_key: :supported_uuid, dependent: :destroy
+  has_many :supporting_relationships, class_name: "CareRelation", primary_key: :uuid, foreign_key: :supporter_uuid, dependent: :destroy
   has_many :supporters, through: :being_supported_relationships, source: :supporter
   has_many :supportings, through: :supporting_relationships, source: :supported
-  has_many :action_tags, dependent: :destroy
+  has_many :action_tags, primary_key: :uuid, foreign_key: :user_uuid, dependent: :destroy
 
   attr_accessor :social_login
 
@@ -73,9 +73,9 @@ class User < ApplicationRecord
 
   def self.assign_care_relation_ids(inviter:, invitee:)
     if inviter.invitee_role == "supported"
-      [ invitee.id, inviter.id ]
+      [ invitee.uuid, inviter.uuid ]
     else
-      [ inviter.id, invitee.id ]
+      [ inviter.uuid, invitee.uuid ]
     end
   end
 

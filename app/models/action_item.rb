@@ -1,5 +1,5 @@
 class ActionItem < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, primary_key: :uuid, foreign_key: :user_uuid
   belongs_to :action_tag
   validates_associated :action_tag, message: "は8文字以内で入力してください。"
 

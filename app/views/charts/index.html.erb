@@ -15,7 +15,7 @@
             data-chart-labels="<%= @labels.to_json %>"
             data-chart-data="<%= @data.to_json %>"
             data-chart-uneasy-flags="<%= @uneasy_flags.to_json %>"
-            data-charts--display-user-id-value="<%= @user.id %>"
+            data-charts--display-user-id-value="<%= @user.uuid %>"
             class="flex items-center mt-4 space-x-4">
       <!-- 表示期間のセレクトボックス -->
       <div>
@@ -33,10 +33,10 @@
       <div>
         <select data-action="charts--display#update" data-charts--display-target="selectedUser" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 my-2">
           <!-- 現在ログインしているユーザー -->
-          <option value="<%= @user.id %>"><%= @user.name || "ユーザーネーム未設定" %></option> 
+          <option value="<%= @user.uuid %>"><%= @user.name || "ユーザーネーム未設定" %></option> 
           <!-- 連携状態にある 双極症を持つユーザー -->
           <% @user.supportings.each do |supported_user| %>
-            <option value="<%= supported_user.id %>"><%= supported_user.name || "ユーザーネーム未設定" %></option>
+            <option value="<%= supported_user.uuid %>"><%= supported_user.name || "ユーザーネーム未設定" %></option>
           <% end %>
         </select>
       </div>

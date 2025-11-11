@@ -6,7 +6,7 @@ RSpec.describe "CareRelationsDestroy", type: :system do
     context "連携解除に成功した場合" do
       before do
         sign_in user
-        care_relation = CareRelation.create(supported_id: user.id, supporter_id: connected_user.id)
+        care_relation = CareRelation.create(supported_uuid: user.uuid, supporter_uuid: connected_user.uuid)
         visit care_relation_path(care_relation.id)
       end
 

@@ -34,7 +34,7 @@ class ChartsController < ApplicationController
     # 自身のグラフを確認する時は常にアクセスを許可
     return if current_user == user
     # アクセスを試みているユーザーと連携状態にない場合にリダイレクト
-    if !CareRelation.exists?(supported_id: user.id, supporter_id: current_user.id) && !CareRelation.exists?(supported_id: current_user.id, supporter_id: user.id)
+    if !CareRelation.exists?(supported_uuid: user.uuid, supporter_uuid: current_user.uuid) && !CareRelation.exists?(supported_uuid: current_user.uuid, supporter_uuid: user.uuid)
       flash[:alert] = "このグラフのユーザーと連携状態にありません。"
       redirect_to charts_path
     end
