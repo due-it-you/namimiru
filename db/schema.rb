@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_11_09_101529) do
+ActiveRecord::Schema[7.2].define(version: 2025_11_11_054628) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "action_items", force: :cascade do |t|
@@ -87,8 +88,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_11_09_101529) do
     t.datetime "invitation_created_at"
     t.string "remember_token"
     t.string "invitee_role"
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
   add_foreign_key "action_items", "action_tags"
