@@ -15,11 +15,12 @@
     "@stimulus-components/dialog": "^1.0.1",
     "@tailwindcss/cli": "^4.1.13",
     "chart.js": "^4.5.0",
+    "doctoc": "^2.2.1",
     "tailwindcss": "^4.1.13"
   },
   "optionalDependencies": {
     "@parcel/watcher-linux-x64-glibc": "^2.4.1",
-    "lightningcss-linux-x64-gnu": "1.21.5",
-    "@tailwindcss/oxide-linux-x64-gnu": "4.1.13"
+    "@tailwindcss/oxide-linux-x64-gnu": "4.1.13",
+    "lightningcss-linux-x64-gnu": "1.21.5"
   }
 }
