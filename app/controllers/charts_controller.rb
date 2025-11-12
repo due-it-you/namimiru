@@ -29,20 +29,4 @@ class ChartsController < ApplicationController
     end
   end
 
-  def selected_range_object(selected_range, user)
-    case selected_range
-    when "last_week"
-      (1.week.ago.to_date..Date.current)
-    when "last_month"
-      (1.month.ago.to_date..Date.current)
-    when "last_3_months"
-      (3.months.ago.to_date..Date.current)
-    when "last_6_months"
-      (6.months.ago.to_date..Date.current)
-    when "last_year"
-      (1.year.ago.to_date..Date.current)
-    when "all_time"
-      (user.daily_records.order(created_at: :ASC).first.created_at.to_date..Date.current)
-    end
-  end
 end
