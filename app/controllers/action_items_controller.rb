@@ -4,9 +4,8 @@ class ActionItemsController < ApplicationController
     # スライダーを変動させた後の値 || 初回アクセス時の初期値 || 記録がまだ存在しない場合の初期値
     @mood_score =  params[:mood_score] || latest_mood_score || 0
 
-    action_items_with_tag = current_user.action_items.includes(:action_tag)
     # 現在リストの中に存在する全てのタグの名前
-    @present_tags = action_items_with_tag.map(&:action_tag).uniq
+    @present_tags = current_user.action_items.includes(:action_tag).map(&:action_tag).uniq
     
     selected_tag_name = params[:selected_tag_name]
     groups = current_user.action_item_lists_by_mood_and_tag(@mood_score, selected_tag_name)
