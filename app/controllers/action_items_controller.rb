@@ -8,7 +8,7 @@ class ActionItemsController < ApplicationController
     @present_tags = current_user.action_items.includes(:action_tag).map(&:action_tag).uniq
     
     selected_tag_name = params[:selected_tag_name]
-    groups = current_user.action_item_lists_by_mood_and_tag(@mood_score, selected_tag_name)
+    groups = current_user.get_action_item_lists_by(@mood_score, selected_tag_name)
     # できるかもリストの項目
     @diff_can_groups, @not_diff_can_groups = groups[:diff_can_groups], groups[:not_diff_can_groups]
     # できないかもリストの項目

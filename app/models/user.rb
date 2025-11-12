@@ -87,7 +87,7 @@ class User < ApplicationRecord
     care_relation.supported != self && care_relation.supporter != self
   end
 
-  def action_item_lists_by_mood_and_tag(mood_score, selected_tag_name)
+  def get_action_item_lists_by(mood_score, selected_tag_name)
     latest_mood_score = self.daily_records.order(created_at: :desc).first&.mood_score
     action_items_with_tag = self.action_items.includes(:action_tag)
     if selected_tag_name.present?
