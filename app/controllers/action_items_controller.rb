@@ -7,30 +7,14 @@ class ActionItemsController < ApplicationController
     action_items_with_tag = current_user.action_items.includes(:action_tag)
     # 現在リストの中に存在する全てのタグの名前
     @present_tags = action_items_with_tag.map(&:action_tag).uniq
+    
     selected_tag_name = params[:selected_tag_name]
-    if selected_tag_name.present?
-      selected_tag = current_user.action_tags.find_by(name: selected_tag_name)
-      current_can_items, current_cannot_items = selected_tag.action_items.dynamic.capable(@mood_score),  selected_tag.action_items.dynamic.incapable(@mood_score)
-      latest_can_items, latest_cannot_items = selected_tag.action_items.dynamic.capable(latest_mood_score), selected_tag.action_items.dynamic.incapable(latest_mood_score)
-      avoid_items = selected_tag.action_items.avoid
-    else
-      current_can_items, current_cannot_items = action_items_with_tag.dynamic.capable(@mood_score),  action_items_with_tag.dynamic.incapable(@mood_score)
-      latest_can_items, latest_cannot_items = action_items_with_tag.dynamic.capable(latest_mood_score), action_items_with_tag.dynamic.incapable(latest_mood_score)
-      avoid_items = action_items_with_tag.avoid
-    end
-
-    # 最新の記録の気分のリストと比べての項目の差分
-    diff_can_items = current_can_items - latest_can_items
-    not_diff_can_items = current_can_items - diff_can_items
-    diff_cannot_items = current_cannot_items - latest_cannot_items
-    not_diff_cannot_items = current_cannot_items - diff_cannot_items
-
-    # やらない方がいいリストの項目
-    @avoid_groups = avoid_items.group_by(&:action_tag)
-
-    # できるかも/できないかもリストの差分と非差分の項目
-    @diff_can_groups, @not_diff_can_groups = diff_can_items.group_by(&:action_tag), not_diff_can_items.group_by(&:action_tag)
-    @diff_cannot_groups, @not_diff_cannot_groups = diff_cannot_items.group_by(&:action_tag), not_diff_cannot_items.group_by(&:action_tag)
+    groups = current_user.action_item_lists_by_mood_and_tag(@mood_score, selected_tag_name)
+    @diff_can_groups = groups[:diff_can_groups]
+    @not_diff_can_groups = groups[:not_diff_can_groups]
+    @diff_cannot_groups = groups[:diff_cannot_groups]
+    @not_diff_cannot_groups = groups[:not_diff_cannot_groups]
+    @avoid_groups = groups[:avoid_groups]
 
     respond_to do |f|
       f.html
