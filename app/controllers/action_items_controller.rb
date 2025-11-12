@@ -5,7 +5,7 @@ class ActionItemsController < ApplicationController
     @mood_score =  params[:mood_score] || latest_mood_score || 0
     # 項目と紐付いている全てのタグ
     @present_tags = current_user.action_items.includes(:action_tag).map(&:action_tag).uniq
-    
+
     selected_tag_name = params[:selected_tag_name]
     groups = current_user.get_action_item_lists_by(@mood_score, selected_tag_name)
     # できるかもリストの項目
