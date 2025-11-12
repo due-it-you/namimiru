@@ -4,15 +4,16 @@ class ActionItemsController < ApplicationController
     # スライダーを変動させた後の値 || 初回アクセス時の初期値 || 記録がまだ存在しない場合の初期値
     @mood_score =  params[:mood_score] || latest_mood_score || 0
 
-    # 現在リストの中に存在する全てのタグの名前
+    # 項目と紐付いている全てのタグ
     @present_tags = current_user.action_items.includes(:action_tag).map(&:action_tag).uniq
     
     selected_tag_name = params[:selected_tag_name]
     groups = current_user.action_item_lists_by_mood_and_tag(@mood_score, selected_tag_name)
-    @diff_can_groups = groups[:diff_can_groups]
-    @not_diff_can_groups = groups[:not_diff_can_groups]
-    @diff_cannot_groups = groups[:diff_cannot_groups]
-    @not_diff_cannot_groups = groups[:not_diff_cannot_groups]
+    # できるかもリストの項目
+    @diff_can_groups, @not_diff_can_groups = groups[:diff_can_groups], groups[:not_diff_can_groups]
+    # できないかもリストの項目
+    @diff_cannot_groups, @not_diff_cannot_groups = groups[:diff_cannot_groups], groups[:not_diff_cannot_groups]
+    # やらない方がいいリストの項目
     @avoid_groups = groups[:avoid_groups]
 
     respond_to do |f|
