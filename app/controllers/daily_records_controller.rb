@@ -1,5 +1,6 @@
 class DailyRecordsController < ApplicationController
   before_action :specified_user, only: %i[show edit update destroy]
+  before_action :has_already_recorded_today, only: %i[create]
 
   ONE_WEEK_DAYS = 7.freeze
 
@@ -15,11 +16,6 @@ class DailyRecordsController < ApplicationController
   def new; end
 
   def create
-    if current_user.already_recorded_today?
-      flash[:alert] = "すでに今日の記録は作成済みです。"
-      redirect_to charts_path and return
-    end
-
     daily_record = current_user.daily_records.new(daily_record_params)
     if daily_record.save
       flash[:success] = "記録の作成が完了しました。"
@@ -67,6 +63,13 @@ class DailyRecordsController < ApplicationController
     if daily_record.user != current_user
       flash[:alert] = "アクセス出来ないページです。"
       redirect_to charts_path
+    end
+  end
+
+  def has_already_recorded_today
+    if current_user.already_recorded_today?
+      flash[:alert] = "すでに今日の記録は作成済みです。"
+      redirect_to charts_path and return
     end
   end
 end
