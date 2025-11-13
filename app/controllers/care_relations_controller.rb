@@ -40,7 +40,7 @@ class CareRelationsController < ApplicationController
       redirect_to care_relations_path, status: :see_other
     else
       flash[:alert] = "連携の解除に失敗しました。"
-      redirect_to care_relations_path
+      redirect_to care_relations_path, status: :see_other
     end
   end
 

@@ -79,7 +79,7 @@ class ActionItemsController < ApplicationController
       redirect_to action_items_path(format: :html)
     else
       flash[:success] = "行動項目を削除できませんでした。"
-      redirect_to action_items_path(format: :html)
+      redirect_to action_items_path(format: :html), status: :see_other
     end
   end
 

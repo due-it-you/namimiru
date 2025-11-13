@@ -48,7 +48,7 @@ class DailyRecordsController < ApplicationController
       redirect_to user_daily_records_path(daily_record.user.id), status: :see_other
     else
       flash[:alert] = "記録の削除に失敗しました。"
-      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id), status: :see_other
     end
   end
 
