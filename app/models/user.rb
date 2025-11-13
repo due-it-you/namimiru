@@ -83,6 +83,13 @@ class User < ApplicationRecord
     self.invitation_created_at <= INVITATION_EXPIRATION_MINUTES.ago
   end
 
+  def generate_unique_invitation_token
+    loop do
+      token = SecureRandom.alphanumeric(12)
+      break token unless User.exists?(invitation_token: token)
+    end
+  end
+
   def absent_from_the_care_relation?(care_relation)
     care_relation.supported != self && care_relation.supporter != self
   end
