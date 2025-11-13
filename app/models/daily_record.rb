@@ -34,7 +34,7 @@ class DailyRecord < ApplicationRecord
     data = range.map { |date| score_by_date[date]&.first }
     uneasy_flags = range.map { |date| score_by_date[date]&.last }
 
-    chart_data = { 
+    chart_data = {
       labels: labels,
       data: data,
       uneasy_flags: uneasy_flags

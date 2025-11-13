@@ -28,5 +28,4 @@ class ChartsController < ApplicationController
       redirect_to charts_path
     end
   end
-
 end
