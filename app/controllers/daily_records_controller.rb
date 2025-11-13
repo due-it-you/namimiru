@@ -42,7 +42,7 @@ class DailyRecordsController < ApplicationController
   end
 
   def destroy
-    daily_record = DailyRecord.find(params[:id])
+    daily_record = current_user.daily_records.find(params[:id])
     if daily_record.destroy
       flash[:success] = "記録の削除が完了しました。"
     else
