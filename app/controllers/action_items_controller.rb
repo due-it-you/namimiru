@@ -76,11 +76,10 @@ class ActionItemsController < ApplicationController
     action_item = current_user.action_items.find(params[:id])
     if action_item.destroy
       flash[:success] = "行動項目を削除しました。"
-      redirect_to action_items_path(format: :html)
     else
       flash[:success] = "行動項目を削除できませんでした。"
-      redirect_to action_items_path(format: :html), status: :see_other
     end
+    redirect_to action_items_path(format: :html), status: :see_other
   end
 
   private

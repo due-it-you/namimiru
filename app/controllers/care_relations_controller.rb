@@ -36,12 +36,11 @@ class CareRelationsController < ApplicationController
   def destroy
     care_relation = CareRelation.find(params[:id])
     if care_relation.destroy
-      flash[:success] = "連携の解除に成功しました！"
-      redirect_to care_relations_path, status: :see_other
+      flash[:success] = "連携の解除に成功しました。"
     else
       flash[:alert] = "連携の解除に失敗しました。"
-      redirect_to care_relations_path, status: :see_other
     end
+    redirect_to care_relations_path, status: :see_other
   end
 
   private
