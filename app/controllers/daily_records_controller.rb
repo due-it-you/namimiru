@@ -37,7 +37,7 @@ class DailyRecordsController < ApplicationController
       redirect_to user_daily_record_path(daily_record.user.id, daily_record.id), status: :see_other
     else
       flash[:alert] = "記録の更新に失敗しました。"
-      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id), status: :unprocessable_entity
+      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
     end
   end
 

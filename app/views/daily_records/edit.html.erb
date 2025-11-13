@@ -8,5 +8,5 @@
     </div> 
   </div>
   <!-- 記録編集フォーム -->
-  <%= render partial: "daily_records/shared/form", locals: { url: user_daily_record_path(@daily_record.user.id, @daily_record.id), method: :put } %>
+  <%= render partial: "daily_records/shared/form", locals: { url: daily_record_path(@daily_record.id), method: :put } %>
 </div>
