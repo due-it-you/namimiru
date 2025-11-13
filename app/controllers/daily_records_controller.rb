@@ -27,11 +27,11 @@ class DailyRecordsController < ApplicationController
   end
 
   def edit
-    @daily_record = DailyRecord.find(params[:id])
+    @daily_record = current_user.daily_records.find(params[:id])
   end
 
   def update
-    daily_record = DailyRecord.find(params[:id])
+    daily_record = current_user.daily_records.find(params[:id])
     if daily_record.update(daily_record_params)
       flash[:success] = "記録の更新に成功しました。"
       redirect_to user_daily_record_path(daily_record.user.id, daily_record.id), status: :see_other
