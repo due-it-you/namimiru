@@ -3,5 +3,5 @@
   <div class="font-semibold text-string-base text-md my-4">
     今日はどんな気分？
   </div>
-  <%= render partial: "daily_records/shared/form", locals: { url: daily_records_path, method: :post } %>
+  <%= render partial: "daily_records/shared/form", locals: { daily_record: @daily_record } %>
 </div>
