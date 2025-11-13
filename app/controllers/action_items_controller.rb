@@ -66,7 +66,7 @@ class ActionItemsController < ApplicationController
       behavior_type: action_item_params[:behavior_type]
     )
       flash[:success] = "行動項目を更新しました。"
-      redirect_to action_items_path(format: :html)
+      redirect_to action_items_path(format: :html), status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
