@@ -13,7 +13,9 @@ class DailyRecordsController < ApplicationController
     @daily_record = DailyRecord.find(params[:id])
   end
 
-  def new; end
+  def new
+    @daily_record = current_user.daily_records.new
+  end
 
   def create
     daily_record = current_user.daily_records.new(daily_record_params)
@@ -27,29 +29,28 @@ class DailyRecordsController < ApplicationController
   end
 
   def edit
-    @daily_record = DailyRecord.find(params[:id])
+    @daily_record = current_user.daily_records.find(params[:id])
   end
 
   def update
-    daily_record = DailyRecord.find(params[:id])
-    if daily_record.update(daily_record_params)
+    @daily_record = current_user.daily_records.find(params[:id])
+    if @daily_record.update(daily_record_params)
       flash[:success] = "記録の更新に成功しました。"
-      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id), status: :see_other
+      redirect_to user_daily_record_path(@daily_record.user.id, @daily_record.id), status: :see_other
     else
-      flash[:alert] = "記録の更新に失敗しました。"
-      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+      flash.now[:alert] = "記録の更新に失敗しました。"
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    daily_record = DailyRecord.find(params[:id])
+    daily_record = current_user.daily_records.find(params[:id])
     if daily_record.destroy
       flash[:success] = "記録の削除が完了しました。"
-      redirect_to user_daily_records_path(daily_record.user.id), status: :see_other
     else
-      flash[:alert] = "記録の削除に失敗しました。"
-      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+      flash[:alert] = "記録の削除が失敗しました。"
     end
+    redirect_to user_daily_records_path(daily_record.user.id), status: :see_other
   end
 
   private
