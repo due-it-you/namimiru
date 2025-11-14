@@ -21,13 +21,13 @@ Rails.application.routes.draw do
     post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
   end
 
-  resources :daily_records, only: %i[new create destroy]
+  resources :daily_records, only: %i[new create edit update destroy]
   resources :care_relations, only: %i[index new create show destroy]
   resources :charts, only: %i[index]
   resource :mypage, only: %i[show]
   resource :invitation, only: %i[new create]
   resources :users, only: [] do
-    resources :daily_records, only: %i[index show edit update]
+    resources :daily_records, only: %i[index show]
   end
   resources :action_items, only: %i[index new create edit update destroy]
   resources :contacts, only: %i[new create]

@@ -3,34 +3,17 @@ class ActionItemsController < ApplicationController
     latest_mood_score = current_user.daily_records.order(created_at: :desc).first&.mood_score
     # スライダーを変動させた後の値 || 初回アクセス時の初期値 || 記録がまだ存在しない場合の初期値
     @mood_score =  params[:mood_score] || latest_mood_score || 0
+    # 項目と紐付いている全てのタグ
+    @present_tags = current_user.action_items.includes(:action_tag).map(&:action_tag).uniq
 
-    action_items_with_tag = current_user.action_items.includes(:action_tag)
-    # 現在リストの中に存在する全てのタグの名前
-    @present_tags = action_items_with_tag.map(&:action_tag).uniq
     selected_tag_name = params[:selected_tag_name]
-    if selected_tag_name.present?
-      selected_tag = current_user.action_tags.find_by(name: selected_tag_name)
-      current_can_items, current_cannot_items = selected_tag.action_items.dynamic.capable(@mood_score),  selected_tag.action_items.dynamic.incapable(@mood_score)
-      latest_can_items, latest_cannot_items = selected_tag.action_items.dynamic.capable(latest_mood_score), selected_tag.action_items.dynamic.incapable(latest_mood_score)
-      avoid_items = selected_tag.action_items.avoid
-    else
-      current_can_items, current_cannot_items = action_items_with_tag.dynamic.capable(@mood_score),  action_items_with_tag.dynamic.incapable(@mood_score)
-      latest_can_items, latest_cannot_items = action_items_with_tag.dynamic.capable(latest_mood_score), action_items_with_tag.dynamic.incapable(latest_mood_score)
-      avoid_items = action_items_with_tag.avoid
-    end
-
-    # 最新の記録の気分のリストと比べての項目の差分
-    diff_can_items = current_can_items - latest_can_items
-    not_diff_can_items = current_can_items - diff_can_items
-    diff_cannot_items = current_cannot_items - latest_cannot_items
-    not_diff_cannot_items = current_cannot_items - diff_cannot_items
-
+    groups = current_user.get_action_item_lists_by(@mood_score, selected_tag_name)
+    # できるかもリストの項目
+    @diff_can_groups, @not_diff_can_groups = groups[:diff_can_groups], groups[:not_diff_can_groups]
+    # できないかもリストの項目
+    @diff_cannot_groups, @not_diff_cannot_groups = groups[:diff_cannot_groups], groups[:not_diff_cannot_groups]
     # やらない方がいいリストの項目
-    @avoid_groups = avoid_items.group_by(&:action_tag)
-
-    # できるかも/できないかもリストの差分と非差分の項目
-    @diff_can_groups, @not_diff_can_groups = diff_can_items.group_by(&:action_tag), not_diff_can_items.group_by(&:action_tag)
-    @diff_cannot_groups, @not_diff_cannot_groups = diff_cannot_items.group_by(&:action_tag), not_diff_cannot_items.group_by(&:action_tag)
+    @avoid_groups = groups[:avoid_groups]
 
     respond_to do |f|
       f.html
@@ -45,8 +28,8 @@ class ActionItemsController < ApplicationController
   def create
     # 既存のタグにない名称が入力された場合 || 既存のタグが選択された場合 || 未入力の場合
     tag_name = action_item_params[:tag_name].presence ||
-      current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name ||
-      "未分類"
+               current_user.action_tags.find_by(id: action_item_params[:action_tag_id])&.name ||
+               "未分類"
     action_tag = current_user.action_tags.find_or_initialize_by(name: tag_name)
 
     @action_item = current_user.action_items.new(
@@ -54,7 +37,6 @@ class ActionItemsController < ApplicationController
       enabled_from: action_item_params[:enabled_from],
       behavior_type: action_item_params[:behavior_type]
     )
-    # 作成を試みる項目に入力されたタグのオブジェクトを関連付け
     # ActionItemモデルのvalidates_associated :action_tagによってaction_item.saveで
     # 関連付けられたaction_tagにもバリデーションが走る
     @action_item.action_tag = action_tag
@@ -84,7 +66,7 @@ class ActionItemsController < ApplicationController
       behavior_type: action_item_params[:behavior_type]
     )
       flash[:success] = "行動項目を更新しました。"
-      redirect_to action_items_path(format: :html)
+      redirect_to action_items_path(format: :html), status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -94,11 +76,10 @@ class ActionItemsController < ApplicationController
     action_item = current_user.action_items.find(params[:id])
     if action_item.destroy
       flash[:success] = "行動項目を削除しました。"
-      redirect_to action_items_path(format: :html)
     else
       flash[:success] = "行動項目を削除できませんでした。"
-      redirect_to action_items_path(format: :html)
     end
+    redirect_to action_items_path(format: :html), status: :see_other
   end
 
   private

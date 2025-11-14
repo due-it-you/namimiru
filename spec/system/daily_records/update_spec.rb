@@ -28,10 +28,10 @@ RSpec.describe "Update", type: :system do
           # 501文字分入力
           fill_in "daily_record[memo]", with: "あ" * 501
           click_on "記録する"
-          expect(page).to have_current_path user_daily_record_path(user.id, daily_record.id)
+          expect(page).to have_current_path "/daily_records/#{daily_record.id}"
           expect(page).to have_content '記録の更新に失敗しました。'
           expect(page).to have_content daily_record.mood_score.to_s
-          expect(page).to have_content daily_record.memo
+          expect(page).to have_field("daily_record[memo]", with: "あ" * 501)
         end
       end
     end

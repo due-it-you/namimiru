@@ -1,5 +1,5 @@
 <div data-controller="daily-records--mood-score range-slider--current-mood">
-  <%= form_with url: url, method: method, scope: :daily_record, data: { turbo: false },
+  <%= form_with model: daily_record, data: { turbo: false },
     class: "bg-white rounded-2xl border border-gray-200 shadow-sm p-5 md:p-6" do |f| %>
 
     <!-- 現在の気分表示 -->
