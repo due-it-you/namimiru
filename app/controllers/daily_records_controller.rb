@@ -1,5 +1,6 @@
 class DailyRecordsController < ApplicationController
   before_action :specified_user, only: %i[show edit update destroy]
+  before_action :has_already_recorded_today, only: %i[create]
 
   ONE_WEEK_DAYS = 7.freeze
 
@@ -12,14 +13,11 @@ class DailyRecordsController < ApplicationController
     @daily_record = DailyRecord.find(params[:id])
   end
 
-  def new; end
+  def new
+    @daily_record = current_user.daily_records.new
+  end
 
   def create
-    if current_user.already_recorded_today?
-      flash[:alert] = "すでに今日の記録は作成済みです。"
-      redirect_to charts_path and return
-    end
-
     daily_record = current_user.daily_records.new(daily_record_params)
     if daily_record.save
       flash[:success] = "記録の作成が完了しました。"
@@ -31,29 +29,28 @@ class DailyRecordsController < ApplicationController
   end
 
   def edit
-    @daily_record = DailyRecord.find(params[:id])
+    @daily_record = current_user.daily_records.find(params[:id])
   end
 
   def update
-    daily_record = DailyRecord.find(params[:id])
-    if daily_record.update(daily_record_params)
+    @daily_record = current_user.daily_records.find(params[:id])
+    if @daily_record.update(daily_record_params)
       flash[:success] = "記録の更新に成功しました。"
-      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id), status: :see_other
+      redirect_to user_daily_record_path(@daily_record.user.id, @daily_record.id), status: :see_other
     else
-      flash[:alert] = "記録の更新に失敗しました。"
-      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+      flash.now[:alert] = "記録の更新に失敗しました。"
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    daily_record = DailyRecord.find(params[:id])
+    daily_record = current_user.daily_records.find(params[:id])
     if daily_record.destroy
       flash[:success] = "記録の削除が完了しました。"
-      redirect_to user_daily_records_path(daily_record.user.id), status: :see_other
     else
-      flash[:alert] = "記録の削除に失敗しました。"
-      redirect_to user_daily_record_path(daily_record.user.id, daily_record.id)
+      flash[:alert] = "記録の削除が失敗しました。"
     end
+    redirect_to user_daily_records_path(daily_record.user.id), status: :see_other
   end
 
   private
@@ -67,6 +64,13 @@ class DailyRecordsController < ApplicationController
     if daily_record.user != current_user
       flash[:alert] = "アクセス出来ないページです。"
       redirect_to charts_path
+    end
+  end
+
+  def has_already_recorded_today
+    if current_user.already_recorded_today?
+      flash[:alert] = "すでに今日の記録は作成済みです。"
+      redirect_to charts_path and return
     end
   end
 end

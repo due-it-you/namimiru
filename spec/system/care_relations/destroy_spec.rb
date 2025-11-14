@@ -14,7 +14,7 @@ RSpec.describe "CareRelationsDestroy", type: :system do
         accept_confirm do
           click_link "trash-icon"
         end
-        expect(page).to have_content "連携の解除に成功しました！"
+        expect(page).to have_content "連携の解除に成功しました。"
         expect(page).not_to have_content connected_user.name
       end
     end
