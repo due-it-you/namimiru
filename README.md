@@ -32,6 +32,11 @@
 双極症(双極性障害)の方向けのWebアプリで、気分の波と行動の両側面から記録して見返すことで、自身の症状の自己理解を進めることが出来ます。
 また、その記録を周囲の家族などの支援者と共有することができます。
 
+**リリースから2週間で**
+- ユーザー登録者数: **107人**
+- 記録の総数：**465件**
+- PV数: 8100回
+
 ## 💻️ サービスURL
 ## https://namimiru.com/
 
@@ -140,7 +145,7 @@
 | インフラ  | Render（Web Service）｜Neon（PostgreSQL） |
 
 ## 🖼️ ER図
-<img width="660" height="493" alt="スクリーンショット 2025-11-07 16 02 06" src="https://github.com/user-attachments/assets/5477385a-1d8e-49f8-bda2-f069fc80ce51" />
+<img width="704" height="535" alt="スクリーンショット 2025-11-17 11 08 35" src="https://github.com/user-attachments/assets/f635cd8c-5b74-4e95-92a2-51a5f1000b7e" />
 
 ## 今後実装予定の機能
 ### 診察レポート機能
