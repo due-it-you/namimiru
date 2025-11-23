@@ -4,7 +4,7 @@
     <!-- 行動項目編集フォーム -->
     <%= render partial: "action_items/shared/form", locals: { action_item: @action_item }%>
   </div>
-  <div class="w-1/8">
+  <div class="w-1/12">
     <!-- 行動項目削除ボタン -->
     <%= link_to action_item_path(@action_item.id), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, id: "trash-icon" do %>
       <%= image_tag "trash_icon.png" %>

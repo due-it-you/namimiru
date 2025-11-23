@@ -7,27 +7,29 @@ export default class extends Controller {
   static targets = ["range", "selectedUser"]
 
   connect() {
+    // HTMLに埋め込んだdata属性を取得
+    // (ログイン中のユーザーの1ヶ月分のデータ)
     const labels = JSON.parse(this.element.dataset.chartLabels)
     const data = JSON.parse(this.element.dataset.chartData)
     const uneasy = JSON.parse(this.element.dataset.chartUneasyFlags)
+    // グラフの各ポイントの色などの情報
     this.uneasyColor = "#eb6ea5"
     this.notUneasyColor = "rgba(103, 189, 183, 0.7)"
     this.uneasyFlags = uneasy.map(flag => (flag ? this.uneasyColor : this.notUneasyColor))
     this.uneasyPointRadius = 3
     this.notUneasyPointRadius = 1.5
     const pointRadius = uneasy.map(flag => (flag ? this.uneasyPointRadius : this.notUneasyPointRadius))
+    const defaultChartLineColor = "rgba(103, 189, 183, 0.7)"
 
     // グラフの縦横幅
     this.fixedHeight = 320
     this.defaultWidth = 253
-
     document.getElementById('myChart').style.width = this.defaultWidth + "px";
     document.getElementById('myChart').style.height = this.fixedHeight + "px";
 
+    //  Chart.js
+    //  キャンバス要素にグラフを表示
     const ctx = document.getElementById('myChart');
-
-    const defaultChartLineColor = "rgba(103, 189, 183, 0.7)"
-
     this.chart = new Chart(ctx, {
       type: 'line',
       data: {
@@ -68,6 +70,7 @@ export default class extends Controller {
     const url = `/charts.json?range=${range}&user_id=${userId}`;
 
     try {
+      // 選択されたユーザーと期間のデータ取得のためのリクエスト
       const res = await fetch(url);
       const json = await res.json();
       const { labels, data, uneasy_flags } = json;
