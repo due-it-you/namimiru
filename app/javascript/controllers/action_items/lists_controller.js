@@ -23,22 +23,26 @@ export default class extends Controller {
   }
 
   async update(e) {
-    const moodScore = e.target.value
-    const tagsList = Array.from(document.getElementById("present-tags-list").children)
-    let activeTagName;
-    tagsList.forEach((tag) => {
-      if (tag.active) {
-        activeTagName = tag.textContent.trim().replace(/^# /, "")
-      }
-    })
-    // もしnullなら空文字に変換
-    const name = activeTagName ?? "";
-    const res = await fetch(
-      `/action_items?mood_score=${moodScore}&selected_tag_name=${name}`,
-      { headers: { Accept: "text/vnd.turbo-stream.html" } }
-    )
-
-    Turbo.renderStreamMessage(await res.text())
+    try {
+      const moodScore = e.target.value
+      const tagsList = Array.from(document.getElementById("present-tags-list").children)
+      let activeTagName;
+      tagsList.forEach((tag) => {
+        if (tag.active) {
+          activeTagName = tag.textContent.trim().replace(/^# /, "")
+        }
+      })
+      // もしnullなら空文字に変換
+      const name = activeTagName ?? "";
+      const res = await fetch(
+        `/action_items?mood_score=${moodScore}&selected_tag_name=${name}`,
+        { headers: { Accept: "text/vnd.turbo-stream.html" } }
+      )
+  
+      Turbo.renderStreamMessage(await res.text())
+    } catch (error) {
+      console.error("例外が発生:", error)
+    }
   }
 
   // スライダーを変動させると自動でリストを切り替える
