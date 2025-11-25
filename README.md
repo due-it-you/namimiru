@@ -147,7 +147,7 @@
 | インフラ  | Render（Web Service）｜Neon（PostgreSQL） |
 
 ## 🖼️ ER図
-<img width="702" height="503" alt="スクリーンショット 2025-11-17 16 58 01" src="https://github.com/user-attachments/assets/cb94d2fb-38a9-4638-878b-1dfd25569fb4" />
+<img width="757" height="521" alt="スクリーンショット 2025-11-25 12 34 40" src="https://github.com/user-attachments/assets/9711f785-bd4c-464c-beea-0b768e622652" />
 
 ## 今後実装予定の機能
 ### 診察レポート機能
