@@ -1,13 +1,16 @@
 <%= turbo_stream.replace "latest-record-link-card" do %>
-  <div id="latest-record-link-card">
-  <% if @latest_record.present? %>
-    <%= render partial: "daily_records/shared/card", locals: { user: @user, daily_record: @latest_record } %>
+  <% if @is_selected_current_user %>
+    <div id="latest-record-link-card">
+    <% if @latest_record.present? %>
+      <%= render partial: "daily_records/shared/card", locals: { user: @user, daily_record: @latest_record } %>
+    <% end %>
   <% end %>
-  </div>
 <% end %>
 
 <%= turbo_stream.replace "daily-records-index-button" do %>
-  <div class="mt-4" id="daily-records-index-button">
-  <%= render partial: "charts/shared/daily_records_index_button", locals: { user: @user } %>
-  </div>
+  <% if @is_selected_current_user %>
+    <div class="mt-4" id="daily-records-index-button">
+    <%= render partial: "charts/shared/daily_records_index_button", locals: { user: @user } %>
+    </div>
+  <% end %>
 <% end %>
