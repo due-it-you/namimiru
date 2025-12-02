@@ -91,6 +91,7 @@ class User < ApplicationRecord
   end
 
   def absent_from_the_care_relation?(care_relation)
+    # アクセスしようとしている連携情報にアクセス者のidがあるかどうかの判定
     care_relation.supported != self && care_relation.supporter != self
   end
 

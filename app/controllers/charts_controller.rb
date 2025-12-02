@@ -3,6 +3,8 @@ class ChartsController < ApplicationController
 
   def index
     @user = User.find_by(id: params[:user_id]) || current_user
+    # 選択されたユーザーがログイン中のユーザーの場合のみ、記録UIを表示するための変数
+    @is_selected_current_user = @user.id == current_user.id
     @latest_record = @user.daily_records.order(created_at: :ASC).last
 
     chart_data = DailyRecord.get_chart_data_by(@user, params[:range])
